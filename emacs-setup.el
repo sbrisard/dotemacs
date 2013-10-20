@@ -35,9 +35,9 @@
 ;; Default geometry
 (setq default-frame-alist
       '((top . 0) (left . 658)
-        (width . 80)
-        (foreground-color . "black")
-        (background-color . "lightyellow")))
+        (width . 80)))
+;;        (foreground-color . "black")
+;;        (background-color . "lightyellow")))
 
 (if windowsp
     (add-to-list 'default-frame-alist '(height . 48))
@@ -81,13 +81,8 @@
 ;; Personnal customizations
 (global-set-key [(control next)] 'next-buffer)
 (global-set-key [(control prior)] 'previous-buffer)
-(global-set-key [(control right)] 'forward-word)
-(global-set-key [(control left)] 'backward-word)
 (setq inhibit-splash-screen t)
 (tool-bar-mode -1)
-
-;; Do not insert tabs when indenting code
-(setq-default indent-tabs-mode nil)
 
 ;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY
 
@@ -136,9 +131,6 @@
  '(make-backup-files nil)
  '(nxml-attribute-indent 2)
  '(nxml-child-indent 2 t)
- '(org-agenda-files (quote ("~/Documents/notes.org")))
- '(org-format-latex-options (quote (:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\["))))
- '(org-startup-truncated nil)
  '(ps-paper-type (quote a4))
  '(reftex-insert-label-flags (quote ("s" "st")))
  '(safe-local-variable-values (quote ((eval setenv "TEXINPUTS" "./sty:"))))
@@ -180,22 +172,22 @@
      (setcar ispell-tex-skip-alists list))
 )
 
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((gnuplot . t)))
-;; add additional languages with '((language . t)))
+;; Select color theme
+;; To see available themes: M-x customize-themes
+(load-theme 'misterioso)
 
-;; org-mode
-;(require 'htmlfontify)
-;;(require 'htmlize)
-;;(setq org-src-fontify-natively t)
-;(setq org-export-htmlize-output-type "css")
-;;(org-babel-do-load-languages 'org-babel-load-languages '((C . t)))
-;;(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+;; Do not insert tabs when indenting code
+(setq-default indent-tabs-mode nil)
+
+;; Globally enable highlighting of the line containing point
+(global-hl-line-mode)
+
+;; htmlize is required to fontify source in html output of org files
+(require 'htmlize)
 
 (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
+(load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
 
 ;; Python-related settings
 

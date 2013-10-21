@@ -185,6 +185,7 @@
 (require 'htmlize)
 
 (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
+(load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))

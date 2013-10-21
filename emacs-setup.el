@@ -172,10 +172,6 @@
      (setcar ispell-tex-skip-alists list))
 )
 
-;; Select color theme
-;; To see available themes: M-x customize-themes
-(load-theme 'misterioso)
-
 ;; Do not insert tabs when indenting code
 (setq-default indent-tabs-mode nil)
 
@@ -185,6 +181,7 @@
 ;; htmlize is required to fontify source in html output of org files
 (require 'htmlize)
 
+(load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))

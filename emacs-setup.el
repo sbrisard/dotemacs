@@ -178,6 +178,9 @@
 ;; Globally enable highlighting of the line containing point
 (global-hl-line-mode)
 
+;; Adds a 'Filesets' menu to the menu bar.
+(filesets-init)
+
 ;; htmlize is required to fontify source in html output of org files
 (require 'htmlize)
 

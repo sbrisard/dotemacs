@@ -6,6 +6,8 @@
 ;; linux. This is useful to share the same init.el file between several systems.
 (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
+(defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
+
 
 ;; Define path to emacs-config directory
 ;;(cond (windowsp (defvar sb-path-to-emacs-setup "/Users/brisard/Documents/emacs.d/"))
@@ -32,17 +34,26 @@
 ;; Set startup directory to home.
 (setq default-directory "~/" )
 
-;; Default geometry
-(setq default-frame-alist
-      '((top . 0) (left . 658)
-        (width . 80)))
-;;        (foreground-color . "black")
-;;        (background-color . "lightyellow")))
+;; Platform specific variables
 
-(if windowsp
-    (add-to-list 'default-frame-alist '(height . 48))
-  (add-to-list 'default-frame-alist '(height . 41))  
-)
+(cond (windowsp 
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 51)
+       (defvar sb-default-frame-left 514))
+      (darwinp
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 51)
+       (defvar sb-default-frame-left 514))
+      (linuxp
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 48)
+       (defvar sb-default-frame-left 501)))
+
+;; Default geometry
+(setq default-frame-alist `((top . 0)
+                            (left . ,sb-default-frame-left)
+                            (width . ,sb-default-frame-width)
+                            (height . ,sb-default-frame-height)))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 

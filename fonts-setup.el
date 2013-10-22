@@ -3,7 +3,8 @@
 ;; +------------------------+
 
 (cond (windowsp (defvar sb-monospaced-font "Consolas-8"))
-      (darwinp (defvar sb-monospaced-font "Inconsolata-10")))
+      (darwinp (defvar sb-monospaced-font "Inconsolata-10"))
+      (linuxp (defvar sb-monospaced-font "Inconsolata-8")))
 
 (defvar sb-variable-pitch-font sb-monospaced-font)
 

@@ -59,13 +59,6 @@
 ;;      and paste it into the .emacs.d/init.el file. The line to add is
 ;;          (set-face-font 'default "fontname")
 ;;      where fontname is the copied string.
-(when (display-graphic-p)
-  (if windowsp
-      (set-face-font 'default "Consolas-9")
-    (set-face-font 'default "Inconsolata-10")))
-
-;; Do not use variable-pitch fonts
-(set-face-attribute 'variable-pitch nil :font "Consolas-9")
 
 ;; Under Linux, starting emacs from the desktop environment results in the
 ;; PATH variable being different from what it would be if started from a shell.
@@ -186,6 +179,7 @@
 ;; htmlize is required to fontify source in html output of org files
 (require 'htmlize)
 
+(load-file (concat sb-path-to-emacs-setup "fonts-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))

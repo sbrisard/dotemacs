@@ -64,6 +64,8 @@
       (set-face-font 'default "Consolas-9")
     (set-face-font 'default "Inconsolata-10")))
 
+;; Do not use variable-pitch fonts
+(set-face-attribute 'variable-pitch nil :font "Consolas-9")
 
 ;; Under Linux, starting emacs from the desktop environment results in the
 ;; PATH variable being different from what it would be if started from a shell.

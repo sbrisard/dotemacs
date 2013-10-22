@@ -42,8 +42,8 @@
        (defvar sb-default-frame-left 514))
       (darwinp
        (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 51)
-       (defvar sb-default-frame-left 514))
+       (defvar sb-default-frame-height 57)
+       (defvar sb-default-frame-left 504))
       (linuxp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 48)

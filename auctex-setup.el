@@ -2,7 +2,10 @@
 ;; | Configuration of AUCTeX |
 ;; +-------------------------+
 
-(load "auctex.el" nil t t)
+(require 'tex)
+(require 'preview)
+;; (require 'tex-mik)
+;;(load "auctex.el" nil t t)
 ;;(load "preview-latex.el" nil t t)
 
 ;; AUCTeX multifile

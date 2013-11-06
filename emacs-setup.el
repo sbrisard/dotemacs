@@ -184,6 +184,9 @@
 ;; Globally enable highlighting of the line containing point
 (global-hl-line-mode)
 
+;; Do not create new window for dropped files.
+(setq dnd-open-file-other-window nil)
+
 ;; Adds a 'Filesets' menu to the menu bar.
 (filesets-init)
 

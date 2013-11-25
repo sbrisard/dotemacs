@@ -38,7 +38,7 @@
 
 (cond (windowsp 
        (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 51)
+       (defvar sb-default-frame-height 53)
        (defvar sb-default-frame-left 514))
       (darwinp
        (defvar sb-default-frame-width 80)
@@ -46,7 +46,7 @@
        (defvar sb-default-frame-left 504))
       (linuxp
        (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 48)
+       (defvar sb-default-frame-height 50)
        (defvar sb-default-frame-left 501)))
 
 ;; Default geometry
@@ -59,6 +59,9 @@
 
 ;; Disable system beep
 (setq visible-bell t)
+
+;; Disable menu bar
+(menu-bar-mode -1)
 
 ;; Default font. Under Windows, to get the right font name, follow this
 ;; procedure
@@ -204,4 +207,4 @@
 
 (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
 (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
+;;(load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))

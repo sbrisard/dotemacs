@@ -196,16 +196,18 @@
 ;; htmlize is required to fontify source in html output of org files
 (require 'htmlize)
 
+;; Load these configurations in window mode only, in order to speed up startup
+;; -nw mode.
 (when window-system
-  (load-file (concat sb-path-to-emacs-setup "fonts-setup.el")))
-(load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "fonts-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
+  
+  ;; Python-related settings
 
-;; Python-related settings
-
-(load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
-(load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el")))

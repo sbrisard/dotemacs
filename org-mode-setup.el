@@ -19,3 +19,29 @@
 
 ;; Use CSS to htmlize source blocks
 (setq org-html-htmlize-output-type 'css)
+
+;; org-publish configuration
+(setq org-publish-project-alist
+      '(("blog-orgfiles"
+         :base-directory "~/Documents/blog/org/"
+         :base-extension "org"
+         :exclude "header.org"
+         :publishing-directory "~/Documents/blog/html/"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :section-numbers nil
+         :with-toc nil)
+        ("blog-images"
+         :base-directory "~/Documents/blog/org/"
+         :base-extension "jpg\\|gif\\|png"
+         :publishing-directory "~/Documents/blog/html/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("blog-other"
+         :base-directory "~/Documents/blog/org/"
+         :base-extension "css"
+         :publishing-directory "~/Documents/blog/html/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("blog"
+         :components ("blog-orgfiles" "blog-images" "blog-other"))))

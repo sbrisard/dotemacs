@@ -210,4 +210,5 @@
 
   (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
-  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el")))
+;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
+)

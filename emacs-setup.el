@@ -25,8 +25,6 @@
   (setq mac-option-modifier 'none)
   (setq mac-command-modifier 'meta))
 
-(load-file (concat sb-path-to-emacs-setup "elpa-setup.el"))
-
 ;; On Windows 7, HOME is set to "C:/Users/brisard/AppData/Roaming/", which
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
@@ -91,7 +89,6 @@
 (global-set-key [(control next)] 'next-buffer)
 (global-set-key [(control prior)] 'previous-buffer)
 (setq inhibit-splash-screen t)
-(tool-bar-mode -1)
 
 ;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY
 
@@ -193,12 +190,11 @@
 ;; Adds a 'Filesets' menu to the menu bar.
 (filesets-init)
 
-;; htmlize is required to fontify source in html output of org files
-(require 'htmlize)
-
 ;; Load these configurations in window mode only, in order to speed up startup
 ;; -nw mode.
 (when window-system
+  (tool-bar-mode -1)
+  (load-file (concat sb-path-to-emacs-setup "elpa-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "fonts-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
@@ -207,8 +203,7 @@
   (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
   
   ;; Python-related settings
-
   (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
-;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
+  ;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
 )

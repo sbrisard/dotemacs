@@ -181,6 +181,9 @@
 ;; Do not insert tabs when indenting code
 (setq-default indent-tabs-mode nil)
 
+;; Systematically ask for confirmation when a nonexistent filename is entered
+(setq confirm-nonexistent-file-or-buffer t)
+
 ;; Globally enable highlighting of the line containing point
 (global-hl-line-mode)
 

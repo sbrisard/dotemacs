@@ -61,6 +61,11 @@
 ;; Disable menu bar
 (menu-bar-mode -1)
 
+;; Indicate trailing white space at the end of lines and empty lines at the
+;; end of the buffer
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines t)
+
 ;; Default font. Under Windows, to get the right font name, follow this
 ;; procedure
 ;;   1. switch to the "*scratch*" buffer

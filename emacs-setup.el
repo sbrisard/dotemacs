@@ -211,7 +211,8 @@
   (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
   
   ;; Python-related settings
-  (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "python-setup.el"))
+  ;; (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
   ;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
 )

@@ -216,3 +216,18 @@
   (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
   ;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
 )
+
+;; (add-to-list 'Info-additional-directory-list sb-path-to-info)
+;;(setq Info-directory-list
+;;      (append '("/Users/Shared/info") Info-default-directory-list))
+
+;;
+;; Python related settings
+;; -----------------------
+;;
+
+(when window-system
+  ;; pydoc-info is an Emacs package for searching and browsing the new Python
+  ;;  documentation in the Info browser.
+  (require 'pydoc-info)
+)

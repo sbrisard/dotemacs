@@ -217,9 +217,13 @@
   ;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
 )
 
-;; (add-to-list 'Info-additional-directory-list sb-path-to-info)
-;;(setq Info-directory-list
-;;      (append '("/Users/Shared/info") Info-default-directory-list))
+;;
+;; Location of additional info manuals
+;; -----------------------------------
+;;
+
+(when (boundp 'sb-path-to-info)
+  (add-to-list 'Info-directory-list sb-path-to-info))
 
 ;;
 ;; Python related settings

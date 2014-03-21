@@ -4,7 +4,8 @@
 
 (cond (windowsp (defvar sb-monospaced-font "Consolas-8"))
       (darwinp (defvar sb-monospaced-font "Inconsolata-10"))
-      (linuxp (defvar sb-monospaced-font "Inconsolata-10")))
+      (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")
+))
 
 (defvar sb-variable-pitch-font sb-monospaced-font)
 

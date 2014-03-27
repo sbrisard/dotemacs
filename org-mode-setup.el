@@ -101,3 +101,6 @@
 ;; If the following variable is not set, then the generated link will point to
 ;; ./file1.html, instead of ./file1.html#target
 (setq org-link-search-must-match-exact-headline nil)
+
+(global-set-key "\C-ca" 'org-agenda)
+(setq org-agenda-files (append sb-org-agenda-files org-agenda-files))

@@ -9,11 +9,6 @@
 (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
 
 
-;; Define path to emacs-config directory
-;;(cond (windowsp (defvar sb-path-to-emacs-setup "/Users/brisard/Documents/emacs.d/"))
-;;      (darwinp (defvar sb-path-to-emacs-setup "/Users/sb/Documents/emacs-setup/"))
-;;      (t (defvar sb-path-to-emacs-setup "/media/sf_documents-brisard/emacs.d/")))
-
 ;; Local directory for emacs extensions.
 (defvar path-to-site-lisp (concat sb-path-to-emacs-setup "site-lisp/"))
 (add-to-list 'load-path path-to-site-lisp)
@@ -34,7 +29,7 @@
 
 ;; Platform specific variables
 
-(cond (windowsp 
+(cond (windowsp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 53)
        (defvar sb-default-frame-left 514))
@@ -82,7 +77,7 @@
 
 ;; (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
 ;;   (setenv "PATH" path)
-;;   (setq exec-path 
+;;   (setq exec-path
 ;;         (append
 ;;          (split-string-and-unquote path ":")
 ;;          exec-path)))
@@ -101,12 +96,12 @@
     (progn
       ;; This allows emacs to find the TeXLive executables. Altering the
       ;; exec-path variable apparently does not work!
-      (setenv "PATH" (concat "C:/texlive/2013/bin/win32;" (getenv "PATH")))     
+      (setenv "PATH" (concat "C:/texlive/2013/bin/win32;" (getenv "PATH")))
       ))
 
 ;; Choix du dictionnaire français pour la vérification de l'orthographe
 (setq ispell-dictionary "francais")
- 	
+
 ; Une macro pour l'insertion de tags dans un fichier XML
 (defun nxml-insert-tag(tag)
   "inserts opening and closing XML tags, with specified tag-name, and places the cursor inbetween"
@@ -147,9 +142,9 @@
  '(safe-local-variable-values (quote ((eval setenv "TEXINPUTS" "./sty:"))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t))
- 
+
 ;; Remove completion buffer when done
-(add-hook 'minibuffer-exit-hook 
+(add-hook 'minibuffer-exit-hook
       '(lambda ()
          (let ((buffer "*Completions*"))
            (and (get-buffer buffer)
@@ -162,7 +157,7 @@
  )
 
 
-;; Empèche Ispell de vérifier le contenu de certaines commandes 
+;; Empèche Ispell de vérifier le contenu de certaines commandes
 (setq ispell-tex-skip-alists
       (list
        (append (car ispell-tex-skip-alists)
@@ -175,7 +170,7 @@
                  ("\\\\label"           ispell-tex-arg-end)
                  ))
        (cadr ispell-tex-skip-alists)))
- 
+
 ;; Empèche Ispell de vérifier le contenu des citation natbib
 (eval-after-load "ispell"
   '(let ((list (car ispell-tex-skip-alists)))
@@ -209,7 +204,7 @@
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
-  
+
   ;; Python-related settings
   (load-file (concat sb-path-to-emacs-setup "python-setup.el"))
   ;; (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))

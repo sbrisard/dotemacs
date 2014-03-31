@@ -56,10 +56,17 @@
 ;; Disable menu bar
 (menu-bar-mode -1)
 
-;; Indicate trailing white space at the end of lines and empty lines at the
-;; end of the buffer
-(setq-default show-trailing-whitespace t)
+;; Trailing whitespaces
+;; --------------------
+;;
+;; In selected modes, show trailing white spaces and empty lines at the end of
+;; the buffer.This is defined as a mode hook (which requires a function).
+(add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
+
+;; In all modes, empty lines at the end of the buffer are shown, and trailing
+;; white spaces are remoaved when buffer is saved.
 (setq-default indicate-empty-lines t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Default font. Under Windows, to get the right font name, follow this
 ;; procedure

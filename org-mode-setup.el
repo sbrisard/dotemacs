@@ -83,7 +83,7 @@
            :publishing-function org-publish-attachment)
           ("blog"
            :components ("blog-orgfiles" "blog-images" "blog-other")))))
-  
+
 ;; This allows proper handling of links to "dedicated targets" accross multiple
 ;; files.
 ;; Let's say file1.og contains
@@ -104,3 +104,6 @@
 
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-agenda-files (append sb-org-agenda-files org-agenda-files))
+
+;; Make sure that timestamps appear in English
+(setq system-time-locale "C")

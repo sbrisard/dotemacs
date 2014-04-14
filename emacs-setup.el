@@ -211,12 +211,6 @@
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
-
-  ;; Python-related settings
-  (load-file (concat sb-path-to-emacs-setup "python-setup.el"))
-  ;; (load-file (concat sb-path-to-emacs-setup "python-mode-setup.el"))
-  (load-file (concat sb-path-to-emacs-setup "cython-mode-setup.el"))
-  ;;  (load-file (concat sb-path-to-emacs-setup "jedi-setup.el"))
 )
 
 ;;
@@ -233,6 +227,20 @@
 ;;
 
 (when window-system
+  ;; python-mode settings
+  (setq
+   python-shell-interpreter "ipython"
+   python-shell-interpreter-args ""
+   python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+   python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+   python-shell-completion-setup-code
+   "from IPython.core.completerlib import module_completion"
+   python-shell-completion-module-string-code
+   "';'.join(module_completion('''%s'''))\n"
+   python-shell-completion-string-code
+   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+  ;; cython-mode
+  (require 'cython-mode)
   ;; pydoc-info is an Emacs package for searching and browsing the new Python
   ;;  documentation in the Info browser.
   (require 'pydoc-info)

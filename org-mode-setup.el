@@ -107,3 +107,7 @@
 
 ;; Make sure that timestamps appear in English
 (setq system-time-locale "C")
+
+;; Use links outside Org
+(global-set-key "\C-c L" 'org-insert-link-global)
+(global-set-key "\C-c o" 'org-open-at-point-global)

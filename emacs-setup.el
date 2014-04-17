@@ -237,3 +237,8 @@
   ;;  documentation in the Info browser.
   (require 'pydoc-info)
 )
+
+(defun set-newline-and-indent ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
+
+(add-hook 'python-mode-hook 'set-newline-and-indent)

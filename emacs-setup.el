@@ -1,3 +1,14 @@
+
+;; Contents
+;; ========
+;;
+;; If the present file has been loaded, follow the links below with C-c o.
+;; Otherwise, use M-x org-open-at-point-global.
+;;
+;; [[org][Org Mode]]
+;; [[python][Python/Cython]]
+;;
+;;
 ;; In init.el, a variable should be defined
 ;; sb-path-to-emacs-setup
 ;; which points to the path to this file.
@@ -213,10 +224,19 @@
 (when (boundp 'sb-path-to-info)
   (add-to-list 'Info-directory-list sb-path-to-info))
 
-;;
-;; Python related settings
-;; -----------------------
-;;
+;; Org Mode                                                             <<org>>
+;; ========
+
+(setq org-startup-truncated nil)                                  ;; Wrap lines
+(setq org-startup-folded nil)            ;; Don't open org files in folded mode
+(setq system-time-locale "C")    ;; Make sure that timestamps appear in English
+
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cL" 'org-insert-link-global)  ;; Allow for links to be used
+(global-set-key "\C-co" 'org-open-at-point-global)               ;; outside Org
+
+;; Python/Cython                                                     <<python>>
+;; =============
 
 (when window-system
   ;; python-mode settings
@@ -242,3 +262,5 @@
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
+
+;;

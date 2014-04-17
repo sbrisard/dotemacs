@@ -2,12 +2,6 @@
 ;; | Configuration of Org-mode |
 ;; +---------------------------+
 
-;; Wrap lines
-(setq org-startup-truncated nil)
-
-;; Don't open org files in folded mode
-(setq org-startup-folded nil)
-
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
                                                          (python . t)))
 
@@ -102,12 +96,4 @@
 ;; ./file1.html, instead of ./file1.html#target
 (setq org-link-search-must-match-exact-headline nil)
 
-(global-set-key "\C-ca" 'org-agenda)
 (setq org-agenda-files (append sb-org-agenda-files org-agenda-files))
-
-;; Make sure that timestamps appear in English
-(setq system-time-locale "C")
-
-;; Use links outside Org
-(global-set-key "\C-c L" 'org-insert-link-global)
-(global-set-key "\C-c o" 'org-open-at-point-global)

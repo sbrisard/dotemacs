@@ -242,6 +242,10 @@
                                    (file . find-file)
                                    (wl . wl-other-frame))))
 
+(require 'htmlize)
+(setq org-src-fontify-natively t)
+(setq org-html-htmlize-output-type 'css)
+
 ;; Python/Cython                                                     <<python>>
 ;; =============
 
@@ -269,5 +273,3 @@
   (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
-
-;;

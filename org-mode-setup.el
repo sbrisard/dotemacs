@@ -5,16 +5,6 @@
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
                                                          (python . t)))
 
-;; Fontify code in code blocks
-(setq org-src-fontify-natively t)
-
-
-;; htmlize is required to fontify source in html output of org files
-(require 'htmlize)
-
-;; Use CSS to htmlize source blocks
-(setq org-html-htmlize-output-type 'css)
-
 ;; org-publish configuration
 (when (boundp 'sb-path-to-blog)
   (defvar sb-path-to-blog-base-directory (concat sb-path-to-blog "org"))

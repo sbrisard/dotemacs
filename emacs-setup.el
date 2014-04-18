@@ -5,6 +5,8 @@
 ;; If the present file has been loaded, follow the links below with C-c o.
 ;; Otherwise, use M-x org-open-at-point-global.
 ;;
+;; [[vars][Variables defined in this file]]
+;; [[funs][Functions defined in this file]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
 ;;
@@ -13,12 +15,33 @@
 ;; sb-path-to-emacs-setup
 ;; which points to the path to this file.
 
-;; Define a useful predicate to check whether emacs is run from windows or
-;; linux. This is useful to share the same init.el file between several systems.
+;; Variables defined in this file                                      <<vars>>
+;; ==============================
+
+;; Predicates to check whether emacs is run from Windows, Linux or MacOS.
 (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
 (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
 
+(cond (windowsp
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 53)
+       (defvar sb-default-frame-left 514))
+      (darwinp
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 57)
+       (defvar sb-default-frame-left 504))
+      (linuxp
+       (defvar sb-default-frame-width 80)
+       (defvar sb-default-frame-height 45)
+       (defvar sb-default-frame-left 501)))
+
+;; Functions defined in this file                                      <<funs>>
+;; ==============================
+
+(defun set-newline-and-indent ()
+  "Bind newline-and-indent to RET. This function can be used as a hook."
+  (local-set-key (kbd "RET") 'newline-and-indent))
 
 ;; Local directory for emacs extensions.
 (defvar path-to-site-lisp (concat sb-path-to-emacs-setup "site-lisp/"))
@@ -39,19 +62,6 @@
 (setq default-directory "~/" )
 
 ;; Platform specific variables
-
-(cond (windowsp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 53)
-       (defvar sb-default-frame-left 514))
-      (darwinp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 57)
-       (defvar sb-default-frame-left 504))
-      (linuxp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 45)
-       (defvar sb-default-frame-left 501)))
 
 ;; Default geometry
 (setq default-frame-alist `((top . 0)
@@ -339,7 +349,5 @@
   (require 'pydoc-info)
 )
 
-(defun set-newline-and-indent ()
-  (local-set-key (kbd "RET") 'newline-and-indent))
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)

@@ -316,24 +316,6 @@
           ("blog"
            :components ("blog-orgfiles" "blog-images" "blog-other")))))
 
-;; This allows proper handling of links to "dedicated targets" accross multiple
-;; files.
-;; Let's say file1.og contains
-;;
-;; #+BEGIN_EXAMPLE
-;;    <<target>> This is a dedicated target.
-;; #+END_EXAMPLE
-;;
-;; And file2.org links to this dedicated target
-;;
-;; #+BEGIN_EXAMPLE
-;;     [[file:./file1.org::target][link]]
-;; #+END_EXAMPLE
-;;
-;; If the following variable is not set, then the generated link will point to
-;; ./file1.html, instead of ./file1.html#target
-(setq org-link-search-must-match-exact-headline nil)
-
 ;; Python/Cython                                                     <<python>>
 ;; =============
 

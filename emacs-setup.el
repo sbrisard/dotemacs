@@ -77,6 +77,8 @@
 ;; Disable menu bar
 (menu-bar-mode -1)
 
+(setq column-number-mode t)
+
 ;; Trailing whitespaces
 ;; --------------------
 ;;
@@ -132,7 +134,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
  '(display-buffer-reuse-frames t)
 ; '(font-use-system-font t)
  '(inhibit-startup-screen t)

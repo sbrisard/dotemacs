@@ -137,8 +137,6 @@
  '(display-buffer-reuse-frames t)
 ; '(font-use-system-font t)
  '(make-backup-files nil)
- '(nxml-attribute-indent 2)
- '(nxml-child-indent 2 t)
  '(ps-paper-type (quote a4))
  '(reftex-insert-label-flags (quote ("s" "st")))
  '(safe-local-variable-values (quote ((eval setenv "TEXINPUTS" "./sty:"))))

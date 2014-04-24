@@ -115,7 +115,7 @@
 ;; Select default encoding for all new buffers
 (setq buffer-file-coding-system 'iso-latin-1-unix)
 
-(setq inhibit-splash-screen t)
+(setq inhibit-startup-screen t)
 
 ;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY
 
@@ -136,7 +136,6 @@
  ;; If there is more than one, they won't work right.
  '(display-buffer-reuse-frames t)
 ; '(font-use-system-font t)
- '(inhibit-startup-screen t)
  '(make-backup-files nil)
  '(nxml-attribute-indent 2)
  '(nxml-child-indent 2 t)

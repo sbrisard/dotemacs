@@ -113,9 +113,6 @@
 ;; Select default encoding for all new buffers
 (setq buffer-file-coding-system 'iso-latin-1-unix)
 
-;; Personnal customizations
-(global-set-key [(control next)] 'next-buffer)
-(global-set-key [(control prior)] 'previous-buffer)
 (setq inhibit-splash-screen t)
 
 ;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY

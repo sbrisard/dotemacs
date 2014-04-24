@@ -81,6 +81,8 @@
 
 (set-scroll-bar-mode nil)
 
+ (setq make-backup-files nil)
+
 ;; Trailing whitespaces
 ;; --------------------
 ;;
@@ -137,7 +139,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 ; '(font-use-system-font t)
- '(make-backup-files nil)
  '(ps-paper-type (quote a4))
  '(reftex-insert-label-flags (quote ("s" "st")))
  '(safe-local-variable-values (quote ((eval setenv "TEXINPUTS" "./sty:"))))

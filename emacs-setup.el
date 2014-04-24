@@ -130,21 +130,6 @@
 ;; Choix du dictionnaire français pour la vérification de l'orthographe
 (setq ispell-dictionary "francais")
 
-; Une macro pour l'insertion de tags dans un fichier XML
-(defun nxml-insert-tag(tag)
-  "inserts opening and closing XML tags, with specified tag-name, and places the cursor inbetween"
-  (interactive "sTag name: ")
-  ; (message "tag to insert %s" tag)
-  (insert "<"tag"></"tag">")
-  (search-backward "<")
-  (indent-according-to-mode)
-  )
-
-(add-hook 'nxml-mode-hook
-          '(lambda ()
-             (local-set-key (kbd "C-c C-t") 'nxml-insert-tag)
-             ))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -79,6 +79,8 @@
 
 (setq column-number-mode t)
 
+(set-scroll-bar-mode nil)
+
 ;; Trailing whitespaces
 ;; --------------------
 ;;
@@ -140,7 +142,6 @@
  '(ps-paper-type (quote a4))
  '(reftex-insert-label-flags (quote ("s" "st")))
  '(safe-local-variable-values (quote ((eval setenv "TEXINPUTS" "./sty:"))))
- '(scroll-bar-mode nil)
  '(show-paren-mode t))
 
 ;; Remove completion buffer when done

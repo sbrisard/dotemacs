@@ -17,3 +17,5 @@
 ;; Turn on the RefTeX-AUCTeX interface. When on, both packages interact
 ;; closely.
 (setq reftex-plug-into-AUCTeX t)
+
+(setq reftex-insert-label-flags (quote ("s" "st")))

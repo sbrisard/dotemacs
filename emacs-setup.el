@@ -83,7 +83,7 @@
 (show-paren-mode t)
 (tool-bar-mode -1)
 
-(global-set-key [C-next] nil)
+(global-unset-key (kbd "<C-next>"))
 
 ;; Trailing whitespaces
 ;; --------------------
@@ -294,9 +294,9 @@
 (setq org-startup-folded nil)            ;; Don't open org files in folded mode
 (setq system-time-locale "C")    ;; Make sure that timestamps appear in English
 
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cL" 'org-insert-link-global)  ;; Allow for links to be used
-(global-set-key "\C-co" 'org-open-at-point-global)               ;; outside Org
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c L") 'org-insert-link-global) ; Allow for links to be
+(global-set-key (kbd "C-c o") 'org-open-at-point-global)    ; used outside Org
 
 ;; Visit files in same window
 (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)

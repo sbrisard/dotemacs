@@ -227,15 +227,15 @@
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-start-server t)
 
-(when windowsp
-  (setq TeX-view-program-list (quote (("SumatraPDF" ("\"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe\" -reuse-instance" (mode-io-correlate " -forward-search %b %n") " %o")))))
-  (setq TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "SumatraPDF") (output-html "xdg-open")))))
+(cond (windowsp
+       (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe\""))))
+       (add-to-list 'TeX-view-program-list '("SumatraPDF" "%(sumatra) -reuse-instance -forward-search %b %n %o"))
+       (setq TeX-view-program-selection '((output-pdf "SumatraPDF"))))
 
-(when darwinp
-  (add-to-list 'TeX-expand-list '("%(skim)" (lambda () (format "/Applications/Skim.app/Contents/SharedSupport/displayline"))))
-  ;;(add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %(line-number) %(pdf-file-name) %(tex-file-name)"))
-  (add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %n %o %b"))
-  (setq TeX-view-program-selection '((output-pdf "Skim"))))
+      (darwinp
+       (add-to-list 'TeX-expand-list '("%(skim)" (lambda () (format "/Applications/Skim.app/Contents/SharedSupport/displayline"))))
+       (add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %n %o %b"))
+       (setq TeX-view-program-selection '((output-pdf "Skim")))))
 
 ;; From the AUCTeX FAQ
 ;;     When writing the log file, TeX puts information related to a file,

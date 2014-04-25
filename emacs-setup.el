@@ -137,28 +137,12 @@
 ;; Choix du dictionnaire français pour la vérification de l'orthographe
 (setq ispell-dictionary "francais")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-; '(font-use-system-font t)
- '
-)
-
 ;; Remove completion buffer when done
 (add-hook 'minibuffer-exit-hook
       '(lambda ()
          (let ((buffer "*Completions*"))
            (and (get-buffer buffer)
             (kill-buffer buffer)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 
 ;; Empèche Ispell de vérifier le contenu de certaines commandes
 (setq ispell-tex-skip-alists

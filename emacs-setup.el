@@ -77,6 +77,7 @@
 (menu-bar-mode nil)
 (set-scroll-bar-mode nil)
 (show-paren-mode t)
+(tool-bar-mode -1)
 
 ;; Trailing whitespaces
 ;; --------------------
@@ -185,7 +186,6 @@
   (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
-  (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
 )
 
 ;;

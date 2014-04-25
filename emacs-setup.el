@@ -11,6 +11,7 @@
 ;; [[geometry][Geometry]]
 ;; [[ispell][Ispell]]
 ;; [[magit][Magit]]
+;; [[maxima][Maxima]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
 ;;
@@ -190,6 +191,18 @@
 
 (when (boundp 'sb-path-to-info)
  (add-to-list 'Info-directory-list sb-path-to-info))
+
+;; Maxima                                                            <<maxima>>
+;; ======
+
+(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
+(autoload 'maxima "maxima" "Run Maxima interactively" t)
+(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
+
+(cond (windowsp
+       (setq maxima-command "C:/Program Files (x86)/Maxima-5.30.0/bin/maxima.bat"))
+      (when darwinp
+        (setq maxima-command "/opt/local/bin/maxima")))
 
 ;; Org Mode                                                             <<org>>
 ;; ========

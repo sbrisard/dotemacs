@@ -9,6 +9,7 @@
 ;; [[funs][Functions defined in this file]]
 ;; [[no-window][No-window configuration]]
 ;; [[geometry][Geometry]]
+;; [[magit][Magit]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
 ;;
@@ -114,6 +115,12 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
+;; Magit (Emacs mode for Git)                                         <<magit>>
+;; ==========================
+
+(when windowsp
+  (setq exec-path (append exec-path
+                          '("C:/Program Files (x86)/Git/bin/"))))
 
 ;; Default font. Under Windows, to get the right font name, follow this
 ;; procedure

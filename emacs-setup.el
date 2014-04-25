@@ -146,15 +146,6 @@
 ;;          exec-path)))
 
 
-;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY
-
-(if windowsp
-    (progn
-      ;; This allows emacs to find the TeXLive executables. Altering the
-      ;; exec-path variable apparently does not work!
-      (setenv "PATH" (concat "C:/texlive/2013/bin/win32;" (getenv "PATH")))
-      ))
-
 ;; Choix du dictionnaire français pour la vérification de l'orthographe
 (setq ispell-dictionary "francais")
 

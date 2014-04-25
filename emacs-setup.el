@@ -403,8 +403,6 @@
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
 
-;; TODO Clean-up below
-
 ;; Jedi -- Python auto-completion for Emacs
 ;; ----------------------------------------
 
@@ -413,6 +411,7 @@
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 
 
+;; TODO Clean-up below
 
 ;; Under Linux, starting emacs from the desktop environment results in the
 ;; PATH variable being different from what it would be if started from a shell.

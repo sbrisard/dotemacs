@@ -8,7 +8,7 @@
 ;; [[vars][Variables defined in this file]]
 ;; [[funs][Functions defined in this file]]
 ;; [[no-window][No-window configuration]]
-;; [[geometry][Geometry]]
+;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
 ;; [[magit][Magit]]
 ;; [[maxima][Maxima]]
@@ -107,8 +107,11 @@
 ;;(setenv "HOME" "C:/Users/brisard/")
 
 
-;; Geometry                                                        <<geometry>>
-;; ========
+;; Visual appearance in window-system mode                       <<appearance>>
+;; =======================================
+
+;; Geometry
+;; --------
 
 (setq default-frame-alist `((top . 0)
                             (left . ,sb-default-frame-left)
@@ -116,6 +119,36 @@
                             (height . ,sb-default-frame-height)))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
+
+;; Color theme
+;; -----------
+
+;; M-x customize-themes displays a selectable list of custom themes.
+(load-theme 'solarized-light t)
+
+;; Fonts
+;; -----
+
+;; Under Windows, the procedure to get the right font name is the following
+;;   1. switch to the "*scratch*" buffer
+;;   2. type (w32-select-font) followed by C-j (or M-x eval-print-last-sexp)
+;;   3. select the desired font from the menu dialog that ensues
+;;   4. copy the string that is displayed (something like:
+;;      "-outline-Lucida Sans Typewriter-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
+;;      and paste it into the .emacs.d/init.el file. The line to add is
+;;          (set-face-font 'default "fontname")
+;;      where fontname is the copied string.
+
+(cond (windowsp (defvar sb-monospaced-font "Consolas-8"))
+      (darwinp (defvar sb-monospaced-font "Inconsolata-10"))
+      (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")))
+
+(defvar sb-variable-pitch-font sb-monospaced-font)
+
+; TODO remove this conditional (run only in graphics mode.
+(when (display-graphic-p) (set-face-font 'default sb-monospaced-font))
+
+(set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
 
 ;; Ispell                                                            <<ispell>>
 ;; ======
@@ -150,16 +183,6 @@
   (setq exec-path (append exec-path
                           '("C:/Program Files (x86)/Git/bin/"))))
 
-;; Default font. Under Windows, to get the right font name, follow this
-;; procedure
-;;   1. switch to the "*scratch*" buffer
-;;   2. type (w32-select-font) followed by C-j (or M-x eval-print-last-sexp)
-;;   3. select the desired font from the menu dialog that ensues
-;;   4. copy the string that is displayed (something like:
-;;      "-outline-Lucida Sans Typewriter-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
-;;      and paste it into the .emacs.d/init.el file. The line to add is
-;;          (set-face-font 'default "fontname")
-;;      where fontname is the copied string.
 
 ;; Under Linux, starting emacs from the desktop environment results in the
 ;; PATH variable being different from what it would be if started from a shell.
@@ -181,7 +204,6 @@
   (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
-  (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
 )
 
 ;;

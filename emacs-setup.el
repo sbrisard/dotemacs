@@ -282,8 +282,8 @@
 
 (cond (windowsp
        (setq maxima-command "C:/Program Files (x86)/Maxima-5.30.0/bin/maxima.bat"))
-      (when darwinp
-        (setq maxima-command "/opt/local/bin/maxima")))
+      (darwinp
+       (setq maxima-command "/opt/local/bin/maxima")))
 
 ;; Org Mode                                                             <<org>>
 ;; ========

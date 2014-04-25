@@ -69,7 +69,7 @@
 
 (setq column-number-mode t)
 (setq confirm-nonexistent-file-or-buffer t)
-(setq default-directory "~/" )                        ; TODO Is this necessary?
+(setq default-directory "~/" )
 (setq dnd-open-file-other-window nil)
 (setq inhibit-startup-screen t)
 (setq make-backup-files nil)

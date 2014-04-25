@@ -83,6 +83,8 @@
 
  (setq make-backup-files nil)
 
+(show-paren-mode t)
+
 ;; Trailing whitespaces
 ;; --------------------
 ;;
@@ -140,7 +142,7 @@
  ;; If there is more than one, they won't work right.
 ; '(font-use-system-font t)
  '(ps-paper-type (quote a4))
- '(show-paren-mode t))
+)
 
 ;; Remove completion buffer when done
 (add-hook 'minibuffer-exit-hook

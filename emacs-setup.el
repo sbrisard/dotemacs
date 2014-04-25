@@ -7,6 +7,7 @@
 ;;
 ;; [[vars][Variables defined in this file]]
 ;; [[funs][Functions defined in this file]]
+;; [[no-window][No-window configuration]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
 ;;
@@ -36,6 +37,12 @@
        (defvar sb-default-frame-height 45)
        (defvar sb-default-frame-left 501)))
 
+;; Local directory for emacs extensions.
+(defvar path-to-site-lisp (concat sb-path-to-emacs-setup "site-lisp/"))
+(add-to-list 'load-path path-to-site-lisp)
+(let ((default-directory path-to-site-lisp))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;; Functions defined in this file                                      <<funs>>
 ;; ==============================
 
@@ -43,11 +50,22 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
-;; Local directory for emacs extensions.
-(defvar path-to-site-lisp (concat sb-path-to-emacs-setup "site-lisp/"))
-(add-to-list 'load-path path-to-site-lisp)
-(let ((default-directory path-to-site-lisp))
-  (normal-top-level-add-subdirs-to-load-path))
+;; No-window-system                                               <<no-window>>
+;; ================
+;;
+;; This section should be executed when emacs is run in both window-system and
+;; no-window-system modes.
+
+(setq-default buffer-file-coding-system 'iso-latin-1-unix)
+(setq column-number-mode t)
+(setq inhibit-startup-screen t)
+(setq make-backup-files nil)
+(setq ps-paper-type (quote a4))
+(setq visible-bell t)
+
+(menu-bar-mode nil)
+(set-scroll-bar-mode nil)
+(show-paren-mode t)
 
 ;; Under Mac OS X, right-alt must be mapped to Alt Gr.
 (when darwinp
@@ -70,22 +88,6 @@
                             (height . ,sb-default-frame-height)))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
-
-;; Disable system beep
-(setq visible-bell t)
-
-;; Disable menu bar
-(menu-bar-mode -1)
-
-(setq column-number-mode t)
-
-(set-scroll-bar-mode nil)
-
- (setq make-backup-files nil)
-
-(show-paren-mode t)
-
-(setq ps-paper-type (quote a4))
 
 ;; Trailing whitespaces
 ;; --------------------
@@ -120,10 +122,6 @@
 ;;          (split-string-and-unquote path ":")
 ;;          exec-path)))
 
-;; Select default encoding for all new buffers
-(setq buffer-file-coding-system 'iso-latin-1-unix)
-
-(setq inhibit-startup-screen t)
 
 ;; PROGRAMS THAT ARE INSTALLED UNDER WINDOWS ONLY
 

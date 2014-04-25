@@ -83,6 +83,8 @@
 (show-paren-mode t)
 (tool-bar-mode -1)
 
+(global-set-key [C-next] nil)
+
 ;; Trailing whitespaces
 ;; --------------------
 

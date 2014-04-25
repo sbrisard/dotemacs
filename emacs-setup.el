@@ -9,6 +9,7 @@
 ;; [[funs][Functions defined in this file]]
 ;; [[no-window][No-window configuration]]
 ;; [[geometry][Geometry]]
+;; [[ispell][Ispell]]
 ;; [[magit][Magit]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
@@ -115,6 +116,30 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
+;; Ispell                                                            <<ispell>>
+;; ======
+
+; TODO simplify this section
+
+(setq ispell-dictionary "francais")
+(setq ispell-tex-skip-alists
+      (list
+       (append (car ispell-tex-skip-alists)
+               '(("\\\\cite"            ispell-tex-arg-end)
+                 ("\\\\nocite"          ispell-tex-arg-end)
+                 ("\\\\includegraphics" ispell-tex-arg-end)
+                 ("\\\\author"          ispell-tex-arg-end)
+                 ("\\\\ref"             ispell-tex-arg-end)
+                 ("\\\\eqref"           ispell-tex-arg-end)
+                 ("\\\\label"           ispell-tex-arg-end)
+                 ))
+       (cadr ispell-tex-skip-alists)))
+
+(eval-after-load "ispell"
+  '(let ((list (car ispell-tex-skip-alists)))
+     (add-to-list 'list '("\\\\cite[tp]" ispell-tex-arg-end))
+     (setcar ispell-tex-skip-alists list)))
+
 ;; Magit (Emacs mode for Git)                                         <<magit>>
 ;; ==========================
 
@@ -146,36 +171,6 @@
 ;;          exec-path)))
 
 
-;; Choix du dictionnaire français pour la vérification de l'orthographe
-(setq ispell-dictionary "francais")
-
-;; Remove completion buffer when done
-(add-hook 'minibuffer-exit-hook
-      '(lambda ()
-         (let ((buffer "*Completions*"))
-           (and (get-buffer buffer)
-            (kill-buffer buffer)))))
-
-;; Empèche Ispell de vérifier le contenu de certaines commandes
-(setq ispell-tex-skip-alists
-      (list
-       (append (car ispell-tex-skip-alists)
-               '(("\\\\cite"            ispell-tex-arg-end)
-                 ("\\\\nocite"          ispell-tex-arg-end)
-                 ("\\\\includegraphics" ispell-tex-arg-end)
-                 ("\\\\author"          ispell-tex-arg-end)
-                 ("\\\\ref"             ispell-tex-arg-end)
-                 ("\\\\eqref"             ispell-tex-arg-end)
-                 ("\\\\label"           ispell-tex-arg-end)
-                 ))
-       (cadr ispell-tex-skip-alists)))
-
-;; Empèche Ispell de vérifier le contenu des citation natbib
-(eval-after-load "ispell"
-  '(let ((list (car ispell-tex-skip-alists)))
-     (add-to-list 'list '("\\\\cite[tp]" ispell-tex-arg-end))
-     (setcar ispell-tex-skip-alists list))
-)
 
 ;; Load these configurations in window mode only, in order to speed up startup
 ;; -nw mode.

@@ -84,6 +84,7 @@
 (tool-bar-mode -1)
 
 (global-unset-key (kbd "<C-next>"))
+(global-unset-key (kbd "<C-prior>"))
 
 ;; Trailing whitespaces
 ;; --------------------

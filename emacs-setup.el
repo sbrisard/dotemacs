@@ -118,6 +118,8 @@
 ;; Magit (Emacs mode for Git)                                         <<magit>>
 ;; ==========================
 
+(delete 'Git vc-handled-backends)
+
 (when windowsp
   (setq exec-path (append exec-path
                           '("C:/Program Files (x86)/Git/bin/"))))

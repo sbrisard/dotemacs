@@ -210,8 +210,6 @@
 ;; Load these configurations in window mode only, in order to speed up startup
 ;; -nw mode.
 (when window-system
-  (load-file (concat sb-path-to-emacs-setup "fonts-setup.el"))
-  (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
 )

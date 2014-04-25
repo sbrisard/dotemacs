@@ -403,6 +403,15 @@
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
 
+;; TODO Clean-up below
+
+;; Jedi -- Python auto-completion for Emacs
+;; ----------------------------------------
+
+;; (setq jedi:setup-keys t)
+;; (setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+
 
 
 ;; Under Linux, starting emacs from the desktop environment results in the

@@ -52,20 +52,45 @@
 
 ;; No-window-system                                               <<no-window>>
 ;; ================
-;;
+
 ;; This section should be executed when emacs is run in both window-system and
 ;; no-window-system modes.
 
+;; Miscellaneous
+;; -------------
+
 (setq-default buffer-file-coding-system 'iso-latin-1-unix)
+(setq-default indent-tabs-mode nil)
+
 (setq column-number-mode t)
+(setq confirm-nonexistent-file-or-buffer t)
+(setq default-directory "~/" )                        ; TODO Is this necessary?
+(setq dnd-open-file-other-window nil)
 (setq inhibit-startup-screen t)
 (setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
 (setq visible-bell t)
 
+(filesets-init)
+(global-hl-line-mode)
 (menu-bar-mode nil)
 (set-scroll-bar-mode nil)
 (show-paren-mode t)
+
+;; Trailing whitespaces
+;; --------------------
+
+;; In selected modes, show trailing whitespaces and empty lines at the end of
+;; the buffer. This is defined as a mode hook (which requires a function).
+(add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
+
+;; In all modes, empty lines at the end of the buffer are shown, and trailing
+;; white spaces are remoaved when buffer is saved.
+(setq-default indicate-empty-lines t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Platform-specific customizations
+;; --------------------------------
 
 ;; Under Mac OS X, right-alt must be mapped to Alt Gr.
 (when darwinp
@@ -76,11 +101,6 @@
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
 
-;; Set startup directory to home.
-(setq default-directory "~/" )
-
-;; Platform specific variables
-
 ;; Default geometry
 (setq default-frame-alist `((top . 0)
                             (left . ,sb-default-frame-left)
@@ -89,17 +109,6 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
-;; Trailing whitespaces
-;; --------------------
-;;
-;; In selected modes, show trailing white spaces and empty lines at the end of
-;; the buffer.This is defined as a mode hook (which requires a function).
-(add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-
-;; In all modes, empty lines at the end of the buffer are shown, and trailing
-;; white spaces are remoaved when buffer is saved.
-(setq-default indicate-empty-lines t)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Default font. Under Windows, to get the right font name, follow this
 ;; procedure
@@ -162,21 +171,6 @@
      (add-to-list 'list '("\\\\cite[tp]" ispell-tex-arg-end))
      (setcar ispell-tex-skip-alists list))
 )
-
-;; Do not insert tabs when indenting code
-(setq-default indent-tabs-mode nil)
-
-;; Systematically ask for confirmation when a nonexistent filename is entered
-(setq confirm-nonexistent-file-or-buffer t)
-
-;; Globally enable highlighting of the line containing point
-(global-hl-line-mode)
-
-;; Do not create new window for dropped files.
-(setq dnd-open-file-other-window nil)
-
-;; Adds a 'Filesets' menu to the menu bar.
-(filesets-init)
 
 ;; Load these configurations in window mode only, in order to speed up startup
 ;; -nw mode.

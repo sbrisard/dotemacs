@@ -8,6 +8,7 @@
 ;; [[vars][Variables defined in this file]]
 ;; [[funs][Functions defined in this file]]
 ;; [[no-window][No-window configuration]]
+;; [[geometry][Geometry]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
 ;;
@@ -101,7 +102,10 @@
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
 
-;; Default geometry
+
+;; Geometry                                                        <<geometry>>
+;; ========
+
 (setq default-frame-alist `((top . 0)
                             (left . ,sb-default-frame-left)
                             (width . ,sb-default-frame-width)
@@ -175,14 +179,13 @@
 ;; Load these configurations in window mode only, in order to speed up startup
 ;; -nw mode.
 (when window-system
-  (tool-bar-mode -1)
   (load-file (concat sb-path-to-emacs-setup "elpa-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "fonts-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "color-theme-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "auctex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "reftex-setup.el"))
   (load-file (concat sb-path-to-emacs-setup "maxima-mode-setup.el"))
-  ;;(load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
+  (load-file (concat sb-path-to-emacs-setup "org-mode-setup.el"))
 )
 
 ;;

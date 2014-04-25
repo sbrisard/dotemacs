@@ -195,25 +195,6 @@
   (setq exec-path (append exec-path
                           '("C:/Program Files (x86)/Git/bin/"))))
 
-
-;; Under Linux, starting emacs from the desktop environment results in the
-;; PATH variable being different from what it would be if started from a shell.
-
-;; (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
-;;   (setenv "PATH" path)
-;;   (setq exec-path
-;;         (append
-;;          (split-string-and-unquote path ":")
-;;          exec-path)))
-
-;;
-;; Location of additional info manuals
-;; -----------------------------------
-;;
-
-(when (boundp 'sb-path-to-info)
- (add-to-list 'Info-directory-list sb-path-to-info))
-
 ;; LaTeX                                                              <<latex>>
 ;; =====
 
@@ -421,3 +402,23 @@
 
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
+
+
+
+;; Under Linux, starting emacs from the desktop environment results in the
+;; PATH variable being different from what it would be if started from a shell.
+
+;; (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
+;;   (setenv "PATH" path)
+;;   (setq exec-path
+;;         (append
+;;          (split-string-and-unquote path ":")
+;;          exec-path)))
+
+;;
+;; Location of additional info manuals
+;; -----------------------------------
+;;
+
+(when (boundp 'sb-path-to-info)
+ (add-to-list 'Info-directory-list sb-path-to-info))

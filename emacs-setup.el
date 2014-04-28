@@ -36,7 +36,8 @@
       (darwinp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 57)
-       (defvar sb-default-frame-left 504))
+       (defvar sb-default-frame-left 504)
+       (defvar sb-path-to-google-drive "~/Google Drive/"))
       (linuxp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 45)
@@ -314,7 +315,8 @@
 ;; Location of files
 ;; -----------------
 
-(setq org-agenda-files sb-org-agenda-files)
+(setq org-agenda-files (cons (concat sb-path-to-google-drive "notes/")
+                             org-agenda-files))
 
 (when (boundp 'sb-path-to-blog)
   (defvar sb-path-to-blog-base-directory (concat sb-path-to-blog "org"))

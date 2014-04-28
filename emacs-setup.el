@@ -78,9 +78,9 @@
 
 (filesets-init)
 (global-hl-line-mode)
-(menu-bar-mode nil)
-(set-scroll-bar-mode nil)
-(show-paren-mode t)
+(menu-bar-mode)
+(scroll-bar-mode -1)
+(show-paren-mode)
 (tool-bar-mode -1)
 
 (global-unset-key (kbd "<C-next>"))

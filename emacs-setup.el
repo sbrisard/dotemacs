@@ -42,12 +42,6 @@
        (defvar sb-default-frame-height 45)
        (defvar sb-default-frame-left 501)))
 
-;; Local directory for emacs extensions.
-(defvar path-to-site-lisp (concat sb-path-to-emacs-setup "site-lisp/"))
-(add-to-list 'load-path path-to-site-lisp)
-(let ((default-directory path-to-site-lisp))
-  (normal-top-level-add-subdirs-to-load-path))
-
 ;; Functions defined in this file                                      <<funs>>
 ;; ==============================
 
@@ -279,14 +273,16 @@
 ;; Maxima                                                            <<maxima>>
 ;; ======
 
-(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
-(autoload 'maxima "maxima" "Run Maxima interactively" t)
-(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
-
 (cond (windowsp
        (setq maxima-command "C:/Program Files (x86)/Maxima-5.30.0/bin/maxima.bat"))
       (darwinp
+       (add-to-list 'load-path "/opt/local/share/maxima/5.33.0/emacs")
        (setq maxima-command "/opt/local/bin/maxima")))
+
+
+(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
+(autoload 'maxima "maxima" "Run Maxima interactively" t)
+(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
 
 ;; Org Mode                                                             <<org>>
 ;; ========

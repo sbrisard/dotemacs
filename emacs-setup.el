@@ -14,11 +14,6 @@
 ;; [[maxima][Maxima]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
-;;
-;;
-;; In init.el, a variable should be defined
-;; sb-path-to-emacs-setup
-;; which points to the path to this file.
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================

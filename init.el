@@ -81,4 +81,4 @@
 ;; Customization in window-system mode
 ;; ===================================
 
-(when window-system(load-file "~/.emacs.d/emacs-setup.el"))
+(when window-system (load-file "~/.emacs.d/init-window-system.el"))

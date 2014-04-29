@@ -192,11 +192,11 @@
 ;; ======
 
 (cond (windowsp
+       (add-to-list 'load-path "C:/Program Files (x86)/Maxima-5.30.0/share/maxima/5.30.0/emacs")
        (setq maxima-command "C:/Program Files (x86)/Maxima-5.30.0/bin/maxima.bat"))
       (darwinp
        (add-to-list 'load-path "/opt/local/share/maxima/5.33.0/emacs")
        (setq maxima-command "/opt/local/bin/maxima")))
-
 
 (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
 (autoload 'maxima "maxima" "Run Maxima interactively" t)

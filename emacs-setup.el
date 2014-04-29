@@ -241,11 +241,11 @@
 ;;
 ;; Hi Richard,
 ;;
-;; no, variables are not interpolated into quoted lists,
-;; any list preceded by "'" is quoted.
+;; no, variables are not interpolated into quoted lists, any list preceded by
+;; "'" is quoted.
 ;;
-;; If you can guarantee that the value of the variables is define at the
-;; time the
+;; If you can guarantee that the value of the variables is defined at the time
+;; the
 ;;
 ;;   (setq org-publish-projects-alist ...
 ;;
@@ -258,11 +258,10 @@
 ;;            ,rgr-souerce
 ;;            ....))
 ;;
-;; Note that this works only once, so if you later change the value, this
-;; list will not be changed.
+;; Note that this works only once, so if you later change the value, this list
+;; will not be changed.
 ::
-;; If you wanted dynamic behavior, then we would have to patch
-;; org-publish.el.
+;; If you wanted dynamic behavior, then we would have to patch org-publish.el.
 ;;
 ;; HTH
 ;;

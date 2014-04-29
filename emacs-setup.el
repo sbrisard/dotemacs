@@ -21,29 +21,21 @@
 (defvar sb-path-to-google-drive "~/Google Drive/")
 (defvar sb-path-to-local-documents "~/Documents/")
 
-(cond (windowsp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 53)
-       (defvar sb-default-frame-left 514))
-      (darwinp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 57)
-       (defvar sb-default-frame-left 504))
-      (linuxp
-       (defvar sb-default-frame-width 80)
-       (defvar sb-default-frame-height 45)
-       (defvar sb-default-frame-left 501)))
-
 ;; Visual appearance                                              <<appearance>>
 ;; =================
 
 ;; Geometry
 ;; --------
 
-(setq default-frame-alist `((top . 0)
-                            (left . ,sb-default-frame-left)
-                            (width . ,sb-default-frame-width)
-                            (height . ,sb-default-frame-height)))
+(cond (windowsp
+       (setq default-frame-alist '((top . 0) (left . 514)
+                                   (width . 80) (height . 53))))
+      (darwinp
+       (setq default-frame-alist '((top . 0) (left . 504)
+                                   (width . 80) (height . 57))))
+      (linuxp
+       (setq default-frame-alist '((top . 0) (left . 501)
+                                   (width . 80) (height . 45)))))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 

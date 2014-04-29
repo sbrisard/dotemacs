@@ -72,10 +72,8 @@
 
 (defvar sb-variable-pitch-font sb-monospaced-font)
 
-; TODO remove this conditional (run only in graphics mode.
-(when window-system
-  (set-face-font 'default sb-monospaced-font)
-  (set-face-attribute 'variable-pitch nil :font sb-monospaced-font))
+(set-face-font 'default sb-monospaced-font)
+(set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
 
 ;; Ispell                                                            <<ispell>>
 ;; ======

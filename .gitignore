@@ -1,5 +1,9 @@
 .org-id-locations
+auto-save-list
 ac-comphist.dat
 elpa
 filesets-cache.el
+lisp
+server
+tramp
 url

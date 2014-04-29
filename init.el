@@ -1,4 +1,14 @@
-(defvar sb-path-to-info "/Users/Shared/info/")
+;; Contents
+;; ========
+
+;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
+;;       C-c o. Otherwise, use M-x org-open-at-point-global.
+
+;; [[vars & funs][Variables and functions defined in this file]]
+;; [[misc][Miscellaneous]]
+;; [[trailing][Trailing whitespaces]]
+;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
+;; [[window][Additional customizations in window-system mode]]
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
@@ -12,14 +22,8 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
-;; No-window-system                                               <<no-window>>
-;; ================
-
-;; This section should be executed when emacs is run in both window-system and
-;; no-window-system modes.
-
-;; Miscellaneous
-;; -------------
+;; Miscellaneous                                                       <<misc>>
+;; =============
 
 (setq-default buffer-file-coding-system 'iso-latin-1-unix)
 (setq-default indent-tabs-mode nil)
@@ -43,8 +47,17 @@
 (global-unset-key (kbd "<C-next>"))
 (global-unset-key (kbd "<C-prior>"))
 
-;; Trailing whitespaces
-;; --------------------
+;; Under Mac OS X, right-alt must be mapped to Alt Gr.
+(when darwinp
+  (setq mac-option-modifier 'none)
+  (setq mac-command-modifier 'meta))
+
+;; On Windows 7, HOME is set to "C:/Users/brisard/AppData/Roaming/", which
+;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
+;;(setenv "HOME" "C:/Users/brisard/")
+
+;; Trailing whitespaces                                            <<trailing>>
+;; ====================
 
 ;; In selected modes, show trailing whitespaces and empty lines at the end of
 ;; the buffer. This is defined as a mode hook (which requires a function).
@@ -55,8 +68,8 @@
 (setq-default indicate-empty-lines t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Emacs Lisp Package Archive (ELPA)
-;; ---------------------------------
+;; Emacs Lisp Package Archive (ELPA)                                   <<elpa>>
+;; =================================
 
 (require 'package)
 
@@ -66,19 +79,7 @@
 
 (package-initialize)
 
-;; Platform-specific customizations
-;; --------------------------------
-
-;; Under Mac OS X, right-alt must be mapped to Alt Gr.
-(when darwinp
-  (setq mac-option-modifier 'none)
-  (setq mac-command-modifier 'meta))
-
-;; On Windows 7, HOME is set to "C:/Users/brisard/AppData/Roaming/", which
-;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
-;;(setenv "HOME" "C:/Users/brisard/")
-
-;; Customization in window-system mode
-;; ===================================
+;; Additional customizations in window-system mode                   <<window>>
+;; ===============================================
 
 (when window-system (load-file "~/.emacs.d/init-window-system.el"))

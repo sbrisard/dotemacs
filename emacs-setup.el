@@ -6,7 +6,6 @@
 ;; Otherwise, use M-x org-open-at-point-global.
 ;;
 ;; [[vars & funs][Variables and functions defined in this file]]
-;; [[no-window][No-window configuration]]
 ;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
 ;; [[magit][Magit]]

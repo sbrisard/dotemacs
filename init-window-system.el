@@ -1,9 +1,12 @@
+;; +-------------------------------------------------+
+;; | Additional customizations in window-system-mode |
+;; +-------------------------------------------------+
 
 ;; Contents
 ;; ========
-;;
-;; If the present file has been loaded, follow the links below with C-c o.
-;; Otherwise, use M-x org-open-at-point-global.
+
+;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
+;;       C-c o. Otherwise, use M-x org-open-at-point-global.
 ;;
 ;; [[vars & funs][Variables and functions defined in this file]]
 ;; [[appearance][Visual appearance in window-system mode]]
@@ -334,5 +337,6 @@
 ;; -----------------------------------
 ;;
 
+(defvar sb-path-to-info "/Users/Shared/info/")
 (when (boundp 'sb-path-to-info)
  (add-to-list 'Info-directory-list sb-path-to-info))

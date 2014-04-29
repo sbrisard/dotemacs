@@ -5,8 +5,7 @@
 ;; If the present file has been loaded, follow the links below with C-c o.
 ;; Otherwise, use M-x org-open-at-point-global.
 ;;
-;; [[vars][Variables defined in this file]]
-;; [[funs][Functions defined in this file]]
+;; [[vars & funs][Variables and functions defined in this file]]
 ;; [[no-window][No-window configuration]]
 ;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
@@ -21,13 +20,15 @@
 ;; sb-path-to-emacs-setup
 ;; which points to the path to this file.
 
-;; Variables defined in this file                                      <<vars>>
-;; ==============================
+;; Variables and functions defined in this file                 <<vars & funs>>
+;; ============================================
 
 ;; Predicates to check whether emacs is run from Windows, Linux or MacOS.
 (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
 (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
+
+(defvar sb-path-to-google-drive "~/Google Drive/")
 
 (cond (windowsp
        (defvar sb-default-frame-width 80)
@@ -36,15 +37,11 @@
       (darwinp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 57)
-       (defvar sb-default-frame-left 504)
-       (defvar sb-path-to-google-drive "~/Google Drive/"))
+       (defvar sb-default-frame-left 504))
       (linuxp
        (defvar sb-default-frame-width 80)
        (defvar sb-default-frame-height 45)
        (defvar sb-default-frame-left 501)))
-
-;; Functions defined in this file                                      <<funs>>
-;; ==============================
 
 (defun set-newline-and-indent ()
   "Bind newline-and-indent to RET. This function can be used as a hook."

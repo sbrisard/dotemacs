@@ -34,8 +34,8 @@
        (defvar sb-default-frame-height 45)
        (defvar sb-default-frame-left 501)))
 
-;; Visual appearance in window-system mode                       <<appearance>>
-;; =======================================
+;; Visual appearance                                              <<appearance>>
+;; =================
 
 ;; Geometry
 ;; --------

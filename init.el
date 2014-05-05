@@ -8,6 +8,7 @@
 ;; [[misc][Miscellaneous]]
 ;; [[trailing][Trailing whitespaces]]
 ;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
+;; [[epa][Easy PG (GnuPG interface for Emacs)]]
 ;; [[custom][Custom-set variables and faces]]
 ;; [[window][Additional customizations in window-system mode]]
 
@@ -95,6 +96,13 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (package-initialize)
+
+;; Easy PG (GnuPG interface for Emacs)                                  <<epa>>
+;; ===================================
+
+(require 'epa-file)
+(epa-file-enable)
+(setenv "GPG_AGENT_INFO" nil)
 
 ;; Additional customizations in window-system mode                   <<window>>
 ;; ===============================================

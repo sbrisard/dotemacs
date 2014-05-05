@@ -102,7 +102,6 @@
 
 (require 'epa-file)
 (epa-file-enable)
-(setenv "GPG_AGENT_INFO" nil)
 
 ;; Additional customizations in window-system mode                   <<window>>
 ;; ===============================================

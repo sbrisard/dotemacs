@@ -5,11 +5,11 @@
 ;;       C-c o. Otherwise, use M-x org-open-at-point-global.
 
 ;; [[vars & funs][Variables and functions defined in this file]]
+;; [[custom][Custom-set variables and faces]]
 ;; [[misc][Miscellaneous]]
 ;; [[trailing][Trailing whitespaces]]
 ;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
 ;; [[epa][Easy PG (GnuPG interface for Emacs)]]
-;; [[custom][Custom-set variables and faces]]
 ;; [[window][Additional customizations in window-system mode]]
 
 ;; Variables and functions defined in this file                 <<vars & funs>>

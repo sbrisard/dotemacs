@@ -34,6 +34,7 @@
  ;; If there is more than one, they won't work right.
  '(find-file-run-dired nil)
  '(magit-use-overlays nil)
+ '(make-backup-files nil)
  '(safe-local-variable-values (quote ((buffer-auto-save-file-name))))
  '(scroll-bar-mode nil))
 (custom-set-faces
@@ -54,7 +55,6 @@
 (setq default-directory "~/" )
 (setq dnd-open-file-other-window nil)
 (setq inhibit-startup-screen t)
-(setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
 (setq visible-bell t)
 

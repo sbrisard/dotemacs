@@ -1,3 +1,4 @@
+;; -*- coding: utf-8 -*-
 ;; Contents
 ;; ========
 
@@ -10,6 +11,7 @@
 ;; [[trailing][Trailing whitespaces]]
 ;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
 ;; [[epa][Easy PG (GnuPG interface for Emacs)]]
+;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
 ;; [[window][Additional customizations in window-system mode]]
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
@@ -106,6 +108,29 @@
 
 (require 'epa-file)
 (epa-file-enable)
+
+;; Whitespace mode (minor mode to visualize blanks)              <<whitespace>>
+;; ================================================
+
+;; Here are the UTF-8 values used below
+;;   - U+0009 TAB
+;;   - U+000A LINE FEED
+;;   - U+0020 SPACE
+;;   - U+0024 DOLLAR SIGN             $
+;;   - U+002E FULL STOP               .
+;;   - U+003E GREATER THAN SIGN       >
+;;   - U+00B6 PILCROW SIGN            ¶
+;;   - U+00B7 MIDDLE DOT              ·
+;;   - U+2192 RIGHTWARDS ARROW        →
+;;   - U+21E5 RIGHTWARDS ARROW TO BAR ⇥
+;;   - U+23CE RETURN SYMBOL          ⏎
+
+(require 'whitespace)
+(setq whitespace-display-mappings
+      '((space-mark #0020  [#x00B7] [#x002E])
+        (newline-mark #x00A [#x00B6 #x000A] [#x0024 #x000A])
+        (tab-mark #x009 [#x2192 #x009] [#x003E #x009])
+        ))
 
 ;; Additional customizations in window-system mode                   <<window>>
 ;; ===============================================

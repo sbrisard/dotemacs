@@ -127,8 +127,11 @@
 ;;   - U+23CE RETURN SYMBOL          ⏎
 
 (require 'whitespace)
+
+(setq whitespace-line-column 80)
+
 (setq whitespace-display-mappings
-      '((space-mark #0020  [#x00B7] [#x002E])
+      '((space-mark #x0020  [#x00B7] [#x002E])
         (newline-mark #x00A [#x00B6 #x000A] [#x0024 #x000A])
         (tab-mark #x009 [#x2192 #x009] [#x003E #x009])
         ))

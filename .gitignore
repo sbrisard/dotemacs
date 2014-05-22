@@ -2,6 +2,7 @@
 auto-save-list
 ac-comphist.dat
 elpa
+eshell
 filesets-cache.el
 lisp
 server

@@ -51,7 +51,7 @@
 ;; Miscellaneous                                                       <<misc>>
 ;; =============
 
-(setq-default buffer-file-coding-system 'iso-latin-1-unix)
+(setq-default buffer-file-coding-system 'utf-8)
 (setq-default indent-tabs-mode nil)
 
 (setq column-number-mode t)

@@ -33,6 +33,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(find-file-run-dired nil)
+ '(global-auto-revert-mode t) ; See [[info:emacs#Reverting]]
  '(magit-use-overlays nil)
  '(make-backup-files nil)
  '(safe-local-variable-values (quote ((buffer-auto-save-file-name))))

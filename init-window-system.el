@@ -47,7 +47,7 @@
 ;; -----------
 
 ;; M-x customize-themes displays a selectable list of custom themes.
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 ;; Fonts
 ;; -----

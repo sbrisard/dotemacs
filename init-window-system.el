@@ -313,6 +313,7 @@
 
 
 (add-hook 'python-mode-hook 'set-newline-and-indent)
+(add-hook 'python-mode-hook 'whitespace-mode)
 
 ;; Jedi -- Python auto-completion for Emacs
 ;; ----------------------------------------

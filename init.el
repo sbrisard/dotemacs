@@ -35,7 +35,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((buffer-auto-save-file-name))))
  '(scroll-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -58,6 +57,7 @@
 (setq inhibit-startup-screen t)
 (setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
+(setq safe-local-variable-values (quote ((buffer-auto-save-file-name))))
 (setq visible-bell t)
 
 (filesets-init)

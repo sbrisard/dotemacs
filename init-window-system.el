@@ -100,6 +100,8 @@
 
 (delete 'Git vc-handled-backends)
 
+(setq magit-use-overlays nil)
+
 (when windowsp
   (setq exec-path (append exec-path
                           '("C:/Program Files (x86)/Git/bin/"))))

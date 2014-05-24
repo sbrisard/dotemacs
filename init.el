@@ -37,7 +37,6 @@
  ;; If there is more than one, they won't work right.
  '(find-file-run-dired nil)
  '(global-auto-revert-mode t)
- '(magit-use-overlays nil)
  '(make-backup-files nil)
  '(safe-local-variable-values (quote ((buffer-auto-save-file-name))))
  '(scroll-bar-mode nil))

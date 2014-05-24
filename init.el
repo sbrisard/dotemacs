@@ -36,7 +36,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(find-file-run-dired nil)
- '(global-auto-revert-mode t) ; See [[info:emacs#Reverting]]
+ '(global-auto-revert-mode t)
  '(magit-use-overlays nil)
  '(make-backup-files nil)
  '(safe-local-variable-values (quote ((buffer-auto-save-file-name))))
@@ -135,6 +135,8 @@
         (newline-mark #x00A [#x00B6 #x000A] [#x0024 #x000A])
         (tab-mark #x009 [#x2192 #x009] [#x003E #x009])
         ))
+
+(setq whitespace-style (quote (face lines-tail)))
 
 ;; Additional customizations in window-system mode                   <<window>>
 ;; ===============================================

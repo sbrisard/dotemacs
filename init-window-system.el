@@ -36,7 +36,7 @@
                                    (width . 80) (height . 53))))
       (darwinp
        (setq default-frame-alist '((top . 0) (left . 504)
-                                   (width . 80) (height . 57))))
+                                   (width . 80) (height . 39))))
       (linuxp
        (setq default-frame-alist '((top . 0) (left . 501)
                                    (width . 80) (height . 45)))))
@@ -63,7 +63,7 @@
 ;;      where fontname is the copied string.
 
 (cond (windowsp (defvar sb-monospaced-font "Consolas-8"))
-      (darwinp (defvar sb-monospaced-font "Inconsolata-10"))
+      (darwinp (defvar sb-monospaced-font "-apple-Fira_Mono-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1"))
       (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")))
 
 (defvar sb-variable-pitch-font sb-monospaced-font)

@@ -33,7 +33,7 @@
 
 (cond (windowsp
        (setq default-frame-alist '((top . 0) (left . 514)
-                                   (width . 80) (height . 53))))
+                                   (width . 80) (height . 51))))
       (darwinp
        (setq default-frame-alist '((top . 0) (left . 504)
                                    (width . 80) (height . 39))))

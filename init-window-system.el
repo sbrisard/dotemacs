@@ -47,6 +47,15 @@
 ;; -----------
 
 ;; M-x customize-themes displays a selectable list of custom themes.
+
+;; Do not use variable height fonts. These variables must be set prior to
+;; loading the theme itself, for them to take effect.
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+
 (load-theme 'solarized-dark t)
 
 ;; Fonts

@@ -25,7 +25,7 @@
 (defvar sb-path-to-google-drive "~/Google Drive/")
 (defvar sb-path-to-local-documents "~/Documents/")
 
-;; Visual appearance                                              <<appearance>>
+;; Visual appearance                                             <<appearance>>
 ;; =================
 
 ;; Geometry

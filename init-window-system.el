@@ -39,7 +39,7 @@
                                    (width . 80) (height . 46))))
       (linuxp
        (setq default-frame-alist '((top . 0) (left . 501)
-                                   (width . 80) (height . 45)))))
+                                   (width . 80) (height . 41)))))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 

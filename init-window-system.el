@@ -33,15 +33,18 @@
 
 (cond (windowsp
        (setq default-frame-alist '((top . 0) (left . 514)
-                                   (width . 80) (height . 44))))
+                                   (width . 162) (height . 44))))
       (darwinp
        (setq default-frame-alist '((top . 0) (left . 504)
-                                   (width . 80) (height . 57))))
+                                   (width . 162) (height . 57))))
       (linuxp
        (setq default-frame-alist '((top . 0) (left . 501)
-                                   (width . 80) (height . 41)))))
+                                   (width . 162) (height . 41)))))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
+
+(split-window-below -7)
+(split-window-right)
 
 ;; Color theme
 ;; -----------

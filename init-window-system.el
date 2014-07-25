@@ -45,6 +45,7 @@
 
 (split-window-below -7)
 (split-window-right)
+(windmove-default-keybindings)
 
 ;; Color theme
 ;; -----------

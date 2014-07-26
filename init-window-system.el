@@ -230,6 +230,12 @@
                                    (file . find-file)
                                    (wl . wl-other-frame))))
 
+;; Show agenda in the current window, keeping all other windows.
+(setq org-agenda-window-setup 'current-window)
+
+;; Restore window configuration upon exiting agenda.
+(setq org-agenda-restore-windows-after-quit t)
+
 ;; Fontification
 ;; -------------
 

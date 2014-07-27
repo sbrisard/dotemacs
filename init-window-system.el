@@ -46,7 +46,7 @@
 ;; Windows
 ;; -------
 
-(split-window-below -7)
+;(split-window-below -7)
 (split-window-right)
 (windmove-default-keybindings)
 

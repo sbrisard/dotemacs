@@ -43,6 +43,9 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
+;; Windows
+;; -------
+
 (split-window-below -7)
 (split-window-right)
 (windmove-default-keybindings)

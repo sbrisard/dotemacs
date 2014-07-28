@@ -13,6 +13,7 @@
 ;; [[vars & funs][Variables and functions defined in this file]]
 ;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
+;; [[auto-complete][Auto-complete]]
 ;; [[magit][Magit]]
 ;; [[latex][LaTeX]]
 ;; [[maxima][Maxima]]
@@ -101,6 +102,13 @@
 
 (set-face-font 'default sb-monospaced-font)
 (set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
+
+;; Auto-complete                                              <<auto-complete>>
+;; =============
+
+(require 'auto-complete)
+(ac-config-default)
+(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 
 ;; Ispell                                                            <<ispell>>
 ;; ======

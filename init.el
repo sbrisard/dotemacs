@@ -12,6 +12,7 @@
 ;; [[trailing][Trailing whitespaces]]
 ;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
 ;; [[epa][Easy PG (GnuPG interface for Emacs)]]
+;; [[filesets][Filesets]]
 ;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
 ;; [[window][Additional customizations in window-system mode]]
 
@@ -60,7 +61,6 @@
 (setq safe-local-variable-values (quote ((buffer-auto-save-file-name))))
 (setq visible-bell t)
 
-(filesets-init)
 (global-auto-revert-mode)
 (global-hl-line-mode)
 (menu-bar-mode)
@@ -108,6 +108,18 @@
 
 (require 'epa-file)
 (epa-file-enable)
+
+;; Filesets                                                        <<filesets>>
+;; ========
+
+;; The version of filesets which ships with emacs seems buggy. It is preferable
+;; to download the latest version by the author
+;;   M-x filesets-goto-homepage
+
+(add-to-list 'load-path (concat user-emacs-directory "elisp/filesets2"))
+(require 'filesets-emacs)
+(setq filesets-menu-path '("File"))
+(filesets-install t)
 
 ;; Whitespace mode (minor mode to visualize blanks)              <<whitespace>>
 ;; ================================================

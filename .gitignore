@@ -1,6 +1,7 @@
 .org-id-locations
 auto-save-list
 ac-comphist.dat
+elisp
 elpa
 eshell
 filesets-cache.el

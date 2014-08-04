@@ -14,6 +14,7 @@
 ;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
 ;; [[auto-complete][Auto-complete]]
+;; [[flycheck][Flycheck]]
 ;; [[magit][Magit]]
 ;; [[latex][LaTeX]]
 ;; [[maxima][Maxima]]
@@ -109,6 +110,11 @@
 ;(require 'auto-complete)
 ;(ac-config-default)
 ;(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+
+;; Flycheck                                                        <<flycheck>>
+;; ========
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Ispell                                                            <<ispell>>
 ;; ======

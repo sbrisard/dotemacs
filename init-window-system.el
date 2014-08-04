@@ -240,6 +240,8 @@
 ;; Org Mode                                                             <<org>>
 ;; ========
 
+(add-to-list 'load-path (concat user-emacs-directory "/elisp/org-mode/lisp"))
+
 (setq org-startup-truncated nil)                                  ;; Wrap lines
 (setq org-startup-folded nil)            ;; Don't open org files in folded mode
 (setq system-time-locale "C")    ;; Make sure that timestamps appear in English

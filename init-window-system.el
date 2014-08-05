@@ -366,8 +366,6 @@
 ;;   ;(require 'pydoc-info)
 ;; )
 
-
-(autoload 'python-mode "python-mode" "Python" t)
 (add-hook 'python-mode-hook 'set-newline-and-indent)
 (add-hook 'python-mode-hook 'whitespace-mode)
 

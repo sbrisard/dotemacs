@@ -121,12 +121,6 @@
 (setq filesets-menu-path '("File"))
 (filesets-install t)
 
-;; Interactively Do Things (ido)                                        <<ido>>
-;; =============================
-
-(require 'ido)
-(ido-mode t)
-
 ;; Whitespace mode (minor mode to visualize blanks)              <<whitespace>>
 ;; ================================================
 

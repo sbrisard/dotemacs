@@ -281,6 +281,7 @@
 ;; Location of files
 ;; -----------------
 
+(setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
 (setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-google-drive s))
                                '("notes/" "notes/biblio/")))
 
@@ -367,8 +368,8 @@
 ;; Jedi -- Python auto-completion for Emacs
 ;; ----------------------------------------
 
-(setq jedi:complete-on-dot t)
-(add-hook 'python-mode-hook 'jedi:setup)
+;;(setq jedi:complete-on-dot t)
+;;(add-hook 'python-mode-hook 'jedi:setup)
 
 ;; TODO Clean-up below
 

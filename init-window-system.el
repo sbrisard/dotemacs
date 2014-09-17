@@ -283,7 +283,7 @@
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
 (setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-google-drive s))
-                               '("notes/" "notes/Doctorants" "notes/Privé")))
+                               '("notes/" "notes/Doctorants" "notes/Prive")))
 
 (defvar sb-path-to-blog (concat sb-path-to-local-documents "blog/"))
 (defvar sb-path-to-blog-base-directory (concat sb-path-to-blog "org/"))

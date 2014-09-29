@@ -327,7 +327,7 @@
          :base-directory ,sb-path-to-blog-base-directory
          :publishing-directory ,sb-path-to-blog-publishing-directory
          :base-extension "org"
-         :exclude "header.org"
+         :exclude "header.*\\|navbar.*"
          :recursive t
          :publishing-function org-html-publish-to-html
          :section-numbers nil

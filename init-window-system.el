@@ -331,6 +331,8 @@
          :recursive t
          :publishing-function org-html-publish-to-html
          :section-numbers nil
+         :auto-sitemap t
+         :sitemap-sort-files chronologically
          :with-toc nil)
         ("blog-images"
          :base-directory ,sb-path-to-blog-base-directory

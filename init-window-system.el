@@ -269,6 +269,37 @@
 ;; Restore window configuration upon exiting agenda.
 (setq org-agenda-restore-windows-after-quit t)
 
+;; Org-export
+;; ----------
+
+(setq org-export-preserve-breaks nil)
+(setq org-export-time-stamp-file t)
+(setq org-export-with-archived-trees 'headline)
+(setq org-export-with-author t)
+(setq org-export-with-clocks nil)
+(setq org-export-with-creator 'comment)
+(setq org-export-with-date t)
+(setq org-export-with-drawers '(not "LOGBOOK"))
+(setq org-export-with-email nil)
+(setq org-export-with-emphasize t)
+(setq org-export-with-entities t)
+(setq org-export-with-fixed-width t)
+(setq org-export-with-footnotes t)
+(setq org-export-with-inlinetasks t)
+(setq org-export-with-planning nil)
+(setq org-export-with-priority nil)
+(setq org-export-with-section-numbers nil)
+(setq org-export-with-smart-quotes nil)
+(setq org-export-with-special-strings t)
+(setq org-export-with-statistics-cookies t)
+(setq org-export-with-sub-superscripts t)
+(setq org-export-with-tables t)
+(setq org-export-with-tags t)
+(setq org-export-with-tasks t)
+(setq org-export-with-timestamps t)
+(setq org-export-with-toc nil)
+(setq org-export-with-todo-keywords t)
+
 ;; Fontification
 ;; -------------
 

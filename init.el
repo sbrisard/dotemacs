@@ -16,6 +16,12 @@
 ;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
 ;; [[window][Additional customizations in window-system mode]]
 
+;; User
+;; ====
+
+(setq user-full-name "Sébastien Brisard")
+(setq user-mail-address "sebastien.brisard@ifsttar.fr")
+
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 

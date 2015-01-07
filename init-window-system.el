@@ -317,7 +317,6 @@
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
 (setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-google-drive s))
                                '("notes"
-                                 "notes/biblio"
                                  "notes/collaborations"
                                  "notes/prive")))
 

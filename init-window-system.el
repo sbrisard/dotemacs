@@ -320,9 +320,6 @@
                                  "notes/collaborations"
                                  "notes/prive")))
 
-;; Load blog-specific customizations
-(load-file (concat sb-path-to-local-documents "blog/init.el"))
-
 ;; Python/Cython                                                     <<python>>
 ;; =============
 

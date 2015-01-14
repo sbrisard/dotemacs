@@ -149,3 +149,10 @@
 ;; ===============================================
 
 (when window-system (load-file "~/.emacs.d/init-window-system.el"))
+
+;; Blog-specific customizations
+;; ============================
+
+(defun sb-load-file-when-exists (filename)
+  (when (file-exists-p filename) (load-file filename)))
+(sb-load-file-when-exists (concat sb-path-to-local-documents "blog/init.el"))

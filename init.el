@@ -64,6 +64,9 @@
 (setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
 (setq safe-local-variable-values (quote ((buffer-auto-save-file-name))))
+(setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+                           ("http" . "proxy.enpc.fr:3128")
+                           ("https" . "proxy.enpc.fr:3128")))
 (setq visible-bell t)
 
 (global-auto-revert-mode)

@@ -155,4 +155,4 @@
 
 (defun sb-load-file-when-exists (filename)
   (when (file-exists-p filename) (load-file filename)))
-(sb-load-file-when-exists (concat sb-path-to-local-documents "blog/init.el"))
+(sb-load-file-when-exists (concat sb-path-to-local-documents "blog/sb-blog.el"))

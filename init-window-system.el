@@ -177,7 +177,7 @@
 (setq TeX-source-correlate-start-server t)
 
 (cond (windowsp
-       (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe\""))))
+       (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/opt/SumatraPDF-3.0/SumatraPDF.exe\""))))
        (add-to-list 'TeX-view-program-list '("SumatraPDF" "%(sumatra) -reuse-instance -forward-search %b %n %o"))
        (setq TeX-view-program-selection '((output-pdf "SumatraPDF"))))
 

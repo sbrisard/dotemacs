@@ -95,7 +95,7 @@
 ;;          (set-face-font 'default "fontname")
 ;;      where fontname is the copied string.
 
-(cond (windowsp (defvar sb-monospaced-font "Envy Code R-9"))
+(cond (windowsp (defvar sb-monospaced-font "Envy Code R-12"))
       (darwinp (defvar sb-monospaced-font "Envy Code R-11"))
       (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")))
 
@@ -233,8 +233,8 @@
 ;; ======
 
 (cond (windowsp
-       (add-to-list 'load-path "C:/Program Files (x86)/Maxima-5.30.0/share/maxima/5.30.0/emacs")
-       (setq maxima-command "C:/Program Files (x86)/Maxima-5.30.0/bin/maxima.bat"))
+       (add-to-list 'load-path "C:/Program Files (x86)/Maxima-5.34.1/share/maxima/5.34.1/emacs")
+       (setq maxima-command "C:/Program Files (x86)/Maxima-5.34.1/bin/maxima.bat"))
       (darwinp
        (add-to-list 'load-path "/opt/local/share/maxima/5.33.0/emacs")
        (setq maxima-command "/opt/local/bin/maxima")))

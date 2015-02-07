@@ -24,7 +24,7 @@
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 
-(defvar sb-path-to-google-drive "~/Google Drive/")
+(defvar sb-path-to-cloud "~/Dropbox/")
 (defvar sb-path-to-local-documents "~/Documents/")
 
 ;; Predicates to check whether emacs is run from Windows, Linux or MacOS.

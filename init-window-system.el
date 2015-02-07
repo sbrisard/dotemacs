@@ -24,7 +24,7 @@
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 
-(defvar sb-path-to-google-drive "~/Google Drive/")
+(defvar sb-path-to-cloud "~/Dropbox/")
 (defvar sb-path-to-local-documents "~/Documents/")
 
 ;; Toggle window dedication
@@ -315,7 +315,7 @@
 ;; -----------------
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
-(setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-google-drive s))
+(setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-cloud s))
                                '("notes"
                                  "notes/collaborations"
                                  "notes/prive")))

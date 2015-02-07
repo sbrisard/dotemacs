@@ -10,7 +10,6 @@
 ;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
 ;;       C-c o. Otherwise, use M-x org-open-at-point-global.
 ;;
-;; [[vars & funs][Variables and functions defined in this file]]
 ;; [[appearance][Visual appearance in window-system mode]]
 ;; [[ispell][Ispell]]
 ;; [[auto-complete][Auto-complete]]
@@ -20,12 +19,6 @@
 ;; [[maxima][Maxima]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
-
-;; Variables and functions defined in this file                 <<vars & funs>>
-;; ============================================
-
-(defvar sb-path-to-cloud "~/Dropbox/")
-(defvar sb-path-to-local-documents "~/Documents/")
 
 ;; Toggle window dedication
 ;; http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-keep-its-buffer-and-not-get-resized

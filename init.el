@@ -24,6 +24,9 @@
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 
+(defvar sb-path-to-google-drive "~/Google Drive/")
+(defvar sb-path-to-local-documents "~/Documents/")
+
 ;; Predicates to check whether emacs is run from Windows, Linux or MacOS.
 (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))

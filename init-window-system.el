@@ -19,6 +19,7 @@
 ;; [[maxima][Maxima]]
 ;; [[org][Org Mode]]
 ;; [[python][Python/Cython]]
+;; [[ccmode]]
 
 ;; Toggle window dedication
 ;; http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-keep-its-buffer-and-not-get-resized
@@ -356,6 +357,11 @@
 ;; Location of additional info manuals
 ;; -----------------------------------
 ;;
+
+;; <<ccmode>>
+;; ==========
+
+(setq-default c-basic-offset 4)
 
 (defvar sb-path-to-info "/Users/Shared/info/")
 (when (boundp 'sb-path-to-info)

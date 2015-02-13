@@ -88,7 +88,7 @@
 ;;          (set-face-font 'default "fontname")
 ;;      where fontname is the copied string.
 
-(cond (windowsp (defvar sb-monospaced-font "Envy Code R-12"))
+(cond (windowsp (defvar sb-monospaced-font "Envy Code R-10"))
       (darwinp (defvar sb-monospaced-font "Envy Code R-11"))
       (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")))
 

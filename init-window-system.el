@@ -90,7 +90,7 @@
 
 (cond (windowsp (defvar sb-monospaced-font "Envy Code R-10"))
       (darwinp (defvar sb-monospaced-font "Envy Code R-11"))
-      (linuxp (defvar sb-monospaced-font "EnvyCodeR-9")))
+      (linuxp (defvar sb-monospaced-font "EnvyCodeR-10")))
 
 (defvar sb-variable-pitch-font sb-monospaced-font)
 

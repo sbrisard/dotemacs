@@ -6,6 +6,7 @@ elpa
 eshell
 filesets-cache.el
 lisp
+local.el
 server
 tramp
 url

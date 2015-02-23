@@ -15,6 +15,14 @@
 ;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
 ;; [[window][Additional customizations in window-system mode]]
 
+;; Machine specific variables
+;; ==========================
+;;
+;; File local.el should define the following variables
+;;   - sb-ipython-command: the command to be used to start an IPython shell
+
+(load-file "./local.el")
+
 ;; User
 ;; ====
 
@@ -35,9 +43,6 @@
 (defun set-newline-and-indent ()
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
-
-(if linuxp (defvar sb-ipython-command "ipython3")
-  (defvar sb-ipython-command "ipython"))
 
 ;; Custom-set variables and faces                                    <<custom>>
 ;; ==============================

@@ -6,14 +6,28 @@
 ;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
 ;;       C-c o. Otherwise, use M-x org-open-at-point-global.
 
+;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
 ;; [[vars & funs][Variables and functions defined in this file]]
 ;; [[custom][Custom-set variables and faces]]
 ;; [[misc][Miscellaneous]]
 ;; [[trailing][Trailing whitespaces]]
-;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
 ;; [[epa][Easy PG (GnuPG interface for Emacs)]]
 ;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
 ;; [[window][Additional customizations in window-system mode]]
+
+
+;; Emacs Lisp Package Archive (ELPA)                                   <<elpa>>
+;; =================================
+
+(require 'package)
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(package-initialize)
+
+(require 'f)
 
 ;; Machine specific variables
 ;; ==========================
@@ -23,7 +37,7 @@
 ;;   - sb-user-mail-address
 ;;   - sb-ipython-command: the command to be used to start an IPython shell
 
-(load-file "./local.el")
+(load-file (f-join (file-name-directory load-file-name) "local.el"))
 
 ;; User
 ;; ====
@@ -112,17 +126,6 @@
 ;; white spaces are remoaved when buffer is saved.
 (setq-default indicate-empty-lines t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Emacs Lisp Package Archive (ELPA)                                   <<elpa>>
-;; =================================
-
-(require 'package)
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(package-initialize)
 
 ;; Easy PG (GnuPG interface for Emacs)                                  <<epa>>
 ;; ===================================

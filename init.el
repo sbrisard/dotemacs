@@ -36,6 +36,9 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
+(if linuxp (defvar sb-ipython-command "ipython3")
+  (defvar sb-ipython-command "ipython"))
+
 ;; Custom-set variables and faces                                    <<custom>>
 ;; ==============================
 

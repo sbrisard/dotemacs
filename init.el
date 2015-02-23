@@ -19,6 +19,8 @@
 ;; ==========================
 ;;
 ;; File local.el should define the following variables
+;;   - sb-user-full-name
+;;   - sb-user-mail-address
 ;;   - sb-ipython-command: the command to be used to start an IPython shell
 
 (load-file "./local.el")
@@ -26,8 +28,8 @@
 ;; User
 ;; ====
 
-(setq user-full-name "Sébastien Brisard")
-(setq user-mail-address "sebastien.brisard@ifsttar.fr")
+(setq user-full-name sb-user-full-name)
+(setq user-mail-address sb-user-mail-address)
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================

@@ -223,6 +223,18 @@
 
 (setq reftex-insert-label-flags (quote ("s" "st")))
 
+;; Custom function to insert BibTeX reference
+;; ------------------------------------------
+
+(defvar sb-path-to-biblio (f-join sb-path-to-local-documents "biblio"))
+
+(defun sb-bibref-path (key)
+  (f-join sb-path-to-biblio (s-left 1 key) key (concat key ".bib")))
+
+(defun sb-insert-bibref (key)
+  (interactive "sBibTeX key: \n")
+  (insert-file-contents (sb-bibref-path (downcase key))))
+
 ;; Maxima                                                            <<maxima>>
 ;; ======
 

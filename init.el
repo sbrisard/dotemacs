@@ -79,7 +79,9 @@
 ;; Miscellaneous                                                       <<misc>>
 ;; =============
 
-(setq-default buffer-file-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq default-process-coding-system 'utf-8)
+;;(setq-default buffer-file-coding-system 'utf-8)
 (setq-default indent-tabs-mode nil)
 
 (setq column-number-mode t)

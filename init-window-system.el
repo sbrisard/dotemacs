@@ -154,9 +154,8 @@
 
 (require 'tex)
 
-;; AUCTeX multifile
-(setq TeX-parse-self t) ; Enable parse on load.
-;;(setq TeX-auto-save t) ; Enable parse on save.
+(setq TeX-parse-self t)
+(setq TeX-auto-save t)
 (setq-default TeX-master nil)
 
 (setq font-latex-match-reference-keywords '(("citeauthor" "*{")

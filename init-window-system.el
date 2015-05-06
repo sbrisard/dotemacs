@@ -140,6 +140,7 @@
 (delete 'Git vc-handled-backends)
 
 (setq magit-use-overlays nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 (when windowsp
   (setq exec-path (append exec-path

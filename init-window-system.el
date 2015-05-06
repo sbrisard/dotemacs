@@ -152,14 +152,11 @@
 ;; ------
 
 (require 'tex)
-(require 'preview)
-;; (require 'tex-mik)
-;;(load "auctex.el" nil t t)
-;;(load "preview-latex.el" nil t t)
 
 ;; AUCTeX multifile
 (setq TeX-parse-self t) ; Enable parse on load.
 ;;(setq TeX-auto-save t) ; Enable parse on save.
+(setq-default TeX-master nil)
 
 (setq font-latex-match-reference-keywords '(("citeauthor" "*{")
                                             ("citetext" "{")

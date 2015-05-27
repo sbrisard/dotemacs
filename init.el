@@ -92,7 +92,8 @@
 (setq inhibit-startup-screen t)
 (setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
-(setq safe-local-variable-values (quote ((buffer-auto-save-file-name))))
+(setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
+                                         (org-confirm-babel-evaluate))))
 (setq visible-bell t)
 
 (global-auto-revert-mode)

@@ -7,6 +7,7 @@ elpa
 eshell
 filesets-cache.el
 ido.last
+init.el
 lisp
 local.el
 server

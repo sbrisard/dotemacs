@@ -239,7 +239,7 @@
        (add-to-list 'load-path "C:/Program Files (x86)/Maxima-5.34.1/share/maxima/5.34.1/emacs")
        (setq maxima-command "C:/Program Files (x86)/Maxima-5.34.1/bin/maxima.bat"))
       (darwinp
-       (add-to-list 'load-path "/opt/local/share/maxima/5.33.0/emacs")
+       (add-to-list 'load-path "/opt/local/share/maxima/5.34.1/emacs")
        (setq maxima-command "/opt/local/bin/maxima")))
 
 (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)

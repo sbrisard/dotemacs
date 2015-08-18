@@ -1,12 +1,15 @@
 .org-id-locations
+.python-environments
 auto-save-list
 ac-comphist.dat
 elisp
 elpa
 eshell
 filesets-cache.el
+ido.last
 lisp
 local.el
 server
+site-lisp
 tramp
 url

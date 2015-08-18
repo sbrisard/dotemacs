@@ -164,7 +164,7 @@
 ;; Additional customizations in window-system mode                   <<window>>
 ;; ===============================================
 
-(when window-system (load-file "~/.emacs.d/init-window-system.el"))
+(when window-system (load-file "~/.emacs.d/sb-init-window-system.el"))
 
 ;; Blog-specific customizations
 ;; ============================

@@ -35,13 +35,21 @@
 ;; File local.el should define the following variables
 ;;   - sb-ipython-command: the command to be used to start an IPython shell
 
+(defgroup sb nil "My customization group" :tag "SB")
+(defcustom sb-path-to-cloud "~/Dropbox"
+  "TODO Documentation"
+  :type 'string :group 'sb :tag "Path to cloud")
+(defcustom sb-path-to-local-documents "~/Documents/"
+  "TODO Documentation"
+  :type 'string :group 'sb :tag "Path to local documents")
+
 (load-file (f-join (file-name-directory load-file-name) "local.el"))
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 
-(defvar sb-path-to-cloud "~/Dropbox/")
-(defvar sb-path-to-local-documents "~/Documents/")
+;(defvar sb-path-to-cloud "~/Dropbox/")
+
 
 ;; Predicates to check whether emacs is run from Windows, Linux or MacOS.
 (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))

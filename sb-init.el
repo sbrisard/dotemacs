@@ -31,9 +31,6 @@
 
 ;; Machine specific variables
 ;; ==========================
-;;
-;; File local.el should define the following variables
-;;   - sb-ipython-command: the command to be used to start an IPython shell
 
 (defgroup sb nil "My customization group" :tag "SB")
 (defcustom sb-path-to-cloud "~/Dropbox"

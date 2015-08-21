@@ -330,8 +330,6 @@
 ;; ------------
 
 ;; Code copied from python.el
-(setq python-shell-interpreter sb-ipython-command)
-(setq python-shell-interpreter-args "")
 (setq python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
 (setq python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: ")
 (setq python-shell-completion-setup-code

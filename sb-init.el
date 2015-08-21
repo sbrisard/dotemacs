@@ -39,7 +39,7 @@
 (defcustom sb-path-to-cloud "~/Dropbox"
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to cloud")
-(defcustom sb-path-to-local-documents "~/Documents/"
+(defcustom sb-path-to-local-documents "~/Documents"
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to local documents")
 
@@ -155,4 +155,4 @@
 
 (defun sb-load-file-when-exists (filename)
   (when (file-exists-p filename) (load-file filename)))
-(sb-load-file-when-exists (concat sb-path-to-local-documents "blog/sb-blog.el"))
+(sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))

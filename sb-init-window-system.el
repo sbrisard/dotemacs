@@ -318,7 +318,7 @@
 ;; -----------------
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
-(setq org-agenda-files (mapcar (lambda(s) (concat sb-path-to-cloud s))
+(setq org-agenda-files (mapcar (lambda(s) (f-join sb-path-to-cloud s))
                                '("notes"
                                  "notes/collaborations"
                                  "notes/prive")))

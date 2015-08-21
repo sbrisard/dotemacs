@@ -40,8 +40,6 @@
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to local documents")
 
-(load-file (f-join (file-name-directory load-file-name) "local.el"))
-
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================
 

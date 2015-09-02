@@ -236,8 +236,7 @@
 ;; ======
 
 (cond (windowsp
-       (add-to-list 'load-path "C:/Program Files (x86)/Maxima-5.34.1/share/maxima/5.34.1/emacs")
-       (setq maxima-command "C:/Program Files (x86)/Maxima-5.34.1/bin/maxima.bat"))
+       (add-to-list 'load-path "C:\\maxima-5.37.1\\share\\maxima\\5.37.1\\emacs"))
       (darwinp
        (add-to-list 'load-path "/opt/local/share/maxima/5.34.1/emacs")
        (setq maxima-command "/opt/local/bin/maxima")))

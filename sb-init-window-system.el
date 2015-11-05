@@ -330,6 +330,13 @@
 (require 'ob-ipython)
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
+;; TODO items
+;; ----------
+
+(setq org-todo-keywords '((sequence "A_FAIRE" "EN_ATTENTE" "UN_JOUR" "|"
+                                    "FAIT")
+                          (sequence "TODO" "|" "DONE")))
+
 ;; Python/Cython                                                     <<python>>
 ;; =============
 

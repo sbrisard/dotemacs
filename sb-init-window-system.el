@@ -322,6 +322,14 @@
                                  "notes/collaborations"
                                  "notes/prive")))
 
+;; ob-ipython
+;; ----------
+
+(setq org-confirm-babel-evaluate nil)
+
+(require 'ob-ipython)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
 ;; Python/Cython                                                     <<python>>
 ;; =============
 

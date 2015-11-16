@@ -311,7 +311,8 @@
 (setq org-src-fontify-natively t)
 (setq org-html-htmlize-output-type 'css)
 (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
-                                                         (python . t)))
+                                                         (python . t)
+                                                         (maxima . t)))
 
 ;; Location of files
 ;; -----------------

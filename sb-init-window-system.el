@@ -260,12 +260,12 @@
 (global-set-key (kbd "C-c L") 'org-insert-link-global) ; Allow for links to be
 (global-set-key (kbd "C-c o") 'org-open-at-point-global)    ; used outside Org
 
-;; Visit files in same window
-(setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
-                                   (vm-imap . vm-visit-imap-folder-other-frame)
-                                   (gnus . org-gnus-no-new-news)
-                                   (file . find-file)
-                                   (wl . wl-other-frame))))
+;; Visit files in other window
+ (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
+                                    (vm-imap . vm-visit-imap-folder-other-frame)
+                                    (gnus . org-gnus-no-new-news)
+                                    (file . find-file-other-window)
+                                    (wl . wl-other-frame))))
 
 ;; Show agenda in the current window, keeping all other windows.
 (setq org-agenda-window-setup 'current-window)

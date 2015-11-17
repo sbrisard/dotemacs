@@ -39,6 +39,9 @@
 (defcustom sb-path-to-local-documents "~/Documents"
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to local documents")
+(defcustom sb-path-to-maxima-mode ""
+  "TODO Documentation"
+  :type 'string :group 'sb :tag "Path to maxima-mode files")
 
 ;; Variables and functions defined in this file                 <<vars & funs>>
 ;; ============================================

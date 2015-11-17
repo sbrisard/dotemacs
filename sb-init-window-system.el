@@ -34,8 +34,6 @@
      "Window '%s' is normal")
    (current-buffer)))
 
-;; Use switch-window instead of other-window
-(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Visual appearance                                             <<appearance>>
 ;; =================
@@ -54,6 +52,9 @@
                                    (width . 163) (height . 41)))))
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
+
+;; Use switch-window instead of other-window
+(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Windows
 ;; -------
@@ -237,12 +238,7 @@
 ;; Maxima                                                            <<maxima>>
 ;; ======
 
-(cond (windowsp
-       (add-to-list 'load-path "C:\\maxima-5.37.1\\share\\maxima\\5.37.1\\emacs"))
-      (darwinp
-       (add-to-list 'load-path "/opt/local/share/maxima/5.34.1/emacs")
-       (setq maxima-command "/opt/local/bin/maxima")))
-
+(add-to-list 'load-path sb-path-to-maxima-mode)
 (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
 (autoload 'maxima "maxima" "Run Maxima interactively" t)
 (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
@@ -262,12 +258,12 @@
 (global-set-key (kbd "C-c L") 'org-insert-link-global) ; Allow for links to be
 (global-set-key (kbd "C-c o") 'org-open-at-point-global)    ; used outside Org
 
-;; Visit files in other window
- (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
-                                    (vm-imap . vm-visit-imap-folder-other-frame)
-                                    (gnus . org-gnus-no-new-news)
-                                    (file . find-file-other-window)
-                                    (wl . wl-other-frame))))
+;; Visit files in same window
+(setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
+                                   (vm-imap . vm-visit-imap-folder-other-frame)
+                                   (gnus . org-gnus-no-new-news)
+                                   (file . find-file-other-window)
+                                   (wl . wl-other-frame))))
 
 ;; Show agenda in the current window, keeping all other windows.
 (setq org-agenda-window-setup 'current-window)

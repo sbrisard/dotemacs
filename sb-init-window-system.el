@@ -34,6 +34,8 @@
      "Window '%s' is normal")
    (current-buffer)))
 
+;; Use switch-window instead of other-window
+(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Visual appearance                                             <<appearance>>
 ;; =================

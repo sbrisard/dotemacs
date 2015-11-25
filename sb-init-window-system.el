@@ -44,9 +44,6 @@
 (cond (windowsp
        (setq default-frame-alist '((top . 0) (left . 514)
                                    (width . 163) (height . 44))))
-      (darwinp
-       (setq default-frame-alist '((top . 0) (left . 504)
-                                   (width . 163) (height . 57))))
       (linuxp
        (setq default-frame-alist '((top . 0) (left . 501)
                                    (width . 163) (height . 41)))))

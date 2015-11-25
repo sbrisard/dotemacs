@@ -352,7 +352,7 @@
 (setq python-shell-completion-string-code
       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-(add-hook 'python-mode-hook 'set-newline-and-indent)
+(add-hook 'python-mode-hook 'sb-bind-newline-and-indent-to-RET)
 (add-hook 'python-mode-hook 'whitespace-mode)
 
 ;; Jedi -- Python auto-completion for Emacs

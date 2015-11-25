@@ -33,7 +33,7 @@
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
 (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
 
-(defun set-newline-and-indent ()
+(defun sb-bind-newline-and-indent-to-RET ()
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 

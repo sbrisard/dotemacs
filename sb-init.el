@@ -1,22 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; Contents
-;; ========
-
-;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
-;;       C-c o. Otherwise, use M-x org-open-at-point-global.
-
-;; [[elpa][Emacs Lisp Package Archive (ELPA)]]
-;; [[vars & funs][Variables and functions defined in this file]]
-;; [[custom][Custom-set variables and faces]]
-;; [[misc][Miscellaneous]]
-;; [[trailing][Trailing whitespaces]]
-;; [[epa][Easy PG (GnuPG interface for Emacs)]]
-;; [[whitespace][Whitespace mode (minor mode to visualize blanks)]]
-;; [[window][Additional customizations in window-system mode]]
-
-
-;; Emacs Lisp Package Archive (ELPA)                                   <<elpa>>
+;; Emacs Lisp Package Archive (ELPA)
 ;; =================================
 
 (require 'package)
@@ -43,7 +27,7 @@
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to maxima-mode files")
 
-;; Variables and functions defined in this file                 <<vars & funs>>
+;; Variables and functions defined in this file
 ;; ============================================
 
 ;; Predicates to check whether emacs is run from Windows, Linux or MacOS.
@@ -55,7 +39,7 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
-;; Miscellaneous                                                       <<misc>>
+;; Miscellaneous
 ;; =============
 
 (prefer-coding-system 'utf-8)
@@ -94,7 +78,7 @@
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
 
-;; Trailing whitespaces                                            <<trailing>>
+;; Trailing whitespaces
 ;; ====================
 
 ;; In selected modes, show trailing whitespaces and empty lines at the end of
@@ -106,13 +90,13 @@
 (setq-default indicate-empty-lines t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Easy PG (GnuPG interface for Emacs)                                  <<epa>>
+;; Easy PG (GnuPG interface for Emacs)
 ;; ===================================
 
 (require 'epa-file)
 (epa-file-enable)
 
-;; Whitespace mode (minor mode to visualize blanks)              <<whitespace>>
+;; Whitespace mode (minor mode to visualize blanks)
 ;; ================================================
 
 ;; Here are the UTF-8 values used below
@@ -140,7 +124,7 @@
 
 (setq whitespace-style (quote (face lines-tail)))
 
-;; Additional customizations in window-system mode                   <<window>>
+;; Additional customizations in window-system mode
 ;; ===============================================
 
 (when window-system (load-file "~/.emacs.d/sb-init-window-system.el"))

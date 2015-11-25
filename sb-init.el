@@ -13,8 +13,8 @@
 
 (require 'f)
 
-;; Machine specific variables
-;; ==========================
+;; Customizable variables
+;; ======================
 
 (defgroup sb nil "My customization group" :tag "SB")
 (defcustom sb-path-to-cloud "~/Google Drive"

@@ -37,6 +37,10 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
+(defun sb-load-file-when-exists (filename)
+  "Load specified file if it exists. Do nothing otherwise."
+  (when (file-exists-p filename) (load-file filename)))
+
 ;; Miscellaneous
 ;; =============
 
@@ -130,6 +134,4 @@
 ;; Blog-specific customizations
 ;; ============================
 
-(defun sb-load-file-when-exists (filename)
-  (when (file-exists-p filename) (load-file filename)))
 (sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))

@@ -50,9 +50,6 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
-;; Use switch-window instead of other-window
-(global-set-key (kbd "C-x o") 'switch-window)
-
 ;; Windows
 ;; -------
 

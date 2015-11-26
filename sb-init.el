@@ -81,6 +81,7 @@
 ;;(setenv "HOME" "C:/Users/brisard/")
 
 (when window-system (load-theme 'zenburn t))
+(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Trailing whitespaces
 ;; ====================

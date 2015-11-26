@@ -63,14 +63,14 @@
 ;;          (set-face-font 'default "fontname")
 ;;      where fontname is the copied string.
 
-(cond (windowsp (defvar sb-monospaced-font "Envy Code R-10"))
-      (darwinp (defvar sb-monospaced-font "Envy Code R-11"))
-      (linuxp (defvar sb-monospaced-font "EnvyCodeR-10")))
+;; (cond (windowsp (defvar sb-monospaced-font "Envy Code R-10"))
+;;       ;(darwinp (defvar sb-monospaced-font "Envy Code R-11"))
+;;       (linuxp (defvar sb-monospaced-font "EnvyCodeR-10")))
 
-(defvar sb-variable-pitch-font sb-monospaced-font)
+;; (defvar sb-variable-pitch-font sb-monospaced-font)
 
-(set-face-font 'default sb-monospaced-font)
-(set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
+;; (set-face-font 'default sb-monospaced-font)
+;; (set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
 
 ;; Auto-complete                                              <<auto-complete>>
 ;; =============

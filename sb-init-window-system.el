@@ -50,12 +50,6 @@
 
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
-;; Windows
-;; -------
-
-;(split-window-below -7)
-(windmove-default-keybindings)
-
 ;; Fonts
 ;; -----
 

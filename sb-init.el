@@ -80,7 +80,9 @@
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
 
-(when window-system (load-theme 'zenburn t))
+(when window-system
+  (load-theme 'zenburn t)
+  (split-window-right))
 (global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Trailing whitespaces

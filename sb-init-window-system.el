@@ -41,10 +41,7 @@
 ;; Geometry
 ;; --------
 
-(cond (windowsp
-       (setq default-frame-alist '((top . 0) (left . 514)
-                                   (width . 163) (height . 44))))
-      (linuxp
+(cond (linuxp
        (setq default-frame-alist '((top . 0) (left . 501)
                                    (width . 163) (height . 41)))))
 

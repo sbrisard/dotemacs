@@ -34,47 +34,6 @@
      "Window '%s' is normal")
    (current-buffer)))
 
-
-;; Visual appearance                                             <<appearance>>
-;; =================
-
-;; Geometry
-;; --------
-
-(setq initial-frame-alist '((top . 0) (left . 0)))
-
-;; Use switch-window instead of other-window
-(global-set-key (kbd "C-x o") 'switch-window)
-
-;; Windows
-;; -------
-
-;(split-window-below -7)
-(split-window-right)
-(windmove-default-keybindings)
-
-;; Fonts
-;; -----
-
-;; Under Windows, the procedure to get the right font name is the following
-;;   1. switch to the "*scratch*" buffer
-;;   2. type (w32-select-font) followed by C-j (or M-x eval-print-last-sexp)
-;;   3. select the desired font from the menu dialog that ensues
-;;   4. copy the string that is displayed (something like:
-;;      "-outline-Lucida Sans Typewriter-normal-r-normal-normal-12-90-96-96-c-*-iso8859-1")
-;;      and paste it into the .emacs.d/init.el file. The line to add is
-;;          (set-face-font 'default "fontname")
-;;      where fontname is the copied string.
-
-(cond (windowsp (defvar sb-monospaced-font "Envy Code R-10"))
-      (darwinp (defvar sb-monospaced-font "Envy Code R-11"))
-      (linuxp (defvar sb-monospaced-font "EnvyCodeR-10")))
-
-(defvar sb-variable-pitch-font sb-monospaced-font)
-
-(set-face-font 'default sb-monospaced-font)
-(set-face-attribute 'variable-pitch nil :font sb-monospaced-font)
-
 ;; Auto-complete                                              <<auto-complete>>
 ;; =============
 

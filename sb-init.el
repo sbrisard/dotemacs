@@ -45,21 +45,23 @@
 ;; =============
 
 (prefer-coding-system 'utf-8)
-(setq default-process-coding-system 'utf-8)
-;;(setq-default buffer-file-coding-system 'utf-8)
-(setq-default indent-tabs-mode nil)
 
 (setq column-number-mode t)
 (setq confirm-nonexistent-file-or-buffer t)
 (setq default-directory "~/" )
+(setq default-process-coding-system 'utf-8)
 (setq dnd-open-file-other-window nil)
 (setq find-file-run-dired nil)
 (setq inhibit-startup-screen t)
+(setq initial-frame-alist '((top . 0) (left . 0)))
 (setq make-backup-files nil)
 (setq ps-paper-type (quote a4))
 (setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
                                          (org-confirm-babel-evaluate))))
 (setq visible-bell t)
+
+;;(setq-default buffer-file-coding-system 'utf-8)
+(setq-default indent-tabs-mode nil)
 
 (global-auto-revert-mode)
 (global-hl-line-mode)
@@ -68,6 +70,7 @@
 (show-paren-mode)
 (tool-bar-mode -1)
 
+(global-set-key (kbd "C-x o") 'switch-window)
 (global-unset-key (kbd "<C-next>"))
 (global-unset-key (kbd "<C-prior>"))
 
@@ -80,7 +83,9 @@
 ;; allows correct location of ".emacs.d", but leads to incorrect value of "~".
 ;;(setenv "HOME" "C:/Users/brisard/")
 
-(when window-system (load-theme 'zenburn t))
+(when window-system
+  (load-theme 'zenburn t)
+  (split-window-right))
 
 ;; Trailing whitespaces
 ;; ====================

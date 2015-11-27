@@ -1,7 +1,9 @@
+.DS_Store
 .org-id-locations
 .python-environments
 auto-save-list
 ac-comphist.dat
+bookmarks
 elisp
 elpa
 eshell

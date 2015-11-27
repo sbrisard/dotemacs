@@ -41,10 +41,6 @@
 ;; Geometry
 ;; --------
 
-(cond (linuxp
-       (setq default-frame-alist '((top . 0) (left . 501)
-                                   (width . 163) (height . 41)))))
-
 (setq initial-frame-alist '((top . 0) (left . 0)))
 
 ;; Use switch-window instead of other-window

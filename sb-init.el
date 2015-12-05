@@ -6,7 +6,8 @@
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")
+                         ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 (package-initialize)
 
 (require 'f)
@@ -142,3 +143,5 @@
 ;; ============================
 
 (sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))
+
+(elpy-enable)

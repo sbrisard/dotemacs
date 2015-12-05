@@ -261,6 +261,7 @@
 
 (require 'ob-ipython)
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+(setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
 
 ;; TODO items
 ;; ----------

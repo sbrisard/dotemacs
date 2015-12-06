@@ -270,48 +270,6 @@
                                     "FAIT")
                           (sequence "TODO" "|" "DONE")))
 
-;; Python/Cython                                                     <<python>>
-;; =============
-
-;; Python shell
-;; ------------
-
-;; Code copied from python.el
-(setq python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
-(setq python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: ")
-(setq python-shell-completion-setup-code
-      "from IPython.core.completerlib import module_completion")
-(setq python-shell-completion-module-string-code
-      "';'.join(module_completion('''%s'''))\n")
-(setq python-shell-completion-string-code
-      "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-
-(add-hook 'python-mode-hook 'sb-bind-newline-and-indent-to-RET)
-(add-hook 'python-mode-hook 'whitespace-mode)
-
-;; Jedi -- Python auto-completion for Emacs
-;; ----------------------------------------
-
-;;(setq jedi:complete-on-dot t)
-;;(add-hook 'python-mode-hook 'jedi:setup)
-
-;; TODO Clean-up below
-
-;; Under Linux, starting emacs from the desktop environment results in the
-;; PATH variable being different from what it would be if started from a shell.
-
-;; (let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
-;;   (setenv "PATH" path)
-;;   (setq exec-path
-;;         (append
-;;          (split-string-and-unquote path ":")
-;;          exec-path)))
-
-;;
-;; Location of additional info manuals
-;; -----------------------------------
-;;
-
 ;; <<ccmode>>
 ;; ==========
 

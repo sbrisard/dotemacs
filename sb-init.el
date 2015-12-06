@@ -134,15 +134,8 @@
 
 (setq whitespace-style (quote (face lines-tail)))
 
-;; Additional customizations in window-system mode
-;; ===============================================
-
-(when window-system (load-file "~/.emacs.d/sb-init-window-system.el"))
-
-;; Blog-specific customizations
-;; ============================
-
-(sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))
+;; elpy
+;; ====
 
 (elpy-enable)
 (setq elpy-modules (quote (elpy-module-company
@@ -153,3 +146,13 @@
                            elpy-module-sane-defaults)))
 (setq elpy-test-runner (quote elpy-test-pytest-runner))
 (add-hook 'elpy-mode-hook 'whitespace-mode)
+
+;; Additional customizations in window-system mode
+;; ===============================================
+
+(when window-system (load-file "~/.emacs.d/sb-init-window-system.el"))
+
+;; Blog-specific customizations
+;; ============================
+
+(sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))

@@ -145,3 +145,11 @@
 (sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))
 
 (elpy-enable)
+(setq elpy-modules (quote (elpy-module-company
+                           elpy-module-eldoc
+                           elpy-module-flymake
+                           elpy-module-pyvenv
+                           elpy-module-yasnippet
+                           elpy-module-sane-defaults)))
+(setq elpy-test-runner (quote elpy-test-pytest-runner))
+(add-hook 'elpy-mode-hook 'whitespace-mode)

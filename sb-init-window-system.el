@@ -249,11 +249,9 @@
 ;; -----------------
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
-(setq org-agenda-files (mapcar (lambda(s) (f-join sb-path-to-cloud s))
-                               '("notes"
-                                 "notes/collaborations"
-                                 "notes/prive"
-                                 "notes/en_cours")))
+(setq org-agenda-files
+      (let ((root (f-join sb-path-to-cloud "notes")))
+        (cons root (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
 
 ;; ob-ipython
 ;; ----------

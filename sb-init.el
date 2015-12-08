@@ -88,6 +88,12 @@
   (load-theme 'zenburn t)
   (split-window-right))
 
+;; Ido
+;; ===
+
+(require 'ido)
+(ido-mode t)
+
 ;; Trailing whitespaces
 ;; ====================
 

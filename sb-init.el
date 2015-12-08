@@ -144,8 +144,7 @@
 ;; ====
 
 (elpy-enable)
-(setq elpy-modules (quote (elpy-module-company
-                           elpy-module-eldoc
+(setq elpy-modules (quote (elpy-module-eldoc
                            elpy-module-flymake
                            elpy-module-pyvenv
                            elpy-module-yasnippet

@@ -252,7 +252,8 @@
 (setq org-agenda-files (mapcar (lambda(s) (f-join sb-path-to-cloud s))
                                '("notes"
                                  "notes/collaborations"
-                                 "notes/prive")))
+                                 "notes/prive"
+                                 "notes/en_cours")))
 
 ;; ob-ipython
 ;; ----------

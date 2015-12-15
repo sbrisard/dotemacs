@@ -91,8 +91,13 @@
 ;; Ido
 ;; ===
 
-(require 'ido)
+;;(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 (ido-mode t)
+(setq ido-file-extensions-order '(".org" ".py"))
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Trailing whitespaces
 ;; ====================

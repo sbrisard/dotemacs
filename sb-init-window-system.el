@@ -176,98 +176,11 @@
 (autoload 'maxima "maxima" "Run Maxima interactively" t)
 (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
 
-;; Org Mode                                                             <<org>>
-;; ========
-
-(add-to-list 'load-path (concat user-emacs-directory "/elisp/org-mode/lisp"))
-
-(setq org-log-into-drawer t)
-
-(setq org-startup-truncated nil)                                  ;; Wrap lines
-(setq org-startup-folded nil)            ;; Don't open org files in folded mode
-(setq system-time-locale "C")    ;; Make sure that timestamps appear in English
-
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c L") 'org-insert-link-global) ; Allow for links to be
-(global-set-key (kbd "C-c o") 'org-open-at-point-global)    ; used outside Org
-
-;; Visit files in same window
-(setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
-                                   (vm-imap . vm-visit-imap-folder-other-frame)
-                                   (gnus . org-gnus-no-new-news)
-                                   (file . find-file-other-window)
-                                   (wl . wl-other-frame))))
-
-;; Show agenda in the current window, keeping all other windows.
-(setq org-agenda-window-setup 'current-window)
-
-;; Restore window configuration upon exiting agenda.
-(setq org-agenda-restore-windows-after-quit t)
-
-;; Org-export
-;; ----------
-
-(setq org-export-preserve-breaks nil)
-(setq org-export-time-stamp-file t)
-(setq org-export-with-archived-trees 'headline)
-(setq org-export-with-author t)
-(setq org-export-with-clocks nil)
-(setq org-export-with-creator 'comment)
-(setq org-export-with-date t)
-(setq org-export-with-drawers '(not "LOGBOOK"))
-(setq org-export-with-email nil)
-(setq org-export-with-emphasize t)
-(setq org-export-with-entities t)
-(setq org-export-with-fixed-width t)
-(setq org-export-with-footnotes t)
-(setq org-export-with-inlinetasks t)
-(setq org-export-with-planning nil)
-(setq org-export-with-priority nil)
-(setq org-export-with-section-numbers nil)
-(setq org-export-with-smart-quotes nil)
-(setq org-export-with-special-strings t)
-(setq org-export-with-statistics-cookies t)
-(setq org-export-with-sub-superscripts t)
-(setq org-export-with-tables t)
-(setq org-export-with-tags t)
-(setq org-export-with-tasks t)
-(setq org-export-with-timestamps t)
-(setq org-export-with-toc nil)
-(setq org-export-with-todo-keywords t)
-
-;; Fontification
-;; -------------
-
-(require 'htmlize)
-(setq org-src-fontify-natively t)
-(setq org-html-htmlize-output-type 'css)
-(org-babel-do-load-languages 'org-babel-load-languages '((C . t)
-                                                         (python . t)
-                                                         (maxima . t)))
-
-;; Location of files
-;; -----------------
-
-(setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
-(setq org-agenda-files
-      (let ((root (f-join sb-path-to-cloud "notes")))
-        (cons root (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
-
 ;; ob-ipython
-;; ----------
-
-(setq org-confirm-babel-evaluate nil)
+;; ==========
 
 (require 'ob-ipython)
-(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 (setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
-
-;; TODO items
-;; ----------
-
-(setq org-todo-keywords '((sequence "A_FAIRE" "EN_ATTENTE" "UN_JOUR" "|"
-                                    "FAIT")
-                          (sequence "TODO" "|" "DONE")))
 
 ;; <<ccmode>>
 ;; ==========

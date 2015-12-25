@@ -225,6 +225,7 @@
 (setq org-startup-truncated nil) ;; Wrap lines
 (setq org-startup-folded nil) ;; Don't open org files in folded mode
 (setq org-src-fontify-natively t)
+(setq org-table-copy-increment nil)
 (setq org-todo-keywords '((sequence "A_FAIRE" "EN_ATTENTE" "UN_JOUR" "|"
                                     "FAIT")
                           (sequence "TODO" "|" "DONE")))

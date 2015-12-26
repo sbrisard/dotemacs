@@ -92,6 +92,10 @@
 ;; ===
 
 ;;(require 'ido)
+(setq completion-ignored-extensions (quote ("~" ".aux" ".bbl" ".blg" ".out"
+                                            ".synctex.gz" ".toc"
+                                            ".pdf" ".o" ".so" ".a" ".elc"
+                                            ".pyc" ".pyo" ".git/")))
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode t)

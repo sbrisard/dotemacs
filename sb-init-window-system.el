@@ -168,14 +168,6 @@
   (interactive "sBibTeX key: \n")
   (insert-file-contents (sb-bibref-path (downcase key))))
 
-;; Maxima                                                            <<maxima>>
-;; ======
-
-(add-to-list 'load-path sb-path-to-maxima-mode)
-(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
-(autoload 'maxima "maxima" "Run Maxima interactively" t)
-(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
-
 ;; ob-ipython
 ;; ==========
 

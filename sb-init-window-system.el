@@ -120,7 +120,3 @@
 ;; ==========
 
 (setq-default c-basic-offset 4)
-
-(defvar sb-path-to-info "/Users/Shared/info/")
-(when (boundp 'sb-path-to-info)
- (add-to-list 'Info-directory-list sb-path-to-info))

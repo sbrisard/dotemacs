@@ -24,18 +24,6 @@
      (add-to-list 'list '("\\\\cite[tp]" ispell-tex-arg-end))
      (setcar ispell-tex-skip-alists list)))
 
-;; Magit (Emacs mode for Git)                                         <<magit>>
-;; ==========================
-
-(delete 'Git vc-handled-backends)
-
-(setq magit-use-overlays nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
-
-(when windowsp
-  (setq exec-path (append exec-path
-                          '("C:/Program Files (x86)/Git/bin/"))))
-
 ;; LaTeX                                                              <<latex>>
 ;; =====
 

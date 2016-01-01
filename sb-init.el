@@ -256,6 +256,16 @@
 (autoload 'maxima "maxima" "Run Maxima interactively" t)
 (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
 
+;; Magit
+;; =====
+
+(delete 'Git vc-handled-backends)
+
+(setq magit-use-overlays nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+(when windowsp (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
+
 ;; Additional customizations in window-system mode
 ;; ===============================================
 

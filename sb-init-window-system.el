@@ -1,40 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-;; +-------------------------------------------------+
-;; | Additional customizations in window-system-mode |
-;; +-------------------------------------------------+
-
-;; Contents
-;; ========
-
-;; NOTA: if `init-window-system.el` has been loaded, follow the links below with
-;;       C-c o. Otherwise, use M-x org-open-at-point-global.
-;;
-;; [[appearance][Visual appearance in window-system mode]]
-;; [[ispell][Ispell]]
-;; [[auto-complete][Auto-complete]]
-;; [[flycheck][Flycheck]]
-;; [[magit][Magit]]
-;; [[latex][LaTeX]]
-;; [[maxima][Maxima]]
-;; [[org][Org Mode]]
-;; [[python][Python/Cython]]
-;; [[ccmode]]
-
-
-;; Auto-complete                                              <<auto-complete>>
-;; =============
-
-;(require 'auto-complete)
-;(ac-config-default)
-;(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-
-;; Flycheck                                                        <<flycheck>>
-;; ========
-
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Ispell                                                            <<ispell>>
+;; Ispell
 ;; ======
 
 ; TODO simplify this section

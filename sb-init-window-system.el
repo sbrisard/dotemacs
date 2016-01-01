@@ -1,29 +1,5 @@
 ;; -*- coding: utf-8 -*-
 
-;; Ispell
-;; ======
-
-; TODO simplify this section
-
-(setq ispell-dictionary "francais")
-(setq ispell-tex-skip-alists
-      (list
-       (append (car ispell-tex-skip-alists)
-               '(("\\\\cite"            ispell-tex-arg-end)
-                 ("\\\\nocite"          ispell-tex-arg-end)
-                 ("\\\\includegraphics" ispell-tex-arg-end)
-                 ("\\\\author"          ispell-tex-arg-end)
-                 ("\\\\ref"             ispell-tex-arg-end)
-                 ("\\\\eqref"           ispell-tex-arg-end)
-                 ("\\\\label"           ispell-tex-arg-end)
-                 ))
-       (cadr ispell-tex-skip-alists)))
-
-(eval-after-load "ispell"
-  '(let ((list (car ispell-tex-skip-alists)))
-     (add-to-list 'list '("\\\\cite[tp]" ispell-tex-arg-end))
-     (setcar ispell-tex-skip-alists list)))
-
 ;; LaTeX                                                              <<latex>>
 ;; =====
 

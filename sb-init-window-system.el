@@ -2,10 +2,3 @@
 
 ;; LaTeX                                                              <<latex>>
 ;; =====
-
-
-
-;; <<ccmode>>
-;; ==========
-
-(setq-default c-basic-offset 4)

@@ -366,11 +366,6 @@
 
 (setq-default c-basic-offset 4)
 
-;; Additional customizations in window-system mode
-;; ===============================================
-
-(when window-system (load-file "~/.emacs.d/sb-init-window-system.el"))
-
 ;; Blog-specific customizations
 ;; ============================
 

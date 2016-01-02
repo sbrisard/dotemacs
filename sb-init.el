@@ -355,6 +355,11 @@
   (interactive "sBibTeX key: \n")
   (insert-file-contents (sb-bibref-path (downcase key))))
 
+;; Ob-ipython
+;; ==========
+
+(require 'ob-ipython)
+(setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
 
 ;; Additional customizations in window-system mode
 ;; ===============================================

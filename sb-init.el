@@ -289,9 +289,11 @@
 
 (require 'tex)
 
-(setq TeX-parse-self t)
+(setq LaTeX-electric-left-right-brace t)
 (setq TeX-auto-save t)
+(setq TeX-electric-math (quote ("\\(" . "\\)")))
 (setq-default TeX-master nil)
+(setq TeX-parse-self t)
 
 (setq font-latex-match-reference-keywords '(("citeauthor" "*{")
                                             ("citetext" "{")

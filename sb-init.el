@@ -112,7 +112,7 @@
 (setq ido-ignore-extensions nil)
 (setq ido-ignore-files
       (quote
-       ("\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" ".*~" ".*\\.aux" ".*\\.bbl" ".*\\.blg" ".*\\.bst" ".*\\.log" ".*\\.out" ".*\\.pdf" ".*\\.spl" ".*\\.synctex\\.gz" ".*\\.toc" ".*\\.o" ".*\\.so" ".*\\.a" ".*\\.elc" ".*\\.pyc" ".*\\.pyo" "\\.git/")))
+       ("\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" ".*~" ".*\\.aux\'" ".*\\.bbl\'" ".*\\.blg\'" ".*\\.bst\'" ".*\\.log\'" ".*\\.out\'" ".*\\.pdf\'" ".*\\.spl\'" ".*\\.synctex\\.gz\'" ".*\\.toc\'" ".*\\.o\'" ".*\\.so\'" ".*\\.a\'" ".*\\.elc\'" ".*\\.pyc\'" ".*\\.pyo\'" "\\.git/")))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 

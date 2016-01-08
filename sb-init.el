@@ -290,7 +290,7 @@
 (require 'tex)
 
 (setq LaTeX-electric-left-right-brace t)
-(setq TeX-auto-save t)
+(setq TeX-auto-save nil)
 (setq TeX-electric-math (quote ("\\(" . "\\)")))
 (setq-default TeX-master nil)
 (setq TeX-parse-self t)

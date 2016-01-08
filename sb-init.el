@@ -104,15 +104,15 @@
 ;; Ido
 ;; ===
 
-;;(require 'ido)
-(setq completion-ignored-extensions (quote ("~" ".aux" ".bbl" ".blg" ".out"
-                                            ".synctex.gz" ".toc"
-                                            ".pdf" ".o" ".so" ".a" ".elc"
-                                            ".pyc" ".pyo" ".git/")))
+(ido-mode t)
+
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(ido-mode t)
-(setq ido-file-extensions-order '(".org" ".py"))
+(setq ido-file-extensions-order (quote (".org" ".tex" ".bib" ".html" ".py")))
+(setq ido-ignore-extensions nil)
+(setq ido-ignore-files
+      (quote
+       ("\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" ".*~" ".*\\.aux" ".*\\.bbl" ".*\\.blg" ".*\\.bst" ".*\\.log" ".*\\.out" ".*\\.pdf" ".*\\.spl" ".*\\.synctex\\.gz" ".*\\.toc" ".*\\.o" ".*\\.so" ".*\\.a" ".*\\.elc" ".*\\.pyc" ".*\\.pyo" "\\.git/")))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 

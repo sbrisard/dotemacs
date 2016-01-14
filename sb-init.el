@@ -84,7 +84,6 @@
 (show-paren-mode)
 (tool-bar-mode -1)
 
-(global-set-key (kbd "C-x o") 'switch-window)
 (global-unset-key (kbd "<C-next>"))
 (global-unset-key (kbd "<C-prior>"))
 
@@ -367,6 +366,13 @@
 ;; ======
 
 (setq-default c-basic-offset 4)
+
+;; ace-window
+;; ==========
+
+(require 'ace-window)
+(global-set-key (kbd "C-x o") 'ace-window)
+(set-face-attribute 'aw-leading-char-face nil :foreground nil :inherit 'compilation-mode-line-fail)
 
 ;; Blog-specific customizations
 ;; ============================

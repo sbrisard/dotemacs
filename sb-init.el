@@ -367,15 +367,17 @@
 
 (setq-default c-basic-offset 4)
 
+;; key-chord
+;; =========
+
+(key-chord-mode 1)
+(key-chord-define-global "jj" #'avy-goto-word-1)
+
 ;; avy
 ;; ===
 
 (setq avy-background t)
 (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
-
-(global-set-key (kbd "C-c SPC") #'avy-goto-word-1)
-(global-set-key (kbd "C-u C-c SPC") #'avy-goto-char-2)
-(global-set-key (kbd "C-u C-u C-c SPC") #'avy-goto-line)
 
 ;; ace-window
 ;; ==========

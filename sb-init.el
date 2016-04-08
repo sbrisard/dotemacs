@@ -262,6 +262,9 @@
 
 (setq magit-use-overlays nil)
 (setq magit-last-seen-setup-instructions "1.4.0")
+;; Disable this new functionality as it apparently causes the following error
+;;   wrong-type-argument list utf-8
+(setq magit-process-ensure-unix-line-ending nil)
 
 (when windowsp (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
 

@@ -167,8 +167,6 @@
 (elpy-enable)
 (setq elpy-modules (quote (elpy-module-eldoc
                            elpy-module-flymake
-                           elpy-module-pyvenv
-                           elpy-module-yasnippet
                            elpy-module-sane-defaults)))
 (setq elpy-test-runner (quote elpy-test-pytest-runner))
 (add-hook 'elpy-mode-hook 'whitespace-mode)

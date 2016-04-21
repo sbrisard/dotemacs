@@ -1,0 +1,80 @@
+# -*- mode: org; coding: utf-8 -*-
+#+TITLE: My emacs configuration file
+#+AUTHOR: Sébastien Brisard
+#+CATEGORY: DOTEMACS
+
+I use the literate programming paradigm for my emacs configuration. This file should therefore be loaded with =org-babel-load-file=. More information can be found here
+
+  - [[http://irreal.org/blog/?p=2804][Literate Programming and Your Emacs Configuration]]
+  - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
+  - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
+
+* Magit
+  :LOGBOOK:
+  CLOCK: [2016-04-21 Thu 07:25]
+  :END:
+
+From the [[https://magit.vc/about/][official website]]
+
+#+BEGIN_QUOTE
+Magit is an interface to the version control system [[https://git-scm.com/][Git]], implemented as an [[https://www.gnu.org/software/emacs][Emacs]] package. Magit aspires to be a complete Git porcelain. While we cannot (yet) claim that Magit wraps and improves upon each and every Git command, it is complete enough to allow even experienced Git users to perform almost all of their daily version control tasks directly from within Emacs. While many fine Git clients exist, only Magit and Git itself deserve to be called porcelains.
+#+END_QUOTE
+
+** General configuration
+
+Git project should not be handled by =vc=
+
+#+BEGIN_SRC emacs-lisp
+(delete 'Git vc-handled-backends)
+#+END_SRC
+
+Under windows, specify the path to =git=
+
+#+BEGIN_SRC emacs-lisp
+  (when windowsp (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
+#+END_SRC
+
+** Issues under Windows
+
+*** Staging hunks/regions
+    :LOGBOOK:
+    CLOCK: [2016-04-08 Fri 08:15]--[2016-04-08 Fri 08:50] =>  0:35
+    CLOCK: [2016-04-07 Thu 07:30]--[2016-04-07 Thu 08:00] =>  0:30
+    CLOCK: [2016-04-06 Wed 08:20]--[2016-04-06 Wed 08:45] =>  0:25
+    CLOCK: [2016-04-05 Tue 07:50]--[2016-04-05 Tue 08:05] =>  0:15
+    :END:
+
+From the [[https://raw.githubusercontent.com/magit/magit/master/Documentation/RelNotes/2.6.0.txt][release notes]] of version 2.6.0
+
+#+BEGIN_QUOTE
+Staging hunks/regions belonging to files with CRLF line endings on Windows (or, to be precise, when =default-process-coding-system= had CRLF end-of-line conversion) ended up erroneously staging changes with LF line endings.  Magit now ensures line endings are preserved by enforcing a =process-coding-system= with LF end-of-line conversion.  The new behavior may be disabled by setting the option =magit-process-ensure-unix-line-ending= to =nil=.
+#+END_QUOTE
+
+However, on my windows box, this new feature seems to cause the following error message
+
+#+BEGIN_EXAMPLE
+wrong-type-argument list utf-8
+#+END_EXAMPLE
+
+I therefore disable this feature
+
+#+BEGIN_SRC emacs-lisp
+  (setq magit-process-ensure-unix-line-ending nil)
+#+END_SRC
+
+*** Pushing from Magit
+    :LOGBOOK:
+    CLOCK: [2016-04-21 Thu 07:10]--[2016-04-21 Thu 07:25] =>  0:15
+    :END:
+
+From the [[https://github.com/magit/magit/wiki/Pushing-with-Magit-from-Windows][official website]],
+
+#+BEGIN_QUOTE
+Windows does not have the concept of a PTY, so there is no way for Emacs to intercept password prompts from Git.
+#+END_QUOTE
+
+The solution that I adopted is to use =guit-gui--askpass=, even if it does not integrate well with emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
+#+END_SRC

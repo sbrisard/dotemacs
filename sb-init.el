@@ -194,7 +194,8 @@
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
 (setq org-agenda-files
       (let ((root (f-join sb-path-to-cloud "notes")))
-        (cons root (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
+        (append (list root user-emacs-directory)
+                (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
 ;; Restore window configuration upon exiting agenda.
 (setq org-agenda-restore-windows-after-quit t)
 ;; Show agenda in the current window, keeping all other windows.
@@ -256,15 +257,8 @@
 ;; Magit
 ;; =====
 
-(delete 'Git vc-handled-backends)
-
-(setq magit-use-overlays nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
-;; Disable this new functionality as it apparently causes the following error
-;;   wrong-type-argument list utf-8
-(setq magit-process-ensure-unix-line-ending nil)
-
-(when windowsp (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
+;; (setq magit-use-overlays nil)
+;; (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Ispell
 ;; ======
@@ -386,6 +380,8 @@
 (require 'ace-window)
 (global-set-key (kbd "C-x o") 'ace-window)
 (set-face-attribute 'aw-leading-char-face nil :foreground nil :inherit 'compilation-mode-line-fail)
+
+(org-babel-load-file (concat user-emacs-directory "sb-config.org"))
 
 ;; Blog-specific customizations
 ;; ============================

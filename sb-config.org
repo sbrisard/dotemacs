@@ -79,9 +79,20 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
   (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
 
+* A_FAIRE AUCTEX and RefTeX
+  :LOGBOOK:
+  CLOCK: [2016-04-29 Fri 07:35]--[2016-04-29 Fri 07:45] =>  0:10
+  :END:
+
+On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\pageref=, etc...).
+
+#+BEGIN_SRC emacs-lisp
+  (setq reftex-ref-macro-prompt nil)
+#+END_SRC
+
 * Avy
   :LOGBOOK:
-  CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:30] =>  0:05
+  CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:35] =>  0:10
   CLOCK: [2016-03-21 Mon 08:15]--[2016-03-21 Mon 08:20] =>  0:05
   CLOCK: [2016-03-14 Mon 08:15]--[2016-03-14 Mon 08:40] =>  0:25
   :END:

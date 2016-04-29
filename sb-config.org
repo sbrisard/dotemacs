@@ -11,7 +11,7 @@ I use the literate programming paradigm for my emacs configuration. This file sh
 
 * Magit
   :LOGBOOK:
-  CLOCK: [2016-04-21 Thu 07:25]
+  CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00
   :END:
 
 From the [[https://magit.vc/about/][official website]]
@@ -77,4 +77,30 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 
 #+BEGIN_SRC emacs-lisp
   (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
+#+END_SRC
+
+* Avy
+  :LOGBOOK:
+  CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:30] =>  0:05
+  CLOCK: [2016-03-21 Mon 08:15]--[2016-03-21 Mon 08:20] =>  0:05
+  CLOCK: [2016-03-14 Mon 08:15]--[2016-03-14 Mon 08:40] =>  0:25
+  :END:
+
+From the [[https://github.com/abo-abo/avy][official website]]
+
+#+BEGIN_QUOTE
+=avy= is a GNU Emacs package for jumping to visible text using a char-based decision tree. See also [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] and [[https://github.com/Lokaltog/vim-easymotion][vim-easymotion]] - =avy= uses the same idea.
+#+END_QUOTE
+
+See also
+
+  - [[http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/][Ace-jump-mode Is Dead, Long Live Avy]]
+  - [[http://oremacs.com/2015/05/08/avy-0.1.0/][New on MELPA - avy]]
+
+The key-chord "jj" is bound to =avy-goto-word-1=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq avy-background t)
+  (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
+  (key-chord-define-global "jj" #'avy-goto-word-1)
 #+END_SRC

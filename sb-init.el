@@ -200,6 +200,7 @@
 (setq org-agenda-restore-windows-after-quit t)
 ;; Show agenda in the current window, keeping all other windows.
 (setq org-agenda-window-setup 'current-window)
+(setq org-archive-location (f-join sb-path-to-cloud "notes" "archives" "%s_archive::"))
 ;; Potentially dangerous
 (setq org-confirm-babel-evaluate nil)
 (setq org-export-preserve-breaks nil)
@@ -366,13 +367,7 @@
 ;; =========
 
 (key-chord-mode 1)
-(key-chord-define-global "jj" #'avy-goto-word-1)
 
-;; avy
-;; ===
-
-(setq avy-background t)
-(setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
 
 ;; ace-window
 ;; ==========

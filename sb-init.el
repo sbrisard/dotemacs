@@ -193,14 +193,14 @@
 
 (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
 (setq org-agenda-files
-      (let ((root (f-join sb-path-to-cloud "notes")))
+      (let ((root (f-join sb-path-to-local-documents "notes")))
         (append (list root user-emacs-directory)
                 (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
 ;; Restore window configuration upon exiting agenda.
 (setq org-agenda-restore-windows-after-quit t)
 ;; Show agenda in the current window, keeping all other windows.
 (setq org-agenda-window-setup 'current-window)
-(setq org-archive-location (f-join sb-path-to-cloud "notes" "archives" "%s_archive::"))
+(setq org-archive-location (f-join sb-path-to-local-documents "notes" "archives" "%s_archive::"))
 ;; Potentially dangerous
 (setq org-confirm-babel-evaluate nil)
 (setq org-export-preserve-breaks nil)

@@ -279,67 +279,6 @@
                  ))
        (cadr ispell-tex-skip-alists)))
 
-;; AUCTeX and RefTeX
-;; =================
-
-(require 'tex)
-
-(setq LaTeX-electric-left-right-brace t)
-(setq TeX-auto-save nil)
-(setq TeX-electric-math (quote ("\\(" . "\\)")))
-(setq-default TeX-master nil)
-(setq TeX-parse-self t)
-
-(setq font-latex-match-reference-keywords '(("citeauthor" "*{")
-                                            ("citetext" "{")
-                                            ("citeyear" "{")
-                                            ("citeyearpar" "{")
-                                            ("citep" "*[{")
-                                            ("citet" "*[{")
-                                            ("citealt" "*[{")
-                                            ("citealp" "*[{")))
-
-(setq LaTeX-command "latex")
-(setq-default TeX-PDF-mode t)
-(setq TeX-command "tex")
-(setq TeX-source-correlate-method (quote synctex))
-(setq TeX-source-correlate-mode t)
-(setq TeX-source-correlate-start-server t)
-
-(cond (windowsp
-       (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/opt/SumatraPDF-3.0/SumatraPDF.exe\""))))
-       (add-to-list 'TeX-view-program-list '("SumatraPDF" "%(sumatra) -reuse-instance -forward-search %b %n %o"))
-       (setq TeX-view-program-selection '((output-pdf "SumatraPDF"))))
-
-      (darwinp
-       (add-to-list 'TeX-expand-list '("%(skim)" (lambda () (format "/Applications/Skim.app/Contents/SharedSupport/displayline"))))
-       (add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %n %o %b"))
-       (setq TeX-view-program-selection '((output-pdf "Skim")))))
-
-;; From the AUCTeX FAQ
-;;     When writing the log file, TeX puts information related to a file,
-;;     including error messages, between a pair of parentheses. AUCTeX
-;;     determines the file where the error happened by parsing the log file and
-;;     counting the parentheses. This can fail when there are other, unbalanced
-;;     parentheses present.
-;;
-;;     As a workaround you can activate so-called file:line:error messages for
-;;     the log file. (Those are are easier to parse, but may lack some details.)
-;;     Either you do this in the configuration of your TeX system (consult its
-;;     manual to see where this is) or you add a command line switch to the
-;;    (la)tex call, e.g. by customizing LaTeX-command-style or
-;;    TeX-command-list.
-(setq LaTeX-command-style '(("" "%(PDF)%(latex) -file-line-error %S%(PDFout)")))
-
-(require 'reftex)
-
-(add-hook 'latex-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-insert-label-flags (quote ("s" "st")))
-(setq reftex-load-hook (quote (imenu-add-menubar-index)))
-(setq reftex-mode-hook (quote (imenu-add-menubar-index)))
-(setq reftex-plug-into-AUCTeX t)
-
 ;; Custom function to insert BibTeX reference
 ;; ------------------------------------------
 

@@ -79,10 +79,133 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
   (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
 
-* A_FAIRE AUCTEX and RefTeX
+* AUCTeX and RefTeX
   :LOGBOOK:
+  CLOCK: [2016-05-02 Mon 08:30]--[2016-05-02 Mon 09:10] =>  0:40
   CLOCK: [2016-04-29 Fri 07:35]--[2016-04-29 Fri 07:45] =>  0:10
   :END:
+
+#+BEGIN_SRC emacs-lisp
+(require 'tex)
+#+END_SRC
+
+** Braces and such
+
+Turn on electric mode (closing braces are automatically inserted, see [[info:auctex#Insertion of Quotes, Dollars, and Braces][Insertion of Quotes, Dollars, and Braces]] in the AUCTeX doc). Typing =C-q= before entering the opening brace deactivates this feature.
+
+#+BEGIN_SRC emacs-lisp
+(setq LaTeX-electric-left-right-brace t)
+(setq TeX-electric-math (quote ("\\(" . "\\)")))
+#+END_SRC
+
+** Multi-files projects
+
+By default, assume that the file is a master file.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default TeX-master t)
+#+END_SRC
+
+** UN_JOUR Files parsing
+
+This section needs some love.
+
+#+BEGIN_SRC emacs-lisp
+  (setq TeX-auto-save nil)
+  (setq TeX-parse-self t)
+#+END_SRC
+
+** Fontification of macros
+
+See [[info:auctex#Fontification of macros][Fontification of macros]] in the AUCTeX doc.
+
+#+BEGIN_SRC emacs-lisp
+  (setq font-latex-match-reference-keywords '(("citeauthor" "*{")
+                                              ("citetext" "{")
+                                              ("citeyear" "{")
+                                              ("citeyearpar" "{")
+                                              ("citep" "*[{")
+                                              ("citet" "*[{")
+                                              ("citealt" "*[{")
+                                              ("citealp" "*[{")))
+#+END_SRC
+
+** LaTeX processor
+
+#+BEGIN_SRC emacs-lisp
+  (setq LaTeX-command "latex")
+  (setq-default TeX-PDF-mode t)
+  (setq TeX-command "tex")
+#+END_SRC
+
+=TeX-next-error (C-c `)= sometimes fails. From the [[https://www.gnu.org/software/auctex/manual/auctex/FAQ.html][AUCTeX FAQ]]
+
+#+BEGIN_QUOTE
+When writing the log file, TeX puts information related to a file, including error
+messages, between a pair of parentheses. AUCTeX determines the file where the error
+happened by parsing the log file and counting the parentheses. This can fail when
+there are other, unbalanced parentheses present.
+
+As a workaround you can activate so-called file:line:error messages for the log file.
+(Those are are easier to parse, but may lack some details.) Either you do this in the
+configuration of your TeX system (consult its manual to see where this is) or you add
+a command line switch to the (la)tex call, e.g. by customizing LaTeX-command-style or
+TeX-command-list.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp
+(setq LaTeX-command-style '(("" "%(PDF)%(latex) -file-line-error %S%(PDFout)")))
+#+END_SRC
+
+** Support for SyncTeX
+
+See [[info:auctex#Forward and Inverse Search][Forward and Inverse Search]] in the AUCTeX doc.
+
+#+BEGIN_SRC emacs-lisp
+  (setq TeX-source-correlate-method (quote synctex))
+  (setq TeX-source-correlate-mode t)
+  (setq TeX-source-correlate-start-server t)
+#+END_SRC
+
+** A_FAIRE Viewers
+
+Select the viewer depending on the platform. This should really go in the =custom-set-variables= section.
+
+#+BEGIN_SRC emacs-lisp
+  (cond (windowsp
+         (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/opt/SumatraPDF-3.0/SumatraPDF.exe\""))))
+         (add-to-list 'TeX-view-program-list '("SumatraPDF" "%(sumatra) -reuse-instance -forward-search %b %n %o"))
+         (setq TeX-view-program-selection '((output-pdf "SumatraPDF"))))
+
+        (darwinp
+         (add-to-list 'TeX-expand-list '("%(skim)" (lambda () (format "/Applications/Skim.app/Contents/SharedSupport/displayline"))))
+         (add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %n %o %b"))
+         (setq TeX-view-program-selection '((output-pdf "Skim")))))
+#+END_SRC
+
+** RefTeX
+
+#+BEGIN_SRC emacs-lisp
+  (require 'reftex)
+
+  (add-hook 'latex-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
+  (setq reftex-load-hook (quote (imenu-add-menubar-index)))
+  (setq reftex-mode-hook (quote (imenu-add-menubar-index)))
+#+END_SRC
+
+AUCTeX/RefTeX integration
+
+#+BEGIN_SRC emacs-lisp
+  (setq reftex-plug-into-AUCTeX t)
+#+END_SRC
+
+All labels are inserted automatically (no query).
+
+#+BEGIN_SRC emacs-lisp
+  (setq reftex-insert-label-flags (quote (nil nil)))
+#+END_SRC
 
 On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\pageref=, etc...).
 

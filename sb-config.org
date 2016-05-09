@@ -238,3 +238,87 @@ The key-chord "jj" is bound to =avy-goto-word-1=.
   (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
   (key-chord-define-global "jj" #'avy-goto-word-1)
 #+END_SRC
+
+* Ace-window
+  :LOGBOOK:
+  CLOCK: [2016-05-09 Mon 08:40]--[2016-05-09 Mon 08:45] =>  0:05
+  :END:
+
+From the [[https://github.com/abo-abo/ace-window][official website]]
+
+#+BEGIN_QUOTE
+I'm sure you're aware of =other-window= command. While it's great for two windows, it quickly loses its value when there are more windows: you need to call it many times, and since it's not easily predictable, you have to check each time if you're in the window that you wanted.
+
+Another approach is to use =windmove-left=, =windmove-up=, etc. These are fast and predictable. Their disadvantage is that they need 4 key bindings. The default ones are shift+arrows, which are hard to reach.
+
+This package aims to take the speed and predictability of =windmove= and pack it into a single key binding, similar to =other-window=.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ace-window)
+  (global-set-key (kbd "C-x o") 'ace-window)
+  (set-face-attribute 'aw-leading-char-face nil
+  :foreground nil
+  :inherit 'compilation-mode-line-fail)
+#+END_SRC
+
+* Maxima
+  :LOGBOOK:
+  CLOCK: [2016-05-09 Mon 08:45]--[2016-05-09 Mon 08:50] =>  0:05
+  :END:
+
+From the [[http://maxima.sourceforge.net/][official website]]
+
+#+BEGIN_QUOTE
+Maxima is a system for the manipulation of symbolic and numerical expressions, including differentiation, integration, Taylor series, Laplace transforms, ordinary differential equations, systems of linear equations, polynomials, sets, lists, vectors, matrices and tensors. Maxima yields high precision numerical results by using exact fractions, arbitrary-precision integers and variable-precision floating-point numbers. Maxima can plot functions and data in two and three dimensions.
+#+END_QUOTE
+
+The files for the maxima mode are not available on MELPA. They are packaged with the binaries. I defined the variable =sb-path-to-maxima-mode=, where the following files should be available
+
+  - =maxima.el=
+  - =maxima-font-lock.el=
+  - ...
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path sb-path-to-maxima-mode)
+  (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
+  (autoload 'maxima "maxima" "Run Maxima interactively" t)
+  (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
+                              auto-mode-alist))
+#+END_SRC
+
+* Ido
+  :LOGBOOK:
+  CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
+  :END:
+
+#+BEGIN_SRC emacs-lisp
+  (ido-mode t)
+
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (setq ido-file-extensions-order (quote (".org" ".tex" ".bib" ".html" ".py")))
+  (setq ido-ignore-extensions nil)
+  (setq ido-ignore-files (quote ("\\`#"
+                                 "\\`.#"
+                                 "\\`\\.\\./"
+                                 "\\`\\./"
+                                 ".*~"
+                                 ".*\\.aux\'"
+                                 ".*\\.bbl\'"
+                                 ".*\\.blg\'"
+                                 ".*\\.bst\'"
+                                 ".*\\.log\'"
+                                 ".*\\.out\'"
+                                 ".*\\.pdf\'"
+                                 ".*\\.spl\'"
+                                 ".*\\.synctex\\.gz\'"
+                                 ".*\\.toc\'"
+                                 ".*\\.o\'"
+                                 ".*\\.so\'"
+                                 ".*\\.a\'"
+                                 ".*\\.elc\'"
+                                 ".*\\.pyc\'"
+                                 ".*\\.pyo\'"
+                                 "\\.git/")))
+#+END_SRC

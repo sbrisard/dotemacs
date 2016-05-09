@@ -100,19 +100,6 @@
   (load-theme 'zenburn t)
   (split-window-right))
 
-;; Ido
-;; ===
-
-(ido-mode t)
-
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-file-extensions-order (quote (".org" ".tex" ".bib" ".html" ".py")))
-(setq ido-ignore-extensions nil)
-(setq ido-ignore-files
-      (quote
-       ("\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" ".*~" ".*\\.aux\'" ".*\\.bbl\'" ".*\\.blg\'" ".*\\.bst\'" ".*\\.log\'" ".*\\.out\'" ".*\\.pdf\'" ".*\\.spl\'" ".*\\.synctex\\.gz\'" ".*\\.toc\'" ".*\\.o\'" ".*\\.so\'" ".*\\.a\'" ".*\\.elc\'" ".*\\.pyc\'" ".*\\.pyo\'" "\\.git/")))
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Trailing whitespaces
@@ -247,20 +234,6 @@
                           (sequence "TODO" "|" "DONE")))
 (setq system-time-locale "C") ;; Make sure that timestamps appear in English
 
-;; Maxima
-;; ======
-
-(add-to-list 'load-path sb-path-to-maxima-mode)
-(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
-(autoload 'maxima "maxima" "Run Maxima interactively" t)
-(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist))
-
-;; Magit
-;; =====
-
-;; (setq magit-use-overlays nil)
-;; (setq magit-last-seen-setup-instructions "1.4.0")
-
 ;; Ispell
 ;; ======
 
@@ -306,14 +279,6 @@
 ;; =========
 
 (key-chord-mode 1)
-
-
-;; ace-window
-;; ==========
-
-(require 'ace-window)
-(global-set-key (kbd "C-x o") 'ace-window)
-(set-face-attribute 'aw-leading-char-face nil :foreground nil :inherit 'compilation-mode-line-fail)
 
 (org-babel-load-file (concat user-emacs-directory "sb-config.org"))
 

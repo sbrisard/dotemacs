@@ -26,6 +26,34 @@
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to maxima-mode files")
 
+(defcustom sb-TeX-pdf-viewer-command ""
+  "Path to the executable to be used for the TeX-view command.
+For SumatraPDF (Windows platforms), set this variable to
+
+    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\".
+
+For Skim (MacOS X platforms), set this variable to
+
+    \"/Applications/Skim.app/Contents/SharedSupport/displayline\".
+"
+  :type 'string
+  :group 'sb
+  :tag "TeX PDF viewer command")
+
+(defcustom sb-TeX-pdf-viewer-options ""
+  "Command line options to be passed to the TeX-view command.
+For SumatraPDF (Windows platforms), set this variable to
+
+    \"-reuse-instance -forward-search %b %n %o\".
+
+For Skim (MacOS X platforms), set this variable to
+
+    \"-r -b %n %o %b\".
+"
+  :type 'string
+  :group 'sb
+  :tag "TeX PDF viewer options")
+
 ;; Variables and functions defined in this file
 ;; ============================================
 

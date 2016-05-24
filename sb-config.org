@@ -81,6 +81,7 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 
 * AUCTeX and RefTeX
   :LOGBOOK:
+  CLOCK: [2016-05-24 Tue 08:00]--[2016-05-24 Tue 09:30] =>  1:30
   CLOCK: [2016-05-02 Mon 08:30]--[2016-05-02 Mon 09:10] =>  0:40
   CLOCK: [2016-04-29 Fri 07:35]--[2016-04-29 Fri 07:45] =>  0:10
   :END:
@@ -169,18 +170,19 @@ See [[info:auctex#Forward and Inverse Search][Forward and Inverse Search]] in th
 
 ** A_FAIRE Viewers
 
-Select the viewer depending on the platform. This should really go in the =custom-set-variables= section.
+The following variables should be custom-set
+
+  - =sb-TeX-pdf-viewer-command= full path to the PDF viewer executable
+  - =sb-TeX-pdf-viewer-options= PDF viewer command line options (synctex and such).
+
+The following piece of code is not robust: changing the value of =sb-TeX-pdf-viewer-options= should automatically update =TeX-view-program-list=.
 
 #+BEGIN_SRC emacs-lisp
-  (cond (windowsp
-         (add-to-list 'TeX-expand-list '("%(sumatra)" (lambda () (format "\"C:/opt/SumatraPDF-3.0/SumatraPDF.exe\""))))
-         (add-to-list 'TeX-view-program-list '("SumatraPDF" "%(sumatra) -reuse-instance -forward-search %b %n %o"))
-         (setq TeX-view-program-selection '((output-pdf "SumatraPDF"))))
-
-        (darwinp
-         (add-to-list 'TeX-expand-list '("%(skim)" (lambda () (format "/Applications/Skim.app/Contents/SharedSupport/displayline"))))
-         (add-to-list 'TeX-view-program-list '("Skim" "%(skim) -r -b %n %o %b"))
-         (setq TeX-view-program-selection '((output-pdf "Skim")))))
+  (add-to-list 'TeX-expand-list
+               '("%(pdf-viewer)" (lambda () (format sb-TeX-pdf-viewer-command))))
+  (add-to-list 'TeX-view-program-list
+               `("PDF viewer" ,(concat "%(pdf-viewer) " sb-TeX-pdf-viewer-options)))
+  (setq TeX-view-program-selection '((output-pdf "PDF viewer")))
 #+END_SRC
 
 ** RefTeX

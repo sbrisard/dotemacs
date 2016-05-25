@@ -81,6 +81,7 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 
 * AUCTeX and RefTeX
   :LOGBOOK:
+  CLOCK: [2016-05-25 Wed 08:10]--[2016-05-25 Wed 08:50] =>  0:40
   CLOCK: [2016-05-24 Tue 08:00]--[2016-05-24 Tue 09:30] =>  1:30
   CLOCK: [2016-05-02 Mon 08:30]--[2016-05-02 Mon 09:10] =>  0:40
   CLOCK: [2016-04-29 Fri 07:35]--[2016-04-29 Fri 07:45] =>  0:10
@@ -170,18 +171,54 @@ See [[info:auctex#Forward and Inverse Search][Forward and Inverse Search]] in th
 
 ** A_FAIRE Viewers
 
-The following variables should be custom-set
+We define some variables which can be custom-set
 
   - =sb-TeX-pdf-viewer-command= full path to the PDF viewer executable
   - =sb-TeX-pdf-viewer-options= PDF viewer command line options (synctex and such).
 
-The following piece of code is not robust: changing the value of =sb-TeX-pdf-viewer-options= should automatically update =TeX-view-program-list=.
+#+BEGIN_SRC emacs-lisp
+  (defcustom sb-TeX-pdf-viewer-command ""
+    "Path to the executable to be used for the TeX-view command.
+  For SumatraPDF (Windows platforms), set this variable to
+
+      \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\".
+
+  For Skim (MacOS X platforms), set this variable to
+
+      \"/Applications/Skim.app/Contents/SharedSupport/displayline\".
+  "
+    :type 'string
+    :group 'sb
+    :tag "TeX PDF viewer command")
+#+END_SRC
+
+We use a custom =:set= function for the =sb-TeX-pdf-viewer-options= variable, in order to update =TeX-view-program-list=, which depends on it.
+
+#+BEGIN_SRC emacs-lisp
+  (defcustom sb-TeX-pdf-viewer-options ""
+    "Command line options to be passed to the TeX-view command.
+  For SumatraPDF (Windows platforms), set this variable to
+
+      \"-reuse-instance -forward-search %b %n %o\".
+
+  For Skim (MacOS X platforms), set this variable to
+
+      \"-r -b %n %o %b\".
+  "
+    :type 'string
+    :group 'sb
+    :tag "TeX PDF viewer options"
+    :set (lambda (symbol value)
+           (progn (add-to-list 'TeX-view-program-list
+                               `("PDF viewer" ,(concat "%(pdf-viewer) " value)))
+                  (set-default symbol value))))
+#+END_SRC
+
+The above piece of code will generated multiple "PDF viewer" entries in the =TeX-view-program-list=. Also, the =:set= function must be documented.
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'TeX-expand-list
                '("%(pdf-viewer)" (lambda () (format sb-TeX-pdf-viewer-command))))
-  (add-to-list 'TeX-view-program-list
-               `("PDF viewer" ,(concat "%(pdf-viewer) " sb-TeX-pdf-viewer-options)))
   (setq TeX-view-program-selection '((output-pdf "PDF viewer")))
 #+END_SRC
 

@@ -275,11 +275,6 @@
 
 (setq-default c-basic-offset 4)
 
-;; key-chord
-;; =========
-
-(key-chord-mode 1)
-
 (org-babel-load-file (concat user-emacs-directory "sb-config.org"))
 
 ;; Blog-specific customizations

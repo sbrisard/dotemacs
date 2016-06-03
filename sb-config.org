@@ -9,6 +9,63 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
+* Navigation
+
+** Key-chord mode
+
+#+BEGIN_SRC emacs-lisp
+  (key-chord-mode 1)
+#+END_SRC
+
+** Avy
+   :LOGBOOK:
+   CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:35] =>  0:10
+   CLOCK: [2016-03-21 Mon 08:15]--[2016-03-21 Mon 08:20] =>  0:05
+   CLOCK: [2016-03-14 Mon 08:15]--[2016-03-14 Mon 08:40] =>  0:25
+   :END:
+
+From the [[https://github.com/abo-abo/avy][official website]]
+
+#+BEGIN_QUOTE
+=avy= is a GNU Emacs package for jumping to visible text using a char-based decision tree. See also [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] and [[https://github.com/Lokaltog/vim-easymotion][vim-easymotion]] - =avy= uses the same idea.
+#+END_QUOTE
+
+See also
+
+  - [[http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/][Ace-jump-mode Is Dead, Long Live Avy]]
+  - [[http://oremacs.com/2015/05/08/avy-0.1.0/][New on MELPA - avy]]
+
+The key-chord "jj" is bound to =avy-goto-word-1=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq avy-background t)
+  (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
+  (key-chord-define-global "jj" #'avy-goto-word-1)
+#+END_SRC
+
+** Ace-window
+   :LOGBOOK:
+   CLOCK: [2016-05-09 Mon 08:40]--[2016-05-09 Mon 08:45] =>  0:05
+   :END:
+
+From the [[https://github.com/abo-abo/ace-window][official website]]
+
+#+BEGIN_QUOTE
+I'm sure you're aware of =other-window= command. While it's great for two windows, it quickly loses its value when there are more windows: you need to call it many times, and since it's not easily predictable, you have to check each time if you're in the window that you wanted.
+
+Another approach is to use =windmove-left=, =windmove-up=, etc. These are fast and predictable. Their disadvantage is that they need 4 key bindings. The default ones are shift+arrows, which are hard to reach.
+
+This package aims to take the speed and predictability of =windmove= and pack it into a single key binding, similar to =other-window=.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ace-window)
+  (global-set-key (kbd "C-x o") 'ace-window)
+  (set-face-attribute 'aw-leading-char-face nil
+  :foreground nil
+  :inherit 'compilation-mode-line-fail)
+#+END_SRC
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00
@@ -235,55 +292,6 @@ On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\page
 
 #+BEGIN_SRC emacs-lisp
   (setq reftex-ref-macro-prompt nil)
-#+END_SRC
-
-* Avy
-  :LOGBOOK:
-  CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:35] =>  0:10
-  CLOCK: [2016-03-21 Mon 08:15]--[2016-03-21 Mon 08:20] =>  0:05
-  CLOCK: [2016-03-14 Mon 08:15]--[2016-03-14 Mon 08:40] =>  0:25
-  :END:
-
-From the [[https://github.com/abo-abo/avy][official website]]
-
-#+BEGIN_QUOTE
-=avy= is a GNU Emacs package for jumping to visible text using a char-based decision tree. See also [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] and [[https://github.com/Lokaltog/vim-easymotion][vim-easymotion]] - =avy= uses the same idea.
-#+END_QUOTE
-
-See also
-
-  - [[http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/][Ace-jump-mode Is Dead, Long Live Avy]]
-  - [[http://oremacs.com/2015/05/08/avy-0.1.0/][New on MELPA - avy]]
-
-The key-chord "jj" is bound to =avy-goto-word-1=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq avy-background t)
-  (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
-  (key-chord-define-global "jj" #'avy-goto-word-1)
-#+END_SRC
-
-* Ace-window
-  :LOGBOOK:
-  CLOCK: [2016-05-09 Mon 08:40]--[2016-05-09 Mon 08:45] =>  0:05
-  :END:
-
-From the [[https://github.com/abo-abo/ace-window][official website]]
-
-#+BEGIN_QUOTE
-I'm sure you're aware of =other-window= command. While it's great for two windows, it quickly loses its value when there are more windows: you need to call it many times, and since it's not easily predictable, you have to check each time if you're in the window that you wanted.
-
-Another approach is to use =windmove-left=, =windmove-up=, etc. These are fast and predictable. Their disadvantage is that they need 4 key bindings. The default ones are shift+arrows, which are hard to reach.
-
-This package aims to take the speed and predictability of =windmove= and pack it into a single key binding, similar to =other-window=.
-#+END_QUOTE
-
-#+BEGIN_SRC emacs-lisp
-  (require 'ace-window)
-  (global-set-key (kbd "C-x o") 'ace-window)
-  (set-face-attribute 'aw-leading-char-face nil
-  :foreground nil
-  :inherit 'compilation-mode-line-fail)
 #+END_SRC
 
 * Maxima

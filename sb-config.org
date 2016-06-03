@@ -81,6 +81,7 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 
 * AUCTeX and RefTeX
   :LOGBOOK:
+  CLOCK: [2016-06-03 Fri 08:30]--[2016-06-03 Fri 08:50] =>  0:20
   CLOCK: [2016-06-02 Thu 07:20]--[2016-06-02 Thu 09:00] =>  1:40
   CLOCK: [2016-05-25 Wed 08:10]--[2016-05-25 Wed 08:50] =>  0:40
   CLOCK: [2016-05-24 Tue 08:00]--[2016-05-24 Tue 09:30] =>  1:30
@@ -170,60 +171,39 @@ See [[info:auctex#Forward and Inverse Search][Forward and Inverse Search]] in th
   (setq TeX-source-correlate-start-server t)
 #+END_SRC
 
-** A_FAIRE Viewers
+** Viewers
 
-We define some variables which can be custom-set
-
-  - =sb-TeX-pdf-viewer-command= full path to the PDF viewer executable
-  - =sb-TeX-pdf-viewer-options= PDF viewer command line options (synctex and such).
+We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable holds the full path to the PDF viewer, including the command line options (synctex and such). We use a custom =:set= function for the =sb-TeX-pdf-viewer-command= variable, in order to update =TeX-view-program-list=, which depends on it.
 
 #+BEGIN_SRC emacs-lisp
-  (defcustom sb-TeX-pdf-viewer-command ""
-    "Path to the executable to be used for the TeX-view command.
-  For SumatraPDF (Windows platforms), set this variable to
-
-      \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\".
-
-  For Skim (MacOS X platforms), set this variable to
-
-      \"/Applications/Skim.app/Contents/SharedSupport/displayline\".
-  "
-    :type 'string
-    :group 'sb
-    :tag "TeX PDF viewer command")
-#+END_SRC
-
-We use a custom =:set= function for the =sb-TeX-pdf-viewer-options= variable, in order to update =TeX-view-program-list=, which depends on it.
-
-#+BEGIN_SRC emacs-lisp
-  (defun sb-set-TeX-pdf-viewer-options (symbol value)
-    "The function to be called when modifying `sb-TeX-pdf-viewer-options'
+  (defun sb-set-TeX-pdf-viewer-command (symbol value)
+    "The function to be called when modifying `sb-TeX-pdf-viewer-command'
   when using the Customize user interface. This setter updates
   `TeX-view-program-list', taking care of duplicate entries."
     (progn (setq TeX-view-program-list
-                 (cons (list "SB PDF viewer" (concat "%(sb-pdf-viewer) " value))
+                 (cons (list "SB PDF viewer" value)
                        (cl-remove "SB PDF viewer" TeX-view-program-list
                                   :test (lambda (left right)
                                           (equal left (car right))))))
            (set-default symbol value)))
 
-  (defcustom sb-TeX-pdf-viewer-options ""
-    "Command line options to be passed to the TeX-view command.
+  (defcustom sb-TeX-pdf-viewer-command ""
+    "Command line (including options) to be passed to `TeX-view'.
   For SumatraPDF (Windows platforms), set this variable to
 
-      \"-reuse-instance -forward-search %b %n %o\".
+      \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe
+      -reuse-instance -forward-search %b %n %o\".
 
   For Skim (MacOS X platforms), set this variable to
 
-      \"-r -b %n %o %b\".
+      \"/Applications/Skim.app/Contents/SharedSupport/displayline
+      -r -b %n %o %b\".
   "
     :type 'string
     :group 'sb
-    :tag "TeX PDF viewer options"
-    :set 'sb-set-TeX-pdf-viewer-options)
+    :tag "TeX PDF viewer command"
+    :set 'sb-set-TeX-pdf-viewer-command)
 
-  (add-to-list 'TeX-expand-list
-               '("%(sb-pdf-viewer)" (lambda () (format sb-TeX-pdf-viewer-command))))
   (setq TeX-view-program-selection '((output-pdf "SB PDF viewer")))
 #+END_SRC
 

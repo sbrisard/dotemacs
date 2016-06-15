@@ -9,6 +9,21 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
+* Navigation and such
+
+** Zap to char vs. zap up to char
+   :LOGBOOK:
+   CLOCK: [2016-06-15 Wed 08:00]--[2016-06-15 Wed 08:15] =>  0:15
+   :END:
+
+=zap-to-char= (bound to =M-z=) kills up to and including the specified char. =misc.el= provides an alternative function, namely =zap-up-to-char= which does not remove the specified char. However, =misc.el= is not loaded by default.
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'zap-up-to-char "misc"
+    "Kill up to, but not including ARGth occurrence of CHAR.")
+  (global-set-key (kbd "M-z") 'zap-up-to-char)
+#+END_SRC
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00

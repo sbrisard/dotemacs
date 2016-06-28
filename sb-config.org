@@ -79,6 +79,79 @@ This package aims to take the speed and predictability of =windmove= and pack it
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 #+END_SRC
 
+** Hydra
+   :LOGBOOK:
+   CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
+   :END:
+
+From the [[https://github.com/abo-abo/hydra][repository]]
+
+#+BEGIN_QUOTE
+This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
+#+END_QUOTE
+
+We first define a hydra to insert Greek chars
+
+#+BEGIN_SRC emacs-lisp :results none
+  (defhydra sb-hydra-insert-char-greek (:columns 8 :foreign-keys run)
+    " "
+    ("A" (insert-char #x0391) "Α")
+    ("B" (insert-char #x0392) "Β")
+    ("G" (insert-char #x0393) "Γ")
+    ("D" (insert-char #x0394) "Δ")
+    ("E" (insert-char #x0395) "Ε")
+    ("Z" (insert-char #x0396) "Ζ")
+    ("H" (insert-char #x0397) "Η")
+    ("Q" (insert-char #x0398) "Θ")
+    ("I" (insert-char #x0399) "Ι")
+    ("K" (insert-char #x039A) "Κ")
+    ("L" (insert-char #x039B) "Λ")
+    ("M" (insert-char #x039C) "Μ")
+    ("N" (insert-char #x039D) "Ν")
+    ("X" (insert-char #x039E) "Ξ")
+    ("O" (insert-char #x039F) "Ο")
+    ("P" (insert-char #x03A0) "Π")
+    ("R" (insert-char #x03A1) "Ρ")
+    ("S" (insert-char #x03A3) "Σ")
+    ("T" (insert-char #x03A4) "Τ")
+    ("Y" (insert-char #x03A5) "Υ")
+    ("F" (insert-char #x03A6) "Φ")
+    ("C" (insert-char #x03A7) "Χ")
+    ("J" (insert-char #x03A8) "Ψ")
+    ("W" (insert-char #x03A9) "Ω")
+    ("a" (insert-char #x03B1) "α")
+    ("b" (insert-char #x03B2) "β")
+    ("g" (insert-char #x03B3) "γ")
+    ("d" (insert-char #x03B4) "δ")
+    ("e" (insert-char #x03B5) "ε")
+    ("z" (insert-char #x03B6) "ζ")
+    ("h" (insert-char #x03B7) "η")
+    ("q" (insert-char #x03B8) "θ")
+    ("i" (insert-char #x03B9) "ι")
+    ("k" (insert-char #x03BA) "κ")
+    ("l" (insert-char #x03BB) "λ")
+    ("m" (insert-char #x03BC) "μ")
+    ("n" (insert-char #x03BD) "ν")
+    ("x" (insert-char #x03BE) "ξ")
+    ("o" (insert-char #x03BF) "ο")
+    ("p" (insert-char #x03C0) "π")
+    ("r" (insert-char #x03C1) "ρ")
+    ("s" (insert-char #x03C2) "ς")
+    ("u" (insert-char #x03C3) "σ")
+    ("t" (insert-char #x03C4) "τ")
+    ("y" (insert-char #x03C5) "υ")
+    ("f" (insert-char #x03C6) "φ")
+    ("c" (insert-char #x03C7) "χ")
+    ("j" (insert-char #x03C8) "ψ")
+    ("w" (insert-char #x03C9) "ω"))
+#+END_SRC
+
+Which is bound to =C-c 8=
+
+#+BEGIN_SRC emacs-lisp :results none
+  (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char-greek/body)
+#+END_SRC
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00

@@ -81,6 +81,7 @@ This package aims to take the speed and predictability of =windmove= and pack it
 
 ** Hydra
    :LOGBOOK:
+   CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
    CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
    :END:
 
@@ -144,6 +145,20 @@ We first define a hydra to insert Greek chars
     ("c" (insert-char #x03C7) "χ")
     ("j" (insert-char #x03C8) "ψ")
     ("w" (insert-char #x03C9) "ω")
+    ("C-g" nil "quit"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results none
+  (defhydra sb-hydra-insert-char-arrow (:columns 4 :foreign-keys run)
+    "Insert arrow"
+    ("<left>" (insert-char #x2190) "←")
+    ("<up>" (insert-char #x2191) "↑")
+    ("<right>" (insert-char #x2192) "→")
+    ("<down>" (insert-char #x2193) "↓")
+    ("S-<left>" (insert-char #x21D0) "⇐")
+    ("S-<up>" (insert-char #x21D1) "⇑")
+    ("S-<right>" (insert-char #x21D2) "⇒")
+    ("S-<down>" (insert-char #x21D3) "⇓")
     ("C-g" nil "quit"))
 #+END_SRC
 

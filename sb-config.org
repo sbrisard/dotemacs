@@ -81,7 +81,7 @@ This package aims to take the speed and predictability of =windmove= and pack it
 
 ** Hydra
    :LOGBOOK:
-   CLOCK: [2016-06-30 Thu 07:15]
+   CLOCK: [2016-06-30 Thu 07:15]--[2016-06-30 Thu 07:40] =>  0:25
    CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
    CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
    :END:

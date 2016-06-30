@@ -81,6 +81,7 @@ This package aims to take the speed and predictability of =windmove= and pack it
 
 ** Hydra
    :LOGBOOK:
+   CLOCK: [2016-06-30 Thu 07:15]
    CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
    CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
    :END:
@@ -91,7 +92,31 @@ From the [[https://github.com/abo-abo/hydra][repository]]
 This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
 #+END_QUOTE
 
-We first define a hydra to insert Greek chars
+We first define a hydra to insert various types of arrows.
+
+#+BEGIN_SRC emacs-lisp :results none
+  (defhydra sb-hydra-insert-char-arrow (:columns 4 :foreign-keys run)
+    "Insert arrow"
+    ("<left>" (insert-char #x2190) "←")
+    ("<up>" (insert-char #x2191) "↑")
+    ("<right>" (insert-char #x2192) "→")
+    ("<down>" (insert-char #x2193) "↓")
+    ("S-<left>" (insert-char #x21D0) "⇐")
+    ("S-<up>" (insert-char #x21D1) "⇑")
+    ("S-<right>" (insert-char #x21D2) "⇒")
+    ("S-<down>" (insert-char #x21D3) "⇓")
+    ("C-<left>" (insert-char #x21A4) "↤")
+    ("C-<up>" (insert-char #x21A5) "↥")
+    ("C-<right>" (insert-char #x21A6) "↦")
+    ("C-<down>" (insert-char #x21A7) "↧")
+    ("M-<left>" (insert-char #x219E) "↞")
+    ("M-<up>" (insert-char #x219F) "↟")
+    ("M-<right>" (insert-char #x21A0) "↠")
+    ("M-<down>" (insert-char #x21A1) "↡")
+    ("C-g" nil "quit"))
+#+END_SRC
+
+Then, a hydra to insert Greek chars.
 
 #+BEGIN_SRC emacs-lisp :results none
   (defhydra sb-hydra-insert-char-greek (:columns 8 :foreign-keys run)
@@ -137,8 +162,8 @@ We first define a hydra to insert Greek chars
     ("o" (insert-char #x03BF) "ο")
     ("p" (insert-char #x03C0) "π")
     ("r" (insert-char #x03C1) "ρ")
-    ("s" (insert-char #x03C2) "ς")
-    ("u" (insert-char #x03C3) "σ")
+    ("s" (insert-char #x03C3) "σ")
+    ("M-s" (insert-char #x03C2) "ς")
     ("t" (insert-char #x03C4) "τ")
     ("y" (insert-char #x03C5) "υ")
     ("f" (insert-char #x03C6) "φ")
@@ -148,24 +173,16 @@ We first define a hydra to insert Greek chars
     ("C-g" nil "quit"))
 #+END_SRC
 
+The following hydra puts everything together, and is bound to =C-c 8= (note the similarity to =C-x 8=, which is bound to =insert-char=).
+
 #+BEGIN_SRC emacs-lisp :results none
-  (defhydra sb-hydra-insert-char-arrow (:columns 4 :foreign-keys run)
-    "Insert arrow"
-    ("<left>" (insert-char #x2190) "←")
-    ("<up>" (insert-char #x2191) "↑")
-    ("<right>" (insert-char #x2192) "→")
-    ("<down>" (insert-char #x2193) "↓")
-    ("S-<left>" (insert-char #x21D0) "⇐")
-    ("S-<up>" (insert-char #x21D1) "⇑")
-    ("S-<right>" (insert-char #x21D2) "⇒")
-    ("S-<down>" (insert-char #x21D3) "⇓")
+  (defhydra sb-hydra-insert-char (:exit true :columns 1)
+    "Insert special character"
+    ("a" (sb-hydra-insert-char-arrow/body) "arrows")
+    ("g" (sb-hydra-insert-char-greek/body) "greek")
     ("C-g" nil "quit"))
-#+END_SRC
 
-Which is bound to =C-c 8=
-
-#+BEGIN_SRC emacs-lisp :results none
-  (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char-greek/body)
+  (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char/body)
 #+END_SRC
 
 * Magit

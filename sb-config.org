@@ -11,6 +11,17 @@ I use the literate programming paradigm for my emacs configuration. This file sh
 
 * Navigation
 
+** Default directory
+   :LOGBOOK:
+   CLOCK: [2016-08-17 Wed 08:30]--[2016-08-17 Wed 08:40] =>  0:10
+   :END:
+
+Default directory is retrieved programmatically from the environment variable =HOME=
+
+#+BEGIN_SRC emacs-lisp
+  (setq default-directory (concat (getenv "HOME") "/"))
+#+END_SRC
+
 ** Key-chord mode
 
 #+BEGIN_SRC emacs-lisp

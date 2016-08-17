@@ -62,7 +62,6 @@
 
 (setq column-number-mode t)
 (setq confirm-nonexistent-file-or-buffer t)
-(setq-default default-directory "~/" )
 (setq default-process-coding-system 'utf-8)
 (setq dnd-open-file-other-window nil)
 (setq find-file-run-dired nil)

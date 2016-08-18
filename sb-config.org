@@ -400,6 +400,9 @@ We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable hol
 #+END_SRC
 
 ** RefTeX
+   :LOGBOOK:
+   CLOCK: [2016-08-18 Thu 16:00]--[2016-08-18 Thu 16:30] =>  0:30
+   :END:
 
 #+BEGIN_SRC emacs-lisp
   (require 'reftex)
@@ -417,16 +420,30 @@ AUCTeX/RefTeX integration
   (setq reftex-plug-into-AUCTeX t)
 #+END_SRC
 
-All labels are inserted automatically (no query).
+All labels but sections are inserted automatically (no query).
 
 #+BEGIN_SRC emacs-lisp
-  (setq reftex-insert-label-flags (quote (nil nil)))
+  (setq reftex-insert-label-flags (quote ("s" "s")))
 #+END_SRC
 
 On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\pageref=, etc...).
 
 #+BEGIN_SRC emacs-lisp
   (setq reftex-ref-macro-prompt nil)
+#+END_SRC
+
+Register axiom, theorem and remark environments so that they get properly numbered.
+
+#+BEGIN_SRC emacs-lisp
+  (setq reftex-label-alist
+        '(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
+          ("theorem" ?h "thr:" "~\\ref{%s}" nil   ("theorem" "th.") -3)
+          ("remark" ?r "rem:" "~\\ref{%s}" t ("remark" "rem.") -4)))
+
+  (add-hook 'LaTeX-mode-hook (lambda ()
+                               (LaTeX-add-environments '("axiom" LaTeX-env-label)
+                                                       '("theorem" LaTeX-env-label)
+                                                       '("remark" LaTeX-env-label))))
 #+END_SRC
 
 * Maxima

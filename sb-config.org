@@ -96,6 +96,7 @@ This package aims to take the speed and predictability of =windmove= and pack it
 
 ** Hydra
    :LOGBOOK:
+   CLOCK: [2016-08-18 Thu 06:30]--[2016-08-18 Thu 06:40] =>  0:10
    CLOCK: [2016-06-30 Thu 07:15]--[2016-06-30 Thu 07:40] =>  0:25
    CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
    CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
@@ -110,7 +111,7 @@ This is a package for GNU Emacs that can be used to tie related commands into a 
 We first define a hydra to insert various types of arrows.
 
 #+BEGIN_SRC emacs-lisp :results none
-  (defhydra sb-hydra-insert-char-arrow (:columns 4 :foreign-keys run)
+  (defhydra sb-hydra-insert-char-arrow (:exit t :columns 4 :foreign-keys nil)
     "Insert arrow"
     ("<left>" (insert-char #x2190) "←")
     ("<up>" (insert-char #x2191) "↑")
@@ -134,7 +135,7 @@ We first define a hydra to insert various types of arrows.
 Then, a hydra to insert Greek chars.
 
 #+BEGIN_SRC emacs-lisp :results none
-  (defhydra sb-hydra-insert-char-greek (:columns 8 :foreign-keys run)
+  (defhydra sb-hydra-insert-char-greek (:exit t :columns 8 :foreign-keys nil)
     "Insert Greek char"
     ("A" (insert-char #x0391) "Α")
     ("B" (insert-char #x0392) "Β")
@@ -191,7 +192,7 @@ Then, a hydra to insert Greek chars.
 The following hydra puts everything together, and is bound to =C-c 8= (note the similarity to =C-x 8=, which is bound to =insert-char=).
 
 #+BEGIN_SRC emacs-lisp :results none
-  (defhydra sb-hydra-insert-char (:exit true :columns 1)
+  (defhydra sb-hydra-insert-char (:exit t :columns 1 :foreign-keys nil)
     "Insert special character"
     ("a" (sb-hydra-insert-char-arrow/body) "arrows")
     ("g" (sb-hydra-insert-char-greek/body) "greek")

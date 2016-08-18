@@ -11,6 +11,10 @@ I use the literate programming paradigm for my emacs configuration. This file sh
 
 * Navigation
 
+Some interesting references
+
+  - [[http://irreal.org/blog/?p%3D5309][Defining a Keymap Prefix (Ireal)]]
+
 ** Default directory
    :LOGBOOK:
    CLOCK: [2016-08-17 Wed 08:30]--[2016-08-17 Wed 08:40] =>  0:10

@@ -201,6 +201,28 @@ The following hydra puts everything together, and is bound to =C-c 8= (note the 
   (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char/body)
 #+END_SRC
 
+** ibuffer
+   :LOGBOOK:
+   CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05
+   :END:
+
+From the [[https://www.emacswiki.org/emacs/IbufferMode][EmacsWiki]]
+
+#+BEGIN_QUOTE
+Ibuffer is an advanced replacement for BufferMenu, which lets you operate on buffers much in the same manner as Dired. The most important Ibuffer features are highlighting and various alternate layouts. Ibuffer is part of Emacs 22.
+#+END_QUOTE
+
+See also
+
+  - [[https://mytechrants.wordpress.com/2010/03/25/emacs-tip-of-the-day-start-using-ibuffer-asap/][Emacs Tip of the Day: Start Using IBuffer ASAP]]
+  - [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][Tips for using Emacs Ibuffer]]
+
+#+BEGIN_SRC emacs-lisp :results none
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
+
+*** A_FAIRE Change sorting method
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00

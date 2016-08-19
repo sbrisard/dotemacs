@@ -93,8 +93,6 @@
   (load-theme 'zenburn t)
   (split-window-right))
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; Trailing whitespaces
 ;; ====================
 

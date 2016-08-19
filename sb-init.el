@@ -16,9 +16,6 @@
 ;; ======================
 
 (defgroup sb nil "My customization group" :tag "SB")
-(defcustom sb-path-to-cloud "~/Google Drive"
-  "TODO Documentation"
-  :type 'string :group 'sb :tag "Path to cloud")
 (defcustom sb-path-to-local-documents "~/Documents"
   "TODO Documentation"
   :type 'string :group 'sb :tag "Path to local documents")

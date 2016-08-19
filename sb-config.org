@@ -531,3 +531,23 @@ The files for the maxima mode are not available on MELPA. They are packaged with
                                  ".*\\.pyo\'"
                                  "\\.git/")))
 #+END_SRC
+
+* Text editing
+
+** Trailing whitespaces
+   :LOGBOOK:
+   CLOCK: [2016-08-19 Fri 07:40]--[2016-08-19 Fri 07:45] =>  0:05
+   :END:
+
+In selected modes, show trailing whitespaces and empty lines at the end of the buffer. This is defined as a mode hook (which requires a function).
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
+#+END_SRC
+
+In all modes, empty lines at the end of the buffer are shown, and trailing white spaces are removed when buffer is saved.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default indicate-empty-lines t)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC

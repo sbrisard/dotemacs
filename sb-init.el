@@ -93,18 +93,6 @@
   (load-theme 'zenburn t)
   (split-window-right))
 
-;; Trailing whitespaces
-;; ====================
-
-;; In selected modes, show trailing whitespaces and empty lines at the end of
-;; the buffer. This is defined as a mode hook (which requires a function).
-(add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-
-;; In all modes, empty lines at the end of the buffer are shown, and trailing
-;; white spaces are remoaved when buffer is saved.
-(setq-default indicate-empty-lines t)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; Easy PG (GnuPG interface for Emacs)
 ;; ===================================
 

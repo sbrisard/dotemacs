@@ -448,6 +448,7 @@ Register axiom, theorem and remark environments so that they get properly number
 
 * Maxima
   :LOGBOOK:
+  CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15
   CLOCK: [2016-05-09 Mon 08:45]--[2016-05-09 Mon 08:50] =>  0:05
   :END:
 
@@ -457,13 +458,15 @@ From the [[http://maxima.sourceforge.net/][official website]]
 Maxima is a system for the manipulation of symbolic and numerical expressions, including differentiation, integration, Taylor series, Laplace transforms, ordinary differential equations, systems of linear equations, polynomials, sets, lists, vectors, matrices and tensors. Maxima yields high precision numerical results by using exact fractions, arbitrary-precision integers and variable-precision floating-point numbers. Maxima can plot functions and data in two and three dimensions.
 #+END_QUOTE
 
-The files for the maxima mode are not available on MELPA. They are packaged with the binaries. I defined the variable =sb-path-to-maxima-mode=, where the following files should be available
-
-  - =maxima.el=
-  - =maxima-font-lock.el=
-  - ...
+The files for the maxima mode are not available on MELPA. They are packaged with the binaries, and I defined the variable =sb-path-to-maxima-mode=, where the relevant files are stored.
 
 #+BEGIN_SRC emacs-lisp
+  (defcustom sb-path-to-maxima-mode ""
+    "Path to the folder hosting elisp files for maxima-mode.
+  This is the path to the files: maxima.el, maxima-font-lock.el.
+  "
+    :type 'string :group 'sb :tag "Path to maxima-mode files")
+
   (add-to-list 'load-path sb-path-to-maxima-mode)
   (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
   (autoload 'maxima "maxima" "Run Maxima interactively" t)

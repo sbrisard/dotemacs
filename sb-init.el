@@ -99,34 +99,6 @@
 (require 'epa-file)
 (epa-file-enable)
 
-;; Whitespace mode (minor mode to visualize blanks)
-;; ================================================
-
-;; Here are the UTF-8 values used below
-;;   - U+0009 TAB
-;;   - U+000A LINE FEED
-;;   - U+0020 SPACE
-;;   - U+0024 DOLLAR SIGN             $
-;;   - U+002E FULL STOP               .
-;;   - U+003E GREATER THAN SIGN       >
-;;   - U+00B6 PILCROW SIGN            ¶
-;;   - U+00B7 MIDDLE DOT              ·
-;;   - U+2192 RIGHTWARDS ARROW        →
-;;   - U+21E5 RIGHTWARDS ARROW TO BAR ⇥
-;;   - U+23CE RETURN SYMBOL          ⏎
-
-(require 'whitespace)
-
-(setq whitespace-line-column 80)
-
-(setq whitespace-display-mappings
-      '((space-mark #x0020  [#x00B7] [#x002E])
-        (newline-mark #x00A [#x00B6 #x000A] [#x0024 #x000A])
-        (tab-mark #x009 [#x2192 #x009] [#x003E #x009])
-        ))
-
-(setq whitespace-style (quote (face lines-tail)))
-
 ;; elpy
 ;; ====
 

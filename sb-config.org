@@ -588,3 +588,13 @@ From the [[https://www.emacswiki.org/emacs/WhiteSpace][EmacsWiki]]: "This packag
 
   (setq whitespace-style (quote (face lines-tail)))
 #+END_SRC
+
+* Blog-related customizations
+  :LOGBOOK:
+  CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10
+  :END:
+
+#+BEGIN_SRC emacs-lisp
+  (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
+                                              sb-path-to-local-documents))
+#+END_SRC

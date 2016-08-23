@@ -227,8 +227,3 @@
 (setq-default c-basic-offset 4)
 
 (org-babel-load-file (concat user-emacs-directory "sb-config.org"))
-
-;; Blog-specific customizations
-;; ============================
-
-(sb-load-file-when-exists (f-join sb-path-to-local-documents "blog/sb-blog.el"))

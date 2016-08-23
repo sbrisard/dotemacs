@@ -249,6 +249,13 @@ I use the [[https://github.com/bbatsov/zenburn-emacs][Zenburn theme]] when emacs
   (when (display-graphic-p) (load-theme 'zenburn t))
 #+END_SRC
 
+** A_FAIRE Frame size
+   :LOGBOOK:
+   CLOCK: [2016-08-23 Tue 08:00]--[2016-08-23 Tue 08:10] =>  0:10
+   :END:
+
+The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monitor-attributes]] might be helpful to conditionally resize the main frame. See also [[http://stackoverflow.com/questions/16481984/get-width-of-current-monitor-in-emacs-lisp][Get width of current monitor in Emacs Lisp]].
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00

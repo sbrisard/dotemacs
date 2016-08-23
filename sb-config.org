@@ -9,6 +9,19 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
+* Functions and variables to be used in this file
+  :LOGBOOK:
+  CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
+  :END:
+
+** Load a file only when it exists
+
+#+BEGIN_SRC emacs-lisp
+  (defun sb-load-file-when-exists (filename)
+    "Load specified file if it exists. Do nothing otherwise."
+    (when (file-exists-p filename) (load-file filename)))
+#+END_SRC
+
 * Navigation
 
 Some interesting references

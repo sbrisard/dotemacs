@@ -32,10 +32,6 @@
   "Bind newline-and-indent to RET. This function can be used as a hook."
   (local-set-key (kbd "RET") 'newline-and-indent))
 
-(defun sb-load-file-when-exists (filename)
-  "Load specified file if it exists. Do nothing otherwise."
-  (when (file-exists-p filename) (load-file filename)))
-
 ;; Toggle window dedication
 ;; http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-keep-its-buffer-and-not-get-resized
 (defun sb-toggle-window-dedicated ()

@@ -86,7 +86,6 @@
 ;;(setenv "HOME" "C:/Users/brisard/")
 
 (when window-system
-  (load-theme 'zenburn t)
   (split-window-right))
 
 ;; Easy PG (GnuPG interface for Emacs)

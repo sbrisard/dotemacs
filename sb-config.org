@@ -236,6 +236,19 @@ See also
 
 *** A_FAIRE Change sorting method
 
+* Appearance
+
+** Theme
+   :LOGBOOK:
+   CLOCK: [2016-08-23 Tue 07:50]--[2016-08-23 Tue 08:00] =>  0:10
+   :END:
+
+I use the [[https://github.com/bbatsov/zenburn-emacs][Zenburn theme]] when emacs is run in GUI mode.
+
+#+BEGIN_SRC emacs-lisp
+  (when (display-graphic-p) (load-theme 'zenburn t))
+#+END_SRC
+
 * Magit
   :LOGBOOK:
   CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00

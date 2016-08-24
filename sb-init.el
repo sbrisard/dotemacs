@@ -94,16 +94,6 @@
 (require 'epa-file)
 (epa-file-enable)
 
-;; elpy
-;; ====
-
-(elpy-enable)
-(setq elpy-modules (quote (elpy-module-eldoc
-                           elpy-module-flymake
-                           elpy-module-sane-defaults)))
-(setq elpy-test-runner (quote elpy-test-pytest-runner))
-(add-hook 'elpy-mode-hook 'whitespace-mode)
-
 ;; Org Mode
 ;; ========
 

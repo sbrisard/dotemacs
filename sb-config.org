@@ -501,11 +501,29 @@ Register axiom, theorem and remark environments so that they get properly number
                                                        '("remark" LaTeX-env-label))))
 #+END_SRC
 
-* Maxima
-  :LOGBOOK:
-  CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15
-  CLOCK: [2016-05-09 Mon 08:45]--[2016-05-09 Mon 08:50] =>  0:05
-  :END:
+* Development
+
+** Python
+   :LOGBOOK:
+   CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:05] =>  0:10
+   :END:
+
+I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
+
+#+BEGIN_SRC emacs-lisp
+  (elpy-enable)
+  (setq elpy-modules (quote (elpy-module-eldoc
+                             elpy-module-flymake
+                             elpy-module-sane-defaults)))
+  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  (add-hook 'elpy-mode-hook 'whitespace-mode)
+#+END_SRC
+
+** Maxima
+   :LOGBOOK:
+   CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15
+   CLOCK: [2016-05-09 Mon 08:45]--[2016-05-09 Mon 08:50] =>  0:05
+   :END:
 
 From the [[http://maxima.sourceforge.net/][official website]]
 

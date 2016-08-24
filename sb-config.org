@@ -505,7 +505,7 @@ Register axiom, theorem and remark environments so that they get properly number
 
 ** Python
    :LOGBOOK:
-   CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:05] =>  0:10
+   CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:25] =>  0:30
    :END:
 
 I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
@@ -517,6 +517,13 @@ I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package
                              elpy-module-sane-defaults)))
   (setq elpy-test-runner (quote elpy-test-test-discover-runner))
   (add-hook 'elpy-mode-hook 'whitespace-mode)
+#+END_SRC
+
+It may be useful to set some other =elpy= variables. Since their value is platform dependent, I simply add them as a reminder to the "sb" =customize-group=.
+
+#+BEGIN_SRC emacs-lisp
+  (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
+  (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 #+END_SRC
 
 ** Maxima

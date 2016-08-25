@@ -22,6 +22,10 @@ I use the literate programming paradigm for my emacs configuration. This file sh
     (when (file-exists-p filename) (load-file filename)))
 #+END_SRC
 
+* Various packages
+
+=htmlize= is used by [[#ORG_MODE][Org mode]] for fontification of code blocks.
+
 * Navigation
 
 Some interesting references
@@ -257,6 +261,9 @@ I use the [[https://github.com/bbatsov/zenburn-emacs][Zenburn theme]] when emacs
 The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monitor-attributes]] might be helpful to conditionally resize the main frame. See also [[http://stackoverflow.com/questions/16481984/get-width-of-current-monitor-in-emacs-lisp][Get width of current monitor in Emacs Lisp]].
 
 * Org mode
+  :PROPERTIES:
+  :CUSTOM_ID: ORG_MODE
+  :END:
   :LOGBOOK:
   CLOCK: [2016-08-25 Thu 08:35]
   :END:
@@ -266,9 +273,6 @@ There we are! That's really the crux of this file!
 #+BEGIN_SRC emacs-lisp
   ;; This should not be necessary
   ;;(add-to-list 'load-path (concat user-emacs-directory "/elisp/org-mode/lisp"))
-
-  ;; For fontification
-  (require 'htmlize)
 
   ;; Allow for links to be used outside Org
   (global-set-key (kbd "C-c a") 'org-agenda)

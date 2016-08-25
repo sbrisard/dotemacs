@@ -274,10 +274,8 @@ There we are! That's really the crux of this file!
   ;; This should not be necessary
   ;;(add-to-list 'load-path (concat user-emacs-directory "/elisp/org-mode/lisp"))
 
-  ;; Allow for links to be used outside Org
+  ;; Allow for agenda to be used outside Org
   (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c L") 'org-insert-link-global)
-  (global-set-key (kbd "C-c o") 'org-open-at-point-global)
 
   (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
                                                            (python . t)

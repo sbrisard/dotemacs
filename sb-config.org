@@ -265,7 +265,7 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :CUSTOM_ID: ORG_MODE
   :END:
   :LOGBOOK:
-  CLOCK: [2016-08-25 Thu 08:35]
+  CLOCK: [2016-08-25 Thu 08:35]--[2016-08-25 Thu 08:50]
   :END:
 
 There we are! That's really the crux of this file!

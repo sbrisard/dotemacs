@@ -265,13 +265,15 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :CUSTOM_ID: ORG_MODE
   :END:
   :LOGBOOK:
-  CLOCK: [2016-08-26 Fri 08:25]
+  CLOCK: [2016-08-26 Fri 08:25]--[2016-08-26 Fri 08:50] =>  0:25
   CLOCK: [2016-08-25 Thu 08:35]--[2016-08-25 Thu 08:50] =>  0:15
   :END:
 
-There we are! That's really the crux of this file!
+There we are! That's really the crux of this file! Configuring Org Mode is very complex. The various configurations are organized like the [[info:Org][Org Mode Manual]].
 
-** Activation
+** [[info:Org#Introduction][Introduction]]
+
+*** [[info:Org#Activation][Activation]]
 
 Make agenda accessible from everywhere.
 
@@ -279,19 +281,29 @@ Make agenda accessible from everywhere.
   (global-set-key (kbd "C-c a") 'org-agenda)
 #+END_SRC
 
-** Misc
+** [[info:Org#Working with source code][Working with source code]]
+
+*** [[info:Org#Languages][Languages]]
+
+Enable languages for evaluation in source blocks.
 
 #+BEGIN_SRC emacs-lisp
-  ;; This should not be necessary
-  ;;(add-to-list 'load-path (concat user-emacs-directory "/elisp/org-mode/lisp"))
-
-
   (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
                                                            (python . t)
                                                            (maxima . t)))
+#+END_SRC
 
+*** [[info:Org#Evaluating code blocks][Evaluating code blocks]]
+
+Displayed inlined images are automatically updated after evaluating source blocks. This was suggested by [[https://github.com/gregsexton/ob-ipython][ob-ipython]].
+
+#+BEGIN_SRC emacs-lisp
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+#+END_SRC
 
+** Misc
+
+#+BEGIN_SRC emacs-lisp
   (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
   (setq org-agenda-files
         (let ((root (f-join sb-path-to-local-documents "notes")))

@@ -265,7 +265,8 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :CUSTOM_ID: ORG_MODE
   :END:
   :LOGBOOK:
-  CLOCK: [2016-08-30 Tue 07:40]
+  CLOCK: [2016-08-30 Tue 08:10]--[2016-08-30 Tue 08:30] =>  0:20
+  CLOCK: [2016-08-30 Tue 07:40]--[2016-08-30 Tue 08:05] =>  0:25
   CLOCK: [2016-08-29 Mon 07:30]--[2016-08-29 Mon 08:20] =>  0:50
   CLOCK: [2016-08-26 Fri 08:25]--[2016-08-26 Fri 08:50] =>  0:25
   CLOCK: [2016-08-25 Thu 08:35]--[2016-08-25 Thu 08:50] =>  0:15
@@ -295,6 +296,34 @@ Org files are not opened in folded mode.
   (setq org-startup-folded nil)
 #+END_SRC
 
+Wrap lines.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-truncated nil)
+#+END_SRC
+
+** [[info:Org#Tables][Tables]]
+
+*** [[info:Org#Built-in table editor][The built-in table editor]]
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-table-copy-increment nil)
+#+END_SRC
+
+** [[info:Org#Hyperlinks][Hyperlinks]]
+
+*** [[info:Org#Handling%20links][Handling links]]
+
+Follow links in same window.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
+                                     (vm-imap . vm-visit-imap-folder-other-frame)
+                                     (gnus . org-gnus-no-new-news)
+                                     (file . find-file-other-window)
+                                     (wl . wl-other-frame))))
+#+END_SRC
+
 ** [[info:Org#TODO Items][TODO Items]]
 
 *** [[info:Org#TODO%20extensions][Extended use of TODO keywords]]
@@ -314,6 +343,26 @@ Org files are not opened in folded mode.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-log-into-drawer t)
+#+END_SRC
+
+** [[info:Org#Dates and times][Dates and times]]
+
+Make sure that timestamps appear in English.
+
+#+BEGIN_SRC emacs-lisp
+  (setq system-time-locale "C")
+#+END_SRC
+
+** [[info:Org#Capture - Refile - Archive][Capture - Refile - Archive]]
+
+*** [[info:Org#Archiving][Archiving]]
+
+**** [[info:Org#Moving subtrees][Moving a tree to the archive file]]
+
+Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/archives/FILE.org_archive=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-archive-location (f-join sb-path-to-local-documents "notes" "archives" "%s_archive::"))
 #+END_SRC
 
 ** [[info:Org#Agenda views][Agenda views]]
@@ -340,49 +389,11 @@ Restore window configuration upon exiting agenda. Show agenda in the current win
                   (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
 #+END_SRC
 
-** [[info:Org#Capture - Refile - Archive][Capture - Refile - Archive]]
-
-*** [[info:Org#Archiving][Archiving]]
-
-**** [[info:Org#Moving subtrees][Moving a tree to the archive file]]
-
-Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/archives/FILE.org_archive=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-archive-location (f-join sb-path-to-local-documents "notes" "archives" "%s_archive::"))
-#+END_SRC
-
-** [[info:Org#Working with source code][Working with source code]]
-
-*** [[info:Org#Languages][Languages]]
-
-Enable languages for evaluation in source blocks.
-
-#+BEGIN_SRC emacs-lisp
-  (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
-                                                           (python . t)
-                                                           (maxima . t)))
-#+END_SRC
-
-*** [[info:Org#Evaluating code blocks][Evaluating code blocks]]
-
-Displayed inlined images are automatically updated after evaluating source blocks. This was suggested by [[https://github.com/gregsexton/ob-ipython][ob-ipython]].
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-#+END_SRC
-
-** [[info:Org#Miscellaneous][Miscellaneous]]
-
-*** [[info:Org#Code evaluation security][Code evaluation and security issues]]
-
-This is potentially risky!
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
-#+END_SRC
-
 ** [[info:Org#Exporting][Exporting]]
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-html-htmlize-output-type 'css)
+#+END_SRC
 
 *** [[info:Org#Export settings][Export settings]]
 
@@ -416,20 +427,40 @@ This is potentially risky!
   (setq org-export-with-todo-keywords t)
 #+END_SRC
 
-** TODO Sort these settings
+** [[info:Org#Working with source code][Working with source code]]
+
+*** [[info:Org#Editing source code][Editing source code]]
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-html-htmlize-output-type 'css)
-  ;; Visit files in same window
-  (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
-                                     (vm-imap . vm-visit-imap-folder-other-frame)
-                                     (gnus . org-gnus-no-new-news)
-                                     (file . find-file-other-window)
-                                     (wl . wl-other-frame))))
-  (setq org-startup-truncated nil) ;; Wrap lines
   (setq org-src-fontify-natively t)
-  (setq org-table-copy-increment nil)
-  (setq system-time-locale "C") ;; Make sure that timestamps appear in English
+#+END_SRC
+
+*** [[info:Org#Evaluating code blocks][Evaluating code blocks]]
+
+Displayed inlined images are automatically updated after evaluating source blocks. This was suggested by [[https://github.com/gregsexton/ob-ipython][ob-ipython]].
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+#+END_SRC
+
+*** [[info:Org#Languages][Languages]]
+
+Enable languages for evaluation in source blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
+                                                           (python . t)
+                                                           (maxima . t)))
+#+END_SRC
+
+** [[info:Org#Miscellaneous][Miscellaneous]]
+
+*** [[info:Org#Code evaluation security][Code evaluation and security issues]]
+
+This is potentially risky!
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 * Magit

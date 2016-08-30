@@ -265,6 +265,7 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :CUSTOM_ID: ORG_MODE
   :END:
   :LOGBOOK:
+  CLOCK: [2016-08-30 Tue 07:40]
   CLOCK: [2016-08-29 Mon 07:30]--[2016-08-29 Mon 08:20] =>  0:50
   CLOCK: [2016-08-26 Fri 08:25]--[2016-08-26 Fri 08:50] =>  0:25
   CLOCK: [2016-08-25 Thu 08:35]--[2016-08-25 Thu 08:50] =>  0:15
@@ -381,7 +382,9 @@ This is potentially risky!
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
-** TODO Sort these settings
+** [[info:Org#Exporting][Exporting]]
+
+*** [[info:Org#Export settings][Export settings]]
 
 #+BEGIN_SRC emacs-lisp
   (setq org-export-preserve-breaks nil)
@@ -411,6 +414,11 @@ This is potentially risky!
   (setq org-export-with-timestamps t)
   (setq org-export-with-toc nil)
   (setq org-export-with-todo-keywords t)
+#+END_SRC
+
+** TODO Sort these settings
+
+#+BEGIN_SRC emacs-lisp
   (setq org-html-htmlize-output-type 'css)
   ;; Visit files in same window
   (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)

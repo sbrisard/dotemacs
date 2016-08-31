@@ -88,39 +88,5 @@
 (when window-system
   (split-window-right))
 
-;; Easy PG (GnuPG interface for Emacs)
-;; ===================================
-
-(require 'epa-file)
-(epa-file-enable)
-
-;; Ispell
-;; ======
-
-(setq ispell-dictionary "francais")
-(setq ispell-tex-skip-alists
-      (list
-       (append (car ispell-tex-skip-alists)
-               '(("\\\\cite"            ispell-tex-arg-end)
-                 ("\\\\nocite"          ispell-tex-arg-end)
-                 ("\\\\includegraphics" ispell-tex-arg-end)
-                 ("\\\\author"          ispell-tex-arg-end)
-                 ("\\\\ref"             ispell-tex-arg-end)
-                 ("\\\\eqref"           ispell-tex-arg-end)
-                 ("\\\\label"           ispell-tex-arg-end)
-                 ("\\\\cite[tp]"        ispell-tex-arg-end)
-                 ))
-       (cadr ispell-tex-skip-alists)))
-
-;; Ob-ipython
-;; ==========
-
-(require 'ob-ipython)
-(setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
-
-;; ccmode
-;; ======
-
-(setq-default c-basic-offset 4)
 
 (org-babel-load-file (concat user-emacs-directory "sb-config.org"))

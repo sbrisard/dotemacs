@@ -11,7 +11,7 @@ I use the literate programming paradigm for my emacs configuration. This file sh
 
 * Functions and variables to be used in this file
   :LOGBOOK:
-  CLOCK: [2016-09-05 Mon 08:15]
+  CLOCK: [2016-09-05 Mon 08:15]--[2016-09-05 Mon 08:30] =>  0:15
   CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
   :END:
 
@@ -55,6 +55,10 @@ In programming mode, it can be inconvenient to use =C-j= to call =newline-and-in
 * Various packages
 
 =htmlize= is used by [[#ORG_MODE][Org mode]] for fontification of code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'htmlize)
+#+END_SRC
 
 * Navigation
 

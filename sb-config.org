@@ -11,6 +11,7 @@ I use the literate programming paradigm for my emacs configuration. This file sh
 
 * Functions and variables to be used in this file
   :LOGBOOK:
+  CLOCK: [2016-09-05 Mon 08:15]
   CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
   :END:
 
@@ -20,6 +21,35 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   (defun sb-load-file-when-exists (filename)
     "Load specified file if it exists. Do nothing otherwise."
     (when (file-exists-p filename) (load-file filename)))
+#+END_SRC
+
+** Toggle window dedication
+
+See [[http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-keep-its-buffer-and-not-get-resized][stack overflow]]
+
+#+BEGIN_SRC emacs-lisp
+  (defun sb-toggle-window-dedicated ()
+    "Toggle whether the current active window is dedicated or not."
+    (interactive)
+    (message
+     (if (let (window (get-buffer-window (current-buffer)))
+           (set-window-dedicated-p window
+                                   (not (window-dedicated-p window))))
+         "Window '%s' is dedicated"
+       "Window '%s' is normal")
+     (current-buffer)))
+#+END_SRC
+
+** Bind newline and indent to RET
+
+In programming mode, it can be inconvenient to use =C-j= to call =newline-and-indent=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun sb-bind-newline-and-indent-to-RET ()
+    "Bind newline-and-indent to RET.
+
+  This function can be used as a hook."
+    (local-set-key (kbd "RET") 'newline-and-indent))
 #+END_SRC
 
 * Various packages
@@ -813,6 +843,8 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
   (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 #+END_SRC
+
+*** A_FAIRE Should I use =sb-bind-newline-and-indent-to-RET=?
 
 ** Maxima
    :LOGBOOK:

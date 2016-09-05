@@ -28,23 +28,6 @@
 (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
 (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
 
-(defun sb-bind-newline-and-indent-to-RET ()
-  "Bind newline-and-indent to RET. This function can be used as a hook."
-  (local-set-key (kbd "RET") 'newline-and-indent))
-
-;; Toggle window dedication
-;; http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-keep-its-buffer-and-not-get-resized
-(defun sb-toggle-window-dedicated ()
-  "Toggle whether the current active window is dedicated or not"
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         (set-window-dedicated-p window
-                                 (not (window-dedicated-p window))))
-       "Window '%s' is dedicated"
-     "Window '%s' is normal")
-   (current-buffer)))
-
 ;; Miscellaneous
 ;; =============
 

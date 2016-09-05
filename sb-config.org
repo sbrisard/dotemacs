@@ -9,6 +9,20 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
+* Miscellaneous
+  :LOGBOOK:
+  CLOCK: [2016-09-05 Mon 08:30]--[2016-09-05 Mon 08:40] =>  0:10
+  :END:
+
+** Coding system
+
+Use UTF-8 preferably.
+
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+  (setq default-process-coding-system 'utf-8)
+#+END_SRC
+
 * Functions and variables to be used in this file
   :LOGBOOK:
   CLOCK: [2016-09-05 Mon 08:15]--[2016-09-05 Mon 08:30] =>  0:15

@@ -16,4 +16,4 @@ server
 site-lisp
 tramp
 url
-sb-config.el
+sb-init.el

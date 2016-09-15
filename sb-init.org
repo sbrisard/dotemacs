@@ -2,6 +2,12 @@
 #+TITLE: My emacs configuration file
 #+AUTHOR: Sébastien Brisard
 #+CATEGORY: DOTEMACS
+#+PROPERTY: header-args:emacs-lisp :tangle yes
+
+* Introduction
+  :LOGBOOK:
+  CLOCK: [2016-09-15 Thu 08:25]--[2016-09-15 Thu 08:58] =>  0:33
+  :END:
 
 I use the literate programming paradigm for my emacs configuration. This file should therefore be loaded with =org-babel-load-file=. More information can be found here
 
@@ -9,11 +15,19 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
-This file should be saved in =~/.emacs.d= (for example, as =~/.emacs.d/sb-init.el=) and the following line should be appended at the bottom of =~/.emacs.d/init.el=
+This file should be saved in =~/.emacs.d= (for example, as =~/.emacs.d/sb-init.el=). The most natural way to load this file would probably be to append the following line at the bottom of =~/.emacs.d/init.el=
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (org-babel-load-file (concat user-emacs-directory "sb-init.org"))
 #+END_SRC
+
+However, this leads to a conflict, since this call to =org-babel-load-file= will load the built-in version of Orgmode, since =package-initialize= has not been loaded yet. This results in a [[http://orgmode.org/worg/org-faq.html#mixed-install][mixed installation]]. I prefer to tangle this file manually, and append the following line at the bottom of =~/.emacs.d/init.el=
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (load-file (concat user-emacs-directory "sb-init.el"))
+#+END_SRC
+
+Tangling can be triggered by calling =org-babel-tangle-file= (=C-c C-v t=).
 
 * Miscellaneous
   :LOGBOOK:
@@ -297,7 +311,7 @@ This is a package for GNU Emacs that can be used to tie related commands into a 
 
 We first define a hydra to insert various types of arrows.
 
-#+BEGIN_SRC emacs-lisp :results none
+#+BEGIN_SRC emacs-lisp
   (defhydra sb-hydra-insert-char-arrow (:exit t :columns 4 :foreign-keys nil)
     "Insert arrow"
     ("<left>" (insert-char #x2190) "←")
@@ -321,7 +335,7 @@ We first define a hydra to insert various types of arrows.
 
 Then, a hydra to insert Greek chars.
 
-#+BEGIN_SRC emacs-lisp :results none
+#+BEGIN_SRC emacs-lisp
   (defhydra sb-hydra-insert-char-greek (:exit t :columns 8 :foreign-keys nil)
     "Insert Greek char"
     ("A" (insert-char #x0391) "Α")
@@ -378,7 +392,7 @@ Then, a hydra to insert Greek chars.
 
 The following hydra puts everything together, and is bound to =C-c 8= (note the similarity to =C-x 8=, which is bound to =insert-char=).
 
-#+BEGIN_SRC emacs-lisp :results none
+#+BEGIN_SRC emacs-lisp
   (defhydra sb-hydra-insert-char (:exit t :columns 1 :foreign-keys nil)
     "Insert special character"
     ("a" (sb-hydra-insert-char-arrow/body) "arrows")
@@ -404,7 +418,7 @@ See also
   - [[https://mytechrants.wordpress.com/2010/03/25/emacs-tip-of-the-day-start-using-ibuffer-asap/][Emacs Tip of the Day: Start Using IBuffer ASAP]]
   - [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][Tips for using Emacs Ibuffer]]
 
-#+BEGIN_SRC emacs-lisp :results none
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 
@@ -477,6 +491,10 @@ Wrap lines.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-truncated nil)
 #+END_SRC
+
+*** [[info:Org#Structure editing][Structure editing]]
+
+**** A_FAIRE org-do-promote should not indent text
 
 ** [[info:Org#Tables][Tables]]
 
@@ -757,6 +775,13 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 #+BEGIN_SRC emacs-lisp
   (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
+
+** A_FAIRE Use ido when calling magit-status with a prefix argument
+   :LOGBOOK:
+   CLOCK: [2016-09-15 Thu 08:08]--[2016-09-15 Thu 08:25] =>  0:17
+   :END:
+
+It seems that the =magit-read-repository= function uses =read-directory-name=.
 
 * AUCTeX and RefTeX
   :LOGBOOK:

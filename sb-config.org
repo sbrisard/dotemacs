@@ -9,6 +9,12 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
 
+This file should be saved in =~/.emacs.d=, and the following line should be appended at the bottom of =~/.emacs.d/init.el=
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (org-babel-load-file (concat user-emacs-directory "sb-config.org"))
+#+END_SRC
+
 * Miscellaneous
   :LOGBOOK:
   CLOCK: [2016-09-05 Mon 08:30]--[2016-09-05 Mon 08:40] =>  0:10
@@ -23,11 +29,77 @@ Use UTF-8 preferably.
   (setq default-process-coding-system 'utf-8)
 #+END_SRC
 
+** A_FAIRE À classer
+   :LOGBOOK:
+   CLOCK: [2016-09-15 Thu 07:15]--[2016-09-15 Thu 07:22] =>  0:07
+   :END:
+
+#+BEGIN_SRC emacs-lisp
+  (setq column-number-mode t)
+  (setq confirm-nonexistent-file-or-buffer t)
+  (setq dnd-open-file-other-window nil)
+  (setq find-file-run-dired nil)
+  (setq inhibit-startup-screen t)
+  (setq initial-frame-alist '((top . 0) (left . 0)))
+  (setq make-backup-files nil)
+  (setq ps-paper-type (quote a4))
+  (setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
+                                           (org-confirm-babel-evaluate))))
+  (setq visible-bell t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;;(setq-default buffer-file-coding-system 'utf-8)
+  (setq-default indent-tabs-mode nil)
+
+  (global-auto-revert-mode)
+  (global-hl-line-mode)
+  (menu-bar-mode)
+  ;(scroll-bar-mode -1)
+  (show-paren-mode)
+  (tool-bar-mode -1)
+
+  (global-unset-key (kbd "<C-next>"))
+  (global-unset-key (kbd "<C-prior>"))
+#+END_SRC
+
 * Functions and variables to be used in this file
   :LOGBOOK:
+  CLOCK: [2016-09-15 Thu 07:28]--[2016-09-15 Thu 07:46] =>  0:18
   CLOCK: [2016-09-05 Mon 08:15]--[2016-09-05 Mon 08:30] =>  0:15
   CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
   :END:
+
+** Dedicated custom group
+
+The custom group SB gathers some variables which must be set locally.
+
+#+BEGIN_SRC emacs-lisp
+  (defgroup sb nil "My customization group" :tag "SB")
+
+  (defcustom sb-path-to-local-documents "~/Documents"
+    "Path to the documents directory.
+
+  It is in particular assumed that
+
+    - my org notes are located in the notes/ subdirectory,
+    - my blog files are located in the blog/ subdirectory.
+
+  Under Linux, this variable might be set to
+
+      /home/username/Documents
+
+  while under Windows, it might be set to
+
+      C:\\Users\\username\\Documents
+
+  In most cases, the default value
+
+      ~/Documents
+
+  should work."
+    :type 'string :group 'sb :tag "Path to local documents")
+#+END_SRC
 
 ** Load a file only when it exists
 
@@ -66,12 +138,62 @@ In programming mode, it can be inconvenient to use =C-j= to call =newline-and-in
     (local-set-key (kbd "RET") 'newline-and-indent))
 #+END_SRC
 
+* Platform dependent settings
+
+** Predicates
+   :LOGBOOK:
+   CLOCK: [2016-09-15 Thu 07:22]--[2016-09-15 Thu 07:25] =>  0:03
+   :END:
+
+These predicates allow to assert the platform on which emacs currently runs.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
+  (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
+  (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
+#+END_SRC
+
+** Linux settings
+
+** Mac OS X settings
+
+Under Mac OS X, right-alt must be mapped to Alt Gr.
+
+#+BEGIN_SRC emacs-lisp
+  (when darwinp
+    (setq mac-option-modifier 'none)
+    (setq mac-command-modifier 'meta))
+#+END_SRC
+
+** Windows settings
+
 * Various packages
+
+** Emacs Lisp Package Archive (ELPA)
+
+Various repositories are configured.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("melpa" . "http://melpa.org/packages/")
+                           ("melpa-stable" . "http://stable.melpa.org/packages/")
+                           ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+  (package-initialize)
+#+END_SRC
+
+** Others
 
 =htmlize= is used by [[#ORG_MODE][Org mode]] for fontification of code blocks.
 
 #+BEGIN_SRC emacs-lisp
   (require 'htmlize)
+#+END_SRC
+
+*** A_FAIRE Remove f dependency
+
+#+BEGIN_SRC emacs-lisp
+  (require 'f)
 #+END_SRC
 
 * Navigation
@@ -286,7 +408,7 @@ See also
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 
-*** A_FAIRE Change sorting method
+*** A_FAIRE [#C] Change sorting method
 
 * Appearance
 
@@ -301,12 +423,18 @@ I use the [[https://github.com/bbatsov/zenburn-emacs][Zenburn theme]] when emacs
   (when (display-graphic-p) (load-theme 'zenburn t))
 #+END_SRC
 
-** A_FAIRE Frame size
+** A_FAIRE [#C] Frame size
    :LOGBOOK:
+   CLOCK: [2016-09-15 Thu 07:26]--[2016-09-15 Thu 07:27] =>  0:01
    CLOCK: [2016-08-23 Tue 08:00]--[2016-08-23 Tue 08:10] =>  0:10
    :END:
 
 The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monitor-attributes]] might be helpful to conditionally resize the main frame. See also [[http://stackoverflow.com/questions/16481984/get-width-of-current-monitor-in-emacs-lisp][Get width of current monitor in Emacs Lisp]].
+
+#+BEGIN_SRC emacs-lisp
+  (when window-system
+    (split-window-right))
+#+END_SRC
 
 * Org Mode
   :PROPERTIES:
@@ -862,7 +990,7 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 #+END_SRC
 
-*** A_FAIRE Should I use =sb-bind-newline-and-indent-to-RET=?
+*** A_FAIRE [#C] Should I use =sb-bind-newline-and-indent-to-RET=?
 
 ** Maxima
    :LOGBOOK:

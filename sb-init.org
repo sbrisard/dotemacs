@@ -455,6 +455,8 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :CUSTOM_ID: ORG_MODE
   :END:
   :LOGBOOK:
+  CLOCK: [2016-09-22 Thu 13:10]--[2016-09-22 Thu 13:30] =>  0:20
+  CLOCK: [2016-09-22 Thu 12:00]--[2016-09-22 Thu 13:00] =>  1:00
   CLOCK: [2016-08-30 Tue 08:10]--[2016-08-30 Tue 08:30] =>  0:20
   CLOCK: [2016-08-30 Tue 07:40]--[2016-08-30 Tue 08:05] =>  0:25
   CLOCK: [2016-08-29 Mon 07:30]--[2016-08-29 Mon 08:20] =>  0:50
@@ -493,6 +495,12 @@ Wrap lines.
 #+END_SRC
 
 *** [[info:Org#Structure editing][Structure editing]]
+
+Do not shift text to the left or right when promoting/demoting headlines.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-adapt-indentation nil)
+#+END_SRC
 
 **** A_FAIRE org-do-promote should not indent text
 
@@ -546,6 +554,30 @@ Make sure that timestamps appear in English.
 #+BEGIN_SRC emacs-lisp
   (setq system-time-locale "C")
 #+END_SRC
+
+*** Clocking work time
+
+**** The clock table
+
+Time durations greater than 24h should not be converted in days.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-time-clocksum-format "%02d:%02d")
+#+END_SRC
+
+Remove ugly =\_= from the clock table.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "org-clock"
+    '(defun org-clocktable-indent-string (level)
+       "Return indentation string according to LEVEL.
+  LEVEL is an integer.  Indent by two spaces per level above 1."
+       (if (= level 1) ""
+         (concat "→" (make-string (* 2 (- level 1)) 32)))))
+#+END_SRC
+
+#+RESULTS:
+: org-clocktable-indent-string
 
 ** [[info:Org#Capture - Refile - Archive][Capture - Refile - Archive]]
 

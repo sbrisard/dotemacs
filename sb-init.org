@@ -502,8 +502,6 @@ Do not shift text to the left or right when promoting/demoting headlines.
   (setq org-adapt-indentation nil)
 #+END_SRC
 
-**** A_FAIRE org-do-promote should not indent text
-
 ** [[info:Org#Tables][Tables]]
 
 *** [[info:Org#Built-in table editor][The built-in table editor]]

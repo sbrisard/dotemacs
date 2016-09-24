@@ -317,6 +317,11 @@ From the [[https://github.com/abo-abo/hydra][repository]]
 This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
 #+END_QUOTE
 
+See also
+
+  - [[http://ericjmritz.name/2015/10/14/some-personal-hydras-for-gnu-emacs/][Some Personal Hydras for GNU Emacs]]
+  - [[http://oremacs.com/2016/04/04/hydra-doc-syntax/][Extended syntax for hydra docstrings]]
+
 We first define a hydra to insert various types of arrows.
 
 #+BEGIN_SRC emacs-lisp

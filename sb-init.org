@@ -2,7 +2,7 @@
 #+TITLE: My emacs configuration file
 #+AUTHOR: Sébastien Brisard
 #+CATEGORY: DOTEMACS
-#+PROPERTY: header-args:emacs-lisp :tangle yes
+#+PROPERTY: header-args:emacs-lisp :tangle yes :results output silent
 
 * Introduction
   :LOGBOOK:

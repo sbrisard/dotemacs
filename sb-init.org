@@ -229,6 +229,14 @@ Default directory is retrieved programmatically from the environment variable =H
 
 ** Key-chord mode
 
+From the [[http://www.emacswiki.org/emacs/KeyChord][Emacs Wiki]]
+
+#+BEGIN_QUOTE
+Key-chord lets you bind commands to combination of key-strokes. Here a “key chord” means two keys pressed simultaneously, or a single key quickly pressed twice.
+#+END_QUOTE
+
+See also some recommendations on [[https://www.reddit.com/r/emacs/comments/3ricev/tip_for_when_you_are_running_out_of_easytopress/][reddit]].
+
 #+BEGIN_SRC emacs-lisp
   (key-chord-mode 1)
 #+END_SRC

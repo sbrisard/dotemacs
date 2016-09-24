@@ -14,6 +14,7 @@ I use the literate programming paradigm for my emacs configuration. This file sh
   - [[http://irreal.org/blog/?p=2804][Literate Programming and Your Emacs Configuration]]
   - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
   - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
+  - [[http://howardism.org/Technical/Emacs/literate-programming-tutorial.html][Introduction to literate programming]]
 
 This file should be saved in =~/.emacs.d= (for example, as =~/.emacs.d/sb-init.el=). The most natural way to load this file would probably be to append the following line at the bottom of =~/.emacs.d/init.el=
 

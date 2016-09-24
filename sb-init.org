@@ -1255,6 +1255,16 @@ From the [[https://www.emacswiki.org/emacs/WhiteSpace][EmacsWiki]]: "This packag
          (cadr ispell-tex-skip-alists)))
 #+END_SRC
 
+* Packages I should start to use
+
+** IMenu
+
+See also
+
+  - [[https://github.com/vspinu/imenu-anywhere][imenu-anywhere]]
+  - [[https://github.com/bmag/imenu-list][imenu-list]]
+  - [[https://www.wisdomandwonder.com/article/10358/easily-browse-imenu-entries-in-a-buffer][Easily Browse Imenu Entries In A Buffer]]
+
 * Blog-related customizations
   :LOGBOOK:
   CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10

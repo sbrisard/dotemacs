@@ -1091,9 +1091,11 @@ The files for the maxima mode are not available on MELPA. They are packaged with
 #+END_SRC
 
 * Ido
-  :LOGBOOK:
-  CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
-  :END:
+
+** ido itself
+:LOGBOOK:
+CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
+:END:
 
 #+BEGIN_SRC emacs-lisp
   (ido-mode t)
@@ -1124,6 +1126,17 @@ The files for the maxima mode are not available on MELPA. They are packaged with
                                  ".*\\.pyc\'"
                                  ".*\\.pyo\'"
                                  "\\.git/")))
+#+END_SRC
+
+** ido-ubiquitous
+:LOGBOOK:
+CLOCK: [2016-09-24 Sat 06:20]--[2016-09-24 Sat 06:25] =>  0:05
+:END:
+
+[[https://github.com/DarwinAwardWinner/ido-ubiquitous][ido-ubquitous]] replaces stock emacs completion with ido completion wherever it is possible to do so without breaking things.
+
+#+BEGIN_SRC emacs-lisp
+  (ido-ubiquitous-mode 1)
 #+END_SRC
 
 * Text editing

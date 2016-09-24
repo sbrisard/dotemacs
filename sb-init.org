@@ -416,6 +416,10 @@ The following hydra puts everything together, and is bound to =C-c 8= (note the 
   (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char/body)
 #+END_SRC
 
+*** UN_JOUR Maybe this would be best handled with a keymap
+
+See for example [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]], and the video [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]].
+
 ** ibuffer
    :LOGBOOK:
    CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05

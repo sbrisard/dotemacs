@@ -435,6 +435,7 @@ See also
 
   - [[https://mytechrants.wordpress.com/2010/03/25/emacs-tip-of-the-day-start-using-ibuffer-asap/][Emacs Tip of the Day: Start Using IBuffer ASAP]]
   - [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][Tips for using Emacs Ibuffer]]
+  - [[http://www.emacswiki.org/emacs/IbufferMode][IBuffer mode]]
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -1125,6 +1126,8 @@ The files for the maxima mode are not available on MELPA. They are packaged with
 
 * Ido
 
+  - [[https://www.masteringemacs.org/article/introduction-to-ido-mode][Introduction to Ido Mode]]
+
 ** ido itself
 :LOGBOOK:
 CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
@@ -1257,6 +1260,9 @@ From the [[https://www.emacswiki.org/emacs/WhiteSpace][EmacsWiki]]: "This packag
 
 * Packages I should start to use
 
+  - [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]]
+  - [[http://emacsthemes.com/][Emacs Themes]]
+
 ** IMenu
 
 See also
@@ -1264,6 +1270,73 @@ See also
   - [[https://github.com/vspinu/imenu-anywhere][imenu-anywhere]]
   - [[https://github.com/bmag/imenu-list][imenu-list]]
   - [[https://www.wisdomandwonder.com/article/10358/easily-browse-imenu-entries-in-a-buffer][Easily Browse Imenu Entries In A Buffer]]
+
+** Yasnippet
+
+  - [[http://howardism.org/Technical/Emacs/templates-tutorial.html][Having Emacs Type for You]]
+
+** Paren editing
+
+  - [[http://superuser.com/questions/124246/emacs-equivalent-to-vim-ci][Emacs equivalent to VIM ci ?]]
+  - [[https://github.com/magnars/change-inner.el][change-inner.el]]
+  - [[https://github.com/Fuco1/smartparens][smartparens]]
+  - [[http://pragmaticemacs.com/emacs/jump-to-matching-parenthesis/][Jump to matching parenthesis]]
+
+** Calfw - A calendar framework for Emacs
+
+  - [[https://github.com/kiwanami/emacs-calfw][Calfw - A calendar framework for Emacs]]
+
+** ggtags
+
+  - [[https://github.com/leoliu/ggtags][Emacs frontend to GNU Global source code tagging system]]
+
+
+** RSS
+:LOGBOOK:
+CLOCK: [2016-03-29 Tue 11:55]--[2016-03-29 Tue 13:55] =>  2:00
+CLOCK: [2016-03-21 Mon 08:20]--[2016-03-21 Mon 09:00] =>  0:40
+:END:
+
+I have been exploring several options to read RSS threads from within emacs. =gnus= was the first choice. However, there are a few threads I failed to subscribe to.
+
+I also gave up =newsticker= because
+
+  - collection of new threads frequently fails,
+  - the state (read/unread) threads is not saved frequently enough.
+
+** Regular expressions
+
+
+  - [[https://github.com/benma/visual-regexp.el][visual-regexp]] is like replace-regexp, but with live visual feedback directly in the buffer
+  - [[https://github.com/mhayashi1120/Emacs-wgrep][wgrep]] allows you to edit a grep buffer and apply those changes to the file buffer
+
+** Raibow delimiters
+
+From the [[http://www.emacswiki.org/emacs/RainbowDelimiters][EmacsWiki]]
+
+#+BEGIN_QUOTE
+RainbowDelimiters is a “rainbow parentheses”-like mode which highlights parens, brackets, and braces according to their depth. Each successive level is highlighted a different color. This makes it easy to spot matching delimiters, orient yourself in the code, and tell which statements are at the same depth.
+#+END_QUOTE
+
+** smex
+
+[[https://github.com/nonsequitur/smex][Smex]] is a M-x enhancement for Emacs. Built on top of Ido, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+
+** crux
+
+[[https://github.com/bbatsov/crux][crux]] is a Collection of Ridiculously Useful eXtensions for Emacs. crux bundles a few useful interactive commands to enhance your overall Emacs experience.
+
+** dired-hacks
+
+From [[https://github.com/Fuco1/dired-hacks][Github]]
+
+#+BEGIN_QUOTE
+Collection of useful dired additions. I don't want this become another dired+, so I'm splitting all the functionality into separate mutually independent packages. All shared functionality and helpers will be extracted into a single package dired-hacks-utils, so that will be the only dependence.
+#+END_QUOTE
+
+** icicles
+
+  - [[http://www.emacswiki.org/emacs/Icicles_-_Nutshell_View][Icicles]]
 
 * Blog-related customizations
   :LOGBOOK:

@@ -428,9 +428,10 @@ The following hydra puts everything together, and is bound to =C-c 8= (note the 
 See for example [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]], and the video [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]].
 
 ** ibuffer
-   :LOGBOOK:
-   CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05
-   :END:
+:LOGBOOK:
+CLOCK: [2016-09-29 Thu 08:10]--[2016-09-29 Thu 08:45] =>  0:35
+CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05
+:END:
 
 From the [[https://www.emacswiki.org/emacs/IbufferMode][EmacsWiki]]
 
@@ -448,7 +449,24 @@ See also
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 
-*** A_FAIRE [#C] Change sorting method
+Let us create a few groups
+
+#+BEGIN_SRC emacs-lisp
+  (setq ibuffer-saved-filter-groups
+        (quote
+         (("sb-ibuffer-groups"
+           ("Notes personnelles" (filename . "notes/prive"))
+           ("Notes de travail" (filename . "notes"))
+           ("HDR" (filename . "HDR"))
+           (".emacs" (filename . ".emacs.d"))))))
+#+END_SRC
+
+Then, load these groups at startup
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'ibuffer-mode-hook
+            (lambda () (ibuffer-switch-to-saved-filter-groups "sb-ibuffer-groups")))
+#+END_SRC
 
 * Appearance
 
@@ -1381,3 +1399,8 @@ Collection of useful dired additions. I don't want this become another dired+, s
   (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                               sb-path-to-local-documents))
 #+END_SRC
+
+** Info mode
+
+  - Learn about keystrokes
+  - Sort manuals more conveniently

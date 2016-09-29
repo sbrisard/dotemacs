@@ -659,6 +659,10 @@ Restore window configuration upon exiting agenda. Show agenda in the current win
 
 ** [[info:Org#Exporting][Exporting]]
 
+See also
+
+  - [[https://github.com/marsmining/ox-twbs][ox-twbs]]: export org-mode docs as HTML compatible with Twitter Bootstrap.
+
 #+BEGIN_SRC emacs-lisp
   (setq org-html-htmlize-output-type 'css)
 #+END_SRC

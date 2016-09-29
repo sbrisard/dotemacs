@@ -78,6 +78,13 @@ Use UTF-8 preferably.
   (global-unset-key (kbd "<C-prior>"))
 #+END_SRC
 
+** emacs behind a proxy
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq url-proxy-services '(("http" . "proxy.enpc.fr:3128")
+                             ("https" . "proxy.enpc.fr:3128")))
+#+END_SRC
+
 * Functions and variables to be used in this file
   :LOGBOOK:
   CLOCK: [2016-09-15 Thu 07:28]--[2016-09-15 Thu 07:46] =>  0:18
@@ -469,6 +476,20 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
     (split-window-right))
 #+END_SRC
 
+** Fonts
+
+To select the font under windows, run the following command
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (w32-select-font)
+#+END_SRC
+
+Then select the desired font in the dialog that shows up. Copy the string that is returned, and insert it in your init file
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (set-face-font 'default "fontname")
+#+END_SRC
+
 * Org Mode
   :PROPERTIES:
   :CUSTOM_ID: ORG_MODE
@@ -484,6 +505,10 @@ The function [[elisp:(describe-function 'frame-monitor-attributes)][frame-monito
   :END:
 
 There we are! That's really the crux of this file! Configuring Org Mode is very complex. The various configurations are organized like the [[info:Org][Org Mode Manual]].
+
+Other resources
+
+  - Rainer König's [[https://www.youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE][OrgMode tutorial]]
 
 ** [[info:Org#Introduction][Introduction]]
 
@@ -1072,9 +1097,12 @@ With these principles, implementation of =sb-insert-bibref= is straightforward.
 #+END_SRC
 
 ** Python
-   :LOGBOOK:
-   CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:25] =>  0:30
-   :END:
+:LOGBOOK:
+CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:25] =>  0:30
+CLOCK: [2014-08-07 Thu 13:55]--[2014-08-07 Thu 15:00] =>  1:05
+CLOCK: [2014-08-07 Thu 07:30]--[2014-08-07 Thu 10:00] =>  2:30
+CLOCK: [2014-08-05 Tue 07:30]--[2014-08-05 Tue 10:30] =>  3:00
+:END:
 
 I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
 
@@ -1281,6 +1309,7 @@ See also
   - [[https://github.com/magnars/change-inner.el][change-inner.el]]
   - [[https://github.com/Fuco1/smartparens][smartparens]]
   - [[http://pragmaticemacs.com/emacs/jump-to-matching-parenthesis/][Jump to matching parenthesis]]
+  - [[https://github.com/cute-jumper/embrace.el][embrace.el]]
 
 ** Calfw - A calendar framework for Emacs
 

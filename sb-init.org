@@ -190,6 +190,10 @@ Under Mac OS X, right-alt must be mapped to Alt Gr.
 ** Windows settings
 
 * Various packages
+:LOGBOOK:
+CLOCK: [2016-10-20 Thu 21:15]--[2016-10-20 Thu 21:55] =>  0:40
+:END:
+
 
 ** Emacs Lisp Package Archive (ELPA)
 
@@ -210,12 +214,6 @@ Various repositories are configured.
 
 #+BEGIN_SRC emacs-lisp
   (require 'htmlize)
-#+END_SRC
-
-*** A_FAIRE Remove f dependency
-
-#+BEGIN_SRC emacs-lisp
-  (require 'f)
 #+END_SRC
 
 * Navigation
@@ -648,7 +646,7 @@ Remove ugly =\_= from the clock table.
 Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/archives/FILE.org_archive=.
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-archive-location (f-join sb-path-to-local-documents "notes" "archives" "%s_archive::"))
+  (setq org-archive-location (expand-file-name "notes/archives/%s_archive::" sb-path-to-local-documents))
 #+END_SRC
 
 ** [[info:Org#Agenda views][Agenda views]]
@@ -670,9 +668,11 @@ Restore window configuration upon exiting agenda. Show agenda in the current win
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
   (setq org-agenda-files
-        (let ((root (f-join sb-path-to-local-documents "notes")))
+        (let ((root (expand-file-name "notes" sb-path-to-local-documents)))
           (append (list root user-emacs-directory)
-                  (f-directories root (lambda (dir) (not (s-contains? "archives" dir)))))))
+                  (remove-if (lambda (name) (or (not (file-directory-p name))
+                                                (string-suffix-p ".git" name)))
+                             (directory-files root t directory-files-no-dot-files-regexp)))))
 #+END_SRC
 
 ** [[info:Org#Exporting][Exporting]]
@@ -1102,8 +1102,8 @@ With these principles, implementation of =sb-insert-bibref= is straightforward.
 #+BEGIN_SRC emacs-lisp
   (defun sb-bibref-path (key)
     "Return the path to a BibTeX file containing the specified KEY."
-    (f-join sb-path-to-local-documents "biblio"
-            (s-left 1 key) key (concat key ".bib")))
+    (expand-file-name  (concat "biblio/" (s-left 1 key) "/" key "/" key ".bib")
+                       sb-path-to-local-documents))
 
   (defun sb-insert-bibref (key)
     "Insert at point the BibTex file containing the specified KEY."

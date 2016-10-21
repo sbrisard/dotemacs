@@ -754,6 +754,26 @@ This is potentially risky!
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
+** Hacking
+
+*** Dynamic blocks
+:LOGBOOK:
+CLOCK: [2016-10-21 Fri 06:15]--[2016-10-21 Fri 06:20] =>  0:05
+CLOCK: [2016-10-21 Fri 05:50]--[2016-10-21 Fri 06:05] =>  0:15
+CLOCK: [2016-10-18 Tue 08:40]--[2016-10-18 Tue 09:20] =>  0:40
+CLOCK: [2016-10-17 Mon 08:55]--[2016-10-17 Mon 09:05] =>  0:10
+CLOCK: [2016-10-13 Thu 08:15]--[2016-10-13 Thu 08:25] =>  0:10
+:END:
+
+I intended to develop a dynamic block that would automatically insert (and update) a table of contents at the top of the current org buffer. However, I realized that [[info:Org#Visibility%20cycling][visibility cycling]] (a feature I did not use much previously) was exactly what I was looking for. So I gave up this project entirely. However, what I learned in the process was interesting. Here is a small code snippet that returns a list of the titles of all headlines in the current buffer (see the [[http://orgmode.org/worg/dev/org-element-api.html][Org Element API]]).
+
+#+BEGIN_SRC emacs-lisp :tangle no :results value replace
+  (let ((tree (org-element-parse-buffer 'headline)))
+    (org-element-map tree 'headline
+      (lambda (hl)
+        (org-element-property :raw-value hl))))
+#+END_SRC
+
 ** ob-ipython
    :LOGBOOK:
    CLOCK: [2016-08-31 Wed 05:50]--[2016-08-31 Wed 06:05] =>  0:15

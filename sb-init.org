@@ -448,9 +448,10 @@ See also
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
 
-Let us create a few groups
+Let us create a few groups and not show empty filter groups
 
 #+BEGIN_SRC emacs-lisp
+  (setq ibuffer-show-empty-filter-groups nil)
   (setq ibuffer-saved-filter-groups
         (quote
          (("sb-ibuffer-groups"
@@ -467,7 +468,7 @@ Then, load these groups at startup
             (lambda () (ibuffer-switch-to-saved-filter-groups "sb-ibuffer-groups")))
 #+END_SRC
 
-*** A_FAIRE Don't show empty filter groups
+Do not show empty groups
 
 * Appearance
 

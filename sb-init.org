@@ -446,6 +446,7 @@ See also
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (setq ibuffer-default-sorting-mode (quote filename/process))
 #+END_SRC
 
 Let us create a few groups and not show empty filter groups

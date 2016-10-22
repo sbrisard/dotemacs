@@ -427,6 +427,7 @@ See for example [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mo
 
 ** ibuffer
 :LOGBOOK:
+CLOCK: [2016-10-22 Sat 06:50]--[2016-10-22 Sat 07:05] =>  0:15
 CLOCK: [2016-09-29 Thu 08:10]--[2016-09-29 Thu 08:45] =>  0:35
 CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05
 :END:
@@ -453,8 +454,8 @@ Let us create a few groups
   (setq ibuffer-saved-filter-groups
         (quote
          (("sb-ibuffer-groups"
-           ("Notes personnelles" (filename . "notes/prive"))
-           ("Notes de travail" (filename . "notes"))
+           ("Notes professionnelles" (filename . "notes/professionnelles"))
+           ("Notes personnelles" (filename . "notes/personnelles"))
            ("HDR" (filename . "HDR"))
            (".emacs" (filename . ".emacs.d"))))))
 #+END_SRC
@@ -465,6 +466,8 @@ Then, load these groups at startup
   (add-hook 'ibuffer-mode-hook
             (lambda () (ibuffer-switch-to-saved-filter-groups "sb-ibuffer-groups")))
 #+END_SRC
+
+*** A_FAIRE Don't show empty filter groups
 
 * Appearance
 

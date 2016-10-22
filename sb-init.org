@@ -591,10 +591,8 @@ Follow links in same window.
 **** [[info:Org#TODO%20types][TODO keywords as types]]
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-todo-keywords '((sequence "A_FAIRE" "EN_ATTENTE" "UN_JOUR" "|" "FAIT")
-                            (sequence "A_LIRE" "|" "LU")
-                            (sequence "A_VOIR" "|" "VU")
-                            (sequence "TODO" "|" "DONE")))
+    (setq org-todo-keywords '((sequence "A_FAIRE(a)" "EN_ATTENTE(e)" "UN_JOUR(u)"
+                                        "|" "FAIT(f)")))
 #+END_SRC
 
 *** [[info:Org#Progress logging][Progress logging]]

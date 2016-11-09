@@ -30,6 +30,10 @@ However, this leads to a conflict, since this call to =org-babel-load-file= will
 
 Tangling can be triggered by calling =org-babel-tangle-file= (=C-c C-v t=).
 
+Possible sources of inspiration
+
+  - [[https://github.com/dakrone/eos/blob/master/eos.org#the-emacs-operating-system-eos][The Emacs Operating System (EOS)]]
+
 * Miscellaneous
   :LOGBOOK:
   CLOCK: [2016-09-05 Mon 08:30]--[2016-09-05 Mon 08:40] =>  0:10
@@ -41,7 +45,6 @@ Use UTF-8 preferably.
 
 #+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
-  (setq default-process-coding-system 'utf-8)
 #+END_SRC
 
 ** A_FAIRE À classer
@@ -1344,6 +1347,7 @@ See also
   - [[https://github.com/vspinu/imenu-anywhere][imenu-anywhere]]
   - [[https://github.com/bmag/imenu-list][imenu-list]]
   - [[https://www.wisdomandwonder.com/article/10358/easily-browse-imenu-entries-in-a-buffer][Easily Browse Imenu Entries In A Buffer]]
+  - [[https://github.com/ancane/popup-imenu][Popup-imenu]]
 
 ** Yasnippet
 

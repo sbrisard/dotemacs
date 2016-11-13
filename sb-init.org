@@ -47,6 +47,27 @@ Use UTF-8 preferably.
   (prefer-coding-system 'utf-8)
 #+END_SRC
 
+** Input method
+:LOGBOOK:
+CLOCK: [2016-11-13 Sun 08:50]--[2016-11-13 Sun 09:10] =>  0:20
+CLOCK: [2016-11-12 Sat 20:45]--[2016-11-12 Sat 21:00] =>  0:15
+CLOCK: [2016-11-12 Sat 13:30]--[2016-11-12 Sat 13:45] =>  0:15
+CLOCK: [2016-11-12 Sat 06:40]--[2016-11-12 Sat 07:00] =>  0:20
+CLOCK: [2016-11-11 Fri 09:25]--[2016-11-11 Fri 09:45] =>  0:20
+CLOCK: [2016-11-10 Thu 21:05]--[2016-11-10 Thu 21:35] =>  0:30
+CLOCK: [2016-11-10 Thu 06:00]--[2016-11-10 Thu 06:30] =>  0:30
+:END:
+
+I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easily input Greek characters and mathematical symbols (arrows and such). It turns out that this is best done through the rfc1345 [[info:Emacs#Input Methods][input method]] (see also =C-h I rfc1345). In case this is not sufficient, it is possible to set up a minor mode, see
+
+  - [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]]
+  - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]]
+  - [[http://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]]
+
+#+BEGIN_SRC emacs-lisp
+  (set-input-method 'rfc1345)
+#+END_SRC
+
 ** A_FAIRE À classer
    :LOGBOOK:
    CLOCK: [2016-09-15 Thu 07:15]--[2016-09-15 Thu 07:22] =>  0:07
@@ -311,122 +332,6 @@ This package aims to take the speed and predictability of =windmove= and pack it
     "Kill up to, but not including ARGth occurrence of CHAR.")
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 #+END_SRC
-
-** Hydra
-   :LOGBOOK:
-   CLOCK: [2016-08-18 Thu 06:30]--[2016-08-18 Thu 06:40] =>  0:10
-   CLOCK: [2016-06-30 Thu 07:15]--[2016-06-30 Thu 07:40] =>  0:25
-   CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
-   CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
-   :END:
-
-From the [[https://github.com/abo-abo/hydra][repository]]
-
-#+BEGIN_QUOTE
-This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
-#+END_QUOTE
-
-See also
-
-  - [[http://ericjmritz.name/2015/10/14/some-personal-hydras-for-gnu-emacs/][Some Personal Hydras for GNU Emacs]]
-  - [[http://oremacs.com/2016/04/04/hydra-doc-syntax/][Extended syntax for hydra docstrings]]
-
-We first define a hydra to insert various types of arrows.
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra sb-hydra-insert-char-arrow (:exit t :columns 4 :foreign-keys nil)
-    "Insert arrow"
-    ("<left>" (insert-char #x2190) "←")
-    ("<up>" (insert-char #x2191) "↑")
-    ("<right>" (insert-char #x2192) "→")
-    ("<down>" (insert-char #x2193) "↓")
-    ("S-<left>" (insert-char #x21D0) "⇐")
-    ("S-<up>" (insert-char #x21D1) "⇑")
-    ("S-<right>" (insert-char #x21D2) "⇒")
-    ("S-<down>" (insert-char #x21D3) "⇓")
-    ("C-<left>" (insert-char #x21A4) "↤")
-    ("C-<up>" (insert-char #x21A5) "↥")
-    ("C-<right>" (insert-char #x21A6) "↦")
-    ("C-<down>" (insert-char #x21A7) "↧")
-    ("M-<left>" (insert-char #x219E) "↞")
-    ("M-<up>" (insert-char #x219F) "↟")
-    ("M-<right>" (insert-char #x21A0) "↠")
-    ("M-<down>" (insert-char #x21A1) "↡")
-    ("C-g" nil "quit"))
-#+END_SRC
-
-Then, a hydra to insert Greek chars.
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra sb-hydra-insert-char-greek (:exit t :columns 8 :foreign-keys nil)
-    "Insert Greek char"
-    ("A" (insert-char #x0391) "Α")
-    ("B" (insert-char #x0392) "Β")
-    ("G" (insert-char #x0393) "Γ")
-    ("D" (insert-char #x0394) "Δ")
-    ("E" (insert-char #x0395) "Ε")
-    ("Z" (insert-char #x0396) "Ζ")
-    ("H" (insert-char #x0397) "Η")
-    ("Q" (insert-char #x0398) "Θ")
-    ("I" (insert-char #x0399) "Ι")
-    ("K" (insert-char #x039A) "Κ")
-    ("L" (insert-char #x039B) "Λ")
-    ("M" (insert-char #x039C) "Μ")
-    ("N" (insert-char #x039D) "Ν")
-    ("X" (insert-char #x039E) "Ξ")
-    ("O" (insert-char #x039F) "Ο")
-    ("P" (insert-char #x03A0) "Π")
-    ("R" (insert-char #x03A1) "Ρ")
-    ("S" (insert-char #x03A3) "Σ")
-    ("T" (insert-char #x03A4) "Τ")
-    ("Y" (insert-char #x03A5) "Υ")
-    ("F" (insert-char #x03A6) "Φ")
-    ("C" (insert-char #x03A7) "Χ")
-    ("J" (insert-char #x03A8) "Ψ")
-    ("W" (insert-char #x03A9) "Ω")
-    ("a" (insert-char #x03B1) "α")
-    ("b" (insert-char #x03B2) "β")
-    ("g" (insert-char #x03B3) "γ")
-    ("d" (insert-char #x03B4) "δ")
-    ("e" (insert-char #x03B5) "ε")
-    ("z" (insert-char #x03B6) "ζ")
-    ("h" (insert-char #x03B7) "η")
-    ("q" (insert-char #x03B8) "θ")
-    ("i" (insert-char #x03B9) "ι")
-    ("k" (insert-char #x03BA) "κ")
-    ("l" (insert-char #x03BB) "λ")
-    ("m" (insert-char #x03BC) "μ")
-    ("n" (insert-char #x03BD) "ν")
-    ("x" (insert-char #x03BE) "ξ")
-    ("o" (insert-char #x03BF) "ο")
-    ("p" (insert-char #x03C0) "π")
-    ("r" (insert-char #x03C1) "ρ")
-    ("s" (insert-char #x03C3) "σ")
-    ("M-s" (insert-char #x03C2) "ς")
-    ("t" (insert-char #x03C4) "τ")
-    ("y" (insert-char #x03C5) "υ")
-    ("f" (insert-char #x03C6) "φ")
-    ("c" (insert-char #x03C7) "χ")
-    ("j" (insert-char #x03C8) "ψ")
-    ("w" (insert-char #x03C9) "ω")
-    ("C-g" nil "quit"))
-#+END_SRC
-
-The following hydra puts everything together, and is bound to =C-c 8= (note the similarity to =C-x 8=, which is bound to =insert-char=).
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra sb-hydra-insert-char (:exit t :columns 1 :foreign-keys nil)
-    "Insert special character"
-    ("a" (sb-hydra-insert-char-arrow/body) "arrows")
-    ("g" (sb-hydra-insert-char-greek/body) "greek")
-    ("C-g" nil "quit"))
-
-  (global-set-key (kbd "C-c 8") 'sb-hydra-insert-char/body)
-#+END_SRC
-
-*** UN_JOUR Maybe this would be best handled with a keymap
-
-See for example [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]], and the video [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]].
 
 ** ibuffer
 :LOGBOOK:
@@ -1416,6 +1321,27 @@ Collection of useful dired additions. I don't want this become another dired+, s
 ** icicles
 
   - [[http://www.emacswiki.org/emacs/Icicles_-_Nutshell_View][Icicles]]
+
+** Hydra
+:LOGBOOK:
+CLOCK: [2016-08-18 Thu 06:30]--[2016-08-18 Thu 06:40] =>  0:10
+CLOCK: [2016-06-30 Thu 07:15]--[2016-06-30 Thu 07:40] =>  0:25
+CLOCK: [2016-06-30 Thu 05:45]--[2016-06-30 Thu 06:25] =>  0:40
+CLOCK: [2016-06-28 Tue 08:05]--[2016-06-28 Tue 09:20] =>  1:15
+:END:
+
+From the [[https://github.com/abo-abo/hydra][repository]]
+
+#+BEGIN_QUOTE
+This is a package for GNU Emacs that can be used to tie related commands into a family of short bindings with a common prefix - a Hydra.
+#+END_QUOTE
+
+See also
+
+  - [[http://ericjmritz.name/2015/10/14/some-personal-hydras-for-gnu-emacs/][Some Personal Hydras for GNU Emacs]]
+  - [[http://oremacs.com/2016/04/04/hydra-doc-syntax/][Extended syntax for hydra docstrings]]
+
+We first define a hydra to insert various types of arrows.
 
 * Blog-related customizations
   :LOGBOOK:

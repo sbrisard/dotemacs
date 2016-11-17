@@ -49,6 +49,7 @@ Use UTF-8 preferably.
 
 ** Input method
 :LOGBOOK:
+CLOCK: [2016-11-17 Thu 07:15]--[2016-11-17 Thu 07:35] =>  0:20
 CLOCK: [2016-11-13 Sun 08:50]--[2016-11-13 Sun 09:10] =>  0:20
 CLOCK: [2016-11-12 Sat 20:45]--[2016-11-12 Sat 21:00] =>  0:15
 CLOCK: [2016-11-12 Sat 13:30]--[2016-11-12 Sat 13:45] =>  0:15
@@ -58,7 +59,9 @@ CLOCK: [2016-11-10 Thu 21:05]--[2016-11-10 Thu 21:35] =>  0:30
 CLOCK: [2016-11-10 Thu 06:00]--[2016-11-10 Thu 06:30] =>  0:30
 :END:
 
-I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easily input Greek characters and mathematical symbols (arrows and such). It turns out that this is best done through the rfc1345 [[info:Emacs#Input Methods][input method]] (see also =C-h I rfc1345). In case this is not sufficient, it is possible to set up a minor mode, see
+I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easily input Greek characters and mathematical symbols (arrows and such). It turns out that this is best done through the rfc1345 [[info:Emacs#Input Methods][input method]] (see also =C-h I rfc1345=). This input method is toggled on for org and text buffers. This allows in particular to use it for editing commit messages with magit (commit messages are text mode buffers).
+
+In case this is not sufficient, it is possible to set up a minor mode, see
 
   - [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]]
   - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]]
@@ -66,6 +69,8 @@ I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easi
 
 #+BEGIN_SRC emacs-lisp
   (set-input-method 'rfc1345)
+  (add-hook 'org-mode-hook 'toggle-input-method)
+  (add-hook 'text-mode-hook 'toggle-input-method)
 #+END_SRC
 
 ** A_FAIRE À classer

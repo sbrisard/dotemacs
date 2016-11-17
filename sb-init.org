@@ -429,7 +429,7 @@ Then select the desired font in the dialog that shows up. Copy the string that i
 :CUSTOM_ID: ORG_MODE
 :END:
 :LOGBOOK:
-CLOCK: [2016-11-17 Thu 08:00]
+CLOCK: [2016-11-17 Thu 08:00]--[2016-11-17 Thu 08:10] =>  0:10
 CLOCK: [2016-09-22 Thu 13:10]--[2016-09-22 Thu 13:30] =>  0:20
 CLOCK: [2016-09-22 Thu 12:00]--[2016-09-22 Thu 13:00] =>  1:00
 CLOCK: [2016-08-30 Tue 08:10]--[2016-08-30 Tue 08:30] =>  0:20
@@ -461,10 +461,10 @@ Make agenda accessible from everywhere.
 
 **** [[info:Org#Initial visibility][Initial visibility]]
 
-Org files are not opened in folded mode.
+Org files are opened in folded mode.
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-startup-folded nil)
+  (setq org-startup-folded t)
 #+END_SRC
 
 Wrap lines.

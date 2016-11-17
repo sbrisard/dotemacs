@@ -179,7 +179,7 @@ See [[http://stackoverflow.com/questions/5151620/how-do-i-make-this-emacs-frame-
 
 ** Bind newline and indent to RET
 
-In programming mode, it can be inconvenient to use =C-j= to call =newline-and-indent=.
+In programming mode, it can be inconvenient to use =C-j= to call =newline-and-indent=. The following function is not necessary with Python (when using elpy-mode).
 
 #+BEGIN_SRC emacs-lisp
   (defun sb-bind-newline-and-indent-to-RET ()
@@ -1057,6 +1057,7 @@ With these principles, implementation of =sb-insert-bibref= is straightforward.
 
 ** Python
 :LOGBOOK:
+CLOCK: [2016-11-17 Thu 07:35]--[2016-11-17 Thu 07:50] =>  0:15
 CLOCK: [2016-08-24 Wed 07:55]--[2016-08-24 Wed 08:25] =>  0:30
 CLOCK: [2014-08-07 Thu 13:55]--[2014-08-07 Thu 15:00] =>  1:05
 CLOCK: [2014-08-07 Thu 07:30]--[2014-08-07 Thu 10:00] =>  2:30
@@ -1080,8 +1081,6 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
   (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 #+END_SRC
-
-*** A_FAIRE Should I use =sb-bind-newline-and-indent-to-RET=?
 
 ** Maxima
    :LOGBOOK:

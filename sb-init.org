@@ -448,9 +448,9 @@ Other resources
 
   - Rainer König's [[https://www.youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE][OrgMode tutorial]]
 
-** [[info:Org#Introduction][Introduction]]
+** Introduction
 
-*** [[info:Org#Activation][Activation]]
+*** Activation
 
 Make agenda accessible from everywhere.
 
@@ -458,11 +458,11 @@ Make agenda accessible from everywhere.
   (global-set-key (kbd "C-c a") 'org-agenda)
 #+END_SRC
 
-** [[info:Org#Document structure][Document structure]]
+** Document structure
 
-*** [[info:Org#Visibility cycling][Visibility cycling]]
+*** Visibility cycling
 
-**** [[info:Org#Initial visibility][Initial visibility]]
+**** Initial visibility
 
 Org files are opened in folded mode.
 
@@ -476,7 +476,7 @@ Wrap lines.
   (setq org-startup-truncated nil)
 #+END_SRC
 
-*** [[info:Org#Structure editing][Structure editing]]
+*** Structure editing
 
 Do not shift text to the left or right when promoting/demoting headlines.
 
@@ -484,17 +484,17 @@ Do not shift text to the left or right when promoting/demoting headlines.
   (setq org-adapt-indentation nil)
 #+END_SRC
 
-** [[info:Org#Tables][Tables]]
+** Tables
 
-*** [[info:Org#Built-in table editor][The built-in table editor]]
+*** The built-in table editor
 
 #+BEGIN_SRC emacs-lisp
   (setq org-table-copy-increment nil)
 #+END_SRC
 
-** [[info:Org#Hyperlinks][Hyperlinks]]
+** Hyperlinks
 
-*** [[info:Org#Handling%20links][Handling links]]
+*** Handling links]
 
 Follow links in same window.
 
@@ -506,26 +506,26 @@ Follow links in same window.
                                      (wl . wl-other-frame))))
 #+END_SRC
 
-** [[info:Org#TODO Items][TODO Items]]
+** TODO Items
 
-*** [[info:Org#TODO%20extensions][Extended use of TODO keywords]]
+*** Extended use of TODO keywords
 
-**** [[info:Org#TODO%20types][TODO keywords as types]]
+**** TODO keywords as types
 
 #+BEGIN_SRC emacs-lisp
     (setq org-todo-keywords '((sequence "A_FAIRE(a)" "EN_ATTENTE(e)" "UN_JOUR(u)"
                                         "|" "FAIT(f)")))
 #+END_SRC
 
-*** [[info:Org#Progress logging][Progress logging]]
+*** Progress logging
 
-**** [[info:Org#Tracking TODO state changes][Tracking TODO state changes]]
+**** Tracking TODO state changes
 
 #+BEGIN_SRC emacs-lisp
   (setq org-log-into-drawer t)
 #+END_SRC
 
-** [[info:Org#Dates and times][Dates and times]]
+** Dates and times
 
 Make sure that timestamps appear in English.
 
@@ -557,11 +557,11 @@ Remove ugly =\_= from the clock table.
 #+RESULTS:
 : org-clocktable-indent-string
 
-** [[info:Org#Capture - Refile - Archive][Capture - Refile - Archive]]
+** Capture - Refile - Archive
 
-*** [[info:Org#Archiving][Archiving]]
+*** Archiving
 
-**** [[info:Org#Moving subtrees][Moving a tree to the archive file]]
+**** Moving a tree to the archive file
 
 Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/archives/FILE.org_archive=.
 
@@ -569,7 +569,7 @@ Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/ar
   (setq org-archive-location (expand-file-name "notes/archives/%s_archive::" sb-path-to-local-documents))
 #+END_SRC
 
-** [[info:Org#Agenda views][Agenda views]]
+** Agenda views
 
 Restore window configuration upon exiting agenda. Show agenda in the current window, keeping all other windows.
 
@@ -578,7 +578,7 @@ Restore window configuration upon exiting agenda. Show agenda in the current win
   (setq org-agenda-window-setup 'current-window)
 #+END_SRC
 
-*** [[info:Org#Agenda files][Agenda files]]
+*** Agenda files
 
 =*.org= and =*.txt= files are considered as agenda files. These files are looked for in
 
@@ -595,7 +595,7 @@ Restore window configuration upon exiting agenda. Show agenda in the current win
                              (directory-files root t directory-files-no-dot-files-regexp)))))
 #+END_SRC
 
-** [[info:Org#Exporting][Exporting]]
+** Exporting
 
 See also
 
@@ -606,7 +606,7 @@ See also
   (setq org-html-htmlize-output-type 'css)
 #+END_SRC
 
-*** [[info:Org#Export settings][Export settings]]
+*** Export settings
 
 #+BEGIN_SRC emacs-lisp
   (setq org-export-preserve-breaks nil)
@@ -638,16 +638,16 @@ See also
   (setq org-export-with-todo-keywords t)
 #+END_SRC
 
-** [[info:Org#Working with source code][Working with source code]]
+** Working with source code
 
-*** [[info:Org#Editing source code][Editing source code]]
+*** Editing source code
 
 #+BEGIN_SRC emacs-lisp
   (setq org-src-fontify-natively t)
   (setq org-src-window-setup 'other-window)
 #+END_SRC
 
-*** [[info:Org#Evaluating code blocks][Evaluating code blocks]]
+*** Evaluating code blocks
 
 Displayed inlined images are automatically updated after evaluating source blocks. This was suggested by [[https://github.com/gregsexton/ob-ipython][ob-ipython]].
 
@@ -655,7 +655,7 @@ Displayed inlined images are automatically updated after evaluating source block
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 #+END_SRC
 
-*** [[info:Org#Languages][Languages]]
+*** Languages
 
 Enable languages for evaluation in source blocks.
 
@@ -665,9 +665,9 @@ Enable languages for evaluation in source blocks.
                                                            (maxima . t)))
 #+END_SRC
 
-** [[info:Org#Miscellaneous][Miscellaneous]]
+** Miscellaneous
 
-*** [[info:Org#Code evaluation security][Code evaluation and security issues]]
+*** Code evaluation and security issues
 
 This is potentially risky!
 
@@ -1300,7 +1300,6 @@ I also gave up =newsticker= because
 
 ** Regular expressions
 
-
   - [[https://github.com/benma/visual-regexp.el][visual-regexp]] is like replace-regexp, but with live visual feedback directly in the buffer
   - [[https://github.com/mhayashi1120/Emacs-wgrep][wgrep]] allows you to edit a grep buffer and apply those changes to the file buffer
 
@@ -1353,6 +1352,11 @@ See also
 
 We first define a hydra to insert various types of arrows.
 
+** Info mode
+
+  - Learn about keystrokes
+  - Sort manuals more conveniently
+
 * Blog-related customizations
   :LOGBOOK:
   CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10
@@ -1362,8 +1366,3 @@ We first define a hydra to insert various types of arrows.
   (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                               sb-path-to-local-documents))
 #+END_SRC
-
-** Info mode
-
-  - Learn about keystrokes
-  - Sort manuals more conveniently

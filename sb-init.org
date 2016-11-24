@@ -49,6 +49,7 @@ Use UTF-8 preferably.
 
 ** Input method
 :LOGBOOK:
+CLOCK: [2016-11-24 Thu 07:20]--[2016-11-24 Thu 07:25] =>  0:05
 CLOCK: [2016-11-21 Mon 08:30]--[2016-11-21 Mon 09:00] =>  0:30
 CLOCK: [2016-11-17 Thu 07:15]--[2016-11-17 Thu 07:35] =>  0:20
 CLOCK: [2016-11-13 Sun 08:50]--[2016-11-13 Sun 09:10] =>  0:20
@@ -64,16 +65,14 @@ I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easi
 
 In case this is not sufficient, it is possible to set up a minor mode, see
 
-  - [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]]
-  - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]]
-  - [[http://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]]
+  - [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]],
+  - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]],
+  - [[http://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]].
+
+Input method conflict with key-chord. Therefore, input method are not activated by default.
 
 #+BEGIN_SRC emacs-lisp
   (set-input-method 'rfc1345)
-  (defun sb-activate-input-method ()
-    (activate-input-method default-input-method))
-  (add-hook 'text-mode-hook 'sb-activate-input-method)
-  (add-hook 'org-mode-hook 'sb-activate-input-method)
 #+END_SRC
 
 ** A_FAIRE À classer

@@ -72,7 +72,7 @@ In case this is not sufficient, it is possible to set up a minor mode, see
 Input method conflict with key-chord. Therefore, input method are not activated by default.
 
 #+BEGIN_SRC emacs-lisp
-  (set-input-method 'rfc1345)
+  (setq default-input-method 'rfc1345)
 #+END_SRC
 
 ** A_FAIRE À classer

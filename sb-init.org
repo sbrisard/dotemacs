@@ -1356,6 +1356,10 @@ We first define a hydra to insert various types of arrows.
   - Learn about keystrokes
   - Sort manuals more conveniently
 
+** undo-tree
+
+  - [[https://www.emacswiki.org/emacs/UndoTree][EmacsWiki: Undo Tree]]
+
 * Blog-related customizations
   :LOGBOOK:
   CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10

@@ -1240,9 +1240,32 @@ From the [[https://www.emacswiki.org/emacs/WhiteSpace][EmacsWiki]]: "This packag
 #+END_SRC
 
 * Ispell
+:LOGBOOK:
+CLOCK: [2016-12-06 Tue 08:25]--[2016-12-06 Tue 09:10] =>  0:45
+CLOCK: [2016-12-05 Mon 08:30]--[2016-12-05 Mon 09:00] =>  0:30
+:END:
+
+The spell checker is selected through the =ispell-program-name= variable. The following code snippet sets the dictionary list for hunspell. However, on the first execution of =ispell= in an emacs session, an error is raised
+
+#+BEGIN_EXAMPLE
+split-string: Wrong type argument: stringp, nil
+#+END_EXAMPLE
+
+On trying again, ispell works like a charm.
 
 #+BEGIN_SRC emacs-lisp
-  (setq ispell-dictionary "francais")
+  (setq ispell-local-dictionary-alist (quote (("american"
+                                               "[[:alpha:]]"
+                                               "[^[:alpha:]]"
+                                               "[']"
+                                               t
+                                               ("-d" "en_US")
+                                               "~tex" undecided))))
+
+  (setq ispell-dictionary "american")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (setq ispell-tex-skip-alists
         (list
          (append (car ispell-tex-skip-alists)

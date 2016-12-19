@@ -83,6 +83,7 @@ Input method conflict with key-chord. Therefore, input method are not activated 
 #+BEGIN_SRC emacs-lisp
   (setq column-number-mode t)
   (setq confirm-nonexistent-file-or-buffer t)
+  (setq delete-active-region nil)
   (setq dnd-open-file-other-window nil)
   (setq find-file-run-dired nil)
   (setq inhibit-startup-screen t)

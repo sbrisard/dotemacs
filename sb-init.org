@@ -767,7 +767,7 @@ Magit is an interface to the version control system [[https://git-scm.com/][Git]
 
 This interesting video, [[https://www.youtube.com/watch?v%3DvQO7F2Q9DwA][Magit Introduction and Demonstration]] illustrates /rebasing/. The author recommends the following key binding
 
-#+BEGIN_SRC elisp :eval never :tangle yes
+#+BEGIN_SRC emacs-lisp :eval never :tangle yes
   (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC
 

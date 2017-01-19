@@ -1292,9 +1292,15 @@ On trying again, ispell works like a charm.
 See also
 
   - [[https://github.com/vspinu/imenu-anywhere][imenu-anywhere]]
-  - [[https://github.com/bmag/imenu-list][imenu-list]]
   - [[https://www.wisdomandwonder.com/article/10358/easily-browse-imenu-entries-in-a-buffer][Easily Browse Imenu Entries In A Buffer]]
   - [[https://github.com/ancane/popup-imenu][Popup-imenu]]
+
+** imenu-list
+:LOGBOOK:
+CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
+:END:
+
+[[https://github.com/bmag/imenu-list][imenu-list]]
 
 ** Yasnippet
 

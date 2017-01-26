@@ -861,6 +861,10 @@ However, the above snippet does not work =:'(=. I will keep it for further refer
 
 This requires the =ido-ubiquitous= package. I will start using this functionality and see if I am happy with it. What would be nice in particular is that magit suggests to add a repository to =magit-repository-directories= if it is not already present in this list.
 
+** A_FAIRE Insert default commit messages
+
+My notes are version controlled. However, I find it difficult to enclose a meaningful commit message on each commit. So I end up using a standard message recording the date and time. This ought to be automated (hooks?).
+
 * AUCTeX and RefTeX
   :LOGBOOK:
   CLOCK: [2016-11-17 Thu 07:50]--[2016-11-17 Thu 08:00] =>  0:10

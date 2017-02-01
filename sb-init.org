@@ -309,8 +309,8 @@ See also
 Avy commands are bound to =C-& &= and =C-& é=.
 
 #+BEGIN_SRC emacs-lisp
-  (define-key bjm-map (kbd "&") 'avy-goto-char)
-  (define-key bjm-map (kbd "é") 'avy-goto-char-2)
+  (define-key sb-map (kbd "&") 'avy-goto-char)
+  (define-key sb-map (kbd "é") 'avy-goto-char-2)
 #+END_SRC
 
 ** Ace-window

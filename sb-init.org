@@ -223,7 +223,7 @@ Under Mac OS X, right-alt must be mapped to Alt Gr.
 
 * My personal keymap
 :LOGBOOK:
-CLOCK: [2017-02-01 Wed 05:25]
+CLOCK: [2017-02-01 Wed 05:25]--[2017-02-01 Wed 05:45] =>  0:20
 CLOCK: [2017-01-31 Tue 07:30]--[2017-01-31 Tue 08:00] =>  0:30
 CLOCK: [2017-01-31 Tue 05:15]--[2017-01-31 Tue 05:40] =>  0:25
 :END:

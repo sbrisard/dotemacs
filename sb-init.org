@@ -239,13 +239,6 @@ My personal keymap is called =sb-map=, and the prefix key that is assigned to th
   (global-set-key (kbd "C-&") 'sb-map)
 #+END_SRC
 
-Avy commands are bound to =C-& &= and =C-& é=.
-
-#+BEGIN_SRC emacs-lisp
-  (define-key bjm-map (kbd "&") 'avy-goto-char)
-  (define-key bjm-map (kbd "é") 'avy-goto-char-2)
-#+END_SRC
-
 * Various packages
 :LOGBOOK:
 CLOCK: [2016-10-20 Thu 21:15]--[2016-10-20 Thu 21:55] =>  0:40
@@ -311,6 +304,13 @@ See also
 #+BEGIN_SRC emacs-lisp
   (setq avy-background t)
   (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
+#+END_SRC
+
+Avy commands are bound to =C-& &= and =C-& é=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-key bjm-map (kbd "&") 'avy-goto-char)
+  (define-key bjm-map (kbd "é") 'avy-goto-char-2)
 #+END_SRC
 
 ** Ace-window

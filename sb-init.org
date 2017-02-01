@@ -388,6 +388,13 @@ My personal keymap is called =sb-map=, and the prefix key that is assigned to th
   (global-set-key (kbd "C-&") 'sb-map)
 #+END_SRC
 
+Avy commands are bound to =C-& &= and =C-& é=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-key bjm-map (kbd "&") 'avy-goto-char)
+  (define-key bjm-map (kbd "é") 'avy-goto-char-2)
+#+END_SRC
+
 * Appearance
 
 ** Theme

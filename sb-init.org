@@ -387,6 +387,24 @@ Then, load these groups at startup
 
 Do not show empty groups
 
+* My personal keymap
+:LOGBOOK:
+CLOCK: [2017-02-01 Wed 05:25]
+CLOCK: [2017-01-31 Tue 07:30]--[2017-01-31 Tue 08:00] =>  0:30
+CLOCK: [2017-01-31 Tue 05:15]--[2017-01-31 Tue 05:40] =>  0:25
+:END:
+
+Ben Maughan at Pragmatic Emacs has an [[http://pragmaticemacs.com/emacs/use-your-digits-and-a-personal-key-map-for-super-shortcuts/][interesting post]] on unbinding =C-1=, ..., =C-9= and =M-1=, ..., =M-9=, which he rarely uses. In turn, these can be used as prefix keys. This is not so interesting for french keyboards, since typing digits actually requires holding the =shift= key.
+
+See also the [[https://www.emacswiki.org/emacs/PrefixKey][EmacsWiki]] on prefix keys.
+
+My personal keymap is called =sb-map=, and the prefix key that is assigned to this keymap is =C-&=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-prefix-command 'sb-map)
+  (global-set-key (kbd "C-&") 'sb-map)
+#+END_SRC
+
 * Appearance
 
 ** Theme

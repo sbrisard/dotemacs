@@ -69,10 +69,14 @@ In case this is not sufficient, it is possible to set up a minor mode, see
   - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]],
   - [[http://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]].
 
-Input method conflict with key-chord. Therefore, input method are not activated by default.
+It should be noted that Input method conflicts with key-chord, which I no longer use.
 
 #+BEGIN_SRC emacs-lisp
   (setq default-input-method 'rfc1345)
+  (defun sb-activate-input-method ()
+    (activate-input-method default-input-method))
+  (add-hook 'text-mode-hook 'sb-activate-input-method)
+  (add-hook 'org-mode-hook 'sb-activate-input-method)
 #+END_SRC
 
 ** A_FAIRE À classer

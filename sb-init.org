@@ -1419,6 +1419,10 @@ We first define a hydra to insert various types of arrows.
 
 [[https://github.com/magnars/expand-region.el][expand-region]]
 
+** wgrep
+
+See [[http://oremacs.com/2015/01/27/my-refactoring-workflow/][this post]] on refactoring.
+
 * Blog-related customizations
   :LOGBOOK:
   CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10

@@ -1114,6 +1114,11 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 #+END_SRC
 
+*** Other references
+
+  - [[http://kitchingroup.cheme.cmu.edu/blog/2014/12/20/A-new-mode-for-Python-documentation/][A new mode for Python documentation]] : see in particular the Disqus comments.
+  - [[https://bitbucket.org/jonwaltman/pydoc-info][pydoc-info]]
+
 ** Maxima
    :LOGBOOK:
    CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15

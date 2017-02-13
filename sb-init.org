@@ -685,7 +685,8 @@ Enable languages for evaluation in source blocks.
 #+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
                                                            (python . t)
-                                                           (maxima . t)))
+                                                           (maxima . t)
+                                                           (ipython . t)))
 #+END_SRC
 
 ** Miscellaneous

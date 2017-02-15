@@ -1341,6 +1341,7 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
   - [[https://github.com/Fuco1/smartparens][smartparens]]
   - [[http://pragmaticemacs.com/emacs/jump-to-matching-parenthesis/][Jump to matching parenthesis]]
   - [[https://github.com/cute-jumper/embrace.el][embrace.el]]
+  - [[http://endlessparentheses.com/a-few-paredit-keys-that-take-over-the-world.html][A few paredit keys that take over the world]] (Endless Parentheses)
 
 ** Calfw - A calendar framework for Emacs
 

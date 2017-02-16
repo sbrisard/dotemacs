@@ -733,9 +733,9 @@ CLOCK: [2015-11-03 Tue 08:00]--[2015-11-03 Tue 08:30] =>  0:30
 
 The following commands invoke ob-ipython with a specific profile.
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
   (require 'ob-ipython)
-  (setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
+  ;(setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
 #+END_SRC
 
 For the anaconda distribution, the package =jupyter_console= must be installed. The =ob-ipython= Jupyter profile was created as follows

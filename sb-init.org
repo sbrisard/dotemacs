@@ -1013,9 +1013,11 @@ We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable hol
 #+END_SRC
 
 ** RefTeX
-   :LOGBOOK:
-   CLOCK: [2016-08-18 Thu 16:00]--[2016-08-18 Thu 16:30] =>  0:30
-   :END:
+:LOGBOOK:
+CLOCK: [2017-03-01 Wed 17:00]--[2017-03-01 Wed 17:10] =>  0:10
+CLOCK: [2017-03-01 Wed 16:35]--[2017-03-01 Wed 16:40] =>  0:05
+CLOCK: [2016-08-18 Thu 16:00]--[2016-08-18 Thu 16:30] =>  0:30
+:END:
 
 #+BEGIN_SRC emacs-lisp
   (require 'reftex)
@@ -1033,10 +1035,10 @@ AUCTeX/RefTeX integration
   (setq reftex-plug-into-AUCTeX t)
 #+END_SRC
 
-All labels but sections are inserted automatically (no query).
+Insert simple labels, like ‘eq:22’ or ‘sec:13’ (no query). See [[info:reftex#Options%20-%20Creating%20Labels][Creating Labels]].
 
 #+BEGIN_SRC emacs-lisp
-  (setq reftex-insert-label-flags (quote ("s" "s")))
+  (setq reftex-insert-label-flags (quote (nil nil)))
 #+END_SRC
 
 On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\pageref=, etc...).

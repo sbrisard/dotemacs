@@ -275,6 +275,7 @@ Various repositories are configured.
 Some interesting references
 
   - [[http://irreal.org/blog/?p%3D5309][Defining a Keymap Prefix (Ireal)]]
+  - [[http://pragmaticemacs.com/emacs/cycle-spacing/][Cycle spacing]] at Pragmatic Emacs
 
 ** Default directory
    :LOGBOOK:

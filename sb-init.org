@@ -276,7 +276,6 @@ Various repositories are configured.
 Some interesting references
 
   - [[http://irreal.org/blog/?p%3D5309][Defining a Keymap Prefix (Ireal)]]
-  - [[http://pragmaticemacs.com/emacs/cycle-spacing/][Cycle spacing]] at Pragmatic Emacs
   - See function move-to-window-line-top-bottom, bound to =M-r=
 
 ** Default directory
@@ -401,6 +400,25 @@ Then, load these groups at startup
 #+END_SRC
 
 Do not show empty groups
+
+** Cycle spacing
+:LOGBOOK:
+CLOCK: [2017-03-08 Wed 08:30]--[2017-03-08 Wed 08:45] =>  0:15
+:END:
+
+The idea from this configuration comes from Ben Maughan at [[http://pragmaticemacs.com/emacs/cycle-spacing/][Pragmatic Emacs]].
+
+=M-SPC= is bound to [[elisp:(describe-function%20'just-one-space)][just-one-space]], but [[elisp:(describe-function 'cycle-spacing)][cycle-spacing]] is more interesting, since (when called multiple times), it cycles between the following states
+
+  1. leave just one space,
+  2. delete all spaces,
+  3. restore the original whitespace and point.
+
+This function is therefore bound to =M-SPC=.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+#+END_SRC
 
 * Appearance
 

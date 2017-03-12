@@ -1459,6 +1459,16 @@ We first define a hydra to insert various types of arrows.
 
 See [[http://oremacs.com/2015/01/27/my-refactoring-workflow/][this post]] on refactoring.
 
+** zotxt
+
+See [[https://gitlab.com/egh/zotxt][zotxt: a Zotero extension for text]]
+
+#+BEGIN_QUOTE
+zotxt is a Zotero extension for supporting utilities that deal with plain text files (e.g., markdown, reStructuredText, latex, etc.).
+#+END_QUOTE
+
+See also Michael Behr's blog post: [[http://www.mkbehr.com/posts/a-research-workflow-with-zotero-and-org-mode/][A research workflow with Zotero and Org mode]].
+
 * Blog-related customizations
   :LOGBOOK:
   CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10

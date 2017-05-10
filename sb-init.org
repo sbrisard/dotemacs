@@ -1092,7 +1092,7 @@ Register axiom, theorem and remark environments so that they get properly number
 
 ** Insertion of references into a *.bib file
 :LOGBOOK:
-CLOCK: [2017-05-10 Wed 08:25]
+CLOCK: [2017-05-10 Wed 08:25]--[2017-05-10 Wed 08:40] =>  0:15
 CLOCK: [2016-08-25 Thu 08:10]--[2016-08-25 Thu 08:35] =>  0:25
 :END:
 

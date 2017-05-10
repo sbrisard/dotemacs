@@ -159,6 +159,12 @@ The custom group SB gathers some variables which must be set locally.
 
   should work."
     :type 'string :group 'sb :tag "Path to local documents")
+
+  (defcustom sb-path-to-bibliography "~/MyCoRe/biblio"
+    "Path to the local bibliography.
+
+  See `sb-insert-bibref' for more details."
+    :type 'string :group 'sb :tag "Path to bibliography")
 #+END_SRC
 
 ** Load a file only when it exists
@@ -1085,24 +1091,36 @@ Register axiom, theorem and remark environments so that they get properly number
 #+END_SRC
 
 ** Insertion of references into a *.bib file
-   :LOGBOOK:
-   CLOCK: [2016-08-25 Thu 08:10]--[2016-08-25 Thu 08:35] =>  0:25
-   :END:
+:LOGBOOK:
+CLOCK: [2017-05-10 Wed 08:25]
+CLOCK: [2016-08-25 Thu 08:10]--[2016-08-25 Thu 08:35] =>  0:25
+:END:
 
-I have created a function =sb-insert-bibref= which prompts for a key, and inserts a new BibTeX reference at point. This function is taylored to the way I store my references.
+I have created a function =sb-insert-bibref= which prompts for a key,
+and inserts a new BibTeX reference at point. This function is taylored
+to the way I store my references.
 
-  1. Keys are formed as follows: =AUTHYYYY=, where =AUTH= are the first four letters of the first author, and =YYYY= is the year of publication. In case of identical keys, a letter (A, B, C) is added to the end.
+  1. Keys are formed as follows: =AUTHYYYY=, where =AUTH= are the
+     first four letters of the first author, and =YYYY= is the year of
+     publication. In case of identical keys, a letter (A, B, C) is
+     added to the end.
   2. Keys are capitalized.
-  3. Papers are stored in =sb-path-to-local-documents/biblio/a/authYYYY/=, where =a= denotes the first letter of the first author, and =auth= denotes the first four letters of the first author. Note that =a= and =auth= are /not/ capitalized.
-  4. Each folder =sb-path-to-local-documents/biblio/a/authYYYY/= contains the paper itself (generally, =authYYYY.pdf=), along with a =*.bib= file (=authYYYY.bib=).
+  3. Papers are stored in =sb-path-to-bibliography/a/authYYYY/=, where
+     =a= denotes the first letter of the first author, and =auth=
+     denotes the first four letters of the first author. Note that =a=
+     and =auth= are /not/ capitalized.
+  4. Each folder =sb-path-to-bibliography/a/authYYYY/=
+     contains the paper itself (generally, =authYYYY.pdf=), along with
+     a =*.bib= file (=authYYYY.bib=).
 
-With these principles, implementation of =sb-insert-bibref= is straightforward.
+With these principles, implementation of =sb-insert-bibref= is
+straightforward.
 
 #+BEGIN_SRC emacs-lisp
   (defun sb-bibref-path (key)
     "Return the path to a BibTeX file containing the specified KEY."
-    (expand-file-name  (concat "biblio/" (s-left 1 key) "/" key "/" key ".bib")
-                       sb-path-to-local-documents))
+    (expand-file-name  (concat (s-left 1 key) "/" key "/" key ".bib")
+                       sb-path-to-bibliography))
 
   (defun sb-insert-bibref (key)
     "Insert at point the BibTex file containing the specified KEY."

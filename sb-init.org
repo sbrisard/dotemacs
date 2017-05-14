@@ -1353,6 +1353,24 @@ On trying again, ispell works like a charm.
          (cadr ispell-tex-skip-alists)))
 #+END_SRC
 
+* sb-passwd
+
+This is a small package that I wrote in order to use management of
+credentials, in particular creation/insertion of passwords.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/lisp/sb-passwd")
+  (require 'sb-passwd)
+  (sb-passwd-append-from-table
+   (cdr (delq 'hline
+              (sb-passwd-load-table-from-file
+               (expand-file-name "notes/personnelles/mots_de_passe.gpg"
+                                 sb-path-to-local-documents)
+               "credentials"))) 0 1 2)
+
+  (define-key sb-map (kbd "p") 'hydra-sb-passwd/body)
+#+END_SRC
+
 * Packages I should start to use
 
   - [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]]

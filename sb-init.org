@@ -909,8 +909,24 @@ However, the above snippet does not work =:'(=. I will keep it for further refer
 This requires the =ido-ubiquitous= package. I will start using this functionality and see if I am happy with it. What would be nice in particular is that magit suggests to add a repository to =magit-repository-directories= if it is not already present in this list.
 
 ** A_FAIRE Insert default commit messages
+:LOGBOOK:
+CLOCK: [2017-05-16 Tue 08:15]--[2017-05-16 Tue 08:45] =>  0:30
+:END:
 
-My notes are version controlled. However, I find it difficult to enclose a meaningful commit message on each commit. So I end up using a standard message recording the date and time. This ought to be automated (hooks?).
+My notes are version controlled. However, I find it difficult to
+enclose a meaningful commit message on each commit. So I end up using
+a standard message recording the date and time. This ought to be
+automated (hooks?).
+
+#+BEGIN_SRC emacs-lisp
+  (defun sb-magit-stage-all-and-commit ()
+    (interactive)
+    (magit-shell-command (concat "git commit -a -m \""
+                                 (format-time-string "%d/%m/%Y %H:%M")
+                                 "\"")))
+
+  (define-key sb-map (kbd "C") 'sb-magit-stage-all-and-commit)
+#+END_SRC
 
 * AUCTeX and RefTeX
   :LOGBOOK:

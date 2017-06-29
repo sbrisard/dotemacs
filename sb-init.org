@@ -1410,6 +1410,8 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
 ** Yasnippet
 
   - [[http://howardism.org/Technical/Emacs/templates-tutorial.html][Having Emacs Type for You]]
+  - [[http://pragmaticemacs.com/emacs/email-templates-in-mu4e-with-yasnippet/][Email templates in mu4e with yasnippet]] (Pragmatic Emacs)
+  - [[http://pragmaticemacs.com/emacs/multiple-choices-in-yasnippets/][Multiple choices in yasnippets]] (Pragmatic Emacs)
 
 ** Paren editing
 

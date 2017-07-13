@@ -35,6 +35,7 @@ Tangling can be triggered by calling =org-babel-tangle-file= (=C-c C-v t=).
 Possible sources of inspiration
 
   - [[https://github.com/dakrone/eos/blob/master/eos.org#the-emacs-operating-system-eos][The Emacs Operating System (EOS)]]
+  - [[https://github.com/novoid/dot-emacs/blob/master/config.org][Karl Voit's Emacs Configuration]]
 
 * Miscellaneous
   :LOGBOOK:
@@ -1543,6 +1544,40 @@ uses a nicer syntax (IMHO, of course :-).
 See also
 
   - [[http://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/][Exploring Emacs rx Macro]]
+
+** auth-source
+
+  - [[https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources][Keeping Secrets in Emacs with GnuPG and Auth Sources]] (Mastering
+    Emacs)
+
+** winner-mode (built-in)
+
+[[info:emacs#Window%20Convenience][Convenience Features for Window Handling]]
+
+#+BEGIN_QUOTE
+Winner mode is a global minor mode that records the changes in the
+window configuration (i.e., how the frames are partitioned into
+windows), so that you can undo them.
+#+END_QUOTE
+
+** dumb-jump
+
+#+BEGIN_QUOTE
+[[https://github.com/jacktasia/dumb-jump][dumb-jump]] is an Emacs "jump to definition" package with support for
+multiple programming languages that favors "just working". This means
+minimal -- and ideally zero -- configuration with absolutely no stored
+indexes (TAGS) or persistent background processes. Dumb Jump requires
+at least GNU Emacs 24.3.
+#+END_QUOTE
+
+** Ivy, Counsel and Swiper
+
+  - [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][Ivy, Counsel and Swiper]]
+
+** PDF tools
+
+  - [[http://irreal.org/blog/?p=4727][PDF Tools for Emacs]] (Irreal)
+  - [[https://codearsonist.com/reading-for-programmers][Reading for Programmers]]
 
 * Blog-related customizations
   :LOGBOOK:

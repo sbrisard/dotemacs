@@ -609,18 +609,6 @@ Remove ugly =\_= from the clock table.
 #+RESULTS:
 : org-clocktable-indent-string
 
-** Capture - Refile - Archive
-
-*** Archiving
-
-**** Moving a tree to the archive file
-
-Archived trees from =FILE.org= are moved to =sb-path-to-local-documents/notes/archives/FILE.org_archive=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-archive-location (expand-file-name "notes/archives/%s_archive::" sb-path-to-local-documents))
-#+END_SRC
-
 ** Agenda views
 
 Restore window configuration upon exiting agenda. Show agenda in the current window, keeping all other windows.
@@ -1523,6 +1511,38 @@ zotxt is a Zotero extension for supporting utilities that deal with plain text f
 #+END_QUOTE
 
 See also Michael Behr's blog post: [[http://www.mkbehr.com/posts/a-research-workflow-with-zotero-and-org-mode/][A research workflow with Zotero and Org mode]].
+
+** use-package
+
+[[https://github.com/jwiegley/use-package]]
+
+#+BEGIN_QUOTE
+The use-package macro allows you to isolate package configuration in
+your .emacs file in a way that is both performance-oriented and, well,
+tidy. I created it because I have over 80 packages that I use in
+Emacs, and things were getting difficult to manage. Yet with this
+utility my total load time is around 2 seconds, with no loss of
+functionality!
+#+END_QUOTE
+
+See also
+
+  - [[http://cachestocaches.com/2015/8/getting-started-use-package/][Getting started with use-package]]
+
+** rx (built-in package)
+
+#+BEGIN_QUOTE
+This is another implementation of sexp-form regular expressions.
+It was unfortunately written without being aware of the Sregex
+package coming with Emacs, but as things stand, Rx completely
+covers all regexp features, which Sregex doesn't, doesn't suffer
+from the bugs mentioned in the commentary section of Sregex, and
+uses a nicer syntax (IMHO, of course :-).
+#+END_QUOTE
+
+See also
+
+  - [[http://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/][Exploring Emacs rx Macro]]
 
 * Blog-related customizations
   :LOGBOOK:

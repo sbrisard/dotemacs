@@ -1529,6 +1529,7 @@ functionality!
 See also
 
   - [[http://cachestocaches.com/2015/8/getting-started-use-package/][Getting started with use-package]]
+  - [[http://irreal.org/blog/?p=6442][John Wiegley and Sacha Chua on use-package]]
 
 ** rx (built-in package)
 

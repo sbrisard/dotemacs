@@ -1188,6 +1188,11 @@ A work around (under windows) seems to be
 
   1. Install =pyreadline=
   2. Set =python-shell-completion-native= to =t=
+  3. Use simple prompt with Jupyter console: set =python-shell-interpreter-args= to
+
+#+BEGIN_EXAMPLE
+-i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console --simple-prompt
+#+END_EXAMPLE
 
 See also this [[https://github.com/jorgenschaefer/elpy/issues/887][bug report (elpy)]].
 

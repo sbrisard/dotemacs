@@ -1173,6 +1173,24 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
   - [[http://kitchingroup.cheme.cmu.edu/blog/2014/12/20/A-new-mode-for-Python-documentation/][A new mode for Python documentation]] : see in particular the Disqus comments.
   - [[https://bitbucket.org/jonwaltman/pydoc-info][pydoc-info]]
 
+*** A_FAIRE Native completion problems
+:LOGBOOK:
+CLOCK: [2017-08-07 Mon 08:00]
+:END:
+
+When running =M-x run-python", I get the following error message
+
+#+BEGIN_EXAMPLE
+Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support readline, yet ‘python-shell-completion-native’ was t and "ipython3" is not part of the ‘python-shell-completion-native-disabled-interpreters’ list. Native completions have been disabled locally.
+#+END_EXAMPLE
+
+A work around (under windows) seems to be
+
+  1. Install =pyreadline=
+  2. Set =python-shell-completion-native= to =t=
+
+See also this [[https://github.com/jorgenschaefer/elpy/issues/887][bug report (elpy)]].
+
 ** Maxima
    :LOGBOOK:
    CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15

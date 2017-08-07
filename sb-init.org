@@ -1175,7 +1175,7 @@ It may be useful to set some other =elpy= variables. Since their value is platfo
 
 *** A_FAIRE Native completion problems
 :LOGBOOK:
-CLOCK: [2017-08-07 Mon 08:00]
+CLOCK: [2017-08-07 Mon 08:00]--[2017-08-07 Mon 08:45] =>  0:45
 :END:
 
 When running =M-x run-python", I get the following error message

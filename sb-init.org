@@ -1434,6 +1434,9 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
   - [[http://pragmaticemacs.com/emacs/multiple-choices-in-yasnippets/][Multiple choices in yasnippets]] (Pragmatic Emacs)
 
 ** Paren editing
+:LOGBOOK:
+CLOCK: [2017-08-29 Tue 08:35]--[2017-08-29 Tue 09:05] =>  0:30
+:END:
 
   - [[http://superuser.com/questions/124246/emacs-equivalent-to-vim-ci][Emacs equivalent to VIM ci ?]]
   - [[https://github.com/magnars/change-inner.el][change-inner.el]]
@@ -1441,6 +1444,12 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
   - [[http://pragmaticemacs.com/emacs/jump-to-matching-parenthesis/][Jump to matching parenthesis]]
   - [[https://github.com/cute-jumper/embrace.el][embrace.el]]
   - [[http://endlessparentheses.com/a-few-paredit-keys-that-take-over-the-world.html][A few paredit keys that take over the world]] (Endless Parentheses)
+
+It seems there are already quite a few useful built-in functions
+available in emacs, that I should start to use first. See
+[[info:Emacs#Parentheses][Commands for Editing with Parentheses]]. In particular, the function
+ =mark-sexp= (bound to =C-M-SPC=) is interesting. It seems to work
+with LaTeX delimiters like =\Bigl(=, =\Bigr)=, ...
 
 ** Calfw - A calendar framework for Emacs
 

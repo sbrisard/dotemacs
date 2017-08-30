@@ -1235,9 +1235,9 @@ CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
 
 #+BEGIN_SRC emacs-lisp
   (ido-mode t)
+  (ido-everywhere t)
 
   (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
   (setq ido-file-extensions-order (quote (".org" ".tex" ".bib" ".html" ".py")))
   (setq ido-ignore-extensions nil)
   (setq ido-ignore-files (quote ("\\`#"
@@ -1264,15 +1264,18 @@ CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
                                  "\\.git/")))
 #+END_SRC
 
-** ido-ubiquitous
+** ido-completing-read+
 :LOGBOOK:
+CLOCK: [2017-08-30 Wed 13:55]--[2017-08-30 Wed 14:05] =>  0:10
 CLOCK: [2016-09-24 Sat 06:20]--[2016-09-24 Sat 06:25] =>  0:05
 :END:
 
-[[https://github.com/DarwinAwardWinner/ido-ubiquitous][ido-ubquitous]] replaces stock emacs completion with ido completion wherever it is possible to do so without breaking things.
+[[https://github.com/DarwinAwardWinner/ido-completing-read-plus][ido-completing-read+]] replaces stock emacs completion with ido
+completion wherever it is possible to do so without breaking things.
 
 #+BEGIN_SRC emacs-lisp
-  (ido-ubiquitous-mode 1)
+  (require 'ido-completing-read+)
+  (ido-ubiquitous-mode t)
 #+END_SRC
 
 * Text editing

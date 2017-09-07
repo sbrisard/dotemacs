@@ -1225,6 +1225,33 @@ The files for the maxima mode are not available on MELPA. They are packaged with
                               auto-mode-alist))
 #+END_SRC
 
+** Asymptote
+
+#+BEGIN_QUOTE
+[[http://asymptote.sourceforge.net/][Asymptote]] is a powerful descriptive vector graphics language that
+provides a natural coordinate-based framework for technical
+drawing. Labels and equations are typeset with LaTeX, for high-quality
+PostScript output.
+#+END_QUOTE
+
+From the [[http://asymptote.sourceforge.net/doc/Editing-modes.html][online help]], the files for the asymptote mode can be found in
+root directory of Asymptote.
+
+#+BEGIN_SRC emacs-lisp
+  (defcustom sb-path-to-asy-mode "C:\\Program Files (x86)\\Asymptote"
+    "Path to the folder hosting elisp files for asy-mode (Asymptote
+  major mode).  This is the path to the files: asy-init.el,
+  asy-keywords.el, asy-mode.el.
+  "
+    :type 'string :group 'sb :tag "Path to Asymptote major mode files")
+
+  (add-to-list 'load-path sb-path-to-asy-mode)
+  (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
+  (autoload 'lasy-mode "asy-mode.el" "hybrid Asymptote/Latex major mode." t)
+  (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
+  (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode))
+#+END_SRC
+
 * Ido
 
   - [[https://www.masteringemacs.org/article/introduction-to-ido-mode][Introduction to Ido Mode]]

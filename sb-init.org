@@ -1236,9 +1236,9 @@ CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
 
 #+BEGIN_SRC emacs-lisp
   (ido-mode t)
+  (ido-everywhere t)
 
   (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
   (setq ido-file-extensions-order (quote (".org" ".tex" ".bib" ".html" ".py")))
   (setq ido-ignore-extensions nil)
   (setq ido-ignore-files (quote ("\\`#"
@@ -1265,15 +1265,18 @@ CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
                                  "\\.git/")))
 #+END_SRC
 
-** ido-ubiquitous
+** ido-completing-read+
 :LOGBOOK:
+CLOCK: [2017-08-30 Wed 13:55]--[2017-08-30 Wed 14:05] =>  0:10
 CLOCK: [2016-09-24 Sat 06:20]--[2016-09-24 Sat 06:25] =>  0:05
 :END:
 
-[[https://github.com/DarwinAwardWinner/ido-ubiquitous][ido-ubquitous]] replaces stock emacs completion with ido completion wherever it is possible to do so without breaking things.
+[[https://github.com/DarwinAwardWinner/ido-completing-read-plus][ido-completing-read+]] replaces stock emacs completion with ido
+completion wherever it is possible to do so without breaking things.
 
 #+BEGIN_SRC emacs-lisp
-  (ido-ubiquitous-mode 1)
+  (require 'ido-completing-read+)
+  (ido-ubiquitous-mode t)
 #+END_SRC
 
 * Text editing
@@ -1435,6 +1438,9 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
   - [[http://pragmaticemacs.com/emacs/multiple-choices-in-yasnippets/][Multiple choices in yasnippets]] (Pragmatic Emacs)
 
 ** Paren editing
+:LOGBOOK:
+CLOCK: [2017-08-29 Tue 08:35]--[2017-08-29 Tue 09:05] =>  0:30
+:END:
 
   - [[http://superuser.com/questions/124246/emacs-equivalent-to-vim-ci][Emacs equivalent to VIM ci ?]]
   - [[https://github.com/magnars/change-inner.el][change-inner.el]]
@@ -1442,6 +1448,12 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
   - [[http://pragmaticemacs.com/emacs/jump-to-matching-parenthesis/][Jump to matching parenthesis]]
   - [[https://github.com/cute-jumper/embrace.el][embrace.el]]
   - [[http://endlessparentheses.com/a-few-paredit-keys-that-take-over-the-world.html][A few paredit keys that take over the world]] (Endless Parentheses)
+
+It seems there are already quite a few useful built-in functions
+available in emacs, that I should start to use first. See
+[[info:Emacs#Parentheses][Commands for Editing with Parentheses]]. In particular, the function
+ =mark-sexp= (bound to =C-M-SPC=) is interesting. It seems to work
+with LaTeX delimiters like =\Bigl(=, =\Bigr)=, ...
 
 ** Calfw - A calendar framework for Emacs
 

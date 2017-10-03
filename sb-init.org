@@ -1261,7 +1261,7 @@ root directory of Asymptote.
 CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
 :END:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (ido-mode t)
   (ido-everywhere t)
 
@@ -1301,7 +1301,7 @@ CLOCK: [2016-09-24 Sat 06:20]--[2016-09-24 Sat 06:25] =>  0:05
 [[https://github.com/DarwinAwardWinner/ido-completing-read-plus][ido-completing-read+]] replaces stock emacs completion with ido
 completion wherever it is possible to do so without breaking things.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (require 'ido-completing-read+)
   (ido-ubiquitous-mode t)
 #+END_SRC
@@ -1435,6 +1435,33 @@ credentials, in particular creation/insertion of passwords.
   - [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]]
   - [[http://emacsthemes.com/][Emacs Themes]]
 
+** Swiper
+:LOGBOOK:
+CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20]
+:END:
+
+#+BEGIN_SRC emacs-lisp
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+#+END_SRC
+
 ** eyebrowse
 
 [[https://github.com/wasamasa/eyebrowse][eyebrowse]] is a global minor mode for Emacs that allows you to manage
@@ -1466,6 +1493,7 @@ CLOCK: [2017-01-19 Thu 08:00]--[2017-01-19 Thu 08:10] =>  0:10
 
 ** Paren editing
 :LOGBOOK:
+CLOCK: [2017-09-28 Thu 08:05]--[2017-09-28 Thu 08:20] =>  0:15
 CLOCK: [2017-08-29 Tue 08:35]--[2017-08-29 Tue 09:05] =>  0:30
 :END:
 

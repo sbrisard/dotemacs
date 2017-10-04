@@ -1437,7 +1437,7 @@ credentials, in particular creation/insertion of passwords.
 
 ** Swiper
 :LOGBOOK:
-CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20]
+CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20] =>  0:20
 :END:
 
 #+BEGIN_SRC emacs-lisp

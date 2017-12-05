@@ -1435,10 +1435,12 @@ credentials, in particular creation/insertion of passwords.
   - [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]]
   - [[http://emacsthemes.com/][Emacs Themes]]
 
-** Swiper
+** Ivy, Counsel and Swiper
 :LOGBOOK:
 CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20] =>  0:20
 :END:
+
+  - [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][Ivy, Counsel and Swiper]]
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (ivy-mode 1)
@@ -1669,10 +1671,6 @@ minimal -- and ideally zero -- configuration with absolutely no stored
 indexes (TAGS) or persistent background processes. Dumb Jump requires
 at least GNU Emacs 24.3.
 #+END_QUOTE
-
-** Ivy, Counsel and Swiper
-
-  - [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][Ivy, Counsel and Swiper]]
 
 ** PDF tools
 

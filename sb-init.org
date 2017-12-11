@@ -720,7 +720,7 @@ This is potentially risky!
 
 ** Formatting of times
 :LOGBOOK:
-CLOCK: [2017-12-11 Mon 08:00]
+CLOCK: [2017-12-11 Mon 08:00]--[2017-12-11 Mon 08:15] =>  0:15
 :END:
 
 By default, total times are printed in days, hours and minutes in clock-tables. This can be changed as follows

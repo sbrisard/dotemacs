@@ -1,4 +1,4 @@
-# -*- mode: org; coding: utf-8 -*-
+# -*- mode: org; coding: utf-8; fill-column: 79 -*-
 #+TITLE: My emacs configuration file
 #+AUTHOR: Sébastien Brisard
 #+CATEGORY: DOTEMACS

@@ -1272,7 +1272,7 @@ root directory of Asymptote.
 CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
 :END:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle yes
   (ido-mode t)
   (ido-everywhere t)
 
@@ -1312,7 +1312,7 @@ CLOCK: [2016-09-24 Sat 06:20]--[2016-09-24 Sat 06:25] =>  0:05
 [[https://github.com/DarwinAwardWinner/ido-completing-read-plus][ido-completing-read+]] replaces stock emacs completion with ido
 completion wherever it is possible to do so without breaking things.
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle yes
   (require 'ido-completing-read+)
   (ido-ubiquitous-mode t)
 #+END_SRC
@@ -1448,10 +1448,10 @@ credentials, in particular creation/insertion of passwords.
 
 ** Swiper
 :LOGBOOK:
-CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20]
+CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20] =>  0:20
 :END:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)

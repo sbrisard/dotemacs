@@ -1,4 +1,4 @@
-# -*- mode: org; coding: utf-8 -*-
+# -*- mode: org; coding: utf-8; fill-column: 79 -*-
 #+TITLE: My emacs configuration file
 #+AUTHOR: Sébastien Brisard
 #+CATEGORY: DOTEMACS
@@ -716,6 +716,17 @@ This is potentially risky!
 
 #+BEGIN_SRC emacs-lisp
   (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+** Formatting of times
+:LOGBOOK:
+CLOCK: [2017-12-11 Mon 08:00]--[2017-12-11 Mon 08:15] =>  0:15
+:END:
+
+By default, total times are printed in days, hours and minutes in clock-tables. This can be changed as follows
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-duration-format (quote ((special . h:mm))))
 #+END_SRC
 
 ** Hacking

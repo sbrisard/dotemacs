@@ -1303,6 +1303,13 @@ CLOCK: [2016-05-09 Mon 08:50]--[2016-05-09 Mon 08:55] =>  0:05
                                  "\\.git/")))
 #+END_SRC
 
+Ido sometimes freezes emacs completely. It seems that caching is the culprit
+(TBC). Here is how to deactivate that functionality
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq ido-enable-last-directory-history nil)
+#+END_SRC
+
 ** ido-completing-read+
 :LOGBOOK:
 CLOCK: [2017-08-30 Wed 13:55]--[2017-08-30 Wed 14:05] =>  0:10

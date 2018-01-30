@@ -1464,6 +1464,7 @@ CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20] =>  0:20
 #+BEGIN_SRC emacs-lisp :tangle yes
   (ivy-mode 1)
   (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always))
 #+END_SRC
 
 ** eyebrowse

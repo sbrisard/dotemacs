@@ -1487,6 +1487,8 @@ bringing compatibility with Firefox, too.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'atomic-chrome)
   (atomic-chrome-start-server)
+
+  (setq atomic-chrome-buffer-open-style (quote frame))
 #+END_SRC
 
 ** eyebrowse

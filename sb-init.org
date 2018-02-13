@@ -38,6 +38,54 @@ Possible sources of inspiration
   - [[https://github.com/dakrone/eos/blob/master/eos.org#the-emacs-operating-system-eos][The Emacs Operating System (EOS)]]
   - [[https://github.com/novoid/dot-emacs/blob/master/config.org][Karl Voit's Emacs Configuration]]
 
+* Package management
+
+** emacs behind a proxy
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq url-proxy-services '(("http" . "proxy.enpc.fr:3128")
+                             ("https" . "proxy.enpc.fr:3128")))
+#+END_SRC
+
+** Emacs Lisp Package Archive (ELPA)
+
+Various repositories are configured.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("melpa" . "http://melpa.org/packages/")
+                           ("melpa-stable" . "http://stable.melpa.org/packages/")
+                           ("elpy" . "http://jorgenschaefer.github.io/packages/")
+                           ("org" . "https://orgmode.org/elpa/")))
+  (package-initialize)
+#+END_SRC
+
+** use-package
+:LOGBOOK:
+CLOCK: [2018-02-13 Tue 08:15]--[2018-02-13 Tue 08:30] =>  0:15
+:END:
+
+[[https://github.com/jwiegley/use-package]]
+
+#+BEGIN_QUOTE
+The use-package macro allows you to isolate package configuration in
+your .emacs file in a way that is both performance-oriented and, well,
+tidy. I created it because I have over 80 packages that I use in
+Emacs, and things were getting difficult to manage. Yet with this
+utility my total load time is around 2 seconds, with no loss of
+functionality!
+#+END_QUOTE
+
+See also
+
+  - [[http://cachestocaches.com/2015/8/getting-started-use-package/][Getting started with use-package]]
+  - [[http://irreal.org/blog/?p=6442][John Wiegley and Sacha Chua on use-package]]
+
+#+BEGIN_SRC emacs-lisp
+  (require 'use-package)
+#+END_SRC
+
 * Miscellaneous
   :LOGBOOK:
   CLOCK: [2016-09-05 Mon 08:30]--[2016-09-05 Mon 08:40] =>  0:10
@@ -116,13 +164,6 @@ It should be noted that Input method conflicts with key-chord, which I no longer
 
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
-#+END_SRC
-
-** emacs behind a proxy
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (setq url-proxy-services '(("http" . "proxy.enpc.fr:3128")
-                             ("https" . "proxy.enpc.fr:3128")))
 #+END_SRC
 
 * Functions and variables to be used in this file
@@ -257,21 +298,6 @@ My personal keymap is called =sb-map=, and the prefix key that is assigned to th
 :LOGBOOK:
 CLOCK: [2016-10-20 Thu 21:15]--[2016-10-20 Thu 21:55] =>  0:40
 :END:
-
-
-** Emacs Lisp Package Archive (ELPA)
-
-Various repositories are configured.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("melpa" . "http://melpa.org/packages/")
-                           ("melpa-stable" . "http://stable.melpa.org/packages/")
-                           ("elpy" . "http://jorgenschaefer.github.io/packages/")
-                           ("org" . "https://orgmode.org/elpa/")))
-  (package-initialize)
-#+END_SRC
 
 ** Others
 
@@ -1640,24 +1666,6 @@ zotxt is a Zotero extension for supporting utilities that deal with plain text f
 #+END_QUOTE
 
 See also Michael Behr's blog post: [[http://www.mkbehr.com/posts/a-research-workflow-with-zotero-and-org-mode/][A research workflow with Zotero and Org mode]].
-
-** use-package
-
-[[https://github.com/jwiegley/use-package]]
-
-#+BEGIN_QUOTE
-The use-package macro allows you to isolate package configuration in
-your .emacs file in a way that is both performance-oriented and, well,
-tidy. I created it because I have over 80 packages that I use in
-Emacs, and things were getting difficult to manage. Yet with this
-utility my total load time is around 2 seconds, with no loss of
-functionality!
-#+END_QUOTE
-
-See also
-
-  - [[http://cachestocaches.com/2015/8/getting-started-use-package/][Getting started with use-package]]
-  - [[http://irreal.org/blog/?p=6442][John Wiegley and Sacha Chua on use-package]]
 
 ** rx (built-in package)
 

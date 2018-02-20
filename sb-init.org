@@ -4,43 +4,14 @@
 #+CATEGORY: DOTEMACS
 #+PROPERTY: header-args:emacs-lisp :tangle yes :results output silent
 
-* Introduction
-  :LOGBOOK:
-  CLOCK: [2016-09-15 Thu 08:25]--[2016-09-15 Thu 08:58] =>  0:33
-  :END:
-
-I use the literate programming paradigm for my emacs configuration. This file should therefore be loaded with =org-babel-load-file=. More information can be found here
-
-  - [[http://irreal.org/blog/?p=2804][Literate Programming and Your Emacs Configuration]]
-  - [[https://www.mfoot.com/blog/2015/11/22/literate-emacs-configuration-with-org-mode/][Literate emacs configuration with org mode]]
-  - [[http://pages.sachachua.com/.emacs.d/Sacha.html#orgheadline188][Sacha Chua's Emacs configuration]]
-  - [[http://howardism.org/Technical/Emacs/literate-programming-tutorial.html][Introduction to literate programming]]
-  - [[https://github.com/baron42bba/.emacs.d/blob/master/bba.org][bba emacs configuration]]
-  - [[https://github.com/caisah/emacs.dz][Awesome emacs config files]]: a list of people with nice emacs config files
-  - [[https://github.com/novoid/dot-emacs/blob/master/config.org][Karl Voit's config file]]
-
-This file should be saved in =~/.emacs.d= (for example, as =~/.emacs.d/sb-init.el=). The most natural way to load this file would probably be to append the following line at the bottom of =~/.emacs.d/init.el=
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (org-babel-load-file (concat user-emacs-directory "sb-init.org"))
-#+END_SRC
-
-However, this leads to a conflict, since this call to =org-babel-load-file= will load the built-in version of Orgmode, since =package-initialize= has not been loaded yet. This results in a [[http://orgmode.org/worg/org-faq.html#mixed-install][mixed installation]]. I prefer to tangle this file manually, and append the following line at the bottom of =~/.emacs.d/init.el=
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (load-file (concat user-emacs-directory "sb-init.el"))
-#+END_SRC
-
-Tangling can be triggered by calling =org-babel-tangle-file= (=C-c C-v t=).
-
-Possible sources of inspiration
-
-  - [[https://github.com/dakrone/eos/blob/master/eos.org#the-emacs-operating-system-eos][The Emacs Operating System (EOS)]]
-  - [[https://github.com/novoid/dot-emacs/blob/master/config.org][Karl Voit's Emacs Configuration]]
-
 * Package management
 
 ** emacs behind a proxy
+
+#+BEGIN_SRC emacs-lisp
+  ; Remember to configure proxy if necessary
+  (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (setq url-proxy-services '(("http" . "proxy.enpc.fr:3128")

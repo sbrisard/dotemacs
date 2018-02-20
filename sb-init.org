@@ -1502,29 +1502,6 @@ CLOCK: [2017-10-03 Tue 09:00]--[2017-10-03 Tue 09:20] =>  0:20
   (setq ivy-case-fold-search-default (quote always))
 #+END_SRC
 
-** Atomic Chrome for Emacs
-
-#+BEGIN_QUOTE
-This is the Emacs version of [[https://github.com/tuvistavie/atomic-chrome][Atomic Chrome]] which is an extension for Google
-Chrome browser that allows you to edit text areas of the browser in Emacs. It's
-similar to [[https://github.com/stsquad/emacs_chrome][Edit with Emacs]], but has some advantages as below with the help of
-websocket.
-
-  - The input on Emacs is reflected to the browser instantly and continuously.
-  - You can use both the browser and Emacs at the same time. They are updated
-    to the same content bi-directionally.
-
-Since v2.0.0, Atomic Chrome for Emacs supports [[https://github.com/GhostText/GhostText][Ghost Text]] as browser extension,
-bringing compatibility with Firefox, too.
-#+END_QUOTE
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (require 'atomic-chrome)
-  (atomic-chrome-start-server)
-
-  (setq atomic-chrome-buffer-open-style (quote frame))
-#+END_SRC
-
 ** eyebrowse
 
 [[https://github.com/wasamasa/eyebrowse][eyebrowse]] is a global minor mode for Emacs that allows you to manage

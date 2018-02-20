@@ -686,6 +686,17 @@ See also
   (setq org-export-with-todo-keywords t)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load "ox-latex"
+    (add-to-list 'org-latex-classes
+                 '("koma-article" "\\documentclass{scrartcl}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+#+END_SRC
+
 ** Working with source code
 
 *** Editing source code

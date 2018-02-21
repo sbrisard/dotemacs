@@ -13,95 +13,35 @@
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle no
-  (setq url-proxy-services '(("http" . "proxy.enpc.fr:3128")
-                             ("https" . "proxy.enpc.fr:3128")))
-#+END_SRC
-
-** Emacs Lisp Package Archive (ELPA)
-
-Various repositories are configured.
-
 #+BEGIN_SRC emacs-lisp
+  ; This is required for M-x package-list-packages to work properly
+  (prefer-coding-system 'utf-8)
+
   (require 'package)
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("melpa" . "http://melpa.org/packages/")
-                           ("melpa-stable" . "http://stable.melpa.org/packages/")
-                           ("elpy" . "http://jorgenschaefer.github.io/packages/")
-                           ("org" . "https://orgmode.org/elpa/")))
+  (setq package-archives
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")
+          ("melpa-stable" . "http://stable.melpa.org/packages/")
+          ("elpy" . "http://jorgenschaefer.github.io/packages/")
+          ("org" . "https://orgmode.org/elpa/")))
   (package-initialize)
 #+END_SRC
-
-** use-package
-:LOGBOOK:
-CLOCK: [2018-02-13 Tue 08:15]--[2018-02-13 Tue 08:30] =>  0:15
-:END:
-
-[[https://github.com/jwiegley/use-package]]
-
-#+BEGIN_QUOTE
-The use-package macro allows you to isolate package configuration in
-your .emacs file in a way that is both performance-oriented and, well,
-tidy. I created it because I have over 80 packages that I use in
-Emacs, and things were getting difficult to manage. Yet with this
-utility my total load time is around 2 seconds, with no loss of
-functionality!
-#+END_QUOTE
-
-See also
-
-  - [[http://cachestocaches.com/2015/8/getting-started-use-package/][Getting started with use-package]]
-  - [[http://irreal.org/blog/?p=6442][John Wiegley and Sacha Chua on use-package]]
 
 #+BEGIN_SRC emacs-lisp
   (require 'use-package)
   (setq use-package-always-ensure t)
 #+END_SRC
 
-* Miscellaneous
-  :LOGBOOK:
-  CLOCK: [2016-09-05 Mon 08:30]--[2016-09-05 Mon 08:40] =>  0:10
-  :END:
-
-** Coding system
-
-Use UTF-8 preferably.
-
 #+BEGIN_SRC emacs-lisp
-  (prefer-coding-system 'utf-8)
-#+END_SRC
-
-** Input method
-:LOGBOOK:
-CLOCK: [2016-11-24 Thu 07:20]--[2016-11-24 Thu 07:25] =>  0:05
-CLOCK: [2016-11-21 Mon 08:30]--[2016-11-21 Mon 09:00] =>  0:30
-CLOCK: [2016-11-17 Thu 07:15]--[2016-11-17 Thu 07:35] =>  0:20
-CLOCK: [2016-11-13 Sun 08:50]--[2016-11-13 Sun 09:10] =>  0:20
-CLOCK: [2016-11-12 Sat 20:45]--[2016-11-12 Sat 21:00] =>  0:15
-CLOCK: [2016-11-12 Sat 13:30]--[2016-11-12 Sat 13:45] =>  0:15
-CLOCK: [2016-11-12 Sat 06:40]--[2016-11-12 Sat 07:00] =>  0:20
-CLOCK: [2016-11-11 Fri 09:25]--[2016-11-11 Fri 09:45] =>  0:20
-CLOCK: [2016-11-10 Thu 21:05]--[2016-11-10 Thu 21:35] =>  0:30
-CLOCK: [2016-11-10 Thu 06:00]--[2016-11-10 Thu 06:30] =>  0:30
-:END:
-
-I initially set up a set of [[https://github.com/abo-abo/hydra][hydras]] to easily input Greek characters and mathematical symbols (arrows and such). It turns out that this is best done through the rfc1345 [[info:Emacs#Input Methods][input method]] (see also =C-h I rfc1345=). This input method is toggled on for org and text buffers. This allows in particular to use it for editing commit messages with magit (commit messages are text mode buffers).
-
-In case this is not sufficient, it is possible to set up a minor mode, see
-
-  - [[https://github.com/grettke/fraktur-mode/blob/master/fraktur-mode.el][fraktur-mode]],
-  - [[https://www.wisdomandwonder.com/article/10349/screencast-the-story-of-blackboard-bold-mode][The Story Of blackboard-bold-mode]],
-  - [[http://nullprogram.com/blog/2013/02/06/][How to Make an Emacs Minor Mode]].
-
-It should be noted that Input method conflicts with key-chord, which I no longer use.
-
-#+BEGIN_SRC emacs-lisp
+  ; input-method conflicts with key-chord, which I do not use
   (setq default-input-method 'rfc1345)
   (defun sb-activate-input-method ()
     (activate-input-method default-input-method))
   (add-hook 'text-mode-hook 'sb-activate-input-method)
   (add-hook 'org-mode-hook 'sb-activate-input-method)
 #+END_SRC
+
+* Miscellaneous
 
 ** A_FAIRE À classer
    :LOGBOOK:

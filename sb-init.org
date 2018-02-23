@@ -4,11 +4,38 @@
 #+CATEGORY: DOTEMACS
 #+PROPERTY: header-args:emacs-lisp :tangle yes :results output silent
 
-* Package management
-
-** emacs behind a proxy
-
 #+BEGIN_SRC emacs-lisp
+  (defgroup sb nil "My customization group" :tag "sb")
+
+  (defcustom sb-path-to-local-documents "~/Documents"
+    "Path to the documents directory.
+
+  It is in particular assumed that
+
+    - my org notes are located in the notes/ subdirectory,
+    - my blog files are located in the blog/ subdirectory.
+
+  Under Linux, this variable might be set to
+
+      /home/username/Documents
+
+  while under Windows, it might be set to
+
+      C:\\Users\\username\\Documents
+
+  In most cases, the default value
+
+      ~/Documents
+
+  should work."
+    :type 'string :group 'sb :tag "Path to local documents")
+
+  (defcustom sb-path-to-bibliography "~/MyCoRe/biblio"
+    "Path to the local bibliography.
+
+  See `sb-insert-bibref' for more details."
+    :type 'string :group 'sb :tag "Path to bibliography")
+
   ; Remember to configure proxy if necessary
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 #+END_SRC
@@ -28,6 +55,7 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package) (package-install 'use-package))
   (require 'use-package)
   (setq use-package-always-ensure t)
 #+END_SRC
@@ -90,38 +118,6 @@
 
 The custom group SB gathers some variables which must be set locally.
 
-#+BEGIN_SRC emacs-lisp
-  (defgroup sb nil "My customization group" :tag "SB")
-
-  (defcustom sb-path-to-local-documents "~/Documents"
-    "Path to the documents directory.
-
-  It is in particular assumed that
-
-    - my org notes are located in the notes/ subdirectory,
-    - my blog files are located in the blog/ subdirectory.
-
-  Under Linux, this variable might be set to
-
-      /home/username/Documents
-
-  while under Windows, it might be set to
-
-      C:\\Users\\username\\Documents
-
-  In most cases, the default value
-
-      ~/Documents
-
-  should work."
-    :type 'string :group 'sb :tag "Path to local documents")
-
-  (defcustom sb-path-to-bibliography "~/MyCoRe/biblio"
-    "Path to the local bibliography.
-
-  See `sb-insert-bibref' for more details."
-    :type 'string :group 'sb :tag "Path to bibliography")
-#+END_SRC
 
 ** Load a file only when it exists
 

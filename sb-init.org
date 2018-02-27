@@ -216,12 +216,6 @@ CLOCK: [2016-10-20 Thu 21:15]--[2016-10-20 Thu 21:55] =>  0:40
   (require 'htmlize)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (use-package embrace
-    :ensure t
-    :bind (:map sb-map ("(" . embrace-commander)))
-#+END_SRC
-
 * Navigation
 
 Some interesting references

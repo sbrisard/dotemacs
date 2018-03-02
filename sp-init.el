@@ -7,6 +7,10 @@
 (smartparens-global-mode t)
 (show-smartparens-global-mode t)
 
+;; Deactivate electric mode as it conflicts with AUCTex's
+;; This should be investigated
+(setq sp-autoinsert-pair nil)
+
 (bind-key "C-M-f" #'sp-forward-sexp)
 (bind-key "C-M-b" #'sp-backward-sexp)
 (bind-key "C-M-k" #'sp-kill-sexp)

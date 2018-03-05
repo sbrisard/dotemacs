@@ -25,3 +25,8 @@
   (interactive)
   (let ((enc (sp-get-enclosing-sexp)))
     (buffer-substring (sp-get enc :beg) (sp-get enc :end))))
+
+(defun sb-rewrap-sexp ()
+  (interactive)
+  (completing-read (sb-get-enclosing-sexp-as-string)
+                   (sp--get-pair-list-context 'wrap)))

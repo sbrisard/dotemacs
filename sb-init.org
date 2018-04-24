@@ -1107,6 +1107,15 @@ CLOCK: [2014-08-07 Thu 07:30]--[2014-08-07 Thu 10:00] =>  2:30
 CLOCK: [2014-08-05 Tue 07:30]--[2014-08-05 Tue 10:30] =>  3:00
 :END:
 
+#+BEGIN_SRC emacs-lisp
+  (setq python-shell-completion-native-enable nil
+        python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt"
+        python-shell-prompt-detect-enabled nil
+        python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
+        python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+#+END_SRC
+
 I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
 
 #+BEGIN_SRC emacs-lisp

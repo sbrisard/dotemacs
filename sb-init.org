@@ -1081,6 +1081,14 @@ straightforward.
     (insert-file-contents (sb-bibref-path (downcase key))))
 #+END_SRC
 
+** bratex
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/lisp/bratex")
+  (require 'bratex)
+  (add-hook 'LaTeX-mode-hook #'bratex-config)
+#+END_SRC
+
 * Development
 
 ** C

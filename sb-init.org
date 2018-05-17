@@ -36,14 +36,8 @@
   See `sb-insert-bibref' for more details."
     :type 'string :group 'sb :tag "Path to bibliography")
 
-  (defcustom sb-path-to-julia-mode "~/.emacs.d/lisp/julia-emacs"
-    "Path to the julia-mode files (Julia major mode).
-
-  This is the path to the file: julia-mode.el. See:
-
-       https://github.com/JuliaEditorSupport/julia-emacs
-
-  (last retrieved 2018-05-04).")
+  ;; Remember to configure path to Julia program if necessary
+  (custom-add-to-group 'sb 'julia-program 'custom-variable)
 
   ; Remember to configure proxy if necessary
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
@@ -1224,13 +1218,6 @@ root directory of Asymptote.
   (autoload 'lasy-mode "asy-mode.el" "hybrid Asymptote/Latex major mode." t)
   (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
   (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode))
-#+END_SRC
-
-** Julia
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path sb-path-to-julia-mode)
-  (require 'julia-mode)
 #+END_SRC
 
 * Ido

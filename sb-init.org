@@ -41,6 +41,9 @@
 
   ; Remember to configure proxy if necessary
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
+
+  (load-theme 'spacemacs-dark)
+  (set-face-font 'default "Liberation Mono")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -378,7 +381,7 @@ This function is therefore bound to =M-SPC=.
 I use the [[https://github.com/bbatsov/zenburn-emacs][Zenburn theme]] when emacs is run in GUI mode.
 
 #+BEGIN_SRC emacs-lisp
-  (when (display-graphic-p) (load-theme 'zenburn t))
+;;  (when (display-graphic-p) (load-theme 'zenburn t))
 #+END_SRC
 
 ** A_FAIRE Frame size

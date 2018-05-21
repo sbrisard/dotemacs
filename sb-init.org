@@ -64,10 +64,10 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package spacemacs-dark
-    :config
-    (load-theme 'spacemacs-dark)
-    (setq spacemacs-theme-org-height nil))
+  (use-package spacemacs-theme)
+
+  (setq spacemacs-theme-org-height nil)
+  (load-theme 'spacemacs-dark)
 
   (set-face-font 'default "Liberation Mono")
 #+END_SRC

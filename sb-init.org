@@ -43,6 +43,7 @@
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 
   (load-theme 'spacemacs-dark)
+  (setq spacemacs-theme-org-height nil)
   (set-face-font 'default "Liberation Mono")
 #+END_SRC
 

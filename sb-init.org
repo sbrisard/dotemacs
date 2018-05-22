@@ -69,7 +69,7 @@
   (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-dark)
 
-  (set-face-font 'default "Liberation Mono")
+  (set-face-font 'default "DejaVu Sans Mono")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

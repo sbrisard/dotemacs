@@ -109,7 +109,7 @@
 
   (global-auto-revert-mode)
   (global-hl-line-mode)
-  (menu-bar-mode)
+  (menu-bar-mode -1)
   ;(scroll-bar-mode -1)
   (show-paren-mode)
   (setq show-paren-style (quote expression))
@@ -1306,7 +1306,7 @@ In selected modes, show trailing whitespaces and empty lines at the end of the b
 In all modes, empty lines at the end of the buffer are shown, and trailing white spaces are removed when buffer is saved.
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default indicate-empty-lines t)
+  (setq indicate-empty-lines nil)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 

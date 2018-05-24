@@ -246,36 +246,6 @@ Default directory is retrieved programmatically from the environment variable =H
   (setq default-directory (concat (getenv "HOME") "/"))
 #+END_SRC
 
-** Avy
-:LOGBOOK:
-CLOCK: [2016-04-29 Fri 07:25]--[2016-04-29 Fri 07:35] =>  0:10
-CLOCK: [2016-03-21 Mon 08:15]--[2016-03-21 Mon 08:20] =>  0:05
-CLOCK: [2016-03-14 Mon 08:15]--[2016-03-14 Mon 08:40] =>  0:25
-:END:
-
-From the [[https://github.com/abo-abo/avy][official website]]
-
-#+BEGIN_QUOTE
-=avy= is a GNU Emacs package for jumping to visible text using a char-based decision tree. See also [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] and [[https://github.com/Lokaltog/vim-easymotion][vim-easymotion]] - =avy= uses the same idea.
-#+END_QUOTE
-
-See also
-
-  - [[http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/][Ace-jump-mode Is Dead, Long Live Avy]]
-  - [[http://oremacs.com/2015/05/08/avy-0.1.0/][New on MELPA - avy]]
-
-#+BEGIN_SRC emacs-lisp
-  (setq avy-background t)
-  (setq avy-keys (quote (113 115 100 102 103 104 106 107 108 109)))
-#+END_SRC
-
-Avy commands are bound to =C-& &= and =C-& é=.
-
-#+BEGIN_SRC emacs-lisp
-  (define-key sb-map (kbd "&") 'avy-goto-char)
-  (define-key sb-map (kbd "é") 'avy-goto-char-2)
-#+END_SRC
-
 ** Zap to char vs. zap up to char
    :LOGBOOK:
    CLOCK: [2016-06-15 Wed 08:00]--[2016-06-15 Wed 08:15] =>  0:15

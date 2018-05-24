@@ -276,29 +276,6 @@ Avy commands are bound to =C-& &= and =C-& é=.
   (define-key sb-map (kbd "é") 'avy-goto-char-2)
 #+END_SRC
 
-** Ace-window
-   :LOGBOOK:
-   CLOCK: [2016-05-09 Mon 08:40]--[2016-05-09 Mon 08:45] =>  0:05
-   :END:
-
-From the [[https://github.com/abo-abo/ace-window][official website]]
-
-#+BEGIN_QUOTE
-I'm sure you're aware of =other-window= command. While it's great for two windows, it quickly loses its value when there are more windows: you need to call it many times, and since it's not easily predictable, you have to check each time if you're in the window that you wanted.
-
-Another approach is to use =windmove-left=, =windmove-up=, etc. These are fast and predictable. Their disadvantage is that they need 4 key bindings. The default ones are shift+arrows, which are hard to reach.
-
-This package aims to take the speed and predictability of =windmove= and pack it into a single key binding, similar to =other-window=.
-#+END_QUOTE
-
-#+BEGIN_SRC emacs-lisp
-  (require 'ace-window)
-  (global-set-key (kbd "C-x o") 'ace-window)
-  (set-face-attribute 'aw-leading-char-face nil
-  :foreground nil
-  :inherit 'compilation-mode-line-fail)
-#+END_SRC
-
 ** Zap to char vs. zap up to char
    :LOGBOOK:
    CLOCK: [2016-06-15 Wed 08:00]--[2016-06-15 Wed 08:15] =>  0:15

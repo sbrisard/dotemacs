@@ -699,9 +699,13 @@ savefig.facecolor : 3f3f3f
 #+END_EXAMPLE
 
 * Magit
-  :LOGBOOK:
-  CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00
-  :END:
+:LOGBOOK:
+CLOCK: [2016-09-24 Sat 06:25]--[2016-09-24 Sat 06:30] =>  0:05
+CLOCK: [2016-09-24 Sat 05:55]--[2016-09-24 Sat 06:20] =>  0:25
+CLOCK: [2016-09-23 Fri 08:25]--[2016-09-23 Fri 08:55] =>  0:30
+CLOCK: [2016-09-15 Thu 08:08]--[2016-09-15 Thu 08:25] =>  0:17
+CLOCK: [2016-04-21 Thu 07:25]--[2016-04-21 Thu 08:25] =>  1:00
+:END:
 
 From the [[https://magit.vc/about/][official website]]
 
@@ -775,34 +779,6 @@ The solution that I adopted is to use =guit-gui--askpass=, even if it does not i
 #+BEGIN_SRC emacs-lisp
   (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
-
-** Use ido when calling magit-status with a prefix argument
-:LOGBOOK:
-CLOCK: [2016-09-24 Sat 06:25]--[2016-09-24 Sat 06:30] =>  0:05
-CLOCK: [2016-09-24 Sat 05:55]--[2016-09-24 Sat 06:20] =>  0:25
-CLOCK: [2016-09-23 Fri 08:25]--[2016-09-23 Fri 08:55] =>  0:30
-CLOCK: [2016-09-15 Thu 08:08]--[2016-09-15 Thu 08:25] =>  0:17
-:END:
-
-When invoking =magit-status= with a prefix argument, magit prompts for a directory. It would be nice to have use ido to read the directory name. Here is a first attempt at advising =magit-read-repository= to do so
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (defadvice magit-read-repository (around sb-magit-read-repository activate)
-    "Use `ido-read-directory-name' rather than `read-directory-name'."
-    (if (or read-directory-name (not magit-repository-directories))
-        (file-name-as-directory
-         (ido-read-directory-name "Git repository: "
-                                  (or (magit-toplevel) default-directory)))
-      ad-do-it))
-#+END_SRC
-
-However, the above snippet does not work =:'(=. I will keep it for further reference, because while working on this issue, I have discovered the =magit-repository-directories= variable, which stores possible choices for =C-u M-x magit-status=; the following customization activates =ido= to navigate between these choices
-
-#+BEGIN_SRC emacs-lisp
-  (setq magit-completing-read-function (quote magit-ido-completing-read))
-#+END_SRC
-
-This requires the =ido-ubiquitous= package. I will start using this functionality and see if I am happy with it. What would be nice in particular is that magit suggests to add a repository to =magit-repository-directories= if it is not already present in this list.
 
 ** FAIT Insert default commit messages
 :LOGBOOK:

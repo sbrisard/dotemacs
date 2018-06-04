@@ -5,6 +5,37 @@
 #+PROPERTY: header-args:emacs-lisp :tangle yes :results output silent
 
 #+BEGIN_SRC emacs-lisp
+  ;; Vanilla emacs configuration
+  ;; ===========================
+  ;;
+  (setq column-number-mode t)
+  (setq confirm-nonexistent-file-or-buffer t)
+  (setq delete-active-region nil)
+  (setq dnd-open-file-other-window nil)
+  (setq find-file-run-dired nil)
+  (setq indent-tabs-mode nil)
+  (setq inhibit-startup-screen t)
+  (setq initial-frame-alist '((top . 0) (left . 0)))
+  (setq make-backup-files nil)
+  (setq ps-paper-type (quote a4))
+  (setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
+                                           (org-confirm-babel-evaluate))))
+  (setq show-paren-style (quote expression))
+  (setq visible-bell t)
+  ;;(setq-default buffer-file-coding-system 'utf-8)
+
+  (global-auto-revert-mode)
+  (global-hl-line-mode)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (show-paren-mode)
+  (tool-bar-mode -1)
+
+  (global-unset-key (kbd "<C-next>"))
+  (global-unset-key (kbd "<C-prior>"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (defgroup sb nil "My customization group" :tag "sb")
 
   (defcustom sb-path-to-local-documents "~/Documents"
@@ -53,7 +84,8 @@
           ("melpa" . "http://melpa.org/packages/")
           ("melpa-stable" . "http://stable.melpa.org/packages/")
           ("elpy" . "http://jorgenschaefer.github.io/packages/")
-          ("org" . "https://orgmode.org/elpa/")))
+          ;("org" . "https://orgmode.org/elpa/")
+          ))
   (package-initialize)
 
   (defun sb-package-install-unless-installed (pkg)
@@ -75,44 +107,6 @@
     (activate-input-method default-input-method))
   (add-hook 'text-mode-hook 'sb-activate-input-method)
   (add-hook 'org-mode-hook 'sb-activate-input-method)
-#+END_SRC
-
-* Miscellaneous
-
-** A_FAIRE À classer
-   :LOGBOOK:
-   CLOCK: [2016-09-15 Thu 07:15]--[2016-09-15 Thu 07:22] =>  0:07
-   :END:
-
-#+BEGIN_SRC emacs-lisp
-  (setq column-number-mode t)
-  (setq confirm-nonexistent-file-or-buffer t)
-  (setq delete-active-region nil)
-  (setq dnd-open-file-other-window nil)
-  (setq find-file-run-dired nil)
-  (setq inhibit-startup-screen t)
-  (setq initial-frame-alist '((top . 0) (left . 0)))
-  (setq make-backup-files nil)
-  (setq ps-paper-type (quote a4))
-  (setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
-                                           (org-confirm-babel-evaluate))))
-  (setq visible-bell t)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  ;;(setq-default buffer-file-coding-system 'utf-8)
-  (setq-default indent-tabs-mode nil)
-
-  (global-auto-revert-mode)
-  (global-hl-line-mode)
-  (menu-bar-mode -1)
-  ;(scroll-bar-mode -1)
-  (show-paren-mode)
-  (setq show-paren-style (quote expression))
-  (tool-bar-mode -1)
-
-  (global-unset-key (kbd "<C-next>"))
-  (global-unset-key (kbd "<C-prior>"))
 #+END_SRC
 
 * Functions and variables to be used in this file

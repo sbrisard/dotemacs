@@ -8,20 +8,20 @@
   ;; Vanilla emacs configuration
   ;; ===========================
   ;;
-  (setq column-number-mode t)
-  (setq confirm-nonexistent-file-or-buffer t)
-  (setq delete-active-region nil)
-  (setq dnd-open-file-other-window nil)
-  (setq find-file-run-dired nil)
-  (setq indent-tabs-mode nil)
-  (setq inhibit-startup-screen t)
-  (setq initial-frame-alist '((top . 0) (left . 0)))
-  (setq make-backup-files nil)
-  (setq ps-paper-type (quote a4))
-  (setq safe-local-variable-values (quote ((buffer-auto-save-file-name)
-                                           (org-confirm-babel-evaluate))))
-  (setq show-paren-style (quote expression))
-  (setq visible-bell t)
+  (setq column-number-mode t
+        confirm-nonexistent-file-or-buffer t
+        delete-active-region nil
+        dnd-open-file-other-window nil
+        find-file-run-dired nil
+        indent-tabs-mode nil
+        inhibit-startup-screen t
+        initial-frame-alist '((top . 0) (left . 0))
+        make-backup-files nil
+        ps-paper-type (quote a4)
+        safe-local-variable-values (quote ((buffer-auto-save-file-name)
+                                           (org-confirm-babel-evaluate)))
+        show-paren-style (quote expression)
+        visible-bell t)
   ;;(setq-default buffer-file-coding-system 'utf-8)
 
   (global-auto-revert-mode)

@@ -34,6 +34,8 @@
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
 
+  ;; This is required for M-x package-list-packages to work properly
+  (prefer-coding-system 'utf-8)
 
   ;; Definition of my own customization group
   ;; ----------------------------------------
@@ -87,9 +89,6 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ; This is required for M-x package-list-packages to work properly
-  (prefer-coding-system 'utf-8)
-
   (require 'package)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -122,15 +121,11 @@
 #+END_SRC
 
 * Functions and variables to be used in this file
-  :LOGBOOK:
-  CLOCK: [2016-09-15 Thu 07:28]--[2016-09-15 Thu 07:46] =>  0:18
-  CLOCK: [2016-09-05 Mon 08:15]--[2016-09-05 Mon 08:30] =>  0:15
-  CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
-  :END:
-
-** Dedicated custom group
-
-The custom group SB gathers some variables which must be set locally.
+:LOGBOOK:
+CLOCK: [2016-09-15 Thu 07:28]--[2016-09-15 Thu 07:46] =>  0:18
+CLOCK: [2016-09-05 Mon 08:15]--[2016-09-05 Mon 08:30] =>  0:15
+CLOCK: [2016-08-23 Tue 07:45]--[2016-08-23 Tue 07:50] =>  0:05
+:END:
 
 
 ** Load a file only when it exists
@@ -185,8 +180,6 @@ These predicates allow to assert the platform on which emacs currently runs.
   (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
 #+END_SRC
 
-** Linux settings
-
 ** Mac OS X settings
 
 Under Mac OS X, right-alt must be mapped to Alt Gr.
@@ -196,8 +189,6 @@ Under Mac OS X, right-alt must be mapped to Alt Gr.
     (setq mac-option-modifier 'none)
     (setq mac-command-modifier 'meta))
 #+END_SRC
-
-** Windows settings
 
 * My personal keymap
 :LOGBOOK:

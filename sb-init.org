@@ -112,6 +112,12 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+  ;; Used by Org mode for fontification of code blocks.
+  (sb-package-install-unless-installed 'htmlize)
+  (require 'htmlize)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   ; input-method conflicts with key-chord, which I do not use
   (setq default-input-method 'rfc1345)
   (defun sb-activate-input-method ()
@@ -206,19 +212,6 @@ My personal keymap is called =sb-map=, and the prefix key that is assigned to th
 #+BEGIN_SRC emacs-lisp
   (define-prefix-command 'sb-map)
   (global-set-key (kbd "C-&") 'sb-map)
-#+END_SRC
-
-* Various packages
-:LOGBOOK:
-CLOCK: [2016-10-20 Thu 21:15]--[2016-10-20 Thu 21:55] =>  0:40
-:END:
-
-** Others
-
-=htmlize= is used by [[#ORG_MODE][Org mode]] for fontification of code blocks.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'htmlize)
 #+END_SRC
 
 * Navigation

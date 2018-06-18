@@ -38,8 +38,18 @@
   ;; This is required for M-x package-list-packages to work properly
   (prefer-coding-system 'utf-8)
 
-  ;; Useful functions
-  ;; ----------------
+  ;; Useful functions and variables
+  ;; ------------------------------
+
+  (defconst windowsp
+    (string-equal "windows-nt" (symbol-name system-type))
+    "t if the current system is Windows.")
+  (defconst darwinp
+    (string-equal "darwin" (symbol-name system-type))
+    "t if the current system is Darwin.")
+  (defconst linuxp
+    (string-equal "gnu/linux" (symbol-name system-type))
+    "t if the current system is Linux")
 
   (defun sb-activate-default-input-method ()
     "Activate the default input method.
@@ -144,19 +154,6 @@
 #+END_SRC
 
 * Platform dependent settings
-
-** Predicates
-   :LOGBOOK:
-   CLOCK: [2016-09-15 Thu 07:22]--[2016-09-15 Thu 07:25] =>  0:03
-   :END:
-
-These predicates allow to assert the platform on which emacs currently runs.
-
-#+BEGIN_SRC emacs-lisp
-  (defvar windowsp (string-equal "windows-nt" (symbol-name system-type)))
-  (defvar darwinp (string-equal "darwin" (symbol-name system-type)))
-  (defvar linuxp (string-equal "gnu/linux" (symbol-name system-type)))
-#+END_SRC
 
 ** Mac OS X settings
 

@@ -11,6 +11,7 @@
   (setq column-number-mode t
 	confirm-nonexistent-file-or-buffer t
 	default-input-method 'rfc1345
+	default-directory (concat (getenv "HOME") "/")
 	delete-active-region nil
 	dnd-open-file-other-window nil
 	find-file-run-dired nil
@@ -172,24 +173,7 @@ Under Mac OS X, right-alt must be mapped to Alt Gr.
     (setq mac-command-modifier 'meta))
 #+END_SRC
 
-
 * Navigation
-
-Some interesting references
-
-  - [[http://irreal.org/blog/?p%3D5309][Defining a Keymap Prefix (Ireal)]]
-  - See function move-to-window-line-top-bottom, bound to =M-r=
-
-** Default directory
-   :LOGBOOK:
-   CLOCK: [2016-08-17 Wed 08:30]--[2016-08-17 Wed 08:40] =>  0:10
-   :END:
-
-Default directory is retrieved programmatically from the environment variable =HOME=
-
-#+BEGIN_SRC emacs-lisp
-  (setq default-directory (concat (getenv "HOME") "/"))
-#+END_SRC
 
 ** Zap to char vs. zap up to char
    :LOGBOOK:

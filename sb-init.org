@@ -41,13 +41,13 @@
   ;; Useful functions and variables
   ;; ------------------------------
 
-  (defconst windowsp
+  (defconst sb-windows-p
     (string-equal "windows-nt" (symbol-name system-type))
     "t if the current system is Windows.")
-  (defconst darwinp
+  (defconst sb-darwin-p
     (string-equal "darwin" (symbol-name system-type))
     "t if the current system is Darwin.")
-  (defconst linuxp
+  (defconst sb-linux-p
     (string-equal "gnu/linux" (symbol-name system-type))
     "t if the current system is Linux")
 
@@ -160,7 +160,7 @@
 Under Mac OS X, right-alt must be mapped to Alt Gr.
 
 #+BEGIN_SRC emacs-lisp
-  (when darwinp
+  (when sb-darwin-p
     (setq mac-option-modifier 'none)
     (setq mac-command-modifier 'meta))
 #+END_SRC
@@ -661,7 +661,7 @@ Git project should not be handled by =vc=
 Under windows, specify the path to =git=
 
 #+BEGIN_SRC emacs-lisp
-  (when windowsp (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
+  (when sb-windows-p (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
 #+END_SRC
 
 ** Issues under Windows
@@ -706,7 +706,7 @@ Windows does not have the concept of a PTY, so there is no way for Emacs to inte
 The solution that I adopted is to use =guit-gui--askpass=, even if it does not integrate well with emacs.
 
 #+BEGIN_SRC emacs-lisp
-  (when windowsp (setenv "GIT_ASKPASS" "git-gui--askpass"))
+  (when sb-windows-p (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
 
 ** FAIT Insert default commit messages

@@ -68,13 +68,26 @@
     "Load specified file if it exists. Do nothing otherwise."
     (when (file-exists-p filename) (load-file filename)))
 
-  ;; My personal keymap
-  ;; ------------------
-  ;;
-  ;; ... is called `sb-map`, and the prefix key that is
+  ;; Custom key bindings and keymaps
+  ;; -------------------------------
+
+  ;; Unlike zap-to-char (bound to M-z), zap-up-to-char kills up to, but
+  ;; not including ARGth occurrence of CHAR. It is remapped to M-z.
+  (autoload 'zap-up-to-char "misc")
+  (global-set-key (kbd "M-z") 'zap-up-to-char)
+
+  ;; My personnal keymap is called `sb-map`, and the prefix key that is
   ;; assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
   (global-set-key (kbd "C-&") 'sb-map)
+
+  ;; cycle-spacing is more flexible than just-one-space (initially bound
+  ;; to M-SPC).
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+
+  ;; Under Mac OS X, right-alt must be mapped to Alt Gr.
+  (when sb-darwin-p (setq mac-option-modifier 'none
+			  mac-command-modifier 'meta))
 
   ;; Definition of my own customization group
   ;; ----------------------------------------
@@ -161,32 +174,7 @@
   (add-hook 'org-mode-hook 'sb-activate-default-input-method)
 #+END_SRC
 
-* Platform dependent settings
-
-** Mac OS X settings
-
-Under Mac OS X, right-alt must be mapped to Alt Gr.
-
-#+BEGIN_SRC emacs-lisp
-  (when sb-darwin-p
-    (setq mac-option-modifier 'none)
-    (setq mac-command-modifier 'meta))
-#+END_SRC
-
 * Navigation
-
-** Zap to char vs. zap up to char
-   :LOGBOOK:
-   CLOCK: [2016-06-15 Wed 08:00]--[2016-06-15 Wed 08:15] =>  0:15
-   :END:
-
-=zap-to-char= (bound to =M-z=) kills up to and including the specified char. =misc.el= provides an alternative function, namely =zap-up-to-char= which does not remove the specified char. However, =misc.el= is not loaded by default.
-
-#+BEGIN_SRC emacs-lisp
-  (autoload 'zap-up-to-char "misc"
-    "Kill up to, but not including ARGth occurrence of CHAR.")
-  (global-set-key (kbd "M-z") 'zap-up-to-char)
-#+END_SRC
 
 ** ibuffer
 :LOGBOOK:
@@ -233,25 +221,6 @@ Then, load these groups at startup
 #+END_SRC
 
 Do not show empty groups
-
-** Cycle spacing
-:LOGBOOK:
-CLOCK: [2017-03-08 Wed 08:30]--[2017-03-08 Wed 08:45] =>  0:15
-:END:
-
-The idea from this configuration comes from Ben Maughan at [[http://pragmaticemacs.com/emacs/cycle-spacing/][Pragmatic Emacs]].
-
-=M-SPC= is bound to [[elisp:(describe-function%20'just-one-space)][just-one-space]], but [[elisp:(describe-function 'cycle-spacing)][cycle-spacing]] is more interesting, since (when called multiple times), it cycles between the following states
-
-  1. leave just one space,
-  2. delete all spaces,
-  3. restore the original whitespace and point.
-
-This function is therefore bound to =M-SPC=.
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
-#+END_SRC
 
 * Appearance
 

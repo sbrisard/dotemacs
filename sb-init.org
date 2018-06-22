@@ -16,6 +16,7 @@
 	dnd-open-file-other-window nil
 	find-file-run-dired nil
 	indent-tabs-mode nil
+	indicate-empty-lines nil
 	inhibit-startup-screen t
 	initial-frame-alist '((top . 0) (left . 0))
 	make-backup-files nil
@@ -172,6 +173,7 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'sb-activate-default-input-method)
   (add-hook 'org-mode-hook 'sb-activate-default-input-method)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -887,11 +889,12 @@ CLOCK: [2014-08-05 Tue 07:30]--[2014-08-05 Tue 10:30] =>  3:00
 
 #+BEGIN_SRC emacs-lisp
   (setq python-shell-completion-native-enable nil
-        python-shell-interpreter "jupyter"
-        python-shell-interpreter-args "console --simple-prompt"
-        python-shell-prompt-detect-enabled nil
-        python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
-        python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+	python-shell-interpreter "jupyter"
+	python-shell-interpreter-args "console --simple-prompt"
+	python-shell-prompt-detect-enabled nil
+	python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
+	python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+  (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
 #+END_SRC
 
 I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
@@ -962,24 +965,6 @@ The files for the maxima mode are not available on MELPA. They are packaged with
 #+END_SRC
 
 * Text editing
-
-** Trailing whitespaces
-   :LOGBOOK:
-   CLOCK: [2016-08-19 Fri 07:40]--[2016-08-19 Fri 07:45] =>  0:05
-   :END:
-
-In selected modes, show trailing whitespaces and empty lines at the end of the buffer. This is defined as a mode hook (which requires a function).
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-#+END_SRC
-
-In all modes, empty lines at the end of the buffer are shown, and trailing white spaces are removed when buffer is saved.
-
-#+BEGIN_SRC emacs-lisp
-  (setq indicate-empty-lines nil)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+END_SRC
 
 ** Whitespace mode
    :LOGBOOK:

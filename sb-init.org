@@ -174,53 +174,24 @@
   (add-hook 'org-mode-hook 'sb-activate-default-input-method)
 #+END_SRC
 
-* Navigation
-
-** ibuffer
-:LOGBOOK:
-CLOCK: [2016-10-22 Sat 06:50]--[2016-10-22 Sat 07:05] =>  0:15
-CLOCK: [2016-09-29 Thu 08:10]--[2016-09-29 Thu 08:45] =>  0:35
-CLOCK: [2016-08-19 Fri 07:35]--[2016-08-19 Fri 07:40] =>  0:05
-:END:
-
-From the [[https://www.emacswiki.org/emacs/IbufferMode][EmacsWiki]]
-
-#+BEGIN_QUOTE
-Ibuffer is an advanced replacement for BufferMenu, which lets you operate on buffers much in the same manner as Dired. The most important Ibuffer features are highlighting and various alternate layouts. Ibuffer is part of Emacs 22.
-#+END_QUOTE
-
-See also
-
-  - [[https://mytechrants.wordpress.com/2010/03/25/emacs-tip-of-the-day-start-using-ibuffer-asap/][Emacs Tip of the Day: Start Using IBuffer ASAP]]
-  - [[http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html][Tips for using Emacs Ibuffer]]
-  - [[http://www.emacswiki.org/emacs/IbufferMode][IBuffer mode]]
-
 #+BEGIN_SRC emacs-lisp
+  ;; ibuffer
+  ;; -------
+
   (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (setq ibuffer-default-sorting-mode (quote filename/process))
-#+END_SRC
-
-Let us create a few groups and not show empty filter groups
-
-#+BEGIN_SRC emacs-lisp
-  (setq ibuffer-show-empty-filter-groups nil)
-  (setq ibuffer-saved-filter-groups
-        (quote
-         (("sb-ibuffer-groups"
-           ("Notes professionnelles" (filename . "notes/professionnelles"))
-           ("Notes personnelles" (filename . "notes/personnelles"))
-           ("HDR" (filename . "HDR"))
-           (".emacs" (filename . ".emacs.d"))))))
-#+END_SRC
-
-Then, load these groups at startup
-
-#+BEGIN_SRC emacs-lisp
+  (setq ibuffer-default-sorting-mode (quote filename/process)
+	ibuffer-show-empty-filter-groups nil
+	ibuffer-saved-filter-groups
+	(quote
+	 (("sb-ibuffer-groups"
+	   ("Notes professionnelles" (filename . "notes/professionnelles"))
+	   ("Notes personnelles" (filename . "notes/personnelles"))
+	   ("HDR" (filename . "HDR"))
+	   (".emacs" (filename . ".emacs.d"))))))
   (add-hook 'ibuffer-mode-hook
-            (lambda () (ibuffer-switch-to-saved-filter-groups "sb-ibuffer-groups")))
+	    (lambda () (ibuffer-switch-to-saved-filter-groups
+			"sb-ibuffer-groups")))
 #+END_SRC
-
-Do not show empty groups
 
 * Appearance
 

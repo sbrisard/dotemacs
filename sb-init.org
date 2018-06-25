@@ -24,6 +24,8 @@
 	safe-local-variable-values (quote ((buffer-auto-save-file-name)
 					   (org-confirm-babel-evaluate)))
 	show-paren-style (quote expression)
+	;; This ensures that Org timestamps allways appear in english
+	system-time-locale "C"
 	visible-bell t)
   ;;(setq-default buffer-file-coding-system 'utf-8)
 
@@ -195,120 +197,25 @@
 			"sb-ibuffer-groups")))
 #+END_SRC
 
+
 * Org Mode
-:PROPERTIES:
-:CUSTOM_ID: ORG_MODE
-:END:
-:LOGBOOK:
-CLOCK: [2016-11-17 Thu 08:00]--[2016-11-17 Thu 08:10] =>  0:10
-CLOCK: [2016-09-22 Thu 13:10]--[2016-09-22 Thu 13:30] =>  0:20
-CLOCK: [2016-09-22 Thu 12:00]--[2016-09-22 Thu 13:00] =>  1:00
-CLOCK: [2016-08-30 Tue 08:10]--[2016-08-30 Tue 08:30] =>  0:20
-CLOCK: [2016-08-30 Tue 07:40]--[2016-08-30 Tue 08:05] =>  0:25
-CLOCK: [2016-08-29 Mon 07:30]--[2016-08-29 Mon 08:20] =>  0:50
-CLOCK: [2016-08-26 Fri 08:25]--[2016-08-26 Fri 08:50] =>  0:25
-CLOCK: [2016-08-25 Thu 08:35]--[2016-08-25 Thu 08:50] =>  0:15
-:END:
-
-There we are! That's really the crux of this file! Configuring Org Mode is very complex. The various configurations are organized like the [[info:Org][Org Mode Manual]].
-
-Other resources
-
-  - Rainer König's [[https://www.youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE][OrgMode tutorial]]
-
-** Introduction
-
-*** Activation
-
-Make agenda accessible from everywhere.
 
 #+BEGIN_SRC emacs-lisp
+  (setq org-adapt-indentation nil
+	org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
+				     (vm-imap . vm-visit-imap-folder-other-frame)
+				     (gnus . org-gnus-no-new-news)
+				     (file . find-file-other-window)
+				     (wl . wl-other-frame)))
+	org-log-into-drawer t
+	org-startup-folded t
+	org-startup-truncated nil
+	org-table-copy-increment nil
+	org-time-clocksum-format "%02d:%02d"
+	org-todo-keywords '((sequence "A_FAIRE(a)" "EN_ATTENTE(e)" "UN_JOUR(u)"
+				      "|" "FAIT(f)")))
+
   (global-set-key (kbd "C-c a") 'org-agenda)
-#+END_SRC
-
-** Document structure
-
-*** Visibility cycling
-
-**** Initial visibility
-
-Org files are opened in folded mode.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-startup-folded t)
-#+END_SRC
-
-Wrap lines.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-startup-truncated nil)
-#+END_SRC
-
-*** Structure editing
-
-Do not shift text to the left or right when promoting/demoting headlines.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-adapt-indentation nil)
-#+END_SRC
-
-** Tables
-
-*** The built-in table editor
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-table-copy-increment nil)
-#+END_SRC
-
-** Hyperlinks
-
-*** Handling links]
-
-Follow links in same window.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
-                                     (vm-imap . vm-visit-imap-folder-other-frame)
-                                     (gnus . org-gnus-no-new-news)
-                                     (file . find-file-other-window)
-                                     (wl . wl-other-frame))))
-#+END_SRC
-
-** TODO Items
-
-*** Extended use of TODO keywords
-
-**** TODO keywords as types
-
-#+BEGIN_SRC emacs-lisp
-    (setq org-todo-keywords '((sequence "A_FAIRE(a)" "EN_ATTENTE(e)" "UN_JOUR(u)"
-                                        "|" "FAIT(f)")))
-#+END_SRC
-
-*** Progress logging
-
-**** Tracking TODO state changes
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-log-into-drawer t)
-#+END_SRC
-
-** Dates and times
-
-Make sure that timestamps appear in English.
-
-#+BEGIN_SRC emacs-lisp
-  (setq system-time-locale "C")
-#+END_SRC
-
-*** Clocking work time
-
-**** The clock table
-
-Time durations greater than 24h should not be converted in days.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-time-clocksum-format "%02d:%02d")
 #+END_SRC
 
 Remove ugly =\_= from the clock table.

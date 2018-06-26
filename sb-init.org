@@ -197,11 +197,40 @@
 			"sb-ibuffer-groups")))
 #+END_SRC
 
-
-* Org Mode
+* COMMENT Org Mode
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-adapt-indentation nil
+  (setq org-agenda-restore-windows-after-quit t
+	org-agenda-window-setup 'current-window
+	org-adapt-indentation nil
+        org-export-preserve-breaks nil
+	org-export-time-stamp-file t
+	org-export-with-archived-trees 'headline
+	org-export-with-author t
+	org-export-with-clocks nil
+	org-export-with-creator 'comment
+	org-export-with-date t
+	org-export-with-drawers '(not "LOGBOOK")
+	org-export-with-email nil
+	org-export-with-emphasize t
+	org-export-with-entities t
+	org-export-with-fixed-width t
+	org-export-with-footnotes t
+	org-export-with-inlinetasks t
+	org-export-with-planning nil
+	org-export-with-priority nil
+	org-export-with-section-numbers nil
+	org-export-with-smart-quotes nil
+	org-export-with-special-strings t
+	org-export-with-statistics-cookies t
+	org-export-with-sub-superscripts t
+	org-export-with-tables t
+	org-export-with-tags t
+	org-export-with-tasks t
+	org-export-with-timestamps t
+	org-export-with-toc nil
+	org-export-with-todo-keywords t)
+	org-html-htmlize-output-type 'css
 	org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
 				     (vm-imap . vm-visit-imap-folder-other-frame)
 				     (gnus . org-gnus-no-new-news)
@@ -213,92 +242,22 @@
 	org-table-copy-increment nil
 	org-time-clocksum-format "%02d:%02d"
 	org-todo-keywords '((sequence "A_FAIRE(a)" "EN_ATTENTE(e)" "UN_JOUR(u)"
-				      "|" "FAIT(f)")))
+				      "|" "FAIT(f)"))
+	;; Agenda files are looked for in
+	;; sb-path-to-local-documents/notes and its subdirectories.
+	org-agenda-files (let ((root (expand-file-name "notes" sb-path-to-local-documents)))
+			   (cons root (remove-if (lambda (name) (or (not (file-directory-p name))
+								    (string-suffix-p ".git" name)))
+						 (directory-files root t directory-files-no-dot-files-regexp)))))
 
   (global-set-key (kbd "C-c a") 'org-agenda)
-#+END_SRC
 
-Remove ugly =\_= from the clock table.
-
-#+BEGIN_SRC emacs-lisp
   (eval-after-load "org-clock"
     '(defun org-clocktable-indent-string (level)
        "Return indentation string according to LEVEL.
   LEVEL is an integer.  Indent by two spaces per level above 1."
        (if (= level 1) ""
-         (concat "→" (make-string (* 2 (- level 1)) 32)))))
-#+END_SRC
-
-#+RESULTS:
-: org-clocktable-indent-string
-
-** Agenda views
-
-Restore window configuration upon exiting agenda. Show agenda in the current window, keeping all other windows.
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-agenda-restore-windows-after-quit t)
-  (setq org-agenda-window-setup 'current-window)
-#+END_SRC
-
-*** Agenda files
-
-=*.org= and =*.txt= files are considered as agenda files. These files are looked for in
-
-  - =~/.emacs.d= (this file!)
-  - =sb-path-to-local-documents/notes= and its subdirectories (=archives= is excluded).
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-agenda-file-regexp "\\`[^.].*\\.\\(org\\|txt\\)\\'")
-  (setq org-agenda-files
-        (let ((root (expand-file-name "notes" sb-path-to-local-documents)))
-          (append (list root user-emacs-directory)
-                  (remove-if (lambda (name) (or (not (file-directory-p name))
-                                                (string-suffix-p ".git" name)))
-                             (directory-files root t directory-files-no-dot-files-regexp)))))
-#+END_SRC
-
-** Exporting
-
-See also
-
-  - [[https://github.com/marsmining/ox-twbs][ox-twbs]]: export org-mode docs as HTML compatible with Twitter Bootstrap.
-  - [[https://github.com/fniessen/org-html-themes][org-html-themes]]
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-html-htmlize-output-type 'css)
-#+END_SRC
-
-*** Export settings
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-export-preserve-breaks nil)
-  (setq org-export-time-stamp-file t)
-  (setq org-export-with-archived-trees 'headline)
-  (setq org-export-with-author t)
-  (setq org-export-with-clocks nil)
-  (setq org-export-with-creator 'comment)
-  (setq org-export-with-date t)
-  (setq org-export-with-drawers '(not "LOGBOOK"))
-  (setq org-export-with-email nil)
-  (setq org-export-with-emphasize t)
-  (setq org-export-with-entities t)
-  (setq org-export-with-fixed-width t)
-  (setq org-export-with-footnotes t)
-  (setq org-export-with-inlinetasks t)
-  (setq org-export-with-planning nil)
-  (setq org-export-with-priority nil)
-  (setq org-export-with-section-numbers nil)
-  (setq org-export-with-smart-quotes nil)
-  (setq org-export-with-special-strings t)
-  (setq org-export-with-statistics-cookies t)
-  (setq org-export-with-sub-superscripts t)
-  (setq org-export-with-tables t)
-  (setq org-export-with-tags t)
-  (setq org-export-with-tasks t)
-  (setq org-export-with-timestamps t)
-  (setq org-export-with-toc nil)
-  (setq org-export-with-todo-keywords t)
+	 (concat "→" (make-string (* 2 (- level 1)) 32)))))
 #+END_SRC
 
 ** Working with source code

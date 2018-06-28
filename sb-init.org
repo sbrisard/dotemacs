@@ -203,7 +203,11 @@
   (setq org-agenda-restore-windows-after-quit t
 	org-agenda-window-setup 'current-window
 	org-adapt-indentation nil
-        org-export-preserve-breaks nil
+	org-confirm-babel-evaluate nil ; Potentially risky!
+	org-duration-format (quote ((special . h:mm))) ; Don't display
+						       ; long durations
+						       ; in days.
+	org-export-preserve-breaks nil
 	org-export-time-stamp-file t
 	org-export-with-archived-trees 'headline
 	org-export-with-author t
@@ -229,7 +233,7 @@
 	org-export-with-tasks t
 	org-export-with-timestamps t
 	org-export-with-toc nil
-	org-export-with-todo-keywords t)
+	org-export-with-todo-keywords t
 	org-html-htmlize-output-type 'css
 	org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame)
 				     (vm-imap . vm-visit-imap-folder-other-frame)
@@ -237,6 +241,8 @@
 				     (file . find-file-other-window)
 				     (wl . wl-other-frame)))
 	org-log-into-drawer t
+	org-src-fontify-natively t
+	org-src-window-setup 'other-window
 	org-startup-folded t
 	org-startup-truncated nil
 	org-table-copy-increment nil
@@ -258,75 +264,18 @@
   LEVEL is an integer.  Indent by two spaces per level above 1."
        (if (= level 1) ""
 	 (concat "→" (make-string (* 2 (- level 1)) 32)))))
-#+END_SRC
 
-** Working with source code
 
-*** Editing source code
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-fontify-natively t)
-  (setq org-src-window-setup 'other-window)
-#+END_SRC
-
-*** Evaluating code blocks
-
-Displayed inlined images are automatically updated after evaluating source blocks. This was suggested by [[https://github.com/gregsexton/ob-ipython][ob-ipython]].
-
-#+BEGIN_SRC emacs-lisp
+  ;; Displayed inlined images are automatically updated after evaluating
+  ;; source blocks. Suggestion found on the ob-ipython website:
+  ;;
+  ;;     https://github.com/gregsexton/ob-ipython
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-#+END_SRC
 
-*** Languages
-
-Enable languages for evaluation in source blocks.
-
-#+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages 'org-babel-load-languages '((C . t)
-                                                           (python . t)
-                                                           (maxima . t)
-                                                           (ipython . t)))
-#+END_SRC
-
-** Miscellaneous
-
-*** Code evaluation and security issues
-
-This is potentially risky!
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
-#+END_SRC
-
-** Formatting of times
-:LOGBOOK:
-CLOCK: [2017-12-11 Mon 08:00]--[2017-12-11 Mon 08:15] =>  0:15
-:END:
-
-By default, total times are printed in days, hours and minutes in clock-tables. This can be changed as follows
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-duration-format (quote ((special . h:mm))))
-#+END_SRC
-
-** Hacking
-
-*** Dynamic blocks
-:LOGBOOK:
-CLOCK: [2016-10-21 Fri 06:15]--[2016-10-21 Fri 06:20] =>  0:05
-CLOCK: [2016-10-21 Fri 05:50]--[2016-10-21 Fri 06:05] =>  0:15
-CLOCK: [2016-10-18 Tue 08:40]--[2016-10-18 Tue 09:20] =>  0:40
-CLOCK: [2016-10-17 Mon 08:55]--[2016-10-17 Mon 09:05] =>  0:10
-CLOCK: [2016-10-13 Thu 08:15]--[2016-10-13 Thu 08:25] =>  0:10
-:END:
-
-I intended to develop a dynamic block that would automatically insert (and update) a table of contents at the top of the current org buffer. However, I realized that [[info:Org#Visibility%20cycling][visibility cycling]] (a feature I did not use much previously) was exactly what I was looking for. So I gave up this project entirely. However, what I learned in the process was interesting. Here is a small code snippet that returns a list of the titles of all headlines in the current buffer (see the [[http://orgmode.org/worg/dev/org-element-api.html][Org Element API]]).
-
-#+BEGIN_SRC emacs-lisp :tangle no :results value replace
-  (let ((tree (org-element-parse-buffer 'headline)))
-    (org-element-map tree 'headline
-      (lambda (hl)
-        (org-element-property :raw-value hl))))
+							   (python . t)
+							   (maxima . t)
+							   (ipython . t)))
 #+END_SRC
 
 ** ob-ipython

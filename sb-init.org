@@ -278,59 +278,11 @@
 							   (ipython . t)))
 #+END_SRC
 
-** ob-ipython
-:LOGBOOK:
-CLOCK: [2017-02-11 Sat 05:30]--[2017-02-11 Sat 06:35] =>  1:05
-CLOCK: [2016-08-31 Wed 05:50]--[2016-08-31 Wed 06:05] =>  0:15
-CLOCK: [2015-12-01 Tue 08:20]--[2015-12-01 Tue 08:45] =>  0:25
-CLOCK: [2015-11-24 Tue 07:45]--[2015-11-24 Tue 09:00] =>  1:15
-CLOCK: [2015-11-05 Thu 07:15]--[2015-11-05 Thu 08:15] =>  1:00
-CLOCK: [2015-11-03 Tue 08:00]--[2015-11-03 Tue 08:30] =>  0:30
-:END:
-
-[[https://github.com/gregsexton/ob-ipython][ob-ipython]] provides org-babel integration with Jupyter for evaluation of (Python by default) code blocks.
-
-The following commands invoke ob-ipython with a specific profile.
+* ob-ipython
 
 #+BEGIN_SRC emacs-lisp
   (require 'ob-ipython)
-  ;(setq ob-ipython-kernel-extra-args (quote ("--profile=ob-ipython")))
 #+END_SRC
-
-For the anaconda distribution, the package =jupyter_console= must be installed. The =ob-ipython= Jupyter profile was created as follows
-
-#+BEGIN_EXAMPLE
-ipython profile create ob-ipython
-#+END_EXAMPLE
-
-The config file is then located in =~/.ipython/profile_ob-ipython/ipython_config.py=. Its contents is reproduced below.
-
-#+BEGIN_SRC python
-  c.InteractiveShellApp.exec_lines = [
-      'import matplotlib.pyplot as plt',
-      'import numpy as np',
-      'plt.style.use("zenburn")',
-  ]
-
-  c.InteractiveShellApp.matplotlib = 'inline'
-  c.TerminalIPythonApp.display_banner = False
-#+END_SRC
-
-Note: the above apparently no longer works with Jupyter 4.0 (see [[jupyter.readthedocs.io/en/latest/projects/config.html][Jupyter’s Common Configuration Approach]]). I give up alltogether this configuration.
-
-A zenburn stylesheet was also created for Matplotlib. File =~/.matplotlib/stylelib/zenburn.mplstyle= is reproduced below
-
-#+BEGIN_EXAMPLE
-text.color : dcdccc
-axes.facecolor : 3f3f3f
-axes.edgecolor : dcdccc
-axes.labelcolor : dcdccc
-axes.prop_cycle : cycler('color', ['8cd0d3', '7f9f7f', 'cc9393', '93e0e3', 'dc8cc3', 'f0dfaf', 'dcdccc'])
-xtick.color : dcdccc
-ytick.color : dcdccc
-figure.facecolor : 3f3f3f
-savefig.facecolor : 3f3f3f
-#+END_EXAMPLE
 
 * Magit
 :LOGBOOK:

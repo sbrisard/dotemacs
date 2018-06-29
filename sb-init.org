@@ -197,7 +197,7 @@
 			"sb-ibuffer-groups")))
 #+END_SRC
 
-* COMMENT Org Mode
+* Org Mode
 
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-restore-windows-after-quit t

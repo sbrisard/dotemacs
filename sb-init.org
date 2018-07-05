@@ -287,38 +287,14 @@
 * Magit
 
 #+BEGIN_SRC emacs-lisp :eval never :tangle yes
+  (setq magit-process-ensure-unix-line-ending t)
+
   (global-set-key (kbd "C-x g") 'magit-status)
   (delete 'Git vc-handled-backends)
   (when sb-windows-p (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
 #+END_SRC
 
 ** Issues under Windows
-
-*** Staging hunks/regions
-    :LOGBOOK:
-    CLOCK: [2016-04-08 Fri 08:15]--[2016-04-08 Fri 08:50] =>  0:35
-    CLOCK: [2016-04-07 Thu 07:30]--[2016-04-07 Thu 08:00] =>  0:30
-    CLOCK: [2016-04-06 Wed 08:20]--[2016-04-06 Wed 08:45] =>  0:25
-    CLOCK: [2016-04-05 Tue 07:50]--[2016-04-05 Tue 08:05] =>  0:15
-    :END:
-
-From the [[https://raw.githubusercontent.com/magit/magit/master/Documentation/RelNotes/2.6.0.txt][release notes]] of version 2.6.0
-
-#+BEGIN_QUOTE
-Staging hunks/regions belonging to files with CRLF line endings on Windows (or, to be precise, when =default-process-coding-system= had CRLF end-of-line conversion) ended up erroneously staging changes with LF line endings.  Magit now ensures line endings are preserved by enforcing a =process-coding-system= with LF end-of-line conversion.  The new behavior may be disabled by setting the option =magit-process-ensure-unix-line-ending= to =nil=.
-#+END_QUOTE
-
-However, on my windows box, this new feature seems to cause the following error message
-
-#+BEGIN_EXAMPLE
-wrong-type-argument list utf-8
-#+END_EXAMPLE
-
-I therefore disable this feature
-
-#+BEGIN_SRC emacs-lisp
-  (setq magit-process-ensure-unix-line-ending nil)
-#+END_SRC
 
 *** Pushing from Magit
     :LOGBOOK:

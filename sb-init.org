@@ -291,26 +291,9 @@
 
   (global-set-key (kbd "C-x g") 'magit-status)
   (delete 'Git vc-handled-backends)
-  (when sb-windows-p (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/"))
-#+END_SRC
-
-** Issues under Windows
-
-*** Pushing from Magit
-    :LOGBOOK:
-    CLOCK: [2016-04-21 Thu 07:10]--[2016-04-21 Thu 07:25] =>  0:15
-    :END:
-
-From the [[https://github.com/magit/magit/wiki/Pushing-with-Magit-from-Windows][official website]],
-
-#+BEGIN_QUOTE
-Windows does not have the concept of a PTY, so there is no way for Emacs to intercept password prompts from Git.
-#+END_QUOTE
-
-The solution that I adopted is to use =guit-gui--askpass=, even if it does not integrate well with emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (when sb-windows-p (setenv "GIT_ASKPASS" "git-gui--askpass"))
+  (when sb-windows-p
+    (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/")
+    (setenv "GIT_ASKPASS" "git-gui--askpass"))
 #+END_SRC
 
 ** FAIT Insert default commit messages

@@ -287,6 +287,13 @@
 * Magit
 
 #+BEGIN_SRC emacs-lisp :eval never :tangle yes
+  ;; Ensure that magit variables are properly defined and add relevant
+  ;; variables to custom group
+  (require 'magit)
+
+  (custom-add-to-group 'sb 'magit-git-executable 'custom-variable)
+  (custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
+
   (setq magit-process-ensure-unix-line-ending t)
 
   (global-set-key (kbd "C-x g") 'magit-status)
@@ -294,24 +301,16 @@
   (when sb-windows-p
     (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/")
     (setenv "GIT_ASKPASS" "git-gui--askpass"))
-#+END_SRC
 
-** FAIT Insert default commit messages
-:LOGBOOK:
-CLOCK: [2017-05-16 Tue 08:15]--[2017-05-16 Tue 08:45] =>  0:30
-:END:
 
-My notes are version controlled. However, I find it difficult to
-enclose a meaningful commit message on each commit. So I end up using
-a standard message recording the date and time. The following function
-makes the whole process automatic. It is bound to =C-& C=.
-
-#+BEGIN_SRC emacs-lisp
   (defun sb-magit-stage-and-commit-all ()
+    "Stage and commit all changes in current git repository.
+
+  A default commit message is issued (current date+time)."
     (interactive)
     (magit-shell-command (concat "git commit -a -m \""
-                                 (format-time-string "%d/%m/%Y %H:%M")
-                                 "\"")))
+				 (format-time-string "%d/%m/%Y %H:%M")
+				 "\"")))
 
   (define-key sb-map (kbd "C") 'sb-magit-stage-and-commit-all)
 #+END_SRC

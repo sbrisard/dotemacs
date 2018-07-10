@@ -303,16 +303,26 @@
     (setenv "GIT_ASKPASS" "git-gui--askpass"))
 
 
-  (defun sb-magit-stage-and-commit-all ()
-    "Stage and commit all changes in current git repository.
+  (defun sb-git-stage-commit-and-push-all ()
+    "Stage, commit and push all changes in current git repository.
 
-  A default commit message is issued (current date+time)."
+  This function runs the following commands
+
+      git commit -a -m msg
+      git push
+
+  The default commit message is \"DD/MM/YYYY HH:MM\". The gt
+  push.default variable must be set.
+
+  This function uses magit only to display the current status."
     (interactive)
-    (magit-shell-command (concat "git commit -a -m \""
+    (shell-command (concat "git commit -a -m \""
 				 (format-time-string "%d/%m/%Y %H:%M")
-				 "\"")))
+				 "\""))
+    (shell-command "git push")
+    (magit-status))
 
-  (define-key sb-map (kbd "C") 'sb-magit-stage-and-commit-all)
+  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
 #+END_SRC
 
 * AUCTeX and RefTeX

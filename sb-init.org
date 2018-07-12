@@ -371,6 +371,13 @@
       -r -b %n %o %b\"."))
 
   (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
+
+  (setq TeX-view-program-selection '((output-pdf "SB PDF viewer")))
+
+  ;; This does not work
+  ;; (put 'TeX-view-program-selection 'standard-value
+  ;;      '((output-pdf "SB PDF viewer")))
+  (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
 #+END_SRC
 
 ** Viewers
@@ -383,11 +390,11 @@ We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable hol
   when using the Customize user interface. This setter updates
   `TeX-view-program-list', taking care of duplicate entries."
     (progn (setq TeX-view-program-list
-                 (cons (list "SB PDF viewer" value)
-                       (cl-remove "SB PDF viewer" TeX-view-program-list
-                                  :test (lambda (left right)
-                                          (equal left (car right))))))
-           (set-default symbol value)))
+		 (cons (list "SB PDF viewer" value)
+		       (cl-remove "SB PDF viewer" TeX-view-program-list
+				  :test (lambda (left right)
+					  (equal left (car right))))))
+	   (set-default symbol value)))
 
   (defcustom sb-TeX-pdf-viewer-command ""
     "Command line (including options) to be passed to `TeX-view'.
@@ -405,8 +412,6 @@ We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable hol
     :group 'sb
     :tag "TeX PDF viewer command"
     :set 'sb-set-TeX-pdf-viewer-command)
-
-  (setq TeX-view-program-selection '((output-pdf "SB PDF viewer")))
 #+END_SRC
 
 ** RefTeX

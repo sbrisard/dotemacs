@@ -356,9 +356,9 @@
   (put 'TeX-view-program-list 'variable-documentation
        (concat (get 'TeX-view-program-list 'variable-documentation)
 	       "
+  _________________________________________________________________
 
-  ------------------------------------------------------------------------
-  Note (SB): an entry \"SB PDF viewer\" must be defined.
+  Additional note (SB): an entry \"SB PDF viewer\" must be defined.
 
   For SumatraPDF (Windows platforms), set this variable to
 
@@ -368,10 +368,9 @@
   For Skim (MacOS X platforms), set this variable to
 
       \"/Applications/Skim.app/Contents/SharedSupport/displayline
-      -r -b %n %o %b\".
-  ------------------------------------------------------------------------"))
+      -r -b %n %o %b\"."))
 
-  ;; TODO Add this variable to my custom group
+  (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
 #+END_SRC
 
 ** Viewers

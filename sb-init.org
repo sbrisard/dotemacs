@@ -353,12 +353,25 @@
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
+  (when sb-windows-p
+    (defconst sb-SumatraPDF-options "-reuse-instance -forward-search %b %n %o"
+      "Options to be passed to the SumatraPDF viewer.")
+    (defcustom sb-SumatraPDF-executable "C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe"
+      "Full path to the SumatraPDF executable."
+      :type 'string
+      :group 'sb
+      :tag "SumatraPDF executable")
+    (add-to-list 'TeX-view-program-list
+		 `("SumatraPDF"
+		   (,(concat sb-SumatraPDF-executable " " sb-SumatraPDF-options))
+		   ,sb-SumatraPDF-executable)))
+
   (put 'TeX-view-program-list 'variable-documentation
        (concat (get 'TeX-view-program-list 'variable-documentation)
 	       "
   _________________________________________________________________
 
-  Additional note (SB): an entry \"SB PDF viewer\" must be defined.
+  Additional note (SB)
 
   For SumatraPDF (Windows platforms), set this variable to
 
@@ -370,9 +383,8 @@
       \"/Applications/Skim.app/Contents/SharedSupport/displayline
       -r -b %n %o %b\"."))
 
-  (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
 
-  (setq TeX-view-program-selection '((output-pdf "SB PDF viewer")))
+  (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
 
   ;; This does not work
   ;; (put 'TeX-view-program-selection 'standard-value
@@ -380,11 +392,18 @@
   (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
 #+END_SRC
 
+To do :
+
+  - Update TeX-view-program-list each time sb-SumatraPDF-executable is modified.
+  - Define SumatraPDF as viewer for output-pdf. First remove previous entries
+
+(assq-delete-all 'output-pdf TeX-view-program-selection)
+
 ** Viewers
 
 We define =sb-TeX-pdf-viewer-command= which can be custom-set. This variable holds the full path to the PDF viewer, including the command line options (synctex and such). We use a custom =:set= function for the =sb-TeX-pdf-viewer-command= variable, in order to update =TeX-view-program-list=, which depends on it.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (defun sb-set-TeX-pdf-viewer-command (symbol value)
     "The function to be called when modifying `sb-TeX-pdf-viewer-command'
   when using the Customize user interface. This setter updates

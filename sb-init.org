@@ -366,14 +366,8 @@
 		   (,(concat sb-SumatraPDF-executable " " sb-SumatraPDF-options))
 		   ,sb-SumatraPDF-executable)))
 
-  (put 'TeX-view-program-list 'variable-documentation
-       (concat (get 'TeX-view-program-list 'variable-documentation)
-	       "
-  _________________________________________________________________
-
-  Additional note (SB)
-
-  For SumatraPDF (Windows platforms), set this variable to
+  (put 'TeX-view-program-list 'variable-comment
+       "For SumatraPDF (Windows platforms), set this variable to
 
       \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe
       -reuse-instance -forward-search %b %n %o\".
@@ -381,7 +375,7 @@
   For Skim (MacOS X platforms), set this variable to
 
       \"/Applications/Skim.app/Contents/SharedSupport/displayline
-      -r -b %n %o %b\"."))
+      -r -b %n %o %b\".")
 
 
   (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)

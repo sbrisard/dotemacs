@@ -389,9 +389,8 @@
 To do :
 
   - Update TeX-view-program-list each time sb-SumatraPDF-executable is modified.
-  - Define SumatraPDF as viewer for output-pdf. First remove previous entries
 
-(assq-delete-all 'output-pdf TeX-view-program-selection)
+
 
 ** Viewers
 

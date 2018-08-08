@@ -373,94 +373,27 @@
   (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
 #+END_SRC
 
-** RefTeX
-:LOGBOOK:
-CLOCK: [2017-03-01 Wed 17:00]--[2017-03-01 Wed 17:10] =>  0:10
-CLOCK: [2017-03-01 Wed 16:35]--[2017-03-01 Wed 16:40] =>  0:05
-CLOCK: [2016-08-18 Thu 16:00]--[2016-08-18 Thu 16:30] =>  0:30
-:END:
-
 #+BEGIN_SRC emacs-lisp
   (require 'reftex)
 
   (add-hook 'latex-mode-hook 'turn-on-reftex)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-  (setq reftex-load-hook (quote (imenu-add-menubar-index)))
-  (setq reftex-mode-hook (quote (imenu-add-menubar-index)))
+  (setq reftex-load-hook (quote (imenu-add-menubar-index))
+	reftex-mode-hook (quote (imenu-add-menubar-index))
+	reftex-plug-into-AUCTeX t
+	reftex-insert-label-flags (quote (nil nil))
+	reftex-ref-macro-prompt nil
+	reftex-label-alist
+	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
+	  ("theorem" ?h "thr:" "~\\ref{%s}" nil ("theorem" "th.") -3)
+	  ("remark"  ?r "rem:" "~\\ref{%s}" t   ("remark" "rem.") -4)))
+
+  (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
+					 '("axiom" LaTeX-env-label)
+					 '("theorem" LaTeX-env-label)
+					 '("remark" LaTeX-env-label))))
 #+END_SRC
-
-AUCTeX/RefTeX integration
-
-#+BEGIN_SRC emacs-lisp
-  (setq reftex-plug-into-AUCTeX t)
-#+END_SRC
-
-Insert simple labels, like ‘eq:22’ or ‘sec:13’ (no query). See [[info:reftex#Options%20-%20Creating%20Labels][Creating Labels]].
-
-#+BEGIN_SRC emacs-lisp
-  (setq reftex-insert-label-flags (quote (nil nil)))
-#+END_SRC
-
-On calling =reftex-reference=, do not prompt for reference macro (=\ref=, =\pageref=, etc...).
-
-#+BEGIN_SRC emacs-lisp
-  (setq reftex-ref-macro-prompt nil)
-#+END_SRC
-
-Register axiom, theorem and remark environments so that they get properly numbered.
-
-#+BEGIN_SRC emacs-lisp
-  (setq reftex-label-alist
-        '(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
-          ("theorem" ?h "thr:" "~\\ref{%s}" nil   ("theorem" "th.") -3)
-          ("remark" ?r "rem:" "~\\ref{%s}" t ("remark" "rem.") -4)))
-
-  (add-hook 'LaTeX-mode-hook (lambda ()
-                               (LaTeX-add-environments '("axiom" LaTeX-env-label)
-                                                       '("theorem" LaTeX-env-label)
-                                                       '("remark" LaTeX-env-label))))
-#+END_SRC
-
-** Insertion of references into a *.bib file
-:LOGBOOK:
-CLOCK: [2017-05-10 Wed 08:25]--[2017-05-10 Wed 08:40] =>  0:15
-CLOCK: [2016-08-25 Thu 08:10]--[2016-08-25 Thu 08:35] =>  0:25
-:END:
-
-I have created a function =sb-insert-bibref= which prompts for a key,
-and inserts a new BibTeX reference at point. This function is taylored
-to the way I store my references.
-
-  1. Keys are formed as follows: =AUTHYYYY=, where =AUTH= are the
-     first four letters of the first author, and =YYYY= is the year of
-     publication. In case of identical keys, a letter (A, B, C) is
-     added to the end.
-  2. Keys are capitalized.
-  3. Papers are stored in =sb-path-to-bibliography/a/authYYYY/=, where
-     =a= denotes the first letter of the first author, and =auth=
-     denotes the first four letters of the first author. Note that =a=
-     and =auth= are /not/ capitalized.
-  4. Each folder =sb-path-to-bibliography/a/authYYYY/=
-     contains the paper itself (generally, =authYYYY.pdf=), along with
-     a =*.bib= file (=authYYYY.bib=).
-
-With these principles, implementation of =sb-insert-bibref= is
-straightforward.
-
-#+BEGIN_SRC emacs-lisp
-  (defun sb-bibref-path (key)
-    "Return the path to a BibTeX file containing the specified KEY."
-    (expand-file-name  (concat (s-left 1 key) "/" key "/" key ".bib")
-                       sb-path-to-bibliography))
-
-  (defun sb-insert-bibref (key)
-    "Insert at point the BibTex file containing the specified KEY."
-    (interactive "sBibTeX key: \n")
-    (insert-file-contents (sb-bibref-path (downcase key))))
-#+END_SRC
-
-** bratex
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/lisp/bratex")

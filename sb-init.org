@@ -469,31 +469,33 @@ A work around (under windows) seems to be
 See also this [[https://github.com/jorgenschaefer/elpy/issues/887][bug report (elpy)]].
 
 ** Maxima
-   :LOGBOOK:
-   CLOCK: [2016-08-19 Fri 07:20]--[2016-08-19 Fri 07:35] =>  0:15
-   CLOCK: [2016-05-09 Mon 08:45]--[2016-05-09 Mon 08:50] =>  0:05
-   :END:
-
-From the [[http://maxima.sourceforge.net/][official website]]
-
-#+BEGIN_QUOTE
-Maxima is a system for the manipulation of symbolic and numerical expressions, including differentiation, integration, Taylor series, Laplace transforms, ordinary differential equations, systems of linear equations, polynomials, sets, lists, vectors, matrices and tensors. Maxima yields high precision numerical results by using exact fractions, arbitrary-precision integers and variable-precision floating-point numbers. Maxima can plot functions and data in two and three dimensions.
-#+END_QUOTE
-
-The files for the maxima mode are not available on MELPA. They are packaged with the binaries, and I defined the variable =sb-path-to-maxima-mode=, where the relevant files are stored.
 
 #+BEGIN_SRC emacs-lisp
-  (defcustom sb-path-to-maxima-mode ""
-    "Path to the folder hosting elisp files for maxima-mode.
-  This is the path to the files: maxima.el, maxima-font-lock.el.
-  "
-    :type 'string :group 'sb :tag "Path to maxima-mode files")
+  (defun sb-set-maxima-mode-path (symbol value)
+    "Setter for the `sb-maxima-mode-path' custom variable."
+    (progn (when (boundp symbol) (delete (default-value symbol) load-path))
+	   (add-to-list 'load-path value)
+	   (set-default symbol value)))
 
-  (add-to-list 'load-path sb-path-to-maxima-mode)
+  (defun sb-init-maxima-mode-path (symbol value)
+    "Initializer for the `sb-maxima-mode-path' custom variable."
+    (progn (add-to-list 'load-path value)
+	   (custom-initialize-reset symbol value)))
+
+  (defcustom sb-maxima-mode-path ""
+    "Path to the folder hosting elisp files for maxima-mode.
+
+  This is the path to the files: maxima.el, maxima-font-lock.el. On
+  windows platforms, it is something like:
+
+      C:\\maxima-5.40.0\\share\\maxima\\5.40.0\\emacs"
+    :type 'string :group 'sb :tag "Path to maxima-mode files"
+    :initialize 'sb-init-maxima-mode-path :set 'sb-set-maxima-mode-path)
+
   (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
   (autoload 'maxima "maxima" "Run Maxima interactively" t)
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
-                              auto-mode-alist))
+			      auto-mode-alist))
 #+END_SRC
 
 * Text editing

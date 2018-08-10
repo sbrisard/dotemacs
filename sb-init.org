@@ -420,6 +420,25 @@ CLOCK: [2014-08-05 Tue 07:30]--[2014-08-05 Tue 10:30] =>  3:00
 :END:
 
 #+BEGIN_SRC emacs-lisp
+  ;; When running =M-x run-python", I get the following error message
+  ;;
+  ;;     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem
+  ;;     to support readline, yet ‘python-shell-completion-native’ was t
+  ;;     and "ipython3" is not part of the
+  ;;     ‘python-shell-completion-native-disabled-interpreters’
+  ;;     list. Native completions have been disabled locally.
+  ;;
+  ;; A work around (under windows) seems to be
+  ;;
+  ;;   1. Install pyreadline
+  ;;   2. Set `python-shell-completion-native' to t
+  ;;   3. Use simple prompt with Jupyter console: set
+  ;;      `python-shell-interpreter-args' to
+  ;;
+  ;;     -i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console
+  ;;     --simple-prompt
+  ;;
+  ;; See also this https://github.com/jorgenschaefer/elpy/issues/887.
   (setq python-shell-completion-native-enable nil
 	python-shell-interpreter "jupyter"
 	python-shell-interpreter-args "console --simple-prompt"
@@ -427,11 +446,7 @@ CLOCK: [2014-08-05 Tue 07:30]--[2014-08-05 Tue 10:30] =>  3:00
 	python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
 	python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-#+END_SRC
 
-I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package.
-
-#+BEGIN_SRC emacs-lisp
   (elpy-enable)
   (setq elpy-modules (quote (elpy-module-eldoc
                              elpy-module-flymake
@@ -439,34 +454,6 @@ I use Jorgen Schäfer's [[https://github.com/jorgenschaefer/elpy][elpy]] package
   (setq elpy-test-runner (quote elpy-test-test-discover-runner))
   (add-hook 'elpy-mode-hook 'whitespace-mode)
 #+END_SRC
-
-*** Other references
-
-  - [[http://kitchingroup.cheme.cmu.edu/blog/2014/12/20/A-new-mode-for-Python-documentation/][A new mode for Python documentation]] : see in particular the Disqus comments.
-  - [[https://bitbucket.org/jonwaltman/pydoc-info][pydoc-info]]
-
-*** A_FAIRE Native completion problems
-:LOGBOOK:
-CLOCK: [2017-08-07 Mon 08:00]--[2017-08-07 Mon 08:45] =>  0:45
-:END:
-
-When running =M-x run-python", I get the following error message
-
-#+BEGIN_EXAMPLE
-Warning (python): Your ‘python-shell-interpreter’ doesn’t seem to support readline, yet ‘python-shell-completion-native’ was t and "ipython3" is not part of the ‘python-shell-completion-native-disabled-interpreters’ list. Native completions have been disabled locally.
-#+END_EXAMPLE
-
-A work around (under windows) seems to be
-
-  1. Install =pyreadline=
-  2. Set =python-shell-completion-native= to =t=
-  3. Use simple prompt with Jupyter console: set =python-shell-interpreter-args= to
-
-#+BEGIN_EXAMPLE
--i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console --simple-prompt
-#+END_EXAMPLE
-
-See also this [[https://github.com/jorgenschaefer/elpy/issues/887][bug report (elpy)]].
 
 ** Maxima
 

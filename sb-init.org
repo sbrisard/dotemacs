@@ -42,6 +42,11 @@
   ;; This is required for M-x package-list-packages to work properly
   (prefer-coding-system 'utf-8)
 
+  (require 'whitespace)
+
+  (setq whitespace-line-column 80
+	whitespace-style (quote (face lines-tail)))
+
   ;; Useful functions and variables
   ;; ------------------------------
 
@@ -475,45 +480,6 @@
   (autoload 'maxima "maxima" "Run Maxima interactively" t)
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
 			      auto-mode-alist))
-#+END_SRC
-
-* Text editing
-
-** Whitespace mode
-   :LOGBOOK:
-   CLOCK: [2016-08-19 Fri 07:45]--[2016-08-19 Fri 07:55] =>  0:10
-   :END:
-
-From the [[https://www.emacswiki.org/emacs/WhiteSpace][EmacsWiki]]: "This package is a minor mode to visualize blanks (TAB, (HARD) SPACE and NEWLINE)". Here are the UTF-8 values used below
-
-|------------+-------------------------+---|
-| Code point | Meaning                 |   |
-|------------+-------------------------+---|
-| U+0009     | TAB                     |   |
-| U+000A     | LINE FEED               |   |
-| U+0020     | SPACE                   |   |
-| U+0024     | DOLLAR SIGN             | $ |
-| U+002E     | FULL STOP               | . |
-| U+003E     | GREATER THAN SIGN       | > |
-| U+00B6     | PILCROW SIGN            | ¶ |
-| U+00B7     | MIDDLE DOT              | · |
-| U+2192     | RIGHTWARDS ARROW        | → |
-| U+21E5     | RIGHTWARDS ARROW TO BAR | ⇥ |
-| U+23CE     | RETURN SYMBOL           | ⏎ |
-|------------+-------------------------+---|
-
-#+BEGIN_SRC emacs-lisp
-  (require 'whitespace)
-
-  (setq whitespace-line-column 80)
-
-  (setq whitespace-display-mappings
-        '((space-mark #x0020  [#x00B7] [#x002E])
-          (newline-mark #x00A [#x00B6 #x000A] [#x0024 #x000A])
-          (tab-mark #x009 [#x2192 #x009] [#x003E #x009])
-          ))
-
-  (setq whitespace-style (quote (face lines-tail)))
 #+END_SRC
 
 * Easy PG (GnuPG interface for Emacs)

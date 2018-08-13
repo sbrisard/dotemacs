@@ -47,6 +47,10 @@
   (setq whitespace-line-column 80
 	whitespace-style (quote (face lines-tail)))
 
+  ;; Easy PG (GnuPG interface for Emacs)
+  (require 'epa-file)
+  (epa-file-enable)
+
   ;; Useful functions and variables
   ;; ------------------------------
 
@@ -480,13 +484,6 @@
   (autoload 'maxima "maxima" "Run Maxima interactively" t)
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
 			      auto-mode-alist))
-#+END_SRC
-
-* Easy PG (GnuPG interface for Emacs)
-
-#+BEGIN_SRC emacs-lisp
-  (require 'epa-file)
-  (epa-file-enable)
 #+END_SRC
 
 * Ispell

@@ -541,14 +541,8 @@ On trying again, ispell works like a charm.
 	       "credentials"))) 0 1 2)
 
   (define-key sb-map (kbd "p") 'hydra-sb-passwd/body)
-#+END_SRC
 
-* Blog-related customizations
-  :LOGBOOK:
-  CLOCK: [2016-08-23 Tue 07:35]--[2016-08-23 Tue 07:45] =>  0:10
-  :END:
-
-#+BEGIN_SRC emacs-lisp
+  ;; Blog related configuration
   (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                               sb-path-to-local-documents))
 #+END_SRC

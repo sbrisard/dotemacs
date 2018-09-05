@@ -362,11 +362,6 @@
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
-  (add-to-list 'TeX-view-program-list
-	       '("SumatraPDF"
-		 ("C:\\opt\\SumatraPDF-3.1.2-64\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o")
-		 "C:\\opt\\SumatraPDF-3.1.2-64\\SumatraPDF.exe"))
-
   (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
 
   (put 'TeX-view-program-list 'variable-documentation

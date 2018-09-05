@@ -204,6 +204,10 @@
   (add-hook 'ibuffer-mode-hook
 	    (lambda () (ibuffer-switch-to-saved-filter-groups
 			"sb-ibuffer-groups")))
+
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always))
 #+END_SRC
 
 * Org Mode

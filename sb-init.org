@@ -39,6 +39,8 @@
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
 
+  (add-to-list 'exec-path invocation-directory)
+
   ;; This is required for M-x package-list-packages to work properly
   (prefer-coding-system 'utf-8)
 

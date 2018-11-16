@@ -494,6 +494,8 @@ CLOCK: [2016-12-05 Mon 08:30]--[2016-12-05 Mon 09:00] =>  0:30
 :END:
 
 #+BEGIN_SRC emacs-lisp
+  (custom-add-to-group 'sb 'ispell-program-name 'custom-variable)
+
   (defun sb-update-env-dicpath (value)
     (setenv "DICPATH" (mapconcat #'identity value ";")))
 

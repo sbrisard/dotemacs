@@ -152,9 +152,7 @@
 
   (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -167,29 +165,21 @@
 
   (defun sb-package-install-unless-installed (pkg)
     (unless (package-installed-p pkg) (package-install pkg)))
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (sb-package-install-unless-installed 'spacemacs-theme)
   (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-dark)
 
   (set-face-font 'default "DejaVu Sans Mono")
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   ;; Used by Org mode for fontification of code blocks.
   (sb-package-install-unless-installed 'htmlize)
   (require 'htmlize)
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'sb-activate-default-input-method)
   (add-hook 'org-mode-hook 'sb-activate-default-input-method)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   ;; ibuffer
   ;; -------
 
@@ -210,11 +200,7 @@
   (ivy-mode 1)
   (counsel-mode 1)
   (setq ivy-case-fold-search-default (quote always))
-#+END_SRC
 
-* Org Mode
-
-#+BEGIN_SRC emacs-lisp
   (setq org-agenda-restore-windows-after-quit t
 	org-agenda-window-setup 'current-window
 	org-adapt-indentation nil
@@ -291,17 +277,9 @@
 							   (python . t)
 							   (maxima . t)
 							   (ipython . t)))
-#+END_SRC
 
-* ob-ipython
-
-#+BEGIN_SRC emacs-lisp
   (require 'ob-ipython)
-#+END_SRC
 
-* Magit
-
-#+BEGIN_SRC emacs-lisp :eval never :tangle yes
   ;; Ensure that magit variables are properly defined and add relevant
   ;; variables to custom group
   (require 'magit)
@@ -338,11 +316,7 @@
     (magit-status))
 
   (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
-#+END_SRC
 
-* AUCTeX and RefTeX
-
-#+BEGIN_SRC emacs-lisp
   (require 'tex)
 
   (setq LaTeX-command "latex"
@@ -381,9 +355,7 @@
 
   (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
   (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (require 'reftex)
 
   (add-hook 'latex-mode-hook 'turn-on-reftex)
@@ -403,25 +375,13 @@
 					 '("axiom" LaTeX-env-label)
 					 '("theorem" LaTeX-env-label)
 					 '("remark" LaTeX-env-label))))
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/lisp/bratex")
   (require 'bratex)
   (add-hook 'LaTeX-mode-hook #'bratex-config)
-#+END_SRC
 
-* Development
-
-** C
-
-#+BEGIN_SRC emacs-lisp
   (setq-default c-basic-offset 4)
-#+END_SRC
 
-** Python
-
-#+BEGIN_SRC emacs-lisp
   ;; When running =M-x run-python", I get the following error message
   ;;
   ;;     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem
@@ -455,11 +415,8 @@
                              elpy-module-sane-defaults)))
   (setq elpy-test-runner (quote elpy-test-test-discover-runner))
   (add-hook 'elpy-mode-hook 'whitespace-mode)
-#+END_SRC
 
-** Maxima
 
-#+BEGIN_SRC emacs-lisp
   (defun sb-set-maxima-mode-path (symbol value)
     "Setter for the `sb-maxima-mode-path' custom variable."
     (progn (when (boundp symbol) (delete (default-value symbol) load-path))
@@ -485,15 +442,7 @@
   (autoload 'maxima "maxima" "Run Maxima interactively" t)
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
 			      auto-mode-alist))
-#+END_SRC
 
-* Ispell
-:LOGBOOK:
-CLOCK: [2016-12-06 Tue 08:25]--[2016-12-06 Tue 09:10] =>  0:45
-CLOCK: [2016-12-05 Mon 08:30]--[2016-12-05 Mon 09:00] =>  0:30
-:END:
-
-#+BEGIN_SRC emacs-lisp
   (defun sb-update-env-dicpath (value)
     (setenv "DICPATH" (mapconcat #'identity value ";")))
 
@@ -526,9 +475,7 @@ CLOCK: [2016-12-05 Mon 08:30]--[2016-12-05 Mon 09:00] =>  0:30
 		   ("\\\\cite[tp]"        ispell-tex-arg-end)
 		   ))
 	 (cadr ispell-tex-skip-alists)))
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   ;; Blog related configuration
   (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                               sb-path-to-local-documents))

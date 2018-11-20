@@ -1,6 +1,21 @@
-;; Vanilla emacs configuration
-;; ===========================
-;;
+;; ┌───────────────────────────┐
+;; │Vanilla emacs configuration│
+;; └───────────────────────────┘
+
+;; This is required for M-x package-list-packages to work properly
+(prefer-coding-system 'utf-8)
+
+;; First configure package manager and be done with it!
+(require 'package)
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")
+        ("melpa-stable" . "http://stable.melpa.org/packages/")
+        ("elpy" . "http://jorgenschaefer.github.io/packages/")
+        ;("org" . "https://orgmode.org/elpa/")
+        ))
+(package-initialize)
+
 (setq column-number-mode t
       confirm-nonexistent-file-or-buffer t
       default-input-method 'rfc1345
@@ -34,11 +49,8 @@
 
 (add-to-list 'exec-path invocation-directory)
 
-;; This is required for M-x package-list-packages to work properly
-(prefer-coding-system 'utf-8)
-
+;; Whitespace package
 (require 'whitespace)
-
 (setq whitespace-line-column 80
       whitespace-style (quote (face lines-tail)))
 
@@ -46,15 +58,18 @@
 (require 'epa-file)
 (epa-file-enable)
 
-;; Useful functions and variables
-;; ------------------------------
+;; ┌──────────────────────────────┐
+;; │Useful functions and variables│
+;; └──────────────────────────────┘
 
 (defconst sb-windows-p
   (string-equal "windows-nt" (symbol-name system-type))
   "t if the current system is Windows.")
+
 (defconst sb-darwin-p
   (string-equal "darwin" (symbol-name system-type))
   "t if the current system is Darwin.")
+
 (defconst sb-linux-p
   (string-equal "gnu/linux" (symbol-name system-type))
   "t if the current system is Linux")
@@ -62,7 +77,7 @@
 (defun sb-activate-default-input-method ()
   "Activate the default input method.
 
-Can be used as a hook."
+This function can be used as a hook."
   (activate-input-method default-input-method))
 
 (defun sb-bind-newline-and-indent-to-RET ()
@@ -75,18 +90,14 @@ This function can be used as a hook."
   "Load specified file if it exists. Do nothing otherwise."
   (when (file-exists-p filename) (load-file filename)))
 
-;; Custom key bindings and keymaps
-;; -------------------------------
+;; ┌───────────────────────────────┐
+;; │Custom key bindings and keymaps│
+;; └───────────────────────────────┘
 
 ;; Unlike zap-to-char (bound to M-z), zap-up-to-char kills up to, but
 ;; not including ARGth occurrence of CHAR. It is remapped to M-z.
 (autoload 'zap-up-to-char "misc")
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-
-;; My personnal keymap is called `sb-map`, and the prefix key that is
-;; assigned to this keymap is `C-&`.
-(define-prefix-command 'sb-map)
-(global-set-key (kbd "C-&") 'sb-map)
 
 ;; cycle-spacing is more flexible than just-one-space (initially bound
 ;; to M-SPC).
@@ -96,9 +107,15 @@ This function can be used as a hook."
 (when sb-darwin-p (setq mac-option-modifier 'none
 			mac-command-modifier 'meta))
 
-;; Definition of my own customization group
-;; ----------------------------------------
-;;
+;; My personnal keymap is called `sb-map`, and the prefix key that is
+;; assigned to this keymap is `C-&`.
+(define-prefix-command 'sb-map)
+(global-set-key (kbd "C-&") 'sb-map)
+
+;; ┌──────────────────────┐
+;; │My customization group│
+;; └──────────────────────┘
+
 (defgroup sb nil
   "My customization group.
 
@@ -145,16 +162,6 @@ See `sb-insert-bibref' for more details."
 
 (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
 (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
-
-(require 'package)
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")
-        ("melpa-stable" . "http://stable.melpa.org/packages/")
-        ("elpy" . "http://jorgenschaefer.github.io/packages/")
-        ;("org" . "https://orgmode.org/elpa/")
-        ))
-(package-initialize)
 
 (defun sb-package-install-unless-installed (pkg)
   (unless (package-installed-p pkg) (package-install pkg)))

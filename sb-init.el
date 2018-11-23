@@ -148,12 +148,6 @@ In most cases, the default value
 should work."
   :type 'string :group 'sb :tag "Path to local documents")
 
-(defcustom sb-path-to-bibliography "~/MyCoRe/biblio"
-  "Path to the local bibliography.
-
-See `sb-insert-bibref' for more details."
-  :type 'string :group 'sb :tag "Path to bibliography")
-
 ;; Remember to configure path to Julia program if necessary
 (custom-add-to-group 'sb 'julia-program 'custom-variable)
 

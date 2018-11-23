@@ -148,14 +148,10 @@ In most cases, the default value
 should work."
   :type 'string :group 'sb :tag "Path to local documents")
 
-;; Remember to configure path to Julia program if necessary
-(custom-add-to-group 'sb 'julia-program 'custom-variable)
 
 ; Remember to configure proxy if necessary
 (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 
-(custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
-(custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg 'custom-variable)
 
 (defun sb-package-install-unless-installed (pkg)
   (unless (package-installed-p pkg) (package-install pkg)))
@@ -374,7 +370,20 @@ This function uses magit only to display the current status."
 (require 'bratex)
 (add-hook 'LaTeX-mode-hook #'bratex-config)
 
+;; ┌────────────────────────┐
+;; │ C programming language │
+;; └────────────────────────┘
+
 (setq-default c-basic-offset 4)
+
+;; ┌─────────────────────────────┐
+;; │ Python programming language │
+;; └─────────────────────────────┘
+
+(custom-add-to-group 'sb
+		     'python-shell-interpreter-args 'custom-variable)
+(custom-add-to-group 'sb
+		     'python-shell-interpreter-interactive-arg 'custom-variable)
 
 ;; When running =M-x run-python", I get the following error message
 ;;
@@ -410,6 +419,17 @@ This function uses magit only to display the current status."
 (setq elpy-test-runner (quote elpy-test-test-discover-runner))
 (add-hook 'elpy-mode-hook 'whitespace-mode)
 
+;; ┌────────────────────────────┐
+;; │ Julia programming language │
+;; └────────────────────────────┘
+
+;; Remember to configure path to Julia program if necessary
+;; (custom-add-to-group 'sb 'julia-program 'custom-variable)
+
+
+;; ┌────────────────────────────────┐
+;; │ Maxima computer algebra system │
+;; └────────────────────────────────┘
 
 (defun sb-set-maxima-mode-path (symbol value)
   "Setter for the `sb-maxima-mode-path' custom variable."
@@ -436,6 +456,10 @@ windows platforms, it is something like:
 (autoload 'maxima "maxima" "Run Maxima interactively" t)
 (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
 			    auto-mode-alist))
+
+;; ┌─────────────────────┐
+;; │ Ispell and hunspell │
+;; └─────────────────────┘
 
 (defun sb-update-env-dicpath (value)
   (setenv "DICPATH" (mapconcat #'identity value ";")))
@@ -470,6 +494,9 @@ This is a list of directories where hunspell can find dictionaries."
 		 ))
        (cadr ispell-tex-skip-alists)))
 
-;; Blog related configuration
+;; ┌────────────────────────────┐
+;; │ Blog related configuration │
+;; └────────────────────────────┘
+
 (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                             sb-path-to-local-documents))

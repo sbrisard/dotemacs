@@ -2,19 +2,21 @@
 ;; │Vanilla emacs configuration│
 ;; └───────────────────────────┘
 
-;; This is required for M-x package-list-packages to work properly
-(prefer-coding-system 'utf-8)
+(defun sb-init-package ()
+  "Initialize package manager and download uninstalled packages."
+  (require 'package)
+  (setq package-archives
+	'(("gnu" . "http://elpa.gnu.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")
+          ("melpa-stable" . "http://stable.melpa.org/packages/")
+          ("elpy" . "http://jorgenschaefer.github.io/packages/")
+	  ;("org" . "https://orgmode.org/elpa/")
+          ))
+  (package-initialize)
+  (defun sb-package-install-unless-installed (pkg)
+    (unless (package-installed-p pkg) (package-install pkg))))
 
-;; First configure package manager and be done with it!
-(require 'package)
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")
-        ("melpa-stable" . "http://stable.melpa.org/packages/")
-        ("elpy" . "http://jorgenschaefer.github.io/packages/")
-        ;("org" . "https://orgmode.org/elpa/")
-        ))
-(package-initialize)
+(sb-init-package)
 
 (setq column-number-mode t
       confirm-nonexistent-file-or-buffer t
@@ -35,7 +37,9 @@
       ;; This ensures that Org timestamps allways appear in english
       system-time-locale "C"
       visible-bell t)
-;;(setq-default buffer-file-coding-system 'utf-8)
+
+;; This is required for M-x package-list-packages to work properly
+(prefer-coding-system 'utf-8)
 
 (global-auto-revert-mode)
 (global-hl-line-mode)
@@ -152,9 +156,6 @@ should work."
 ; Remember to configure proxy if necessary
 (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 
-
-(defun sb-package-install-unless-installed (pkg)
-  (unless (package-installed-p pkg) (package-install pkg)))
 
 (sb-package-install-unless-installed 'spacemacs-theme)
 (setq spacemacs-theme-org-height nil)

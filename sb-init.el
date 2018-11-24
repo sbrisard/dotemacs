@@ -55,14 +55,20 @@
 
 (sb-init-package)
 
-;; Whitespace package
-(require 'whitespace)
-(setq whitespace-line-column 80
-      whitespace-style (quote (face lines-tail)))
+(defun sb-init-whitespace ()
+  "Initialize whitespace package."
+  (require 'whitespace)
+  (setq whitespace-line-column 80
+	whitespace-style (quote (face lines-tail))))
 
-;; Easy PG (GnuPG interface for Emacs)
-(require 'epa-file)
-(epa-file-enable)
+(sb-init-whitespace)
+
+(defun sb-init-epa-file ()
+  "Initialize GnuPG interface for Emacs."
+  (require 'epa-file)
+  (epa-file-enable))
+
+(sb-init-epa-file)
 
 ;; ┌──────────────────────────────┐
 ;; │Useful functions and variables│

@@ -1,6 +1,43 @@
-;; ┌───────────────────────────┐
-;; │Vanilla emacs configuration│
-;; └───────────────────────────┘
+(defun sb-init-vanilla-emacs ()
+  "Initialize vanilla emacs."
+  (setq column-number-mode t
+	confirm-nonexistent-file-or-buffer t
+	default-input-method 'rfc1345
+	default-directory (concat (getenv "HOME") "/")
+	delete-active-region nil
+	dnd-open-file-other-window nil
+	find-file-run-dired nil
+	indent-tabs-mode nil
+	indicate-empty-lines nil
+	inhibit-startup-screen t
+	initial-frame-alist '((top . 0) (left . 0))
+	make-backup-files nil
+	ps-paper-type (quote a4)
+	safe-local-variable-values (quote ((buffer-auto-save-file-name)
+					   (org-confirm-babel-evaluate)))
+	show-paren-style (quote expression)
+	;; This ensures that Org timestamps allways appear in english
+	system-time-locale "C"
+	visible-bell t)
+
+  ;; This is required for M-x package-list-packages to work properly
+  (prefer-coding-system 'utf-8)
+
+  (global-auto-revert-mode)
+  (global-hl-line-mode)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (show-paren-mode)
+  (tool-bar-mode -1)
+
+  (global-unset-key (kbd "<C-next>"))
+  (global-unset-key (kbd "<C-prior>"))
+
+  (add-to-list 'exec-path invocation-directory))
+
+(sb-init-vanilla-emacs)
+
+;; ----------------------------------------------------------------------------
 
 (defun sb-init-package ()
   "Initialize package manager and download uninstalled packages."
@@ -17,41 +54,6 @@
     (unless (package-installed-p pkg) (package-install pkg))))
 
 (sb-init-package)
-
-(setq column-number-mode t
-      confirm-nonexistent-file-or-buffer t
-      default-input-method 'rfc1345
-      default-directory (concat (getenv "HOME") "/")
-      delete-active-region nil
-      dnd-open-file-other-window nil
-      find-file-run-dired nil
-      indent-tabs-mode nil
-      indicate-empty-lines nil
-      inhibit-startup-screen t
-      initial-frame-alist '((top . 0) (left . 0))
-      make-backup-files nil
-      ps-paper-type (quote a4)
-      safe-local-variable-values (quote ((buffer-auto-save-file-name)
-					 (org-confirm-babel-evaluate)))
-      show-paren-style (quote expression)
-      ;; This ensures that Org timestamps allways appear in english
-      system-time-locale "C"
-      visible-bell t)
-
-;; This is required for M-x package-list-packages to work properly
-(prefer-coding-system 'utf-8)
-
-(global-auto-revert-mode)
-(global-hl-line-mode)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(show-paren-mode)
-(tool-bar-mode -1)
-
-(global-unset-key (kbd "<C-next>"))
-(global-unset-key (kbd "<C-prior>"))
-
-(add-to-list 'exec-path invocation-directory)
 
 ;; Whitespace package
 (require 'whitespace)

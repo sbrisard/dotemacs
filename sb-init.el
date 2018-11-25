@@ -50,7 +50,9 @@
           ))
   (package-initialize)
   (defun sb-package-install-unless-installed (pkg)
-    (unless (package-installed-p pkg) (package-install pkg))))
+    (unless (package-installed-p pkg) (package-install pkg)))
+  (sb-package-install-unless-installed 'spacemacs-theme)
+  (sb-package-install-unless-installed 'htmlize))
 
 (sb-init-package)
 
@@ -144,14 +146,13 @@ should work."
 (custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
 
 
-(sb-package-install-unless-installed 'spacemacs-theme)
 (setq spacemacs-theme-org-height nil)
 (load-theme 'spacemacs-dark)
 
 (set-face-font 'default "DejaVu Sans Mono")
 
 ;; Used by Org mode for fontification of code blocks.
-(sb-package-install-unless-installed 'htmlize)
+
 (require 'htmlize)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

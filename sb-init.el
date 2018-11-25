@@ -2,7 +2,6 @@
   "Initialize vanilla emacs."
   (setq column-number-mode t
 	confirm-nonexistent-file-or-buffer t
-	default-input-method 'rfc1345
 	default-directory (concat (getenv "HOME") "/")
 	delete-active-region nil
 	dnd-open-file-other-window nil
@@ -63,6 +62,16 @@
 
 (sb-init-whitespace)
 
+(defun sb-init-input-method ()
+  (setq default-input-method 'rfc1345)
+  (mapc (lambda (mode)
+	  (add-hook mode (lambda ()
+			   (activate-input-method default-input-method))))
+	'(org-mode-hook
+	  text-mode-hook)))
+
+(sb-init-input-method)
+
 (defun sb-init-epa-file ()
   "Initialize GnuPG interface for Emacs."
   (require 'epa-file)
@@ -85,12 +94,6 @@
 (defconst sb-linux-p
   (string-equal "gnu/linux" (symbol-name system-type))
   "t if the current system is Linux")
-
-(defun sb-activate-default-input-method ()
-  "Activate the default input method.
-
-This function can be used as a hook."
-  (activate-input-method default-input-method))
 
 (defun sb-bind-newline-and-indent-to-RET ()
   "Bind newline-and-indent to RET.
@@ -175,8 +178,6 @@ should work."
 (sb-package-install-unless-installed 'htmlize)
 (require 'htmlize)
 
-(add-hook 'text-mode-hook 'sb-activate-default-input-method)
-(add-hook 'org-mode-hook 'sb-activate-default-input-method)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; ibuffer

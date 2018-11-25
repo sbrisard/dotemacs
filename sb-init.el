@@ -36,7 +36,6 @@
 
 (sb-init-vanilla-emacs)
 
-;; ----------------------------------------------------------------------------
 
 (defun sb-init-package ()
   "Initialize package manager and download uninstalled packages."
@@ -56,6 +55,7 @@
 
 (sb-init-package)
 
+
 (defun sb-init-whitespace ()
   "Initialize whitespace package."
   (require 'whitespace)
@@ -63,6 +63,7 @@
 	whitespace-style (quote (face lines-tail))))
 
 (sb-init-whitespace)
+
 
 (defun sb-init-input-method ()
   (setq default-input-method 'rfc1345)
@@ -74,12 +75,14 @@
 
 (sb-init-input-method)
 
+
 (defun sb-init-epa-file ()
   "Initialize GnuPG interface for Emacs."
   (require 'epa-file)
   (epa-file-enable))
 
 (sb-init-epa-file)
+
 
 (defun sb-init-key-bindings-and-keymaps ()
   "Initialize a few key bindings and my personal keymap."

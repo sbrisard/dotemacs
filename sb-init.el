@@ -112,17 +112,18 @@
 ;; │My customization group│
 ;; └──────────────────────┘
 
-(defgroup sb nil
-  "My customization group.
+(defun sb-init-my-customization-group ()
+  (defgroup sb nil
+    "My customization group.
 
 Gathers platform-dependent custom variables (both built-in and
 user-defined) that are required by my setup. These custom variables
 should be set at each new fresh install (but sensible defaults are
 defined)."
-  :tag "sb")
+    :tag "sb")
 
-(defcustom sb-path-to-local-documents "~/Documents"
-  "Path to the documents directory.
+  (defcustom sb-path-to-local-documents "~/Documents"
+    "Path to the documents directory.
 
 It is in particular assumed that
 
@@ -142,12 +143,13 @@ In most cases, the default value
     ~/Documents
 
 should work."
-  :type 'string :group 'sb :tag "Path to local documents")
+    :type 'string :group 'sb :tag "Path to local documents")
 
+  ;; Add some existing variables to my customization group, so as to
+  ;; remember that they must be configured.
+  (custom-add-to-group 'sb 'url-proxy-services 'custom-variable))
 
-; Remember to configure proxy if necessary
-(custom-add-to-group 'sb 'url-proxy-services 'custom-variable)
-
+(sb-init-my-customization-group)
 
 (setq spacemacs-theme-org-height nil)
 (load-theme 'spacemacs-dark)

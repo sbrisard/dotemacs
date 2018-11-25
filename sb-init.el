@@ -86,10 +86,6 @@
 (defconst sb-darwin-p (string-equal "darwin" (symbol-name system-type))
   "t if the current system is Darwin.")
 
-(defconst sb-linux-p (string-equal "gnu/linux" (symbol-name system-type))
-  "t if the current system is Linux")
-
-
 ;; ┌───────────────────────────────┐
 ;; │Custom key bindings and keymaps│
 ;; └───────────────────────────────┘

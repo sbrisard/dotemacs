@@ -89,9 +89,6 @@
 (defconst sb-linux-p (string-equal "gnu/linux" (symbol-name system-type))
   "t if the current system is Linux")
 
-(defun sb-load-file-when-exists (filename)
-  "Load specified file if it exists. Do nothing otherwise."
-  (when (file-exists-p filename) (load-file filename)))
 
 ;; ┌───────────────────────────────┐
 ;; │Custom key bindings and keymaps│
@@ -493,6 +490,10 @@ This is a list of directories where hunspell can find dictionaries."
 ;; ┌────────────────────────────┐
 ;; │ Blog related configuration │
 ;; └────────────────────────────┘
+
+(defun sb-load-file-when-exists (filename)
+  "Load specified file if it exists. Do nothing otherwise."
+  (when (file-exists-p filename) (load-file filename)))
 
 (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
                                             sb-path-to-local-documents))

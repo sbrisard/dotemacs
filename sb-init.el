@@ -83,23 +83,14 @@
 ;; │Useful functions and variables│
 ;; └──────────────────────────────┘
 
-(defconst sb-windows-p
-  (string-equal "windows-nt" (symbol-name system-type))
+(defconst sb-windows-p (string-equal "windows-nt" (symbol-name system-type))
   "t if the current system is Windows.")
 
-(defconst sb-darwin-p
-  (string-equal "darwin" (symbol-name system-type))
+(defconst sb-darwin-p (string-equal "darwin" (symbol-name system-type))
   "t if the current system is Darwin.")
 
-(defconst sb-linux-p
-  (string-equal "gnu/linux" (symbol-name system-type))
+(defconst sb-linux-p (string-equal "gnu/linux" (symbol-name system-type))
   "t if the current system is Linux")
-
-(defun sb-bind-newline-and-indent-to-RET ()
-  "Bind newline-and-indent to RET.
-
-This function can be used as a hook."
-  (local-set-key (kbd "RET") 'newline-and-indent))
 
 (defun sb-load-file-when-exists (filename)
   "Load specified file if it exists. Do nothing otherwise."

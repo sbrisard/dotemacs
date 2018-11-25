@@ -83,9 +83,6 @@
 ;; │Useful functions and variables│
 ;; └──────────────────────────────┘
 
-(defconst sb-windows-p (string-equal "windows-nt" (symbol-name system-type))
-  "t if the current system is Windows.")
-
 (defconst sb-darwin-p (string-equal "darwin" (symbol-name system-type))
   "t if the current system is Darwin.")
 

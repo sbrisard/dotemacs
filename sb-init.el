@@ -79,28 +79,29 @@
 
 (sb-init-epa-file)
 
-;; ┌───────────────────────────────┐
-;; │Custom key bindings and keymaps│
-;; └───────────────────────────────┘
+(defun sb-init-key-bindings-and-keymaps ()
+  "Initialize a few key bindings and my personal keymap."
+  ;; Unlike zap-to-char (bound to M-z), zap-up-to-char kills up to,
+  ;; but not including ARGth occurrence of CHAR. It is remapped to
+  ;; M-z.
+  (autoload 'zap-up-to-char "misc")
+  (global-set-key (kbd "M-z") 'zap-up-to-char)
 
-;; Unlike zap-to-char (bound to M-z), zap-up-to-char kills up to, but
-;; not including ARGth occurrence of CHAR. It is remapped to M-z.
-(autoload 'zap-up-to-char "misc")
-(global-set-key (kbd "M-z") 'zap-up-to-char)
+  ;; cycle-spacing is more flexible than just-one-space (initially
+  ;; bound to M-SPC).
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
-;; cycle-spacing is more flexible than just-one-space (initially bound
-;; to M-SPC).
-(global-set-key (kbd "M-SPC") 'cycle-spacing)
+  ;; Under Mac OS X, right-alt must be mapped to Alt Gr.
+  (when (string-equal "darwin" (symbol-name system-type)
+		      (setq mac-option-modifier 'none
+			    mac-command-modifier 'meta)))
 
-;; Under Mac OS X, right-alt must be mapped to Alt Gr.
-(when (string-equal "darwin" (symbol-name system-type)
-		    (setq mac-option-modifier 'none
-			  mac-command-modifier 'meta))
+  ;; My personnal keymap is called `sb-map`, and the prefix key that
+  ;; is assigned to this keymap is `C-&`.
+  (define-prefix-command 'sb-map)
+  (global-set-key (kbd "C-&") 'sb-map))
 
-;; My personnal keymap is called `sb-map`, and the prefix key that is
-;; assigned to this keymap is `C-&`.
-(define-prefix-command 'sb-map)
-(global-set-key (kbd "C-&") 'sb-map)
+(sb-init-key-bindings-and-keymaps)
 
 ;; ┌──────────────────────┐
 ;; │My customization group│

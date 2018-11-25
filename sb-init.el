@@ -282,9 +282,7 @@ LEVEL is an integer.  Indent by two spaces per level above 1."
 
 (global-set-key (kbd "C-x g") 'magit-status)
 (delete 'Git vc-handled-backends)
-(when sb-windows-p
-  (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin/")
-  (setenv "GIT_ASKPASS" "git-gui--askpass"))
+(setenv "GIT_ASKPASS" "git-gui--askpass")
 
 
 (defun sb-git-stage-commit-and-push-all ()

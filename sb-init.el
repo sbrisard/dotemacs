@@ -97,9 +97,9 @@
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
   ;; Under Mac OS X, right-alt must be mapped to Alt Gr.
-  (when (string-equal "darwin" (symbol-name system-type)
-		      (setq mac-option-modifier 'none
-			    mac-command-modifier 'meta)))
+  (when (string-equal "darwin" (symbol-name system-type))
+    (setq mac-option-modifier 'none
+	  mac-command-modifier 'meta))
 
   ;; My personnal keymap is called `sb-map`, and the prefix key that
   ;; is assigned to this keymap is `C-&`.
@@ -108,9 +108,6 @@
 
 (sb-init-key-bindings-and-keymaps)
 
-;; ┌──────────────────────┐
-;; │My customization group│
-;; └──────────────────────┘
 
 (defun sb-init-my-customization-group ()
   (defgroup sb nil

@@ -9,7 +9,6 @@
 	indent-tabs-mode nil
 	indicate-empty-lines nil
 	inhibit-startup-screen t
-	initial-frame-alist '((top . 0) (left . 0))
 	make-backup-files nil
 	ps-paper-type (quote a4)
 	safe-local-variable-values (quote ((buffer-auto-save-file-name)
@@ -24,10 +23,7 @@
 
   (global-auto-revert-mode)
   (global-hl-line-mode)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
   (show-paren-mode)
-  (tool-bar-mode -1)
 
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
@@ -148,10 +144,20 @@ should work."
 
 (sb-init-my-customization-group)
 
-(setq spacemacs-theme-org-height nil)
-(load-theme 'spacemacs-dark)
 
-(set-face-font 'default "DejaVu Sans Mono")
+(defun sb-init-appearance ()
+  "Initialize appearance of Emacs (fonts, themes, etc.)."
+  (setq initial-frame-alist '((top . 0) (left . 0))
+	spacemacs-theme-org-height nil)
+  (load-theme 'spacemacs-dark)
+
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+
+  (set-face-font 'default "DejaVu Sans Mono"))
+
+(sb-init-appearance)
 
 ;; Used by Org mode for fontification of code blocks.
 

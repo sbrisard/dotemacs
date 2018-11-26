@@ -21,6 +21,8 @@
   ;; This is required for M-x package-list-packages to work properly
   (prefer-coding-system 'utf-8)
 
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
   (global-auto-revert-mode)
   (global-hl-line-mode)
   (show-paren-mode)
@@ -163,7 +165,7 @@ should work."
 
 (require 'htmlize)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;; ibuffer
 ;; -------

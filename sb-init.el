@@ -27,9 +27,6 @@
   (global-hl-line-mode)
   (show-paren-mode)
 
-  (global-unset-key (kbd "<C-next>"))
-  (global-unset-key (kbd "<C-prior>"))
-
   (add-to-list 'exec-path invocation-directory))
 
 (sb-init-vanilla-emacs)
@@ -99,6 +96,10 @@
     (setq mac-option-modifier 'none
 	  mac-command-modifier 'meta))
 
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (global-unset-key (kbd "<C-next>"))
+  (global-unset-key (kbd "<C-prior>"))
+
   ;; My personnal keymap is called `sb-map`, and the prefix key that
   ;; is assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
@@ -161,32 +162,32 @@ should work."
 
 (sb-init-appearance)
 
-;; Used by Org mode for fontification of code blocks.
 
-(require 'htmlize)
+(defun sb-init-ibuffer ()
+  (setq ibuffer-default-sorting-mode (quote filename/process)
+	ibuffer-show-empty-filter-groups nil
+	ibuffer-saved-filter-groups
+	(quote
+	 (("sb-ibuffer-groups"
+	   ("Notes professionnelles" (filename . "notes/professionnelles"))
+	   ("Notes personnelles" (filename . "notes/personnelles"))
+	   (".emacs" (filename . ".emacs.d"))))))
+  (add-hook 'ibuffer-mode-hook
+	    (lambda () (ibuffer-switch-to-saved-filter-groups
+			"sb-ibuffer-groups"))))
 
+(sb-init-ibuffer)
 
 
 ;; ibuffer
 ;; -------
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-default-sorting-mode (quote filename/process)
-      ibuffer-show-empty-filter-groups nil
-      ibuffer-saved-filter-groups
-      (quote
-       (("sb-ibuffer-groups"
-	 ("Notes professionnelles" (filename . "notes/professionnelles"))
-	 ("Notes personnelles" (filename . "notes/personnelles"))
-	 ("HDR" (filename . "HDR"))
-	 (".emacs" (filename . ".emacs.d"))))))
-(add-hook 'ibuffer-mode-hook
-	  (lambda () (ibuffer-switch-to-saved-filter-groups
-		      "sb-ibuffer-groups")))
 
 (ivy-mode 1)
 (counsel-mode 1)
 (setq ivy-case-fold-search-default (quote always))
+
+(require 'htmlize) ; Used by Org mode for fontification of code blocks.
 
 (setq org-agenda-restore-windows-after-quit t
       org-agenda-window-setup 'current-window

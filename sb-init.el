@@ -47,7 +47,8 @@
     (unless (package-installed-p pkg) (package-install pkg)))
   (sb-package-install-unless-installed 'spacemacs-theme)
   (sb-package-install-unless-installed 'htmlize)
-  (sb-package-install-unless-installed 'ivy))
+  (sb-package-install-unless-installed 'ivy)
+  (sb-package-install-unless-installed 'julia-mode))
 
 (sb-init-package)
 
@@ -420,8 +421,11 @@ This function uses magit only to display the current status."
 ;; │ Julia programming language │
 ;; └────────────────────────────┘
 
-;; Remember to configure path to Julia program if necessary
-;; (custom-add-to-group 'sb 'julia-program 'custom-variable)
+
+(defun sb-init-julia ()
+  (custom-add-to-group 'sb 'julia-program 'custom-variable))
+
+(sb-init-julia)
 
 
 ;; ┌────────────────────────────────┐

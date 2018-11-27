@@ -46,7 +46,8 @@
   (defun sb-package-install-unless-installed (pkg)
     (unless (package-installed-p pkg) (package-install pkg)))
   (sb-package-install-unless-installed 'spacemacs-theme)
-  (sb-package-install-unless-installed 'htmlize))
+  (sb-package-install-unless-installed 'htmlize)
+  (sb-package-install-unless-installed 'ivy))
 
 (sb-init-package)
 
@@ -179,13 +180,13 @@ should work."
 (sb-init-ibuffer)
 
 
-;; ibuffer
-;; -------
+(defun sb-init-ivy ()
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always)))
 
+(sb-init-ivy)
 
-(ivy-mode 1)
-(counsel-mode 1)
-(setq ivy-case-fold-search-default (quote always))
 
 (require 'htmlize) ; Used by Org mode for fontification of code blocks.
 

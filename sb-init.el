@@ -181,6 +181,43 @@ should work."
 (sb-init-ibuffer)
 
 
+(defun sb-init-ispell-hunspell ()
+  "Initialization of ispell, using hunspell"
+  (defun sb-update-env-dicpath (value)
+    (setenv "DICPATH" (mapconcat #'identity value ";")))
+
+  (setenv "DICTIONARY" "en_US")
+
+  (defcustom sb-dict-path nil
+    "The emacs equivalent of the DICPATH environment variable.
+
+This is a list of directories where hunspell can find dictionaries."
+    :type '(repeat string)
+    :group 'sb
+    :tag "Path to Hunspell dictionaries"
+    :initialize (lambda (symbol value)
+		  (custom-initialize-reset symbol value)
+		  (sb-update-env-dicpath value))
+    :set (lambda (symbol value)
+	   (set-default symbol value)
+	   (sb-update-env-dicpath value)))
+
+  (setq ispell-tex-skip-alists
+	(list
+	 (append (car ispell-tex-skip-alists)
+		 '(("\\\\cite"            ispell-tex-arg-end)
+		   ("\\\\nocite"          ispell-tex-arg-end)
+		   ("\\\\includegraphics" ispell-tex-arg-end)
+		   ("\\\\author"          ispell-tex-arg-end)
+		   ("\\\\ref"             ispell-tex-arg-end)
+		   ("\\\\eqref"           ispell-tex-arg-end)
+		   ("\\\\label"           ispell-tex-arg-end)
+		   ("\\\\cite[tp]"        ispell-tex-arg-end)))
+	 (cadr ispell-tex-skip-alists))))
+
+(sb-init-ispell-hunspell)
+
+
 (defun sb-init-ivy ()
   (ivy-mode 1)
   (counsel-mode 1)
@@ -458,42 +495,6 @@ windows platforms, it is something like:
 (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
 			    auto-mode-alist))
 
-;; ┌─────────────────────┐
-;; │ Ispell and hunspell │
-;; └─────────────────────┘
-
-(defun sb-update-env-dicpath (value)
-  (setenv "DICPATH" (mapconcat #'identity value ";")))
-
-(setenv "DICTIONARY" "en_US")
-
-(defcustom sb-dict-path nil
-  "The emacs equivalent of the DICPATH environment variable.
-
-This is a list of directories where hunspell can find dictionaries."
-  :type '(repeat string)
-  :group 'sb
-  :tag "Path to Hunspell dictionaries"
-  :initialize (lambda (symbol value)
-		(custom-initialize-reset symbol value)
-		(sb-update-env-dicpath value))
-  :set (lambda (symbol value)
-	 (set-default symbol value)
-	 (sb-update-env-dicpath value)))
-
-(setq ispell-tex-skip-alists
-      (list
-       (append (car ispell-tex-skip-alists)
-	       '(("\\\\cite"            ispell-tex-arg-end)
-		 ("\\\\nocite"          ispell-tex-arg-end)
-		 ("\\\\includegraphics" ispell-tex-arg-end)
-		 ("\\\\author"          ispell-tex-arg-end)
-		 ("\\\\ref"             ispell-tex-arg-end)
-		 ("\\\\eqref"           ispell-tex-arg-end)
-		 ("\\\\label"           ispell-tex-arg-end)
-		 ("\\\\cite[tp]"        ispell-tex-arg-end)
-		 ))
-       (cadr ispell-tex-skip-alists)))
 
 ;; ┌────────────────────────────┐
 ;; │ Blog related configuration │

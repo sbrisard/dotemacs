@@ -45,10 +45,15 @@
   (package-initialize)
   (defun sb-package-install-unless-installed (pkg)
     (unless (package-installed-p pkg) (package-install pkg)))
-  (sb-package-install-unless-installed 'spacemacs-theme)
+  (sb-package-install-unless-installed 'auctex)
+  (sb-package-install-unless-installed 'counsel)
+  (sb-package-install-unless-installed 'elpy)
   (sb-package-install-unless-installed 'htmlize)
   (sb-package-install-unless-installed 'ivy)
-  (sb-package-install-unless-installed 'julia-mode))
+  (sb-package-install-unless-installed 'julia-mode)
+  (sb-package-install-unless-installed 'magit)
+  (sb-package-install-unless-installed 'ob-ipython)
+  (sb-package-install-unless-installed 'spacemacs-theme))
 
 (sb-init-package)
 

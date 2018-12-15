@@ -113,11 +113,13 @@
   (global-unset-key (kbd "<C-prior>"))
 
   (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; My personnal keymap is called `sb-map`, and the prefix key that
   ;; is assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
-  (global-set-key (kbd "C-&") 'sb-map))
+  (global-set-key (kbd "C-&") 'sb-map)
+  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all))
 
 (sb-init-key-bindings-and-keymaps)
 
@@ -287,19 +289,6 @@ LEVEL is an integer.  Indent by two spaces per level above 1."
 
 (sb-init-org-babel)
 
-;; Ensure that magit variables are properly defined and add relevant
-;; variables to custom group
-(require 'magit)
-
-(custom-add-to-group 'sb 'magit-git-executable 'custom-variable)
-(custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
-
-(setq magit-process-ensure-unix-line-ending t)
-
-(global-set-key (kbd "C-x g") 'magit-status)
-(delete 'Git vc-handled-backends)
-(setenv "GIT_ASKPASS" "git-gui--askpass")
-
 
 (defun sb-git-stage-commit-and-push-all ()
   "Stage, commit and push all changes in current git repository.
@@ -320,7 +309,19 @@ This function uses magit only to display the current status."
   (shell-command "git push")
   (magit-status))
 
-(define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
+
+(defun sb-init-magit ()
+  (require 'magit)
+  (custom-add-to-group 'sb 'magit-git-executable 'custom-variable)
+  (custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
+
+  (setq magit-process-ensure-unix-line-ending t)
+
+  (delete 'Git vc-handled-backends)
+  (setenv "GIT_ASKPASS" "git-gui--askpass"))
+
+(sb-init-magit)
+
 
 (require 'tex)
 

@@ -356,29 +356,33 @@ This function uses magit only to display the current status."
   (setf TeX-view-program-selection
 	(cons '(output-pdf "SumatraPDF")
 	      (cl-remove 'output-pdf TeX-view-program-selection
-			 :test (lambda (left right) (equal left (car right)))))))
+			 :test (lambda (left right) (equal left (car right))))))
+
+  (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
+					 '("axiom" LaTeX-env-label)
+					 '("theorem" LaTeX-env-label)
+					 '("remark" LaTeX-env-label)))))
 
 (sb-init-auctex)
 
-(require 'reftex)
 
-(add-hook 'latex-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(defun sb-init-reftex ()
+  (require 'reftex)
 
-(setq reftex-load-hook (quote (imenu-add-menubar-index))
-      reftex-mode-hook (quote (imenu-add-menubar-index))
-      reftex-plug-into-AUCTeX t
-      reftex-insert-label-flags (quote (nil nil))
-      reftex-ref-macro-prompt nil
-      reftex-label-alist
-      '(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
-	("theorem" ?h "thr:" "~\\ref{%s}" nil ("theorem" "th.") -3)
-	("remark"  ?r "rem:" "~\\ref{%s}" t   ("remark" "rem.") -4)))
+  (add-hook 'latex-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
-(add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
-				       '("axiom" LaTeX-env-label)
-				       '("theorem" LaTeX-env-label)
-				       '("remark" LaTeX-env-label))))
+  (setq reftex-load-hook (quote (imenu-add-menubar-index))
+	reftex-mode-hook (quote (imenu-add-menubar-index))
+	reftex-plug-into-AUCTeX t
+	reftex-insert-label-flags (quote (nil nil))
+	reftex-ref-macro-prompt nil
+	reftex-label-alist
+	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
+	  ("theorem" ?h "thr:" "~\\ref{%s}" nil ("theorem" "th.") -3)
+	  ("remark"  ?r "rem:" "~\\ref{%s}" t   ("remark" "rem.") -4))))
+
+(sb-init-reftex)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/bratex")
 (require 'bratex)

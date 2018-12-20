@@ -384,9 +384,13 @@ This function uses magit only to display the current status."
 
 (sb-init-reftex)
 
-(add-to-list 'load-path "~/.emacs.d/lisp/bratex")
-(require 'bratex)
-(add-hook 'LaTeX-mode-hook #'bratex-config)
+
+(defun sb-init-bratex ()
+  (add-to-list 'load-path "~/.emacs.d/lisp/bratex")
+  (require 'bratex)
+  (add-hook 'LaTeX-mode-hook #'bratex-config))
+
+(sb-init-bratex)
 
 ;; ┌────────────────────────┐
 ;; │ C programming language │

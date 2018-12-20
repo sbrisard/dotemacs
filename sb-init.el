@@ -55,7 +55,6 @@
     (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
-    (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'ob-ipython)
     (sb-package-install-unless-installed 'spacemacs-theme)))
@@ -434,17 +433,6 @@ This function uses magit only to display the current status."
                            elpy-module-sane-defaults)))
 (setq elpy-test-runner (quote elpy-test-test-discover-runner))
 (add-hook 'elpy-mode-hook 'whitespace-mode)
-
-;; ┌────────────────────────────┐
-;; │ Julia programming language │
-;; └────────────────────────────┘
-
-
-(defun sb-init-julia ()
-  (custom-add-to-group 'sb 'julia-program 'custom-variable))
-
-(sb-init-julia)
-
 
 ;; ┌────────────────────────────────┐
 ;; │ Maxima computer algebra system │

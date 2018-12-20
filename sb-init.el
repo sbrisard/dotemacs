@@ -321,45 +321,44 @@ This function uses magit only to display the current status."
 
 (sb-init-magit)
 
+(defun sb-init-auctex ()
+  (require 'tex)
+  (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
+  (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
 
-(require 'tex)
+  (setq LaTeX-command "latex"
+	LaTeX-electric-left-right-brace t
+	TeX-auto-save nil
+	TeX-command "tex"
+	TeX-electric-math (quote ("\\(" . "\\)"))
+	TeX-master t
+	TeX-parse-self t
+	TeX-PDF-mode t
+	TeX-source-correlate-method (quote synctex)
+	TeX-source-correlate-mode t
+	TeX-source-correlate-start-server t
+	;; TODO: is this really necessary?
+	font-latex-match-reference-keywords '(("citeauthor" "*{")
+					      ("citetext" "{")
+					      ("citeyear" "{")
+					      ("citeyearpar" "{")
+					      ("citep" "*[{")
+					      ("citet" "*[{")
+					      ("citealt" "*[{")
+					      ("citealp" "*[{")))
 
-(setq LaTeX-command "latex"
-      LaTeX-electric-left-right-brace t
-      TeX-auto-save nil
-      TeX-command "tex"
-      TeX-electric-math (quote ("\\(" . "\\)"))
-      TeX-master t
-      TeX-parse-self t
-      TeX-PDF-mode t
-      TeX-source-correlate-method (quote synctex)
-      TeX-source-correlate-mode t
-      TeX-source-correlate-start-server t)
+  (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
 
+  (put 'TeX-view-program-list 'variable-documentation
+       (concat (get 'TeX-view-program-list 'variable-documentation)
+	       "\n\n------------------------------------------------------------------------\nNote (SB): for SumatraPDF (Windows platforms), set this variable to\n\n    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\n    -reuse-instance -forward-search %b %n %o\".\n\nFor Skim (MacOS X platforms), set this variable to\n\n    \"/Applications/Skim.app/Contents/SharedSupport/displayline\n    -r -b %n %o %b\".\n\nUpdate `TeX-view-program-selection' accordingly."))
 
-;; TODO: is this really necessary?
-(setq font-latex-match-reference-keywords '(("citeauthor" "*{")
-					    ("citetext" "{")
-					    ("citeyear" "{")
-					    ("citeyearpar" "{")
-					    ("citep" "*[{")
-					    ("citet" "*[{")
-					    ("citealt" "*[{")
-					    ("citealp" "*[{")))
+  (setf TeX-view-program-selection
+	(cons '(output-pdf "SumatraPDF")
+	      (cl-remove 'output-pdf TeX-view-program-selection
+			 :test (lambda (left right) (equal left (car right)))))))
 
-(add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
-
-(put 'TeX-view-program-list 'variable-documentation
-     (concat (get 'TeX-view-program-list 'variable-documentation)
-	     "\n\n------------------------------------------------------------------------\nNote (SB): for SumatraPDF (Windows platforms), set this variable to\n\n    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\n    -reuse-instance -forward-search %b %n %o\".\n\nFor Skim (MacOS X platforms), set this variable to\n\n    \"/Applications/Skim.app/Contents/SharedSupport/displayline\n    -r -b %n %o %b\".\n\nUpdate `TeX-view-program-selection' accordingly."))
-
-(setf TeX-view-program-selection
-      (cons '(output-pdf "SumatraPDF")
-	    (cl-remove 'output-pdf TeX-view-program-selection
-		       :test (lambda (left right) (equal left (car right))))))
-
-(custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
-(custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
+(sb-init-auctex)
 
 (require 'reftex)
 

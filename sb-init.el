@@ -398,52 +398,48 @@ This function uses magit only to display the current status."
 
 (sb-init-c)
 
-;; ┌─────────────────────────────┐
-;; │ Python programming language │
-;; └─────────────────────────────┘
 
-(custom-add-to-group 'sb
-		     'python-shell-interpreter-args 'custom-variable)
-(custom-add-to-group 'sb
-		     'python-shell-interpreter-interactive-arg 'custom-variable)
+(defun sb-init-python ()
+  (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
+  (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg
+		       'custom-variable)
 
-;; When running =M-x run-python", I get the following error message
-;;
-;;     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem
-;;     to support readline, yet ‘python-shell-completion-native’ was t
-;;     and "ipython3" is not part of the
-;;     ‘python-shell-completion-native-disabled-interpreters’
-;;     list. Native completions have been disabled locally.
-;;
-;; A work around (under windows) seems to be
-;;
-;;   1. Install pyreadline
-;;   2. Set `python-shell-completion-native' to t
-;;   3. Use simple prompt with Jupyter console: set
-;;      `python-shell-interpreter-args' to
-;;
-;;     -i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console
-;;     --simple-prompt
-;;
-;; See also this https://github.com/jorgenschaefer/elpy/issues/887.
-(setq python-shell-completion-native-enable nil
-      python-shell-interpreter "jupyter"
-      python-shell-interpreter-args "console --simple-prompt"
-      python-shell-prompt-detect-enabled nil
-      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
-      python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
-(add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
+  ;; When running =M-x run-python", I get the following error message
+  ;;
+  ;;     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem
+  ;;     to support readline, yet ‘python-shell-completion-native’ was t
+  ;;     and "ipython3" is not part of the
+  ;;     ‘python-shell-completion-native-disabled-interpreters’
+  ;;     list. Native completions have been disabled locally.
+  ;;
+  ;; A work around (under windows) seems to be
+  ;;
+  ;;   1. Install pyreadline
+  ;;   2. Set `python-shell-completion-native' to t
+  ;;   3. Use simple prompt with Jupyter console: set
+  ;;      `python-shell-interpreter-args' to
+  ;;
+  ;;     -i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console
+  ;;     --simple-prompt
+  ;;
+  ;; See also this https://github.com/jorgenschaefer/elpy/issues/887.
+  (setq python-shell-completion-native-enable nil
+	python-shell-interpreter "jupyter"
+	python-shell-interpreter-args "console --simple-prompt"
+	python-shell-prompt-detect-enabled nil
+	python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
+	python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+  (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
 
-(elpy-enable)
-(setq elpy-modules (quote (elpy-module-eldoc
-                           elpy-module-flymake
-                           elpy-module-sane-defaults)))
-(setq elpy-test-runner (quote elpy-test-test-discover-runner))
-(add-hook 'elpy-mode-hook 'whitespace-mode)
+  (elpy-enable)
+  (setq elpy-modules (quote (elpy-module-eldoc
+                             elpy-module-flymake
+                             elpy-module-sane-defaults)))
+  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  (add-hook 'elpy-mode-hook 'whitespace-mode))
 
-;; ┌────────────────────────────────┐
-;; │ Maxima computer algebra system │
-;; └────────────────────────────────┘
+(sb-init-python)
+
 
 (defun sb-set-maxima-mode-path (symbol value)
   "Setter for the `sb-maxima-mode-path' custom variable."
@@ -456,20 +452,22 @@ This function uses magit only to display the current status."
   (progn (add-to-list 'load-path value)
 	 (custom-initialize-reset symbol value)))
 
-(defcustom sb-maxima-mode-path ""
-  "Path to the folder hosting elisp files for maxima-mode.
+(defun sb-init-maxima ()
+  (defcustom sb-maxima-mode-path ""
+    "Path to the folder hosting elisp files for maxima-mode.
 
 This is the path to the files: maxima.el, maxima-font-lock.el. On
 windows platforms, it is something like:
 
     C:\\maxima-5.40.0\\share\\maxima\\5.40.0\\emacs"
-  :type 'string :group 'sb :tag "Path to maxima-mode files"
-  :initialize 'sb-init-maxima-mode-path :set 'sb-set-maxima-mode-path)
+    :type 'string :group 'sb :tag "Path to maxima-mode files"
+    :initialize 'sb-init-maxima-mode-path :set 'sb-set-maxima-mode-path)
 
-(autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
-(autoload 'maxima "maxima" "Run Maxima interactively" t)
-(setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode)
-			    auto-mode-alist))
+  (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
+  (autoload 'maxima "maxima" "Run Maxima interactively" t)
+  (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist)))
+
+(sb-init-maxima)
 
 ;; ┌─────────────────────┐
 ;; │ Ispell and hunspell │

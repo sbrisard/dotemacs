@@ -61,6 +61,7 @@
     (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'magit)
+    (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'ob-ipython)
     (sb-package-install-unless-installed 'spacemacs-theme)))
 

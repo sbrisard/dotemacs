@@ -392,11 +392,11 @@ This function uses magit only to display the current status."
 
 (sb-init-bratex)
 
-;; ┌────────────────────────┐
-;; │ C programming language │
-;; └────────────────────────┘
 
-(setq-default c-basic-offset 4)
+(defun sb-init-c ()
+  (setq-default c-basic-offset 4))
+
+(sb-init-c)
 
 ;; ┌─────────────────────────────┐
 ;; │ Python programming language │

@@ -1,3 +1,8 @@
+(defun sb-load-file-when-exists (filename)
+  "Load specified file if it exists. Do nothing otherwise."
+  (when (file-exists-p filename) (load-file filename)))
+
+
 (defun sb-init-vanilla-emacs ()
   "Initialize vanilla emacs."
   (setq column-number-mode t
@@ -473,46 +478,43 @@ windows platforms, it is something like:
 ;; │ Ispell and hunspell │
 ;; └─────────────────────┘
 
-(defun sb-update-env-dicpath (value)
-  (setenv "DICPATH" (mapconcat #'identity value ";")))
+(defun sb-init-ispell-hunspell ()
+  (defun sb-update-env-dicpath (value)
+    (setenv "DICPATH" (mapconcat #'identity value ";")))
 
-(setenv "DICTIONARY" "en_US")
+  (setenv "DICTIONARY" "en_US")
 
-(defcustom sb-dict-path nil
-  "The emacs equivalent of the DICPATH environment variable.
+  (defcustom sb-dict-path nil
+    "The emacs equivalent of the DICPATH environment variable.
 
 This is a list of directories where hunspell can find dictionaries."
-  :type '(repeat string)
-  :group 'sb
-  :tag "Path to Hunspell dictionaries"
-  :initialize (lambda (symbol value)
-		(custom-initialize-reset symbol value)
-		(sb-update-env-dicpath value))
-  :set (lambda (symbol value)
-	 (set-default symbol value)
-	 (sb-update-env-dicpath value)))
+    :type '(repeat string)
+    :group 'sb
+    :tag "Path to Hunspell dictionaries"
+    :initialize (lambda (symbol value)
+		  (custom-initialize-reset symbol value)
+		  (sb-update-env-dicpath value))
+    :set (lambda (symbol value)
+	   (set-default symbol value)
+	   (sb-update-env-dicpath value)))
 
-(setq ispell-tex-skip-alists
-      (list
-       (append (car ispell-tex-skip-alists)
-	       '(("\\\\cite"            ispell-tex-arg-end)
-		 ("\\\\nocite"          ispell-tex-arg-end)
-		 ("\\\\includegraphics" ispell-tex-arg-end)
-		 ("\\\\author"          ispell-tex-arg-end)
-		 ("\\\\ref"             ispell-tex-arg-end)
-		 ("\\\\eqref"           ispell-tex-arg-end)
-		 ("\\\\label"           ispell-tex-arg-end)
-		 ("\\\\cite[tp]"        ispell-tex-arg-end)
-		 ))
-       (cadr ispell-tex-skip-alists)))
+  (setq ispell-tex-skip-alists
+	(list (append (car ispell-tex-skip-alists)
+		      '(("\\\\cite"            ispell-tex-arg-end)
+			("\\\\nocite"          ispell-tex-arg-end)
+			("\\\\includegraphics" ispell-tex-arg-end)
+			("\\\\author"          ispell-tex-arg-end)
+			("\\\\ref"             ispell-tex-arg-end)
+			("\\\\eqref"           ispell-tex-arg-end)
+			("\\\\label"           ispell-tex-arg-end)
+			("\\\\cite[tp]"        ispell-tex-arg-end)))
+	      (cadr ispell-tex-skip-alists))))
 
-;; ┌────────────────────────────┐
-;; │ Blog related configuration │
-;; └────────────────────────────┘
+(sb-init-ispell-hunspell)
 
-(defun sb-load-file-when-exists (filename)
-  "Load specified file if it exists. Do nothing otherwise."
-  (when (file-exists-p filename) (load-file filename)))
 
-(sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
-                                            sb-path-to-local-documents))
+(defun sb-init-blog ()
+  (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
+                                              sb-path-to-local-documents)))
+
+(sb-init-blog)

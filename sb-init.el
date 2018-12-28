@@ -56,10 +56,12 @@
 	  (setq contents-refreshed t))
 	(package-install pkg)))
     (sb-package-install-unless-installed 'auctex)
+    (sb-package-install-unless-installed 'clang-format)
     (sb-package-install-unless-installed 'counsel)
     (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
+    (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'ob-ipython)
@@ -459,7 +461,14 @@ directory where the current buffer lives, or one of its parents."
 
   (define-key sb-map (kbd "f") #'astyle-reformat))
 
-(sb-init-astyle)
+;;(sb-init-astyle)
+
+
+(defun sb-init-clang-format ()
+  (custom-add-to-group 'sb 'clang-format-executable 'custom-variable)
+  (define-key sb-map (kbd "f") #'clang-format-buffer))
+
+(sb-init-clang-format)
 
 
 (defun sb-init-python ()

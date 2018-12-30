@@ -523,18 +523,18 @@ directory where the current buffer lives, or one of its parents."
 
 (sb-init-lsp)
 
-(defun sb-set-maxima-mode-path (symbol value)
-  "Setter for the `sb-maxima-mode-path' custom variable."
-  (progn (when (boundp symbol) (delete (default-value symbol) load-path))
-	 (add-to-list 'load-path value)
-	 (set-default symbol value)))
-
-(defun sb-init-maxima-mode-path (symbol value)
-  "Initializer for the `sb-maxima-mode-path' custom variable."
-  (progn (add-to-list 'load-path value)
-	 (custom-initialize-reset symbol value)))
 
 (defun sb-init-maxima ()
+  (defun sb--set-maxima-mode-path (symbol value)
+    "Setter for the `sb-maxima-mode-path' custom variable."
+    (progn (when (boundp symbol) (delete (default-value symbol) load-path))
+	   (add-to-list 'load-path value)
+	   (set-default symbol value)))
+
+  (defun sb--init-maxima-mode-path (symbol value)
+    "Initializer for the `sb-maxima-mode-path' custom variable."
+    (progn (add-to-list 'load-path value)
+	   (custom-initialize-reset symbol value)))
   (defcustom sb-maxima-mode-path ""
     "Path to the folder hosting elisp files for maxima-mode.
 
@@ -543,7 +543,7 @@ windows platforms, it is something like:
 
     C:\\maxima-5.40.0\\share\\maxima\\5.40.0\\emacs"
     :type 'string :group 'sb :tag "Path to maxima-mode files"
-    :initialize 'sb-init-maxima-mode-path :set 'sb-set-maxima-mode-path)
+    :initialize 'sb--init-maxima-mode-path :set 'sb--set-maxima-mode-path)
 
   (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
   (autoload 'maxima "maxima" "Run Maxima interactively" t)

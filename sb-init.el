@@ -66,6 +66,7 @@
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'ob-ipython)
+    (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
 
 (sb-init-package)
@@ -180,6 +181,8 @@ should work."
   (setq initial-frame-alist '((top . 0) (left . 0))
 	spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-dark)
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme)
 
   (menu-bar-mode -1)
   (scroll-bar-mode -1)

@@ -167,9 +167,9 @@ should work."
 
   ;; Add some existing variables to my customization group, so as to
   ;; remember that they must be configured.
-  (custom-add-to-group 'sb 'ediff-diff-program)
-  (custom-add-to-group 'sb 'ediff-diff3-program)
-  (custom-add-to-group 'sb 'epg-gpg-program)
+  (custom-add-to-group 'sb 'ediff-diff-program 'custom-variable)
+  (custom-add-to-group 'sb 'ediff-diff3-program 'custom-variable)
+  (custom-add-to-group 'sb 'epg-gpg-program 'custom-variable)
   (custom-add-to-group 'sb 'url-proxy-services 'custom-variable))
 
 (sb-init-my-customization-group)

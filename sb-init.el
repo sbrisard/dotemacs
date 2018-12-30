@@ -544,6 +544,7 @@ windows platforms, it is something like:
     C:\\maxima-5.40.0\\share\\maxima\\5.40.0\\emacs"
     :type 'string :group 'sb :tag "Path to maxima-mode files"
     :initialize 'sb--init-maxima-mode-path :set 'sb--set-maxima-mode-path)
+  (custom-add-to-group 'sb 'maxima-command 'custom-variable)
 
   (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
   (autoload 'maxima "maxima" "Run Maxima interactively" t)

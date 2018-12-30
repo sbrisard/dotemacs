@@ -62,6 +62,7 @@
     (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'lsp-mode)
+    (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'ob-ipython)
@@ -510,8 +511,17 @@ directory where the current buffer lives, or one of its parents."
   (setq elpy-test-runner (quote elpy-test-test-discover-runner))
   (add-hook 'elpy-mode-hook 'whitespace-mode))
 
-(sb-init-python)
+;;(sb-init-python)
 
+(defun sb-init-lsp ()
+  (require 'lsp-mode)
+  (require 'lsp-ui)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
+  (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
+  (add-hook 'c-mode-hook #'lsp))
+
+(sb-init-lsp)
 
 (defun sb-set-maxima-mode-path (symbol value)
   "Setter for the `sb-maxima-mode-path' custom variable."

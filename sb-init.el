@@ -446,7 +446,7 @@ This function uses magit only to display the current status."
 
 
 (defun sb-init-c ()
-  (setq-default c-basic-offset 4))
+  (setq-default c-basic-offset 2))
 
 (sb-init-c)
 

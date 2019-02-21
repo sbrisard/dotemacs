@@ -57,6 +57,7 @@
 	(package-install pkg)))
     (sb-package-install-unless-installed 'auctex)
     (sb-package-install-unless-installed 'clang-format)
+    (sb-package-install-unless-installed 'cmake-mode)
     (sb-package-install-unless-installed 'counsel)
     (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'htmlize)

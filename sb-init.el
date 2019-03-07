@@ -596,7 +596,7 @@ This is a list of directories where hunspell can find dictionaries."
 
 
 (defun sb-init-blog ()
-  (sb-load-file-when-exists (expand-file-name "blog/sb-blog.el"
+  (sb-load-file-when-exists (expand-file-name "blog/src/sb-blog.el"
                                               sb-path-to-local-documents)))
 
 (sb-init-blog)

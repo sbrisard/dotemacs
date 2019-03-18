@@ -428,7 +428,7 @@ This function uses magit only to display the current status."
   (setq reftex-load-hook (quote (imenu-add-menubar-index))
 	reftex-mode-hook (quote (imenu-add-menubar-index))
 	reftex-plug-into-AUCTeX t
-	reftex-insert-label-flags (quote (nil nil))
+	reftex-insert-label-flags (quote (t t))
 	reftex-ref-macro-prompt nil
 	reftex-label-alist
 	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)

@@ -190,6 +190,7 @@ should work."
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
 
+  ;; Use w32-select-font
   (set-face-font 'default "DejaVu Sans Mono"))
 
 (sb-init-appearance)

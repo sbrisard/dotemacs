@@ -211,6 +211,10 @@ should work."
 
 (sb-init-ibuffer)
 
+(defun sb-init-flymake ()
+  (remove-hook 'flymake-diagnostic-functions #'flymake-proc-legacy-flymake))
+
+(sb-init-flymake)
 
 (defun sb-init-ispell-hunspell ()
   "Initialization of ispell, using hunspell"

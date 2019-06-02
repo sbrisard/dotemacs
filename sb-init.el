@@ -517,18 +517,23 @@ directory where the current buffer lives, or one of its parents."
 	python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
 
-  (elpy-enable)
-  (setq elpy-modules (quote (elpy-module-eldoc
-                             elpy-module-flymake
-                             elpy-module-sane-defaults)))
-  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
-  (add-hook 'elpy-mode-hook 'whitespace-mode))
+  ;; (elpy-enable)
+  ;; (setq elpy-modules (quote (elpy-module-eldoc
+  ;;                            elpy-module-flymake
+  ;;                            elpy-module-sane-defaults)))
+  ;; (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
 
-;;(sb-init-python)
+  (setq python-flymake-command (quote ("flake8" "-"))))
+
+(sb-init-python)
 
 (defun sb-init-lsp ()
   (require 'lsp-mode)
   (require 'lsp-ui)
+  (require 'lsp-python-ms)
+  (setq lsp-python-ms-dir "C:/opt/python-language-server/output/bin/Release"
+	lsp-python-ms-executable "C:/opt/python-language-server/output/bin/Release/win10-x64/publish/Microsoft.Python.LanguageServer.exe")
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
   (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)

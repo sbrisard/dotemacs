@@ -63,6 +63,7 @@
     (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'lsp-mode)
+    (sb-package-install-unless-installed 'lsp-python-ms)
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
@@ -531,13 +532,15 @@ directory where the current buffer lives, or one of its parents."
 (defun sb-init-lsp ()
   (require 'lsp-mode)
   (require 'lsp-ui)
-  (require 'lsp-python-ms)
-  (setq lsp-python-ms-dir "C:/opt/python-language-server/output/bin/Release"
-	lsp-python-ms-executable "C:/opt/python-language-server/output/bin/Release/win10-x64/publish/Microsoft.Python.LanguageServer.exe")
+
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
   (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
-  (add-hook 'c-mode-hook #'lsp))
+  (add-hook 'c-mode-hook #'lsp)
+
+  (require 'lsp-python-ms)
+  (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
+  (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
 
 (sb-init-lsp)
 

@@ -391,7 +391,6 @@ This function uses magit only to display the current status."
 	TeX-auto-save t
 	TeX-command "tex"
 	TeX-electric-math (quote ("\\(" . "\\)"))
-	TeX-master t
 	TeX-parse-self t
 	TeX-PDF-mode t
 	TeX-source-correlate-method (quote synctex)

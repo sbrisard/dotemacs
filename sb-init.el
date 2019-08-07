@@ -388,7 +388,7 @@ This function uses magit only to display the current status."
 
   (setq LaTeX-command "latex"
 	LaTeX-electric-left-right-brace t
-	TeX-auto-save nil
+	TeX-auto-save t
 	TeX-command "tex"
 	TeX-electric-math (quote ("\\(" . "\\)"))
 	TeX-master t

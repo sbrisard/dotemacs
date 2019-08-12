@@ -512,17 +512,17 @@ directory where the current buffer lives, or one of its parents."
   (setq python-shell-completion-native-enable nil
 	python-shell-interpreter "jupyter"
 	python-shell-interpreter-args "console --simple-prompt"
-	python-shell-prompt-detect-enabled nil
-	python-shell-prompt-output-regexp "Out\\[[0-9]+\\]:"
-	python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+	python-shell-prompt-detect-failure-warning nil)
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+               "jupyter")
 
-  ;; (elpy-enable)
-  ;; (setq elpy-modules (quote (elpy-module-eldoc
-  ;;                            elpy-module-flymake
-  ;;                            elpy-module-sane-defaults)))
-  ;; (setq elpy-test-runner (quote elpy-test-test-discover-runner))
-  ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
+  (elpy-enable)
+  (setq elpy-modules (quote (elpy-module-eldoc
+                             elpy-module-flymake
+                             elpy-module-sane-defaults)))
+  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  (add-hook 'elpy-mode-hook 'whitespace-mode)
 
   (setq python-flymake-command (quote ("flake8" "-"))))
 
@@ -541,7 +541,7 @@ directory where the current buffer lives, or one of its parents."
   (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
   (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
 
-(sb-init-lsp)
+;;(sb-init-lsp)
 
 
 (defun sb-init-maxima ()

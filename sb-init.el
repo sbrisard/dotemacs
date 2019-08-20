@@ -208,6 +208,7 @@ should work."
 	 (("sb-ibuffer-groups"
 	   ("Notes professionnelles" (filename . "notes/professionnelles"))
 	   ("Notes personnelles" (filename . "notes/personnelles"))
+	   ("Blog" (filename . "/blog"))
 	   (".emacs" (filename . ".emacs.d"))))))
   (add-hook 'ibuffer-mode-hook
 	    (lambda () (ibuffer-switch-to-saved-filter-groups

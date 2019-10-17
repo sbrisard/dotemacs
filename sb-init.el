@@ -441,9 +441,12 @@ This function uses magit only to display the current status."
 	reftex-insert-label-flags (quote (nil nil))
 	reftex-ref-macro-prompt nil
 	reftex-label-alist
-	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom"   "ax.") -2)
-	  ("theorem" ?h "thr:" "~\\ref{%s}" nil ("theorem" "th.") -3)
-	  ("remark"  ?r "rem:" "~\\ref{%s}" t   ("remark" "rem.") -4))))
+	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom" "ax.") -1)
+	  ("theorem" ?h "thr:" "~\\ref{%s}" nil ("theorem" "th.") -1)
+	  ("remark"  ?r "rem:" "~\\ref{%s}" nil ("remark" "rem.") -1)
+	  ("definition"  ?r "def:" "~\\ref{%s}" nil ("definition" "def.") -1)
+	  ("example" ?r "ex:" "~\\ref{%s}" nil ("example" "ex.") -1)
+	  ("question" ?r "q:" "~\\ref{%s}" nil ("question") -1))))
 
 (sb-init-reftex)
 

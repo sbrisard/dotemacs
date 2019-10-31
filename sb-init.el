@@ -446,7 +446,8 @@ This function uses magit only to display the current status."
 	  ("remark"  ?r "rem:" "~\\ref{%s}" nil ("remark" "rem.") -1)
 	  ("definition"  ?r "def:" "~\\ref{%s}" nil ("definition" "def.") -1)
 	  ("example" ?r "ex:" "~\\ref{%s}" nil ("example" "ex.") -1)
-	  ("question" ?r "q:" "~\\ref{%s}" nil ("question") -1))))
+	  ("question" ?r "q:" "~\\ref{%s}" nil ("question") -1)
+	  ("problem" ?r "pb:" "~\\ref{%s}" nil ("problem" "pb." "exercice") -1))))
 
 (sb-init-reftex)
 

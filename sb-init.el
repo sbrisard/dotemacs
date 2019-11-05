@@ -424,7 +424,11 @@ This function uses magit only to display the current status."
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
 					 '("axiom" LaTeX-env-label)
 					 '("theorem" LaTeX-env-label)
-					 '("remark" LaTeX-env-label)))))
+					 '("remark" LaTeX-env-label)
+					 '("definition" LaTeX-env-label)
+					 '("example" LaTeX-env-label)
+					 '("question" LaTeX-env-label)
+					 '("problem" LaTeX-env-label)))))
 
 (sb-init-auctex)
 

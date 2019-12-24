@@ -385,6 +385,9 @@ This function uses magit only to display the current status."
 
 (sb-init-magit)
 
+(defun sb-init-raise-frame ()
+  (select-frame-set-input-focus (selected-frame)))
+
 (defun sb-init-auctex ()
   (require 'tex)
   (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
@@ -397,7 +400,8 @@ This function uses magit only to display the current status."
 	TeX-electric-math (quote ("\\(" . "\\)"))
 	TeX-parse-self t
 	TeX-PDF-mode t
-	TeX-source-correlate-method (quote synctex)
+	TeX-raise-frame-function #'sb-init-raise-frame
+	Tex-source-correlate-method (quote synctex)
 	TeX-source-correlate-mode t
 	TeX-source-correlate-start-server t
 	;; TODO: is this really necessary?

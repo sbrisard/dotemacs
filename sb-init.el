@@ -425,6 +425,7 @@ This function uses magit only to display the current status."
 	      (cl-remove 'output-pdf TeX-view-program-selection
 			 :test (lambda (left right) (equal left (car right))))))
 
+  (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
 					 '("axiom" LaTeX-env-label)
 					 '("theorem" LaTeX-env-label)

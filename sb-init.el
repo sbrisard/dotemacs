@@ -3,6 +3,11 @@
   (when (file-exists-p filename) (load-file filename)))
 
 
+(defun sb-insert-timestamp ()
+  (interactive)
+  (insert (format-time-string "%Y%M%d%H%M")))
+
+
 (defun sb-init-vanilla-emacs ()
   "Initialize vanilla emacs."
   (setq column-number-mode t
@@ -135,7 +140,8 @@
   ;; is assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
   (global-set-key (kbd "C-&") 'sb-map)
-  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all))
+  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
+  (define-key sb-map (kbd "t") 'sb-insert-timestamp))
 
 (sb-init-key-bindings-and-keymaps)
 

@@ -5,7 +5,7 @@
 
 (defun sb-insert-timestamp ()
   (interactive)
-  (insert (format-time-string "%Y%M%d%H%M")))
+  (insert (format-time-string "%Y%M%d%H%M%S")))
 
 
 (defun sb-init-vanilla-emacs ()

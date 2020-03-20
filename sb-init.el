@@ -202,7 +202,8 @@ should work."
   (tool-bar-mode -1)
 
   ;; Use w32-select-font
-  (set-face-font 'default "DejaVu Sans Mono-10"))
+  ;; (set-face-font 'default "DejaVu Sans Mono-10")
+  )
 
 (sb-init-appearance)
 

@@ -3,6 +3,11 @@
   (when (file-exists-p filename) (load-file filename)))
 
 
+(defun sb-insert-timestamp ()
+  (interactive)
+  (insert (format-time-string "%Y%m%d%H%M%S")))
+
+
 (defun sb-init-vanilla-emacs ()
   "Initialize vanilla emacs."
   (setq column-number-mode t
@@ -64,6 +69,7 @@
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'js2-mode)
     (sb-package-install-unless-installed 'js2-refactor)
+    (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-python-ms)
     (sb-package-install-unless-installed 'lsp-ui)
@@ -134,7 +140,8 @@
   ;; is assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
   (global-set-key (kbd "C-&") 'sb-map)
-  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all))
+  (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
+  (define-key sb-map (kbd "t") 'sb-insert-timestamp))
 
 (sb-init-key-bindings-and-keymaps)
 
@@ -195,7 +202,8 @@ should work."
   (tool-bar-mode -1)
 
   ;; Use w32-select-font
-  (set-face-font 'default "DejaVu Sans Mono"))
+  ;; (set-face-font 'default "DejaVu Sans Mono-10")
+  )
 
 (sb-init-appearance)
 
@@ -385,6 +393,9 @@ This function uses magit only to display the current status."
 
 (sb-init-magit)
 
+(defun sb-init-raise-frame ()
+  (select-frame-set-input-focus (selected-frame)))
+
 (defun sb-init-auctex ()
   (require 'tex)
   (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
@@ -397,7 +408,8 @@ This function uses magit only to display the current status."
 	TeX-electric-math (quote ("\\(" . "\\)"))
 	TeX-parse-self t
 	TeX-PDF-mode t
-	TeX-source-correlate-method (quote synctex)
+	TeX-raise-frame-function #'sb-init-raise-frame
+	Tex-source-correlate-method (quote synctex)
 	TeX-source-correlate-mode t
 	TeX-source-correlate-start-server t
 	;; TODO: is this really necessary?
@@ -421,6 +433,7 @@ This function uses magit only to display the current status."
 	      (cl-remove 'output-pdf TeX-view-program-selection
 			 :test (lambda (left right) (equal left (car right))))))
 
+  (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
 					 '("axiom" LaTeX-env-label)
 					 '("theorem" LaTeX-env-label)
@@ -442,7 +455,7 @@ This function uses magit only to display the current status."
   (setq reftex-load-hook (quote (imenu-add-menubar-index))
 	reftex-mode-hook (quote (imenu-add-menubar-index))
 	reftex-plug-into-AUCTeX t
-	reftex-insert-label-flags (quote (nil nil))
+	reftex-insert-label-flags (quote (nil t))
 	reftex-ref-macro-prompt nil
 	reftex-label-alist
 	'(("axiom"   ?a "ax:"  "~\\ref{%s}" nil ("axiom" "ax.") -1)

@@ -186,7 +186,7 @@ should work."
   "Initialize appearance of Emacs (fonts, themes, etc.)."
   (setq initial-frame-alist '((top . 0) (left . 0))
 	spacemacs-theme-org-height nil)
-  (load-theme 'spacemacs-dark)
+  (load-theme 'spacemacs-light)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
@@ -575,7 +575,7 @@ directory where the current buffer lives, or one of its parents."
   (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
   (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
 
-;;(sb-init-lsp)
+(sb-init-lsp)
 
 
 (defun sb-init-maxima ()

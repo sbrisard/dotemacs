@@ -13,9 +13,12 @@ ido.last
 init.el
 lisp
 local.el
+.lsp-python
 .lsp-session*
+network-security.data
 server
 site-lisp
+snippets
 tramp
 transient
 url

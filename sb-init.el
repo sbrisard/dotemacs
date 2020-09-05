@@ -191,7 +191,7 @@ should work."
   "Initialize appearance of Emacs (fonts, themes, etc.)."
   (setq initial-frame-alist '((top . 0) (left . 0))
 	spacemacs-theme-org-height nil)
-  (load-theme 'spacemacs-dark)
+  (load-theme 'spacemacs-light)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
 
@@ -200,7 +200,7 @@ should work."
   (tool-bar-mode -1)
 
   ;; Use w32-select-font
-  ;; (set-face-font 'default "DejaVu Sans Mono-10")
+  (set-face-font 'default "DejaVu Sans Mono-10")
   )
 
 (sb-init-appearance)
@@ -539,6 +539,7 @@ directory where the current buffer lives, or one of its parents."
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
   (add-to-list 'python-shell-completion-native-disabled-interpreters
                "jupyter")
+  (add-hook 'python-mode-hook 'whitespace-mode)
 
   (elpy-enable)
   (setq elpy-modules (quote (elpy-module-eldoc
@@ -575,18 +576,15 @@ directory where the current buffer lives, or one of its parents."
 
 (defun sb-init-lsp ()
   (require 'lsp-mode)
+  (require 'lsp-pyls)
   (require 'lsp-ui)
 
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
   (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
-  (add-hook 'c-mode-hook #'lsp)
+  (add-hook 'c-mode-hook #'lsp))
 
-  (require 'lsp-python-ms)
-  (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
-  (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
-
-;;(sb-init-lsp)
+;; (sb-init-lsp)
 
 
 (defun sb-init-maxima ()

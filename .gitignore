@@ -6,13 +6,16 @@ ac-comphist.dat
 bookmarks
 elisp
 elpa
+elpy
 eshell
 filesets-cache.el
 ido.last
 init.el
 lisp
 local.el
+.lsp-session*
 server
 site-lisp
 tramp
+transient
 url

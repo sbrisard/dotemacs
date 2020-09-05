@@ -582,10 +582,13 @@ directory where the current buffer lives, or one of its parents."
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
   (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
-  (add-hook 'c-mode-hook #'lsp))
+  (add-hook 'c-mode-hook #'lsp)
 
-;; (sb-init-lsp)
+  (require 'lsp-python-ms)
+  (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
+  (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
 
+(sb-init-lsp)
 
 (defun sb-init-maxima ()
   (defun sb--set-maxima-mode-path (symbol value)

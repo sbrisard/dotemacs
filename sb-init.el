@@ -65,7 +65,6 @@
     (sb-package-install-unless-installed 'cmake-mode)
     (sb-package-install-unless-installed 'counsel)
     (sb-package-install-unless-installed 'elpy)
-    (sb-package-install-unless-installed 'htmlize)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'js2-mode)
     (sb-package-install-unless-installed 'js2-refactor)

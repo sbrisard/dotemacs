@@ -128,8 +128,6 @@
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
 
-  (global-set-key (kbd "C-x g") 'magit-status)
-
   ;; My personnal keymap is called `sb-map`, and the prefix key that
   ;; is assigned to this keymap is `C-&`.
   (define-prefix-command 'sb-map)
@@ -308,6 +306,7 @@ This function uses magit only to display the current status."
   (custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
 
   (setq magit-process-ensure-unix-line-ending t)
+  (global-set-key (kbd "C-x g") 'magit-status)
 
   (delete 'Git vc-handled-backends)
   (setenv "GIT_ASKPASS" "git-gui--askpass"))

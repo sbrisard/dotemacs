@@ -53,7 +53,7 @@
             ("elpy" . "http://jorgenschaefer.github.io/packages/")
 					;("org" . "https://orgmode.org/elpa/")
             ))
-    (package-initialize)
+    (if (< emacs-major-version 27) (package-initialize))
     (defun sb-package-install-unless-installed (pkg)
       (unless (package-installed-p pkg)
 	(unless contents-refreshed

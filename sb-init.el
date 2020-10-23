@@ -440,32 +440,10 @@ directory where the current buffer lives, or one of its parents."
   (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg
 		       'custom-variable)
 
-  ;; When running =M-x run-python", I get the following error message
-  ;;
-  ;;     Warning (python): Your ‘python-shell-interpreter’ doesn’t seem
-  ;;     to support readline, yet ‘python-shell-completion-native’ was t
-  ;;     and "ipython3" is not part of the
-  ;;     ‘python-shell-completion-native-disabled-interpreters’
-  ;;     list. Native completions have been disabled locally.
-  ;;
-  ;; A work around (under windows) seems to be
-  ;;
-  ;;   1. Install pyreadline
-  ;;   2. Set `python-shell-completion-native' to t
-  ;;   3. Use simple prompt with Jupyter console: set
-  ;;      `python-shell-interpreter-args' to
-  ;;
-  ;;     -i C:\\Users\\brisard\\Miniconda3\\Scripts\\jupyter-script.py console
-  ;;     --simple-prompt
-  ;;
-  ;; See also this https://github.com/jorgenschaefer/elpy/issues/887.
-  (setq python-shell-completion-native-enable nil
-	python-shell-interpreter "jupyter"
+  (setq python-shell-interpreter "jupyter"
 	python-shell-interpreter-args "console --simple-prompt"
 	python-shell-prompt-detect-failure-warning nil)
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-  (add-to-list 'python-shell-completion-native-disabled-interpreters
-               "jupyter")
   (add-hook 'python-mode-hook 'whitespace-mode)
 
   (elpy-enable)

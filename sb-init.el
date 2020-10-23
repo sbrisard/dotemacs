@@ -515,7 +515,7 @@ directory where the current buffer lives, or one of its parents."
   (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
   (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
 
-(sb-init-lsp)
+;; (sb-init-lsp)
 
 (defun sb-init-maxima ()
   (defun sb--set-maxima-mode-path (symbol value)

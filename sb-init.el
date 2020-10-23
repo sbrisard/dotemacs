@@ -128,7 +128,6 @@
   (global-unset-key (kbd "<C-next>"))
   (global-unset-key (kbd "<C-prior>"))
 
-  (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; My personnal keymap is called `sb-map`, and the prefix key that

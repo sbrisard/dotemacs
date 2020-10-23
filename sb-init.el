@@ -72,7 +72,6 @@
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
-    (sb-package-install-unless-installed 'meson-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)
     (sb-package-install-unless-installed 'xref-js2)))

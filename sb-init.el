@@ -312,7 +312,7 @@ This function uses magit only to display the current status."
   (delete 'Git vc-handled-backends)
   (setenv "GIT_ASKPASS" "git-gui--askpass"))
 
-(sb-init-magit)
+;; (sb-init-magit)
 
 (defun sb-init-raise-frame ()
   (select-frame-set-input-focus (selected-frame)))

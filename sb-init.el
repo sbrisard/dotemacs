@@ -183,8 +183,9 @@ should work."
 
 (defun sb-init-appearance ()
   "Initialize appearance of Emacs (fonts, themes, etc.)."
-  (setq initial-frame-alist '((top . 0) (left . 0) (fullscreen . maximized))
-	spacemacs-theme-org-height nil)
+  ;; (setq initial-frame-alist '((top . 0) (left . 0) (fullscreen . maximized))
+  ;; 	spacemacs-theme-org-height nil)
+  (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-light)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme)
@@ -193,7 +194,7 @@ should work."
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   ;; Disable window decorations
-  (set-frame-parameter nil 'undecorated t)
+  ;;(set-frame-parameter nil 'undecorated t)
   (split-window-right)
 
   ;; Use w32-select-font

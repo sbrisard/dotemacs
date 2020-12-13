@@ -183,8 +183,7 @@ should work."
 
 (defun sb-init-appearance ()
   "Initialize appearance of Emacs (fonts, themes, etc.)."
-  ;; (setq initial-frame-alist '((top . 0) (left . 0) (fullscreen . maximized))
-  ;; 	spacemacs-theme-org-height nil)
+  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
   (setq spacemacs-theme-org-height nil)
   (load-theme 'spacemacs-light)
   (require 'spaceline-config)

@@ -137,6 +137,19 @@
 
 (sb-init-key-bindings-and-keymaps)
 
+(defun sb-init-mail ()
+  """Mail-mode"""
+  (setq mail-self-blind t
+	mail-user-agent 'sendmail-user-agent
+	send-mail-function 'smtpmail-send-it
+	smtpmail-default-smtp-server "ssl.polytechnique.org"
+	smtpmail-smtp-service 465
+	smtpmail-smtp-user "sebastien.brisard.1997"
+	smtpmail-stream-type 'ssl
+	user-full-name "Sébastien Brisard"
+	user-mail-address "sebastien.brisard@m4x.org"))
+
+(sb-init-mail)
 
 (defun sb-init-my-customization-group ()
   (defgroup sb nil

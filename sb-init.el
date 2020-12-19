@@ -70,7 +70,6 @@
     (sb-package-install-unless-installed 'js2-refactor)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
-    (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)
@@ -293,36 +292,36 @@ The notes directory is located in the `notes` subdirectory of
 			     (directory-files root t directory-files-no-dot-files-regexp)))))
 
 
-(defun sb-git-stage-commit-and-push-all ()
-  "Stage, commit and push all changes in current git repository.
+;; (defun sb-git-stage-commit-and-push-all ()
+;;   "Stage, commit and push all changes in current git repository.
 
-This function runs the following commands
+;; This function runs the following commands
 
-    git commit -a -m msg
-    git push
+;;     git commit -a -m msg
+;;     git push
 
-The default commit message is \"DD/MM/YYYY HH:MM\". The gt
-push.default variable must be set.
+;; The default commit message is \"DD/MM/YYYY HH:MM\". The gt
+;; push.default variable must be set.
 
-This function uses magit only to display the current status."
-  (interactive)
-  (shell-command (concat "git commit -a -m \""
-			       (format-time-string "%d/%m/%Y %H:%M")
-			       "\""))
-  (shell-command "git push")
-  (magit-status))
+;; This function uses magit only to display the current status."
+;;   (interactive)
+;;   (shell-command (concat "git commit -a -m \""
+;; 			       (format-time-string "%d/%m/%Y %H:%M")
+;; 			       "\""))
+;;   (shell-command "git push")
+;;   (magit-status))
 
 
-(defun sb-init-magit ()
-  (require 'magit)
-  (custom-add-to-group 'sb 'magit-git-executable 'custom-variable)
-  (custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
+;; (defun sb-init-magit ()
+;;   (require 'magit)
+;;   (custom-add-to-group 'sb 'magit-git-executable 'custom-variable)
+;;   (custom-add-to-group 'sb 'magit-repository-directories 'custom-variable)
 
-  (setq magit-process-ensure-unix-line-ending t)
-  (global-set-key (kbd "C-x g") 'magit-status)
+;;   (setq magit-process-ensure-unix-line-ending t)
+;;   (global-set-key (kbd "C-x g") 'magit-status)
 
-  (delete 'Git vc-handled-backends)
-  (setenv "GIT_ASKPASS" "git-gui--askpass"))
+;;   (delete 'Git vc-handled-backends)
+;;   (setenv "GIT_ASKPASS" "git-gui--askpass"))
 
 ;; (sb-init-magit)
 

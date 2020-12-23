@@ -99,3 +99,23 @@ This function uses magit only to display the current status."
 				 #'xref-js2-xref-backend nil t))))
 
 (sb-init-javascript)
+
+
+(defun sb-init-astyle ()
+  (defcustom astyle-executable "astyle" "Full path to the astyle executable."
+    :type 'string :group 'sb :tag "Astyle executable")
+
+  (defun astyle-reformat ()
+    "Call astyle on the current buffer.
+
+This function calls the `astyle-executable' with the --project
+option. This requires that a project options file be found in the
+directory where the current buffer lives, or one of its parents."
+    (interactive)
+    (when (buffer-modified-p) (error "Buffer has unsaved modifications"))
+    (shell-command (concat astyle-executable " --project "
+			   (file-name-nondirectory (buffer-file-name)))))
+
+  (define-key sb-map (kbd "f") #'astyle-reformat))
+
+(sb-init-astyle)

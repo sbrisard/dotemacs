@@ -7,6 +7,12 @@ My emacs configuration files
 - `lsp-clients-clangd-executable`
 - `maxima-command`
 
+## lsp-mode
+
+### C++
+
+Install [https://releases.llvm.org/download.html](clangd).
+
 ## Sending emails with Emacs
 
 - Define a `~\.authinfo` file (see

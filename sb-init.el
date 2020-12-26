@@ -360,23 +360,45 @@ should work."
 
   (setq python-flymake-command (quote ("flake8" "-"))))
 
-(sb-init-python)
+;;(sb-init-python)
 
 (defun sb-init-lsp ()
+  (setq gc-cons-threshold 100000000
+	read-process-output-max (* 1024 1024))
   (require 'lsp-mode)
+
+  (setq lsp-headerline-breadcrumb-enable t
+	lsp-headerline-breadcrumb-enable-symbol-numbers t
+	lsp-headerline-breadcrumb-segments '(project file symbols)
+	lsp-keep-workspace-alive nil
+	lsp-modeline-code-actions-enable t
+	lsp-modeline-code-actions-segments '(count icon name))
+
   (require 'lsp-pyls)
-  (require 'lsp-ui)
-
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (setq lsp-pyls-plugins-autopep8-enabled nil
+	lsp-pyls-plugins-pydocstyle-enabled t
+	lsp-pyls-plugins-yapf-enabled nil)
+  (lsp-register-custom-settings
+   '(("pyls.plugins.pyls_mypy.enabled" t t)
+     ("pyls.plugins.pyls_mypy.live_mode" nil t)
+     ("pyls.plugins.autopep8.enabled" nil t)
+     ("pyls.plugins.yapf.enabled" nil  t)
+     ("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)))
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
-  (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
-  (add-hook 'c-mode-hook #'lsp)
 
-  (require 'lsp-python-ms)
-  (custom-add-to-group 'sb 'lsp-python-ms-dir 'custom-variable)
-  (custom-add-to-group 'sb 'lsp-python-ms-executable 'custom-variable))
+  ;; (require 'lsp-ui)
 
-;; (sb-init-lsp)
+  ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+  ;; (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
+
+  (require 'lsp-clangd)
+  (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
+  )
+
+(sb-init-lsp)
 
 (defun sb-init-maxima ()
   (defun sb--set-maxima-mode-path (symbol value)

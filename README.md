@@ -2,6 +2,11 @@
 
 My emacs configuration files
 
+## Variables that must be custom-set
+
+- `lsp-clients-clangd-executable`
+- `maxima-command`
+
 ## Sending emails with Emacs
 
 - Define a `~\.authinfo` file (see

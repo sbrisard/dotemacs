@@ -340,17 +340,21 @@ The following variables must be custom-set
 	lsp-modeline-code-actions-enable t
 	lsp-modeline-code-actions-segments '(count icon name))
 
-  (require 'lsp-pyls)
+  ;; This setq should occur before lsp-pyls is loaded for the changes
+  ;; to take effect (otherwise, the server is not notified of the
+  ;; changes.
   (setq lsp-pyls-plugins-autopep8-enabled nil
 	lsp-pyls-plugins-pydocstyle-enabled t
 	lsp-pyls-plugins-yapf-enabled nil)
+  ;; These settings are set before lsp-pyls is loaded, so as to
+  ;; benefit from the server notification that is emitted at the end
+  ;; of the package.
   (lsp-register-custom-settings
    '(("pyls.plugins.pyls_mypy.enabled" t t)
      ("pyls.plugins.pyls_mypy.live_mode" nil t)
-     ("pyls.plugins.autopep8.enabled" nil t)
-     ("pyls.plugins.yapf.enabled" nil  t)
      ("pyls.plugins.pyls_black.enabled" t t)
      ("pyls.plugins.pyls_isort.enabled" t t)))
+  (require 'lsp-pyls)
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
 
   (require 'lsp-clangd)

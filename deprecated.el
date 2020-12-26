@@ -119,3 +119,12 @@ directory where the current buffer lives, or one of its parents."
   (define-key sb-map (kbd "f") #'astyle-reformat))
 
 (sb-init-astyle)
+
+
+(defun sb-init-elpy ()
+  (elpy-enable)
+  (setq elpy-modules (quote (elpy-module-eldoc
+                             elpy-module-flymake
+                             elpy-module-sane-defaults)))
+  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  (add-hook 'elpy-mode-hook 'whitespace-mode))

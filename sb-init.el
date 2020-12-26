@@ -50,8 +50,6 @@
 	  '(("gnu" . "http://elpa.gnu.org/packages/")
             ("melpa" . "http://melpa.org/packages/")
             ("melpa-stable" . "http://stable.melpa.org/packages/")
-            ("elpy" . "http://jorgenschaefer.github.io/packages/")
-					;("org" . "https://orgmode.org/elpa/")
             ))
     (if (< emacs-major-version 27) (package-initialize))
     (defun sb-package-install-unless-installed (pkg)
@@ -61,10 +59,8 @@
 	  (setq contents-refreshed t))
 	(package-install pkg)))
     (sb-package-install-unless-installed 'auctex)
-    (sb-package-install-unless-installed 'clang-format)
     (sb-package-install-unless-installed 'cmake-mode)
     (sb-package-install-unless-installed 'counsel)
-    (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
@@ -96,9 +92,15 @@
 
 
 (defun sb-init-epa-file ()
-  "Initialize GnuPG interface for Emacs."
+  "Initialize GnuPG interface for Emacs.
+
+The following variables must be custom-set
+
+- `epg-gpg-program'.
+"
   (require 'epa-file)
-  (epa-file-enable))
+  (epa-file-enable)
+  (setq epg-pinentry-mode 'loopback))
 
 (sb-init-epa-file)
 
@@ -133,61 +135,25 @@
 
 (sb-init-key-bindings-and-keymaps)
 
+
 (defun sb-init-mail ()
-  """Mail-mode"""
+  "Initialize mail-mode.
+
+The following variables should be custom-set
+
+- `smtpmail-default-smtp-server',
+- `smtpmail-smtp-service',
+- `smtpmail-smtp-user',
+- `user-full-name',
+- `user-mail-address'.
+
+For these variables to be clickable, first require `smtpmail'."
   (setq mail-self-blind t
 	mail-user-agent 'sendmail-user-agent
 	send-mail-function 'smtpmail-send-it
-	smtpmail-default-smtp-server "ssl.polytechnique.org"
-	smtpmail-smtp-service 465
-	smtpmail-smtp-user "sebastien.brisard.1997"
-	smtpmail-stream-type 'ssl
-	user-full-name "Sébastien Brisard"
-	user-mail-address "sebastien.brisard@m4x.org"))
+	smtpmail-stream-type 'ssl))
 
 (sb-init-mail)
-
-(defun sb-init-my-customization-group ()
-  (defgroup sb nil
-    "My customization group.
-
-Gathers platform-dependent custom variables (both built-in and
-user-defined) that are required by my setup. These custom variables
-should be set at each new fresh install (but sensible defaults are
-defined)."
-    :tag "sb")
-
-  (defcustom sb-path-to-local-documents "~/Documents"
-    "Path to the documents directory.
-
-It is in particular assumed that
-
-  - my org notes are located in the notes/ subdirectory,
-  - my blog files are located in the blog/ subdirectory.
-
-Under Linux, this variable might be set to
-
-    /home/username/Documents
-
-while under Windows, it might be set to
-
-    C:\\Users\\username\\Documents
-
-In most cases, the default value
-
-    ~/Documents
-
-should work."
-    :type 'string :group 'sb :tag "Path to local documents")
-
-  ;; Add some existing variables to my customization group, so as to
-  ;; remember that they must be configured.
-  (custom-add-to-group 'sb 'ediff-diff-program 'custom-variable)
-  (custom-add-to-group 'sb 'ediff-diff3-program 'custom-variable)
-  (custom-add-to-group 'sb 'epg-gpg-program 'custom-variable)
-  (custom-add-to-group 'sb 'url-proxy-services 'custom-variable))
-
-(sb-init-my-customization-group)
 
 
 (defun sb-init-appearance ()
@@ -246,10 +212,27 @@ should work."
 (defun sb-init-raise-frame ()
   (select-frame-set-input-focus (selected-frame)))
 
+
 (defun sb-init-auctex ()
+  "Initialize the AUCTeX package.
+
+The following variables must be custom-set
+
+- `TeX-view-program-list'
+- `TeX-view-program-selection'
+
+For SumatraPDF (Windows platforms), set `Tex-view-program-list' to
+
+    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe
+         -reuse-instance -forward-search %b %n %o\".
+
+For Skim (MacOS X platforms), set this variable to
+    \"/Applications/Skim.app/Contents/SharedSupport/displayline
+         -r -b %n %o %b\".
+
+Update `TeX-view-program-selection' accordingly.
+"
   (require 'tex)
-  (custom-add-to-group 'sb 'TeX-view-program-list 'custom-variable)
-  (custom-add-to-group 'sb 'TeX-view-program-selection 'custom-variable)
 
   (setq LaTeX-command "latex"
 	LaTeX-electric-left-right-brace t
@@ -273,11 +256,6 @@ should work."
 					      ("citealp" "*[{")))
 
   (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
-
-  (put 'TeX-view-program-list 'variable-documentation
-       (concat (get 'TeX-view-program-list 'variable-documentation)
-	       "\n\n------------------------------------------------------------------------\nNote (SB): for SumatraPDF (Windows platforms), set this variable to\n\n    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe\n    -reuse-instance -forward-search %b %n %o\".\n\nFor Skim (MacOS X platforms), set this variable to\n\n    \"/Applications/Skim.app/Contents/SharedSupport/displayline\n    -r -b %n %o %b\".\n\nUpdate `TeX-view-program-selection' accordingly."))
-
   (setf TeX-view-program-selection
 	(cons '(output-pdf "SumatraPDF")
 	      (cl-remove 'output-pdf TeX-view-program-selection
@@ -333,36 +311,24 @@ should work."
 (sb-init-c)
 
 
-(defun sb-init-clang-format ()
-  (custom-add-to-group 'sb 'clang-format-executable 'custom-variable)
-  (define-key sb-map (kbd "f") #'clang-format-buffer))
-
-(sb-init-clang-format)
-
-
 (defun sb-init-python ()
-  (custom-add-to-group 'sb 'python-shell-interpreter-args 'custom-variable)
-  (custom-add-to-group 'sb 'python-shell-interpreter-interactive-arg
-		       'custom-variable)
-
   (setq python-shell-interpreter "jupyter"
 	python-shell-interpreter-args "console --simple-prompt"
 	python-shell-prompt-detect-failure-warning nil)
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
   (add-hook 'python-mode-hook 'whitespace-mode)
 
-  (elpy-enable)
-  (setq elpy-modules (quote (elpy-module-eldoc
-                             elpy-module-flymake
-                             elpy-module-sane-defaults)))
-  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
-  (add-hook 'elpy-mode-hook 'whitespace-mode)
-
   (setq python-flymake-command (quote ("flake8" "-"))))
 
 ;;(sb-init-python)
 
 (defun sb-init-lsp ()
+  "Initialize lsp-mode.
+
+The following variables must be custom-set
+
+- `lsp-clients-clangd-executable'.
+"
   (setq gc-cons-threshold 100000000
 	read-process-output-max (* 1024 1024))
   (require 'lsp-mode)
@@ -387,12 +353,6 @@ should work."
      ("pyls.plugins.pyls_isort.enabled" t t)))
   (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
 
-  ;; (require 'lsp-ui)
-
-  ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-
-  ;; (custom-add-to-group 'sb 'lsp-clients-clangd-executable 'custom-variable)
-
   (require 'lsp-clangd)
   (add-hook 'c-mode-hook 'lsp)
   (add-hook 'c++-mode-hook 'lsp)
@@ -400,7 +360,15 @@ should work."
 
 (sb-init-lsp)
 
+
 (defun sb-init-maxima ()
+  "Initialize maxima-mode.
+
+The following variables must be custom-set
+
+- `maxima-command',
+- `sb-maxima-mode-path'.
+"
   (defun sb--set-maxima-mode-path (symbol value)
     "Setter for the `sb-maxima-mode-path' custom variable."
     (progn (when (boundp symbol) (delete (default-value symbol) load-path))
@@ -418,9 +386,8 @@ This is the path to the files: maxima.el, maxima-font-lock.el. On
 windows platforms, it is something like:
 
     C:\\maxima-5.40.0\\share\\maxima\\5.40.0\\emacs"
-    :type 'string :group 'sb :tag "Path to maxima-mode files"
+    :type 'string :group nil :tag "Path to maxima-mode files"
     :initialize 'sb--init-maxima-mode-path :set 'sb--set-maxima-mode-path)
-  (custom-add-to-group 'sb 'maxima-command 'custom-variable)
 
   (autoload 'maxima-mode "maxima" "Major mode for writing Maxima programs" t)
   (autoload 'maxima "maxima" "Run Maxima interactively" t)

@@ -4,8 +4,15 @@ My emacs configuration files
 
 ## Variables that must be custom-set
 
+- `ediff-diff-program`
+- `ediff-diff3-program`
+- `epg-gpg-program`
 - `lsp-clients-clangd-executable`
 - `maxima-command`
+- `url-proxy-services`
+- `sb-maxima-mode-path'
+- `TeX-view-program-list`
+- `TeX-view-program-selection`
 
 ## lsp-mode
 

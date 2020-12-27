@@ -201,6 +201,20 @@ For these variables to be clickable, first require `smtpmail'."
 (sb-init-flymake)
 
 
+(defun sb-init-newsticker ()
+ (setq newsticker-automatically-mark-items-as-old nil
+       newsticker-html-renderer nil
+       newsticker-keep-obsolete-items nil
+       newsticker-treeview-automatically-mark-displayed-items-as-old nil
+       newsticker-url-list
+       '(("Planet Emacslife" "https://planet.emacslife.com/atom.xml" nil nil nil)
+	 ("Jupyter Blog" "https://blog.jupyter.org/feed" nil nil
+	  ("--timeout=10")))
+       newsticker-url-list-defaults nil))
+
+(sb-init-newsticker)
+
+
 (defun sb-init-ivy ()
   (ivy-mode 1)
   (counsel-mode 1)

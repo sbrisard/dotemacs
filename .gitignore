@@ -17,6 +17,7 @@ local.el
 .lsp-python
 .lsp-session*
 network-security.data
+newsticker
 server
 site-lisp
 snippets

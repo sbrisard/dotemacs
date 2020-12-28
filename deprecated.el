@@ -128,3 +128,11 @@ directory where the current buffer lives, or one of its parents."
                              elpy-module-sane-defaults)))
   (setq elpy-test-runner (quote elpy-test-test-discover-runner))
   (add-hook 'elpy-mode-hook 'whitespace-mode))
+
+
+(defun sb-init-ivy ()
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always)))
+
+(sb-init-ivy)

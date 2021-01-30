@@ -65,8 +65,6 @@
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'markdown-mode)
-    (sb-package-install-unless-installed 'selectrum)
-    (sb-package-install-unless-installed 'selectrum-prescient)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
 
@@ -217,12 +215,12 @@ For these variables to be clickable, first require `smtpmail'."
 (sb-init-newsticker)
 
 
-(defun sb-init-selectrum ()
-  (selectrum-mode 1)
-  (selectrum-prescient-mode 1)
-  (prescient-persist-mode 1))
+(defun sb-init-ivy ()
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always)))
 
-(sb-init-selectrum)
+(sb-init-ivy)
 
 
 (defun sb-init-raise-frame ()

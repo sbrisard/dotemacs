@@ -130,9 +130,12 @@ directory where the current buffer lives, or one of its parents."
   (add-hook 'elpy-mode-hook 'whitespace-mode))
 
 
-(defun sb-init-ivy ()
-  (ivy-mode 1)
-  (counsel-mode 1)
-  (setq ivy-case-fold-search-default (quote always)))
+;;(sb-package-install-unless-installed 'selectrum)
+;;(sb-package-install-unless-installed 'selectrum-prescient)
 
-(sb-init-ivy)
+(defun sb-init-selectrum ()
+  (selectrum-mode 1)
+  (selectrum-prescient-mode 1)
+  (prescient-persist-mode 1))
+
+(sb-init-selectrum)

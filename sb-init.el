@@ -61,6 +61,7 @@
     (sb-package-install-unless-installed 'auctex)
     (sb-package-install-unless-installed 'cmake-mode)
     (sb-package-install-unless-installed 'counsel)
+    (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
@@ -332,9 +333,14 @@ Update `TeX-view-program-selection' accordingly.
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
   (add-hook 'python-mode-hook 'whitespace-mode)
 
-  (setq python-flymake-command (quote ("flake8" "-"))))
+  (elpy-enable)
+  (setq elpy-modules (quote (elpy-module-eldoc
+                             elpy-module-flymake
+                             elpy-module-sane-defaults)))
+  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  (add-hook 'elpy-mode-hook 'whitespace-mode))
 
-;;(sb-init-python)
+(sb-init-python)
 
 (defun sb-init-lsp ()
   "Initialize lsp-mode.
@@ -376,7 +382,7 @@ The following variables must be custom-set
   (add-hook 'c++-mode-hook 'lsp)
   )
 
-(sb-init-lsp)
+;;(sb-init-lsp)
 
 
 (defun sb-init-maxima ()

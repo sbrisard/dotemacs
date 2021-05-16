@@ -63,6 +63,7 @@
     (sb-package-install-unless-installed 'counsel)
     (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'ivy)
+    (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'markdown-mode)
@@ -341,6 +342,12 @@ Update `TeX-view-program-selection' accordingly.
   (add-hook 'elpy-mode-hook 'whitespace-mode))
 
 (sb-init-python)
+
+(defun sb-init-julia()
+  (require 'julia-mode)
+  )
+
+(sb-init-julia)
 
 (defun sb-init-lsp ()
   "Initialize lsp-mode.

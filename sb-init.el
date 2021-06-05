@@ -66,6 +66,7 @@
     (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
+    (sb-package-install-unless-installed 'lsp-julia)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
@@ -344,8 +345,7 @@ Update `TeX-view-program-selection' accordingly.
 (sb-init-python)
 
 (defun sb-init-julia()
-  (require 'julia-mode)
-  )
+  (require 'julia-mode))
 
 (sb-init-julia)
 
@@ -354,7 +354,9 @@ Update `TeX-view-program-selection' accordingly.
 
 The following variables must be custom-set
 
-- `lsp-clients-clangd-executable'.
+- `lsp-clients-clangd-executable'
+- `lsp-julia-command` should point to the julia executable
+- `lsp-julia-default-environment' should point to something like
 "
   (setq gc-cons-threshold 100000000
 	read-process-output-max (* 1024 1024))
@@ -387,6 +389,9 @@ The following variables must be custom-set
   (require 'lsp-clangd)
   (add-hook 'c-mode-hook 'lsp)
   (add-hook 'c++-mode-hook 'lsp)
+
+  (require 'lsp-julia)
+  (add-hook 'julia-mode-hook #'lsp)
   )
 
 ;;(sb-init-lsp)

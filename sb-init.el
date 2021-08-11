@@ -78,7 +78,9 @@
   "Initialize whitespace package."
   (require 'whitespace)
   (setq whitespace-line-column 80
-	whitespace-style (quote (face lines-tail))))
+	whitespace-style (quote (face lines-tail)))
+  (custom-theme-set-faces 'user '(whitespace-line ((default . (:inherit flymake-note))) t))
+  )
 
 (sb-init-whitespace)
 

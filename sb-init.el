@@ -41,15 +41,14 @@
 
 (sb-init-vanilla-emacs)
 
-
 (defun sb-init-package ()
   "Initialize package manager and download uninstalled packages."
   (let ((contents-refreshed nil))
     (require 'package)
     (setq package-archives
-	  '(("gnu" . "http://elpa.gnu.org/packages/")
-            ("melpa" . "http://melpa.org/packages/")
-            ("melpa-stable" . "http://stable.melpa.org/packages/")
+	  '(("gnu" . "https://elpa.gnu.org/packages/")
+            ("melpa" . "https://melpa.org/packages/")
+            ("melpa-stable" . "https://stable.melpa.org/packages/")
             ))
     (if (< emacs-major-version 27) (package-initialize))
     (defun sb-package-install-unless-installed (pkg)
@@ -67,6 +66,7 @@
     (sb-package-install-unless-installed 'lsp-mode)
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'lsp-julia)
+    (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
@@ -177,7 +177,7 @@ For these variables to be clickable, first require `smtpmail'."
   (split-window-right)
 
   ;; Use w32-select-font
-  (set-face-font 'default "DejaVu Sans Mono-10")
+  (set-face-font 'default "JuliaMono-10")
   )
 
 (sb-init-appearance)
@@ -396,7 +396,7 @@ The following variables must be custom-set
   (add-hook 'julia-mode-hook #'lsp)
   )
 
-;;(sb-init-lsp)
+(sb-init-lsp)
 
 
 (defun sb-init-maxima ()
@@ -432,3 +432,13 @@ windows platforms, it is something like:
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist)))
 
 (sb-init-maxima)
+
+(defun sb-init-magit ()
+  (require 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status)
+
+  (delete 'Git vc-handled-backends)
+  ;; (setenv "GIT_ASKPASS" "git-gui--askpass")
+  )
+
+(sb-init-magit)

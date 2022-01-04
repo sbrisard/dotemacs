@@ -67,6 +67,7 @@
     (sb-package-install-unless-installed 'lsp-ui)
     (sb-package-install-unless-installed 'lsp-julia)
     (sb-package-install-unless-installed 'magit)
+    (sb-package-install-unless-installed 'marginalia)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
@@ -218,6 +219,11 @@ For these variables to be clickable, first require `smtpmail'."
        newsticker-url-list-defaults nil))
 
 (sb-init-newsticker)
+
+(defun sb-init-marginalia ()
+  (marginalia-mode))
+
+(sb-init-marginalia)
 
 
 (defun sb-init-ivy ()

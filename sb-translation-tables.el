@@ -1,3 +1,5 @@
+;; See http://www.unicode.org/charts/
+
 (define-translation-table 'sb-normal-to-subscript '((?0 . ?₀)
 						    (?1 . ?₁)
 						    (?2 . ?₂)

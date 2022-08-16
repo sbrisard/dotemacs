@@ -19,6 +19,7 @@ local.el
 .lsp-session*
 network-security.data
 newsticker
+request/
 server
 site-lisp
 snippets

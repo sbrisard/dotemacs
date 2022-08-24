@@ -244,6 +244,10 @@ For SumatraPDF (Windows platforms), set `Tex-view-program-list' to
     \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe
          -reuse-instance -forward-search %b %n %o\".
 
+Inverse search is configured in Sumatra as follows (File/Preferences/Options...)
+
+    \"C:\\opt\\emacs-28.1\\bin\\emacsclient.exe -n +%l \"%f\"\"
+
 For Skim (MacOS X platforms), set this variable to
     \"/Applications/Skim.app/Contents/SharedSupport/displayline
          -r -b %n %o %b\".
@@ -272,7 +276,6 @@ Update `TeX-view-program-selection' accordingly.
 					      ("citet" "*[{")
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
-
   (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
   (setf TeX-view-program-selection
 	(cons '(output-pdf "SumatraPDF")
@@ -440,4 +443,4 @@ windows platforms, it is something like:
   ;; (setenv "GIT_ASKPASS" "git-gui--askpass")
   )
 
-(sb-init-magit)
+;;(sb-init-magit)

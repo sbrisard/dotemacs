@@ -70,7 +70,8 @@
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'quarto-mode)
     (sb-package-install-unless-installed 'spaceline)
-    (sb-package-install-unless-installed 'spacemacs-theme)))
+    (sb-package-install-unless-installed 'spacemacs-theme)
+    (sb-package-install-unless-installed 'yaml-mode)))
 
 (sb-init-package)
 
@@ -462,3 +463,9 @@ windows platforms, it is something like:
   (require 'quarto-mode))
 
 (sb-init-quarto-mode)
+
+(defun sb-init-yaml-mode()
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+
+(sb-init-yaml-mode)

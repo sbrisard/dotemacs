@@ -68,6 +68,7 @@
     (sb-package-install-unless-installed 'lsp-julia)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
+    (sb-package-install-unless-installed 'quarto-mode)
     (sb-package-install-unless-installed 'spaceline)
     (sb-package-install-unless-installed 'spacemacs-theme)))
 
@@ -177,7 +178,7 @@ For these variables to be clickable, first require `smtpmail'."
   (split-window-right)
 
   ;; Use w32-select-font
-  (set-face-font 'default "JuliaMono-10")
+  (set-face-font 'default "JuliaMono-11")
   )
 
 (sb-init-appearance)
@@ -276,11 +277,23 @@ Update `TeX-view-program-selection' accordingly.
 					      ("citet" "*[{")
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
-  (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
+  ;; (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
+  ;; (setf TeX-view-program-selection
+  ;; 	(cons '(output-pdf "SumatraPDF")
+  ;; 	      (cl-remove 'output-pdf TeX-view-program-selection
+  ;; 			 :test (lambda (left right) (equal left (car right))))))
+
+  (setq TeX-view-program-list
+	'(("qpdfview"
+           ("qpdfview --unique %o"
+            (mode-io-correlate "#src:%b:%n:0"))
+           "qpdfview")))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "qpdfview"))
   (setf TeX-view-program-selection
-	(cons '(output-pdf "SumatraPDF")
+	(cons '(output-pdf "qpdfview")
 	      (cl-remove 'output-pdf TeX-view-program-selection
 			 :test (lambda (left right) (equal left (car right))))))
+
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
@@ -394,8 +407,8 @@ The following variables must be custom-set
   (add-hook 'c-mode-hook 'lsp)
   (add-hook 'c++-mode-hook 'lsp)
 
-  (require 'lsp-julia)
-  (add-hook 'julia-mode-hook #'lsp)
+  ;; (require 'lsp-julia)
+  ;; (add-hook 'julia-mode-hook #'lsp)
   )
 
 (sb-init-lsp)
@@ -444,3 +457,8 @@ windows platforms, it is something like:
   )
 
 ;;(sb-init-magit)
+
+(defun sb-init-quarto-mode ()
+  (require 'quarto-mode))
+
+(sb-init-quarto-mode)

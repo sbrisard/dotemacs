@@ -456,7 +456,7 @@ windows platforms, it is something like:
   ;; (setenv "GIT_ASKPASS" "git-gui--askpass")
   )
 
-;;(sb-init-magit)
+(sb-init-magit)
 
 (defun sb-init-quarto-mode ()
   (require 'quarto-mode))

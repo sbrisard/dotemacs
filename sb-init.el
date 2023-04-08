@@ -236,25 +236,19 @@ For these variables to be clickable, first require `smtpmail'."
 (defun sb-init-auctex ()
   "Initialize the AUCTeX package.
 
-The following variables must be custom-set
+Update `TeX-view-program-selection' to chose the viewer.
 
-- `TeX-view-program-list'
-- `TeX-view-program-selection'
+SumatraPDF and qpdfview are preconfigured, however, they do not appear
+in the list of available viewers.
 
-For SumatraPDF (Windows platforms), set `Tex-view-program-list' to
-
-    \"C:\\opt\\SumatraPDF-3.0\\SumatraPDF.exe
-         -reuse-instance -forward-search %b %n %o\".
-
-Inverse search is configured in Sumatra as follows (File/Preferences/Options...)
+Inverse search is configured in Sumatra under File → Preferences → Options…
 
     \"C:\\opt\\emacs-28.1\\bin\\emacsclient.exe -n +%l \"%f\"\"
 
-For Skim (MacOS X platforms), set this variable to
-    \"/Applications/Skim.app/Contents/SharedSupport/displayline
-         -r -b %n %o %b\".
+In qpdfview, set the \"Source Editor\" in under
+Edit → Settings → Behavior to:
 
-Update `TeX-view-program-selection' accordingly.
+    \"emacsclient +%2:%3 \"%1\"
 "
   (require 'tex)
 
@@ -278,23 +272,15 @@ Update `TeX-view-program-selection' accordingly.
 					      ("citet" "*[{")
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
-  ;; (add-to-list 'TeX-view-program-selection '(output-pdf "SumatraPDF"))
-  ;; (setf TeX-view-program-selection
-  ;; 	(cons '(output-pdf "SumatraPDF")
-  ;; 	      (cl-remove 'output-pdf TeX-view-program-selection
-  ;; 			 :test (lambda (left right) (equal left (car right))))))
 
   (setq TeX-view-program-list
 	'(("qpdfview"
-           ("qpdfview --unique %o"
-            (mode-io-correlate "#src:%b:%n:0"))
-           "qpdfview")))
-  (add-to-list 'TeX-view-program-selection '(output-pdf "qpdfview"))
-  (setf TeX-view-program-selection
-	(cons '(output-pdf "qpdfview")
-	      (cl-remove 'output-pdf TeX-view-program-selection
-			 :test (lambda (left right) (equal left (car right))))))
-
+	   ("qpdfview --unique %o"
+	    (mode-io-correlate "#src:%b:%n:0"))
+	   "qpdfview")
+	  ("SumatraPDF"
+	   ("C:\\\\opt\\\\SumatraPDF-3.0\\\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o")
+	   "SumatraPDF")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments

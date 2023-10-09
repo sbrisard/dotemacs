@@ -279,8 +279,8 @@ Edit → Settings → Behavior to:
 	    (mode-io-correlate "#src:%b:%n:0"))
 	   "qpdfview")
 	  ("SumatraPDF"
-	   ("C:\\\\opt\\\\SumatraPDF-3.0\\\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o")
-	   "SumatraPDF")))
+	   ("SumatraPDF-64.exe -reuse-instance -forward-search %b %n %o")
+	   "SumatraPDF-64")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments

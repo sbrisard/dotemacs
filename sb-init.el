@@ -455,3 +455,10 @@ windows platforms, it is something like:
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 (sb-init-yaml-mode)
+
+(defun sb-init-asymptote-mode()
+  (add-to-list 'load-path "C:\\texlive\\2022\\texmf-dist\\asymptote")
+  (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
+  (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+
+(sb-init-asymptote-mode)

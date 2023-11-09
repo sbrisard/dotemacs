@@ -241,6 +241,9 @@ Update `TeX-view-program-selection' to chose the viewer.
 SumatraPDF and qpdfview are preconfigured, however, they do not appear
 in the list of available viewers.
 
+The full path to the SumatraPDF executable must be defined in
+`sb-sumatrapdf-path`.
+
 Inverse search is configured in Sumatra under File → Preferences → Options…
 
     \"C:\\opt\\emacs-28.1\\bin\\emacsclient.exe -n +%l \"%f\"\"
@@ -273,14 +276,23 @@ Edit → Settings → Behavior to:
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
-  (setq TeX-view-program-list
-	'(("qpdfview"
-	   ("qpdfview --unique %o"
-	    (mode-io-correlate "#src:%b:%n:0"))
-	   "qpdfview")
-	  ("SumatraPDF"
-	   ("SumatraPDF-64.exe -reuse-instance -forward-search %b %n %o")
-	   "SumatraPDF-64")))
+ (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
+
+  ;; (setq TeX-view-program-list
+  ;; 	'(("qpdfview"
+  ;; 	   ("qpdfview --unique %o"
+  ;; 	    (mode-io-correlate "#src:%b:%n:0"))
+  ;; 	   "qpdfview")
+  ;; 	  ("SumatraPDF"
+  ;; 	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
+  ;; 	   "SumatraPDF.exe"))))
+
+ (setq TeX-view-program-selection
+       '(((output-dvi style-pstricks)
+	  "dvips and start")
+	 (output-dvi "Yap")
+	 (output-pdf "SumatraPDF")
+	 (output-html "start")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments

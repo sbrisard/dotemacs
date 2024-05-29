@@ -58,14 +58,10 @@
 	  (setq contents-refreshed t))
 	(package-install pkg)))
     (sb-package-install-unless-installed 'auctex)
-    (sb-package-install-unless-installed 'cmake-mode)
     (sb-package-install-unless-installed 'counsel)
     (sb-package-install-unless-installed 'elpy)
     (sb-package-install-unless-installed 'ivy)
     (sb-package-install-unless-installed 'julia-mode)
-    (sb-package-install-unless-installed 'lsp-mode)
-    (sb-package-install-unless-installed 'lsp-ui)
-    (sb-package-install-unless-installed 'lsp-julia)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'quarto-mode)
@@ -241,6 +237,9 @@ Update `TeX-view-program-selection' to chose the viewer.
 SumatraPDF and qpdfview are preconfigured, however, they do not appear
 in the list of available viewers.
 
+The full path to the SumatraPDF executable must be defined in
+`sb-sumatrapdf-path`.
+
 Inverse search is configured in Sumatra under File → Preferences → Options…
 
     \"C:\\opt\\emacs-28.1\\bin\\emacsclient.exe -n +%l \"%f\"\"
@@ -273,14 +272,23 @@ Edit → Settings → Behavior to:
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
-  (setq TeX-view-program-list
-	'(("qpdfview"
-	   ("qpdfview --unique %o"
-	    (mode-io-correlate "#src:%b:%n:0"))
-	   "qpdfview")
-	  ("SumatraPDF"
-	   ("C:\\\\opt\\\\SumatraPDF-3.0\\\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o")
-	   "SumatraPDF")))
+ (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
+
+  ;; (setq TeX-view-program-list
+  ;; 	'(("qpdfview"
+  ;; 	   ("qpdfview --unique %o"
+  ;; 	    (mode-io-correlate "#src:%b:%n:0"))
+  ;; 	   "qpdfview")
+  ;; 	  ("SumatraPDF"
+  ;; 	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
+  ;; 	   "SumatraPDF.exe"))))
+
+ (setq TeX-view-program-selection
+       '(((output-dvi style-pstricks)
+	  "dvips and start")
+	 (output-dvi "Yap")
+	 (output-pdf "SumatraPDF")
+	 (output-html "start")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
@@ -456,3 +464,10 @@ windows platforms, it is something like:
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 (sb-init-yaml-mode)
+
+(defun sb-init-asymptote-mode()
+  (add-to-list 'load-path "C:\\texlive\\2022\\texmf-dist\\asymptote")
+  (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
+  (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+
+(sb-init-asymptote-mode)

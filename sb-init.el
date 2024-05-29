@@ -333,18 +333,19 @@ Edit → Settings → Behavior to:
 
 
 (defun sb-init-python ()
-  (setq python-shell-interpreter "jupyter"
-	python-shell-interpreter-args "console --simple-prompt"
-	python-shell-prompt-detect-failure-warning nil)
+  ;; (setq python-shell-interpreter "jupyter"
+  ;; 	python-shell-interpreter-args "console --simple-prompt"
+  ;; 	python-shell-prompt-detect-failure-warning nil)
   (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
   (add-hook 'python-mode-hook 'whitespace-mode)
 
-  (elpy-enable)
-  (setq elpy-modules (quote (elpy-module-eldoc
-                             elpy-module-flymake
-                             elpy-module-sane-defaults)))
-  (setq elpy-test-runner (quote elpy-test-test-discover-runner))
-  (add-hook 'elpy-mode-hook 'whitespace-mode))
+  ;; (elpy-enable)
+  ;; (setq elpy-modules (quote (elpy-module-eldoc
+  ;;                            elpy-module-flymake
+  ;;                            elpy-module-sane-defaults)))
+  ;; (setq elpy-test-runner (quote elpy-test-test-discover-runner))
+  ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
+  )
 
 (sb-init-python)
 

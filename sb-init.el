@@ -65,8 +65,6 @@
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'quarto-mode)
-    (sb-package-install-unless-installed 'spaceline)
-    (sb-package-install-unless-installed 'spacemacs-theme)
     (sb-package-install-unless-installed 'yaml-mode)))
 
 (sb-init-package)
@@ -162,10 +160,7 @@ For these variables to be clickable, first require `smtpmail'."
 (defun sb-init-appearance ()
   "Initialize appearance of Emacs (fonts, themes, etc.)."
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-  (setq spacemacs-theme-org-height nil)
-  (load-theme 'spacemacs-light)
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
+  (load-theme 'tango)
 
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
@@ -274,21 +269,21 @@ Edit → Settings → Behavior to:
 
  (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
 
-  ;; (setq TeX-view-program-list
-  ;; 	'(("qpdfview"
-  ;; 	   ("qpdfview --unique %o"
-  ;; 	    (mode-io-correlate "#src:%b:%n:0"))
-  ;; 	   "qpdfview")
-  ;; 	  ("SumatraPDF"
-  ;; 	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
-  ;; 	   "SumatraPDF.exe"))))
+  (setq TeX-view-program-list
+	'(("qpdfview"
+	   ("qpdfview --unique %o"
+	    (mode-io-correlate "#src:%b:%n:0"))
+	   "qpdfview")
+	  ("SumatraPDF"
+	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
+	   "SumatraPDF.exe"))))
 
- (setq TeX-view-program-selection
-       '(((output-dvi style-pstricks)
-	  "dvips and start")
-	 (output-dvi "Yap")
-	 (output-pdf "SumatraPDF")
-	 (output-html "start")))
+ ;; (setq TeX-view-program-selection
+ ;;       '(((output-dvi style-pstricks)
+ ;; 	  "dvips and start")
+ ;; 	 (output-dvi "Yap")
+ ;; 	 (output-pdf "SumatraPDF")
+ ;; 	 (output-html "start")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments

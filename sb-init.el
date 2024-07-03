@@ -402,7 +402,7 @@ The following variables must be custom-set
   ;; (add-hook 'julia-mode-hook #'lsp)
   )
 
-(sb-init-lsp)
+;;(sb-init-lsp)
 
 
 (defun sb-init-maxima ()

@@ -39,7 +39,6 @@
 
   (add-to-list 'exec-path invocation-directory))
 
-(sb-init-vanilla-emacs)
 
 (defun sb-init-package ()
   "Initialize package manager and download uninstalled packages."
@@ -68,9 +67,6 @@
     (sb-package-install-unless-installed 'yaml-mode)
     ))
 
-(sb-init-package)
-
-
 (defun sb-init-whitespace ()
   "Initialize whitespace package."
   (require 'whitespace)
@@ -79,9 +75,6 @@
   (custom-theme-set-faces 'user '(whitespace-line ((default . (:inherit flymake-note))) t))
   )
 
-(sb-init-whitespace)
-
-
 (defun sb-init-input-method ()
   (setq default-input-method 'rfc1345)
   (mapc (lambda (mode)
@@ -89,9 +82,6 @@
 			   (activate-input-method default-input-method))))
 	'(org-mode-hook
 	  text-mode-hook)))
-
-(sb-init-input-method)
-
 
 (defun sb-init-epa-file ()
   "Initialize GnuPG interface for Emacs.
@@ -103,8 +93,6 @@ The following variables must be custom-set
   (require 'epa-file)
   (epa-file-enable)
   (setq epg-pinentry-mode 'loopback))
-
-(sb-init-epa-file)
 
 
 (defun sb-init-key-bindings-and-keymaps ()
@@ -135,9 +123,6 @@ The following variables must be custom-set
   (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
   (define-key sb-map (kbd "t") 'sb-insert-timestamp))
 
-(sb-init-key-bindings-and-keymaps)
-
-
 (defun sb-init-mail ()
   "Initialize mail-mode.
 
@@ -155,9 +140,6 @@ For these variables to be clickable, first require `smtpmail'."
 	send-mail-function 'smtpmail-send-it
 	smtpmail-stream-type 'ssl))
 
-(sb-init-mail)
-
-
 (defun sb-init-appearance ()
   "Initialize appearance of Emacs (fonts, themes, etc.)."
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -174,9 +156,6 @@ For these variables to be clickable, first require `smtpmail'."
   (set-face-font 'default "JuliaMono-11")
   )
 
-(sb-init-appearance)
-
-
 (defun sb-init-ibuffer ()
   (setq ibuffer-default-sorting-mode (quote filename/process)
 	ibuffer-show-empty-filter-groups nil
@@ -191,34 +170,8 @@ For these variables to be clickable, first require `smtpmail'."
 	    (lambda () (ibuffer-switch-to-saved-filter-groups
 			"sb-ibuffer-groups"))))
 
-(sb-init-ibuffer)
-
-
 (defun sb-init-flymake ()
   (remove-hook 'flymake-diagnostic-functions #'flymake-proc-legacy-flymake))
-
-(sb-init-flymake)
-
-
-(defun sb-init-newsticker ()
- (setq newsticker-automatically-mark-items-as-old nil
-       newsticker-html-renderer nil
-       newsticker-keep-obsolete-items nil
-       newsticker-treeview-automatically-mark-displayed-items-as-old nil
-       newsticker-url-list
-       '(("Planet Emacslife" "https://planet.emacslife.com/atom.xml" nil nil nil)
-	 ("Jupyter Blog" "https://blog.jupyter.org/feed" nil nil
-	  ("--timeout=10")))
-       newsticker-url-list-defaults nil))
-
-(sb-init-newsticker)
-
-(defun sb-init-ivy ()
-  (ivy-mode 1)
-  (counsel-mode 1)
-  (setq ivy-case-fold-search-default (quote always)))
-
-;;(sb-init-ivy)
 
 
 (defun sb-init-raise-frame ()
@@ -296,9 +249,6 @@ Edit → Settings → Behavior to:
 					 '("question" LaTeX-env-label)
 					 '("problem" LaTeX-env-label)))))
 
-;;(sb-init-auctex)
-
-
 (defun sb-init-reftex ()
   (require 'reftex)
 
@@ -319,22 +269,15 @@ Edit → Settings → Behavior to:
 	  ("question" ?q "q:" "~\\ref{%s}" nil ("question") -1)
 	  ("problem" ?p "pb:" "~\\ref{%s}" nil ("problem" "pb." "exercice") -1))))
 
-;;(sb-init-reftex)
-
 
 (defun sb-init-bratex ()
   (add-to-list 'load-path "~/.emacs.d/lisp/bratex")
   (require 'bratex)
   (add-hook 'LaTeX-mode-hook #'bratex-config))
 
-(sb-init-bratex)
-
 
 (defun sb-init-c ()
   (setq-default c-basic-offset 2))
-
-(sb-init-c)
-
 
 (defun sb-init-python ()
   ;; (setq python-shell-interpreter "jupyter"
@@ -351,60 +294,8 @@ Edit → Settings → Behavior to:
   ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
   )
 
-;;(sb-init-python)
-
 (defun sb-init-julia()
   (require 'julia-mode))
-
-;;(sb-init-julia)
-
-(defun sb-init-lsp ()
-  "Initialize lsp-mode.
-
-The following variables must be custom-set
-
-- `lsp-clients-clangd-executable'
-- `lsp-julia-command` should point to the julia executable
-- `lsp-julia-default-environment' should point to something like
-"
-  (setq gc-cons-threshold 100000000
-	read-process-output-max (* 1024 1024))
-  (require 'lsp-mode)
-
-  (setq lsp-headerline-breadcrumb-enable t
-	lsp-headerline-breadcrumb-enable-symbol-numbers t
-	lsp-headerline-breadcrumb-segments '(project file symbols)
-	lsp-keep-workspace-alive nil
-	lsp-modeline-code-actions-enable t
-	lsp-modeline-code-actions-segments '(count icon name))
-
-  ;; This setq should occur before lsp-pyls is loaded for the changes
-  ;; to take effect (otherwise, the server is not notified of the
-  ;; changes.
-  (setq lsp-pyls-plugins-autopep8-enabled nil
-	lsp-pyls-plugins-pydocstyle-enabled t
-	lsp-pyls-plugins-yapf-enabled nil)
-  ;; These settings are set before lsp-pyls is loaded, so as to
-  ;; benefit from the server notification that is emitted at the end
-  ;; of the package.
-  (lsp-register-custom-settings
-   '(("pyls.plugins.pyls_mypy.enabled" t t)
-     ("pyls.plugins.pyls_mypy.live_mode" nil t)
-     ("pyls.plugins.pyls_black.enabled" t t)
-     ("pyls.plugins.pyls_isort.enabled" t t)))
-  (require 'lsp-pyls)
-  (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
-
-  (require 'lsp-clangd)
-  (add-hook 'c-mode-hook 'lsp)
-  (add-hook 'c++-mode-hook 'lsp)
-
-  ;; (require 'lsp-julia)
-  ;; (add-hook 'julia-mode-hook #'lsp)
-  )
-
-;;(sb-init-lsp)
-
 
 (defun sb-init-maxima ()
   "Initialize maxima-mode.
@@ -438,7 +329,6 @@ windows platforms, it is something like:
   (autoload 'maxima "maxima" "Run Maxima interactively" t)
   (setq auto-mode-alist (cons '("\\.ma[cx]" . maxima-mode) auto-mode-alist)))
 
-(sb-init-maxima)
 
 (defun sb-init-magit ()
   (require 'magit)
@@ -448,22 +338,41 @@ windows platforms, it is something like:
   ;; (setenv "GIT_ASKPASS" "git-gui--askpass")
   )
 
-(sb-init-magit)
 
 (defun sb-init-quarto-mode ()
   (require 'quarto-mode))
 
-(sb-init-quarto-mode)
 
 (defun sb-init-yaml-mode()
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
-(sb-init-yaml-mode)
 
 (defun sb-init-asymptote-mode()
   (add-to-list 'load-path "C:\\texlive\\2022\\texmf-dist\\asymptote")
   (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
   (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 
-;;(sb-init-asymptote-mode)
+(defun sb-init-all()
+  (sb-init-vanilla-emacs)
+  (sb-init-package)
+  (sb-init-whitespace)
+  (sb-init-input-method)
+  (sb-init-epa-file)
+  (sb-init-key-bindings-and-keymaps)
+  (sb-init-appearance)
+  (sb-init-ibuffer)
+  (sb-init-flymake)
+  ;;(sb-init-auctex)
+  ;;(sb-init-reftex)
+  (sb-init-bratex)
+  (sb-init-c)
+  ;;(sb-init-python)
+  ;;(sb-init-julia)
+  (sb-init-maxima)
+  (sb-init-magit)
+  (sb-init-quarto-mode)
+  (sb-init-yaml-mode)
+  )
+
+(sb-init-all)

@@ -139,3 +139,68 @@ directory where the current buffer lives, or one of its parents."
   (prescient-persist-mode 1))
 
 (sb-init-selectrum)
+
+
+(defun sb-init-newsticker ()
+ (setq newsticker-automatically-mark-items-as-old nil
+       newsticker-html-renderer nil
+       newsticker-keep-obsolete-items nil
+       newsticker-treeview-automatically-mark-displayed-items-as-old nil
+       newsticker-url-list
+       '(("Planet Emacslife" "https://planet.emacslife.com/atom.xml" nil nil nil)
+	 ("Jupyter Blog" "https://blog.jupyter.org/feed" nil nil
+	  ("--timeout=10")))
+       newsticker-url-list-defaults nil))
+
+(defun sb-init-ivy ()
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-case-fold-search-default (quote always)))
+
+
+
+
+(defun sb-init-lsp ()
+  "Initialize lsp-mode.
+
+The following variables must be custom-set
+
+- `lsp-clients-clangd-executable'
+- `lsp-julia-command` should point to the julia executable
+- `lsp-julia-default-environment' should point to something like
+"
+  (setq gc-cons-threshold 100000000
+	read-process-output-max (* 1024 1024))
+  (require 'lsp-mode)
+
+  (setq lsp-headerline-breadcrumb-enable t
+	lsp-headerline-breadcrumb-enable-symbol-numbers t
+	lsp-headerline-breadcrumb-segments '(project file symbols)
+	lsp-keep-workspace-alive nil
+	lsp-modeline-code-actions-enable t
+	lsp-modeline-code-actions-segments '(count icon name))
+
+  ;; This setq should occur before lsp-pyls is loaded for the changes
+  ;; to take effect (otherwise, the server is not notified of the
+  ;; changes.
+  (setq lsp-pyls-plugins-autopep8-enabled nil
+	lsp-pyls-plugins-pydocstyle-enabled t
+	lsp-pyls-plugins-yapf-enabled nil)
+  ;; These settings are set before lsp-pyls is loaded, so as to
+  ;; benefit from the server notification that is emitted at the end
+  ;; of the package.
+  (lsp-register-custom-settings
+   '(("pyls.plugins.pyls_mypy.enabled" t t)
+     ("pyls.plugins.pyls_mypy.live_mode" nil t)
+     ("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)))
+  (require 'lsp-pyls)
+  (add-hook 'python-mode-hook #'lsp) ;; pyls must be on the PATH
+
+  (require 'lsp-clangd)
+  (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
+
+  ;; (require 'lsp-julia)
+  ;; (add-hook 'julia-mode-hook #'lsp)
+)

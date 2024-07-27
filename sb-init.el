@@ -57,15 +57,16 @@
 	  (package-refresh-contents)
 	  (setq contents-refreshed t))
 	(package-install pkg)))
-    (sb-package-install-unless-installed 'auctex)
-    (sb-package-install-unless-installed 'counsel)
-    (sb-package-install-unless-installed 'elpy)
-    (sb-package-install-unless-installed 'ivy)
-    (sb-package-install-unless-installed 'julia-mode)
+    ;;(sb-package-install-unless-installed 'auctex)
+    ;; (sb-package-install-unless-installed 'counsel)
+    ;; (sb-package-install-unless-installed 'elpy)
+    ;; (sb-package-install-unless-installed 'ivy)
+    ;; (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
     (sb-package-install-unless-installed 'quarto-mode)
-    (sb-package-install-unless-installed 'yaml-mode)))
+    (sb-package-install-unless-installed 'yaml-mode)
+    ))
 
 (sb-init-package)
 
@@ -217,7 +218,7 @@ For these variables to be clickable, first require `smtpmail'."
   (counsel-mode 1)
   (setq ivy-case-fold-search-default (quote always)))
 
-(sb-init-ivy)
+;;(sb-init-ivy)
 
 
 (defun sb-init-raise-frame ()
@@ -295,7 +296,7 @@ Edit → Settings → Behavior to:
 					 '("question" LaTeX-env-label)
 					 '("problem" LaTeX-env-label)))))
 
-(sb-init-auctex)
+;;(sb-init-auctex)
 
 
 (defun sb-init-reftex ()
@@ -318,7 +319,7 @@ Edit → Settings → Behavior to:
 	  ("question" ?q "q:" "~\\ref{%s}" nil ("question") -1)
 	  ("problem" ?p "pb:" "~\\ref{%s}" nil ("problem" "pb." "exercice") -1))))
 
-(sb-init-reftex)
+;;(sb-init-reftex)
 
 
 (defun sb-init-bratex ()
@@ -350,12 +351,12 @@ Edit → Settings → Behavior to:
   ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
   )
 
-(sb-init-python)
+;;(sb-init-python)
 
 (defun sb-init-julia()
   (require 'julia-mode))
 
-(sb-init-julia)
+;;(sb-init-julia)
 
 (defun sb-init-lsp ()
   "Initialize lsp-mode.
@@ -402,7 +403,7 @@ The following variables must be custom-set
   ;; (add-hook 'julia-mode-hook #'lsp)
   )
 
-(sb-init-lsp)
+;;(sb-init-lsp)
 
 
 (defun sb-init-maxima ()
@@ -465,4 +466,4 @@ windows platforms, it is something like:
   (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
   (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 
-(sb-init-asymptote-mode)
+;;(sb-init-asymptote-mode)

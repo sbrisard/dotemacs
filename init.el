@@ -16,14 +16,6 @@
  '(completion-styles '(flex basic partial-completion))
  '(fido-mode t)
  '(fido-vertical-mode nil)
- '(math-preview-margin '(2 . 2))
- '(math-preview-svg-postprocess-functions nil)
- '(math-preview-tex-macros
-   '(("ddx" "\\frac{d#2}{d#1}" 2 "t")
-     ("E" . "\\mathcal{E}")
-     ("D" . "\\mathrm{d}")
-     ("order" "#2^{(#1)}" 2 "1")
-     ("reals" . "\\mathbb{R}")))
  '(org-startup-folded 'showeverything)
  '(org-startup-truncated nil))
 (custom-set-faces

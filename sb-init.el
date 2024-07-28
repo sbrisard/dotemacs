@@ -355,7 +355,7 @@ windows platforms, it is something like:
 
 (defun sb-init-all()
   (sb-init-vanilla-emacs)
-  (sb-init-package)
+;;  (sb-init-package)
   (sb-init-whitespace)
   (sb-init-input-method)
   (sb-init-epa-file)
@@ -374,5 +374,17 @@ windows platforms, it is something like:
   (sb-init-quarto-mode)
   (sb-init-yaml-mode)
   )
+
+(use-package julia-mode
+  :ensure t
+  :mode "\\.jl$")
+
+;; (use-package eglot-jl
+;;   :ensure t
+;;   :after julia-mode)
+
+;; (use-package julia-ts-mode
+;;   :ensure t
+;;   :mode "\\.jl$")
 
 (sb-init-all)

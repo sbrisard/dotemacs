@@ -30,8 +30,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/")))
- '(package-selected-packages
-   '(julia-ts-mode treesit-auto eglot-jl yaml-mode quarto-mode magit)))
+ '(package-selected-packages '(julia-mode yaml-mode quarto-mode magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

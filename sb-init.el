@@ -60,11 +60,7 @@
     ;; (sb-package-install-unless-installed 'counsel)
     ;; (sb-package-install-unless-installed 'elpy)
     ;; (sb-package-install-unless-installed 'ivy)
-    ;; (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'magit)
-    (sb-package-install-unless-installed 'markdown-mode)
-    (sb-package-install-unless-installed 'quarto-mode)
-    (sb-package-install-unless-installed 'yaml-mode)
     ))
 
 (defun sb-init-whitespace ()
@@ -339,15 +335,6 @@ windows platforms, it is something like:
   )
 
 
-(defun sb-init-quarto-mode ()
-  (require 'quarto-mode))
-
-
-(defun sb-init-yaml-mode()
-  (require 'yaml-mode)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
-
-
 (defun sb-init-all()
   (sb-init-vanilla-emacs)
 ;;  (sb-init-package)
@@ -362,24 +349,16 @@ windows platforms, it is something like:
   ;;(sb-init-reftex)
   (sb-init-bratex)
   (sb-init-c)
-  ;;(sb-init-python)
-  ;;(sb-init-julia)
   (sb-init-maxima)
   (sb-init-magit)
-  (sb-init-quarto-mode)
-  (sb-init-yaml-mode)
   )
 
-(use-package julia-mode
-  :ensure t
-  :mode "\\.jl$")
+(use-package julia-mode :ensure t :mode "\\.jl\\'")
+(use-package markdown-mode :ensure t :mode "\\.md\\'")
+(use-package quarto-mode :ensure t :mode "\\.qmd\\'")
+(use-package yaml-mode :ensure t :mode "\\.yml\\'")
 
-;; (use-package eglot-jl
-;;   :ensure t
-;;   :after julia-mode)
-
-;; (use-package julia-ts-mode
-;;   :ensure t
-;;   :mode "\\.jl$")
+;; (use-package eglot-jl :ensure t :after julia-mode)
+;; (use-package julia-ts-mode :ensure t :mode "\\.jl$")
 
 (sb-init-all)

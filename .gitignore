@@ -27,3 +27,4 @@ transient
 url
 var/prescient-save.el
 eln-cache/
+tree-sitter/

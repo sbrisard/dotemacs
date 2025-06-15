@@ -16,6 +16,7 @@ lisp
 local.el
 .lsp-python
 .lsp-session*
+multisession
 network-security.data
 newsticker
 request/

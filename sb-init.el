@@ -216,7 +216,7 @@ Edit → Settings → Behavior to:
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
- (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
+  ;; (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
 
   (setq TeX-view-program-list
 	'(("qpdfview"

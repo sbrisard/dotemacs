@@ -280,6 +280,12 @@ Edit → Settings → Behavior to:
   (use-package flymake-ruff
     :ensure t
     :hook (python-mode . flymake-ruff-load))
+  (use-package reformatter
+    :ensure t
+    :config
+    (reformatter-define ruff-format
+      :program "ruff"
+      :args '("format" "-")))
   (add-hook 'python-mode-hook #'whitespace-mode)
   (add-hook 'python-mode-hook #'flymake-mode)
   (add-hook 'python-mode-hook #'ruff-format-on-save-mode)
@@ -356,11 +362,5 @@ windows platforms, it is something like:
   (sb-init-misc-modes)
   )
 
-(use-package reformatter
-  :ensure t
-  :config
-  (reformatter-define ruff-format
-    :program "ruff"
-    :args '("format" "-")))
 
 (sb-init-all)

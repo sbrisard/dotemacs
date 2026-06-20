@@ -65,8 +65,12 @@
 	(package-install pkg)))
     (sb-package-install-unless-installed 'auctex)
     (sb-package-install-unless-installed 'flymake-ruff)
-    (sb-package-install-unless-installed 'reformatter)
+    (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'magit)
+    (sb-package-install-unless-installed 'markdown-mode)
+    (sb-package-install-unless-installed 'quarto-mode)
+    (sb-package-install-unless-installed 'reformatter)
+    (sb-package-install-unless-installed 'yaml-mode)
     ))
 
 (defun sb-init-whitespace ()
@@ -216,14 +220,14 @@ Edit → Settings → Behavior to:
 	   "qpdfview")
 	  ("SumatraPDF"
 	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
-	   "SumatraPDF.exe"))))
+	    "SumatraPDF.exe"))))
 
- ;; (setq TeX-view-program-selection
- ;;       '(((output-dvi style-pstricks)
- ;; 	  "dvips and start")
- ;; 	 (output-dvi "Yap")
- ;; 	 (output-pdf "SumatraPDF")
- ;; 	 (output-html "start")))
+  ;; (setq TeX-view-program-selection
+  ;;       '(((output-dvi style-pstricks)
+  ;; 	  "dvips and start")
+  ;; 	 (output-dvi "Yap")
+  ;; 	 (output-pdf "SumatraPDF")
+  ;; 	 (output-html "start")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments
@@ -274,8 +278,8 @@ Edit → Settings → Behavior to:
           python-shell-interpreter-args "--simple-prompt"
           python-shell-echo-input t))
   (use-package flymake-ruff
-  :ensure t
-  :hook (python-mode . flymake-ruff-load))
+    :ensure t
+    :hook (python-mode . flymake-ruff-load))
   (add-hook 'python-mode-hook #'whitespace-mode)
   (add-hook 'python-mode-hook #'flymake-mode)
   (add-hook 'python-mode-hook #'ruff-format-on-save-mode)
@@ -334,7 +338,7 @@ windows platforms, it is something like:
 
 (defun sb-init-all()
   (sb-init-vanilla-emacs)
-;;  (sb-init-package)
+  (sb-init-package)
   (sb-init-whitespace)
   (sb-init-input-method)
   (sb-init-epa-file)

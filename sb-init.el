@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun sb-load-file-when-exists (filename)
   "Load specified file if it exists. Do nothing otherwise."
   (when (file-exists-p filename) (load-file filename)))

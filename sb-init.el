@@ -331,6 +331,13 @@ windows platforms, it is something like:
   ;; (setenv "GIT_ASKPASS" "git-gui--askpass")
   )
 
+(defun sb-init-misc-modes ()
+  "Initialize miscellaneous major modes."
+  (use-package julia-mode    :ensure t :mode "\\.jl\\'")
+  (use-package markdown-mode :ensure t :mode "\\.md\\'")
+  (use-package quarto-mode   :ensure t :mode "\\.qmd\\'")
+  (use-package yaml-mode     :ensure t :mode "\\.yml\\'"))
+
 
 (defun sb-init-all()
   (sb-init-vanilla-emacs)
@@ -349,12 +356,8 @@ windows platforms, it is something like:
   (sb-init-python)
   (sb-init-maxima)
   (sb-init-magit)
+  (sb-init-misc-modes)
   )
-
-(use-package julia-mode :ensure t :mode "\\.jl\\'")
-(use-package markdown-mode :ensure t :mode "\\.md\\'")
-(use-package quarto-mode :ensure t :mode "\\.qmd\\'")
-(use-package yaml-mode :ensure t :mode "\\.yml\\'")
 
 (use-package reformatter
   :ensure t

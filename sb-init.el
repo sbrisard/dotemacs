@@ -56,10 +56,9 @@
 	  (package-refresh-contents)
 	  (setq contents-refreshed t))
 	(package-install pkg)))
-    ;;(sb-package-install-unless-installed 'auctex)
-    ;; (sb-package-install-unless-installed 'counsel)
-    ;; (sb-package-install-unless-installed 'elpy)
-    ;; (sb-package-install-unless-installed 'ivy)
+    (sb-package-install-unless-installed 'auctex)
+    (sb-package-install-unless-installed 'flymake-ruff)
+    (sb-package-install-unless-installed 'reformatter)
     (sb-package-install-unless-installed 'magit)
     ))
 
@@ -276,22 +275,20 @@ Edit → Settings → Behavior to:
   (setq-default c-basic-offset 2))
 
 (defun sb-init-python ()
-  ;; (setq python-shell-interpreter "jupyter"
-  ;; 	python-shell-interpreter-args "console --simple-prompt"
-  ;; 	python-shell-prompt-detect-failure-warning nil)
-  (add-hook 'python-mode-hook (lambda() (setq show-trailing-whitespace t)))
-  (add-hook 'python-mode-hook 'whitespace-mode)
-
-  ;; (elpy-enable)
-  ;; (setq elpy-modules (quote (elpy-module-eldoc
-  ;;                            elpy-module-flymake
-  ;;                            elpy-module-sane-defaults)))
-  ;; (setq elpy-test-runner (quote elpy-test-test-discover-runner))
-  ;; (add-hook 'elpy-mode-hook 'whitespace-mode)
+  (use-package python
+    :mode ("\\.py\\'" . python-mode)
+    :config
+    (setq python-indent-offset 4))
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt"
+        python-shell-echo-input t)
+  (use-package flymake-ruff
+  :ensure t
+  :hook (python-mode . flymake-ruff-load))
+  (add-hook 'python-mode-hook #'whitespace-mode)
+  (add-hook 'python-mode-hook #'flymake-mode)
+  (add-hook 'python-mode-hook #'ruff-format-on-save-mode)
   )
-
-(defun sb-init-julia()
-  (require 'julia-mode))
 
 (defun sb-init-maxima ()
   "Initialize maxima-mode.
@@ -345,10 +342,11 @@ windows platforms, it is something like:
   (sb-init-appearance)
   (sb-init-ibuffer)
   (sb-init-flymake)
-  ;;(sb-init-auctex)
-  ;;(sb-init-reftex)
+  (sb-init-auctex)
+  (sb-init-reftex)
   (sb-init-bratex)
   (sb-init-c)
+  (sb-init-python)
   (sb-init-maxima)
   (sb-init-magit)
   )
@@ -358,7 +356,11 @@ windows platforms, it is something like:
 (use-package quarto-mode :ensure t :mode "\\.qmd\\'")
 (use-package yaml-mode :ensure t :mode "\\.yml\\'")
 
-;; (use-package eglot-jl :ensure t :after julia-mode)
-;; (use-package julia-ts-mode :ensure t :mode "\\.jl$")
+(use-package reformatter
+  :ensure t
+  :config
+  (reformatter-define ruff-format
+    :program "ruff"
+    :args '("format" "-")))
 
 (sb-init-all)

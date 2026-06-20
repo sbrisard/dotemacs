@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
+
+;;; Utility functions
+
 (defun sb-load-file-when-exists (filename)
   "Load specified file if it exists. Do nothing otherwise."
   (when (file-exists-p filename) (load-file filename)))
@@ -9,6 +12,8 @@
   (interactive)
   (insert (format-time-string "%Y%m%d%H%M%S")))
 
+
+;;; Initialization functions
 
 (defun sb-init-vanilla-emacs ()
   "Initialize vanilla emacs."
@@ -324,6 +329,8 @@ windows platforms, it is something like:
   (use-package quarto-mode   :ensure t :mode "\\.qmd\\'")
   (use-package yaml-mode     :ensure t :mode "\\.yml\\'"))
 
+
+;;; Entry point
 
 (defun sb-init-all()
   (sb-init-vanilla-emacs)

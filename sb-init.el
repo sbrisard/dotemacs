@@ -118,22 +118,6 @@ The following variables must be custom-set
   (define-key sb-map (kbd "C") 'sb-git-stage-commit-and-push-all)
   (define-key sb-map (kbd "t") 'sb-insert-timestamp))
 
-(defun sb-init-mail ()
-  "Initialize mail-mode.
-
-The following variables should be custom-set
-
-- `smtpmail-default-smtp-server',
-- `smtpmail-smtp-service',
-- `smtpmail-smtp-user',
-- `user-full-name',
-- `user-mail-address'.
-
-For these variables to be clickable, first require `smtpmail'."
-  (setq mail-self-blind t
-	mail-user-agent 'sendmail-user-agent
-	send-mail-function 'smtpmail-send-it
-	smtpmail-stream-type 'ssl))
 
 (defun sb-init-appearance ()
   "Initialize appearance of Emacs (fonts, themes, etc.)."

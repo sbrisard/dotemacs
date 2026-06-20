@@ -278,10 +278,10 @@ Edit → Settings → Behavior to:
   (use-package python
     :mode ("\\.py\\'" . python-mode)
     :config
-    (setq python-indent-offset 4))
-  (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "--simple-prompt"
-        python-shell-echo-input t)
+    (setq python-indent-offset 4
+	  python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--simple-prompt"
+          python-shell-echo-input t))
   (use-package flymake-ruff
   :ensure t
   :hook (python-mode . flymake-ruff-load))

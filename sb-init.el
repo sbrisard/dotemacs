@@ -68,7 +68,6 @@
     (sb-package-install-unless-installed 'julia-mode)
     (sb-package-install-unless-installed 'magit)
     (sb-package-install-unless-installed 'markdown-mode)
-    (sb-package-install-unless-installed 'quarto-mode)
     (sb-package-install-unless-installed 'reformatter)
     (sb-package-install-unless-installed 'yaml-mode)
     ))
@@ -335,8 +334,11 @@ windows platforms, it is something like:
 (defun sb-init-misc-modes ()
   "Initialize miscellaneous major modes."
   (use-package julia-mode    :ensure t :mode "\\.jl\\'")
-  (use-package markdown-mode :ensure t :mode "\\.md\\'")
-  (use-package quarto-mode   :ensure t :mode "\\.qmd\\'")
+  (use-package markdown-mode
+    :ensure t
+    :mode "\\.q?md\\'"
+    :config
+    (setq markdown-command "pandoc"))
   (use-package yaml-mode     :ensure t :mode "\\.yml\\'"))
 
 

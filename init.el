@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (load-file "~/.emacs.d/sb-init.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

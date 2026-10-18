@@ -13,6 +13,74 @@ format:
 Tâches faites, archivées depuis `_INSTRUCTIONS.qmd` (la plus récente en tête).
 
 
+## FAIT LE 18/10/2026 • Warning au démarrage
+
+Au démarrage, j'obtiens les messages suivants
+
+```
+⛔ Warning (files): Missing ‘lexical-binding’ cookie in "~/.emacs.d/init.el".
+You can add one with ‘M-x elisp-enable-lexical-binding RET’.
+See ‘(elisp)Selecting Lisp Dialect’ and ‘(elisp)Converting to Lexical Binding’
+for more information.
+⛔ Warning (files): Missing ‘lexical-binding’ cookie in "~/.emacs.d/lisp/bratex/bratex.el".
+You can add one with ‘M-x elisp-enable-lexical-binding RET’.
+See ‘(elisp)Selecting Lisp Dialect’ and ‘(elisp)Converting to Lexical Binding’
+for more information.
+```
+
+Propose-moi une correction.
+
+### Échanges
+
+#### Commentaire n°01 — Origine des avertissements
+
+> Depuis Emacs 30, un fichier Emacs Lisp qui n'indique pas son dialecte par un *cookie* `-*- lexical-binding: t -*-` en première ligne déclenche cet avertissement au chargement. Le fichier est alors toujours interprété en liaison dynamique, l'ancien dialecte. Deux fichiers sont concernés :
+>
+> - `init.el` : il ne contient qu'un `load-file` et les blocs `custom-set-variables` / `custom-set-faces`, qui se comportent de la même façon en liaison lexicale. Le *cookie* peut être ajouté sans risque, comme vous l'avez déjà fait pour `sb-init.el`.
+> - `lisp/bratex/bratex.el` : c'est un dépôt git distinct (`https://github.com/sbrisard/bratex.git`, ignoré par le dépôt `.emacs.d`). Sur une copie dans un dossier temporaire, j'ai ajouté le *cookie*, compilé le fichier et lancé les 7 tests de `bratex-test.el` : ils passent tous, en liaison dynamique comme en liaison lexicale.
+>
+> La compilation en liaison lexicale signale aussi, dans `bratex-balanced-delims`, une variable `that` affectée par `setq` sans être déclarée. C'est une variable globale involontaire, déjà présente en liaison dynamique : le `let` déclare `pair`, qui n'est jamais utilisée, au lieu de `that`. Le reste ne pose pas de problème de fonctionnement : arguments inutilisés, docstring trop large, `(require 'cl)` obsolète alors que seul `cl-defstruct`, fourni par `cl-lib`, est utilisé.
+
+#### Question n°02 — Correction proposée
+
+> Je propose :
+>
+> 1. dans `init.el`, d'ajouter en première ligne `;;; -*- lexical-binding: t -*-`, comme dans `sb-init.el` ;
+> 2. dans `bratex.el`, d'ajouter le *cookie* à la fin de la première ligne : `;;; bratex.el --- Manipulation of brackets in LaTeX mode  -*- lexical-binding: t -*-` ;
+> 3. dans `bratex.el` aussi, de remplacer `(pair)` par `(that)` dans le `let` de `bratex-balanced-delims`.
+>
+> En option, toujours dans le dépôt `bratex` :
+>
+> 4. ajouter le *cookie* à `bratex-test.el`, pour ne plus avoir l'avertissement lors des tests ;
+> 5. remplacer `(require 'cl)` par `(require 'cl-lib)`.
+>
+> Les points 2 à 5 modifient le dépôt `bratex`, que vous publiez sur GitHub. Lesquels de ces points voulez-vous que j'applique ? Je ne ferai aucun commit, ni dans un dépôt ni dans l'autre, sans votre accord.
+
+Applique tous ces points
+
+#### Commentaire n°03 — Mise en œuvre
+
+> J'ai appliqué les cinq points :
+>
+> 1. `init.el` : ajout de `;;; -*- lexical-binding: t -*-` en première ligne ;
+> 2. `bratex.el` : *cookie* ajouté à la fin de la première ligne ;
+> 3. `bratex.el` : `(pair)` remplacé par `(that)` dans le `let` de `bratex-balanced-delims` ;
+> 4. `bratex-test.el` : ajout de `;;; -*- lexical-binding: t -*-` en première ligne ;
+> 5. `bratex.el` : `(require 'cl)` remplacé par `(require 'cl-lib)`.
+>
+> **Correction supplémentaire, rendue nécessaire par le point 5.** Après ce remplacement, la compilation a signalé que la fonction `map` n'était plus définie, et le chargement de `bratex.el` échouait (`void-function map`). `map` était un alias de `cl-map` fourni par l'ancienne bibliothèque `cl`. J'ai donc remplacé `(map 'list ...)` par `(cl-map 'list ...)` dans la définition de `bratex--bracket-regexp`, ligne 91, et réaligné les deux lignes suivantes. Le comportement est identique. La compilation ne signale plus aucune autre fonction ni variable inconnue. Seuls restent des avertissements de style : arguments inutilisés, docstrings.
+>
+> **Tests** :
+>
+> - les 7 tests de `bratex-test.el` passent ;
+> - démarrage complet d'Emacs 31.1 avec votre vraie configuration, sous Linux, dans un serveur X virtuel : aucun buffer `*Warnings*` n'est créé, et les deux avertissements ont disparu.
+>
+> Rien n'est commité : `init.el` est modifié dans le dépôt `.emacs.d`, et `bratex.el` et `bratex-test.el` dans le dépôt `bratex`.
+
+### Compte-rendu de Claude
+
+Les avertissements venaient de l'absence du *cookie* `lexical-binding`, exigé depuis Emacs 30. Je l'ai ajouté à `init.el`, à `bratex.el` et à `bratex-test.el`. Dans `bratex.el`, j'ai aussi déclaré la variable `that` dans `bratex-balanced-delims` et remplacé `cl` par `cl-lib`, ce qui a obligé à remplacer `map` par `cl-map`. Les tests de `bratex` passent, et un démarrage complet ne produit plus d'avertissement (Linux, Emacs 31.1). Rien n'a été commité, dans aucun des deux dépôts.
+
 ## FAIT LE 18/10/2026 • Faire glisser des fichiers en mode Markdown
 
 Lorsque je fais glisser un fichier sur la fenêtre `Emacs` et que le buffer actif est en `markdown-mode`, le fichier ne s'ouvre pas (le comportement par défaut d'`Emacs` me semble désactivé).

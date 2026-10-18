@@ -191,16 +191,30 @@ The following variables must be custom-set
   (select-frame-set-input-focus (selected-frame)))
 
 
+(defun sb-find-sumatrapdf ()
+  "Return the path to the SumatraPDF executable, or nil if not found.
+Look in `exec-path' first, then in C:/opt/SumatraPDF-*/; if several
+versions are installed there, return the most recent one."
+  (or (executable-find "SumatraPDF")
+      (car (last (sort (file-expand-wildcards
+			"C:/opt/SumatraPDF-*/SumatraPDF*.exe")
+		       #'string-version-lessp)))))
+
+
+(defun sb-set-pdf-viewer (viewer)
+  "Use VIEWER for PDF output in `TeX-view-program-selection'."
+  (setq TeX-view-program-selection
+	(cons (list 'output-pdf viewer)
+	      (seq-remove (lambda (entry) (eq (car entry) 'output-pdf))
+			  TeX-view-program-selection))))
+
+
 (defun sb-init-auctex ()
   "Initialize the AUCTeX package.
 
-Update `TeX-view-program-selection' to chose the viewer.
-
-SumatraPDF and qpdfview are preconfigured, however, they do not appear
-in the list of available viewers.
-
-The full path to the SumatraPDF executable must be defined in
-`sb-sumatrapdf-path`.
+The PDF viewer depends on the system: qpdfview under Linux, SumatraPDF
+under Windows (found by `sb-find-sumatrapdf'; the default \"start\"
+viewer is used if it is not found).
 
 Inverse search is configured in Sumatra under File → Preferences → Options…
 
@@ -221,7 +235,6 @@ Edit → Settings → Behavior to:
 	TeX-parse-self t
 	TeX-PDF-mode t
 	TeX-raise-frame-function #'sb-init-raise-frame
-	Tex-source-correlate-method (quote synctex)
 	TeX-source-correlate-mode t
 	TeX-source-correlate-start-server t
 	;; TODO: is this really necessary?
@@ -234,23 +247,29 @@ Edit → Settings → Behavior to:
 					      ("citealt" "*[{")
 					      ("citealp" "*[{")))
 
-  ;; (setq TeX-view-program-list '(("SumatraPDF" "C:\\Progra~1\\SumatraPDF\\SumatraPDF.exe -reuse-instance -forward-search %b %n %o") nil))
-
-  (setq TeX-view-program-list
-	'(("qpdfview"
-	   ("qpdfview --unique %o"
-	    (mode-io-correlate "#src:%b:%n:0"))
-	   "qpdfview")
-	  ("SumatraPDF"
-	   ((concat sb-sumatrapdf-path " -reuse-instance -forward-search %b %n %o")
-	    "SumatraPDF.exe"))))
-
-  ;; (setq TeX-view-program-selection
-  ;;       '(((output-dvi style-pstricks)
-  ;; 	  "dvips and start")
-  ;; 	 (output-dvi "Yap")
-  ;; 	 (output-pdf "SumatraPDF")
-  ;; 	 (output-html "start")))
+  (pcase system-type
+    ('windows-nt
+     (let ((sumatra (sb-find-sumatrapdf)))
+       (if (not sumatra)
+	   (progn
+	     (message "sb-init-auctex: SumatraPDF not found, using \"start\"")
+	     (sb-set-pdf-viewer "start"))
+	 ;; Same name as the built-in viewer, which it overrides, but
+	 ;; with the full path to the executable.
+	 (add-to-list 'TeX-view-program-list
+		      `("SumatraPDF"
+			(,(format "\"%s\" -reuse-instance" sumatra)
+			 (mode-io-correlate " -forward-search \"%b\" %n")
+			 " %o")
+			,sumatra))
+	 (sb-set-pdf-viewer "SumatraPDF"))))
+    ('gnu/linux
+     (add-to-list 'TeX-view-program-list
+		  '("qpdfview"
+		    ("qpdfview --unique %o"
+		     (mode-io-correlate "#src:%b:%n:0"))
+		    "qpdfview"))
+     (sb-set-pdf-viewer "qpdfview")))
 
   (add-hook 'LaTeX-mode-hook 'whitespace-mode)
   (add-hook 'LaTeX-mode-hook (lambda () (LaTeX-add-environments

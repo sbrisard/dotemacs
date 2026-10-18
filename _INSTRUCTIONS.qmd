@@ -17,5 +17,3 @@ Ce projet contient mes fichiers de configuration pour Emacs.
 Toutes mes configurations personnelles sont normalement dans le fichier `sb-init.el`, mais la séparation avec `init.el` n'est pas toujours satisfaisante.
 
 Je vais te emander d'améliorer ma configuration.
-
-

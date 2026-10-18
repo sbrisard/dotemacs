@@ -13,6 +13,180 @@ format:
 Tâches faites, archivées depuis `_INSTRUCTIONS.qmd` (la plus récente en tête).
 
 
+## FAIT LE 18/10/2026 • Visualisation des fichiers PDF avec `AUCTeX`
+
+Je travaille à la fois sous Linux et sous Windows, avec des applications différentes pour visualiser les PDF (`okular` sous Linux, `SumatraPDF` sous Windows). Pour l'instant, la configuration est un peu fragile.
+
+Par ailleurs, la configuration actuelle n'inclut pas `SumatraPDF`, que j'ajoute à la main, ce qui crée une modification que je ne veux pas commiter.
+
+Propose-moi une solution plus robuste.
+
+### Échanges
+
+#### Commentaire n°01 — Diagnostic
+
+> Quatre problèmes dans la configuration actuelle.
+>
+> 1. `TeX-view-program-selection` est fixé dans le bloc `custom-set-variables` de `init.el` (avec `qpdfview`). Ce bloc est évalué *après* `sb-init.el` : il écrase donc tout réglage fait dans `sb-init-auctex`, et c'est lui que tu dois modifier à la main sous Windows (d'où la modification à ne pas commiter).
+> 2. L'entrée `"SumatraPDF"` de `TeX-view-program-list` ne peut pas fonctionner : la liste est citée (`'(...)`), donc `(concat sb-sumatrapdf-path ...)` n'est jamais évalué ; la variable `sb-sumatrapdf-path` n'est définie nulle part ; et la structure ne correspond pas au format attendu `(NOM COMMANDE EXÉCUTABLE)`.
+> 3. AUCTeX 14.2 définit déjà, en standard, un visualiseur `"SumatraPDF"` sous Windows et `"Okular"` sous Linux, tous deux avec la recherche directe (*forward search*) via SyncTeX. Le visualiseur `"SumatraPDF"` standard suppose seulement que `SumatraPDF.exe` est dans le `PATH`, ce qui n'est pas le cas sur cette machine.
+> 4. Détail : `Tex-source-correlate-method` (avec `ex` en minuscules) est une faute de frappe ; la variable visée, `TeX-source-correlate-method`, n'est donc pas réglée. C'est sans conséquence, car sa valeur par défaut utilise déjà SyncTeX pour les PDF : on peut supprimer la ligne.
+
+#### Commentaire n°02 — Solution proposée
+
+> Tout régler dans `sb-init-auctex`, selon `system-type`, et ne plus rien laisser dans `custom-set-variables`.
+>
+> - Supprimer l'entrée `TeX-view-program-selection` de `custom-set-variables` dans `init.el`.
+> - Sous Windows : chercher `SumatraPDF.exe` automatiquement (dans le `PATH`, puis dans les dossiers d'installation habituels), et définir un visualiseur avec le chemin complet ; si on ne le trouve pas, se rabattre sur `"start"` (visualiseur par défaut de Windows) avec un message.
+> - Sous Linux : utiliser le visualiseur standard `"Okular"`, sans rien redéfinir.
+> - Supprimer l'entrée `qpdfview` (si tu ne t'en sers plus, voir question n°03) et l'entrée `SumatraPDF` cassée.
+>
+> Esquisse :
+>
+> ```elisp
+> (defvar sb-sumatrapdf-path nil
+>   "Chemin de SumatraPDF.exe ; nil pour le chercher automatiquement.")
+>
+> (defun sb-find-sumatrapdf ()
+>   "Renvoyer le chemin de SumatraPDF.exe, ou nil s'il est introuvable."
+>   (or sb-sumatrapdf-path
+>       (executable-find "SumatraPDF")
+>       (seq-find #'file-executable-p
+>                 (mapcar (lambda (dir)
+>                           (expand-file-name "SumatraPDF/SumatraPDF.exe" dir))
+>                         (delq nil (list (getenv "LOCALAPPDATA")
+>                                         (getenv "ProgramFiles")))))))
+>
+> ;; Dans sb-init-auctex :
+> (pcase system-type
+>   ('windows-nt
+>    (let ((sumatra (sb-find-sumatrapdf)))
+>      (if (not sumatra)
+>          (message "sb-init-auctex: SumatraPDF introuvable")
+>        (add-to-list 'TeX-view-program-list
+>                     `("SumatraPDF"
+>                       (,(format "\"%s\" -reuse-instance" sumatra)
+>                        (mode-io-correlate " -forward-search \"%b\" %n")
+>                        " %o")
+>                       ,sumatra)))
+>      (setf (alist-get 'output-pdf TeX-view-program-selection)
+>            (list (if sumatra "SumatraPDF" "start")))))
+>   ('gnu/linux
+>    (setf (alist-get 'output-pdf TeX-view-program-selection) '("Okular"))))
+> ```
+>
+> Le visualiseur défini dans `TeX-view-program-list` porte le même nom que le standard et passe devant lui. La variable `sb-sumatrapdf-path` permet de forcer le chemin sur une machine particulière, sans toucher aux fichiers suivis par git (voir question n°05).
+
+#### Question n°03 — Visualiseur sous Linux
+
+> Tu parles d'`okular`, mais la configuration actuelle utilise `qpdfview`. Faut-il passer à `okular` et supprimer `qpdfview`, ou garder `qpdfview` ?
+
+My bad. Il s'agit de `qpdfview`.
+
+#### Question n°04 — Installation de SumatraPDF sur cette machine
+
+> Je ne trouve pas `SumatraPDF.exe` sur cette machine : ni dans le `PATH`, ni dans `C:\Program Files\SumatraPDF`, ni dans `%LOCALAPPDATA%\SumatraPDF` (qui ne contient que les réglages et le cache), ni dans le registre. Où est-il installé ? Selon ta réponse, il suffira peut-être d'ajouter un dossier à la recherche automatique.
+
+J'installe généralement `SumatraPDF` dans `C:\opt\SumatraPDF-x.y.z\SumatraPDF-x.y.z-64.exe`.
+
+#### Question n°05 — Réglages propres à une machine
+
+> Pour les réglages qui varient d'une machine à l'autre (comme `sb-sumatrapdf-path`), `local.el` est déjà ignoré par git, et la fonction `sb-load-file-when-exists` existe, mais rien ne charge ce fichier. Je propose de le charger au début de `sb-init-all`. Par ailleurs, Custom réécrit `custom-set-variables` dans `init.el` dès que tu enregistres un réglage avec `M-x customize`, ce qui peut recréer le même problème. Veux-tu aussi que Custom écrive dans un fichier séparé, ignoré par git (`custom-file`) ?
+
+Je ne comprends pas bien ces deux points. Détaille un peu plus.
+
+#### Commentaire n°06 — Solution révisée, suite aux réponses n°03 et n°04
+
+> J'ai trouvé `C:\opt\SumatraPDF-3.5.2\SumatraPDF-3.5.2-64.exe` sur cette machine. Changements par rapport au commentaire n°02 :
+>
+> - sous Linux, on garde l'entrée `qpdfview` actuelle (elle fonctionne) et on la sélectionne pour les PDF ;
+> - sous Windows, la recherche automatique de SumatraPDF se fait d'abord dans le `PATH`, puis dans `C:\opt\SumatraPDF-*\SumatraPDF*.exe`. S'il y a plusieurs versions, on prend la plus récente (comparaison numérique des versions : `3.10` passe après `3.5`). Mettre à jour SumatraPDF ne demandera donc aucune modification de la configuration.
+>
+> ```elisp
+> (defun sb-find-sumatrapdf ()
+>   "Renvoyer le chemin de SumatraPDF, ou nil s'il est introuvable."
+>   (or (executable-find "SumatraPDF")
+>       (car (last (sort (file-expand-wildcards
+>                         "C:/opt/SumatraPDF-*/SumatraPDF*.exe")
+>                        #'string-version-lessp)))))
+> ```
+>
+> Le reste est inchangé : visualiseur `"SumatraPDF"` défini avec le chemin trouvé, repli sur `"start"` avec un message s'il est introuvable, suppression de `TeX-view-program-selection` dans `init.el`, suppression de l'entrée `SumatraPDF` cassée et de la faute de frappe `Tex-source-correlate-method`. Avec cette recherche automatique, la variable `sb-sumatrapdf-path` ne me semble plus utile : je propose de la supprimer.
+
+#### Commentaire n°07 — Précisions sur la question n°05
+
+> La question n°05 mélangeait deux points distincts.
+>
+> **1. Fichier `local.el`.** Il servirait à des réglages propres à une seule machine : il resterait sur cette machine, sans être suivi par git (il figure déjà dans `.gitignore`). Par exemple, si SumatraPDF était installé ailleurs sur un poste, on y écrirait `(setq sb-sumatrapdf-path "D:/autre/SumatraPDF.exe")`. Avec la recherche automatique du commentaire n°06, ce n'est plus nécessaire pour cette tâche. Je propose de ne rien faire sur ce point pour l'instant.
+>
+> **2. Fichier `custom-file`.** C'est la cause d'origine du problème. Quand on modifie un réglage avec `M-x customize`, ou quand on répond « toujours » à Emacs qui demande si une variable locale de fichier est sûre, Emacs **réécrit** le bloc `custom-set-variables` de `init.el`. C'est sans doute ainsi que `TeX-view-program-selection` s'est retrouvé dans `init.el`. C'est aussi ainsi que s'explique l'entrée `(TeX-master . \../livre_plaques.tex)` dans `safe-local-variable-values`, propre à un projet. `package.el` y écrit aussi `package-selected-packages` à chaque installation de paquet. Chaque fois, `init.el` est modifié, et la modification apparaît dans `git status`.
+>
+> La variable `custom-file` indique à Emacs d'écrire ces réglages dans un autre fichier, par exemple `custom.el`, qu'on ajouterait à `.gitignore`. Il faut deux lignes au début de `init.el` :
+>
+> ```elisp
+> (setq custom-file (locate-user-emacs-file "custom.el"))
+> (load custom-file 'noerror)
+> ```
+>
+> Il faudrait alors décider du sort des réglages actuellement dans `custom-set-variables` (`completion-styles`, `fido-mode`, `math-preview-*`, `org-startup-*`, `package-archives`, qui fait doublon avec `sb-init-package`…). Ceux que tu veux sur toutes tes machines iraient dans `sb-init.el`, les autres dans `custom.el`. C'est un changement plus large que la visualisation des PDF.
+
+#### Question n°08 — Suite à donner
+
+> Pour cette tâche, je propose de ne faire que le commentaire n°06 : visualiseurs PDF, plus suppression de `TeX-view-program-selection` dans `init.el`. Le passage à un `custom-file` ferait l'objet d'une tâche séparée, que tu ajouterais si tu le souhaites. Es-tu d'accord pour que je fasse les modifications du commentaire n°06 ?
+
+Oui je suis d'accord. Par ailleurs, décris complètement la tâche `custom-file` et garde la en mémoire comme en attente.
+
+#### Commentaire n°09 — Modifications faites, suite à la réponse à la question n°08
+
+> Modifications :
+>
+> - `init.el` : suppression de l'entrée `TeX-view-program-selection` dans `custom-set-variables` ;
+> - `sb-init.el` : nouvelle fonction `sb-find-sumatrapdf` (recherche dans le `PATH`, puis dans `C:/opt/SumatraPDF-*/`, version la plus récente) ;
+> - `sb-init.el` : nouvelle fonction `sb-set-pdf-viewer`, qui remplace l'entrée `output-pdf` de `TeX-view-program-selection` sans modifier la valeur par défaut d'AUCTeX en place ;
+> - `sb-init-auctex` : choix du visualiseur selon `system-type` (`qpdfview` sous Linux ; SumatraPDF sous Windows, ou `"start"` avec un message s'il est introuvable) ;
+> - suppression de l'entrée `SumatraPDF` cassée, des blocs en commentaire devenus inutiles et de la ligne `Tex-source-correlate-method` ;
+> - docstring de `sb-init-auctex` mise à jour ; la variable `sb-sumatrapdf-path` n'existe plus.
+>
+> Vérifications, en mode non interactif (`emacs --batch`, Emacs 30.1), sur cette machine :
+>
+> - `sb-find-sumatrapdf` trouve `c:/opt/SumatraPDF-3.5.2/SumatraPDF-3.5.2-64.exe` ;
+> - dans un tampon `LaTeX-mode`, AUCTeX produit la commande `"c:/opt/SumatraPDF-3.5.2/SumatraPDF-3.5.2-64.exe" -reuse-instance -forward-search "%b" %n %o` ;
+> - le chemin entre guillemets, suivi d'arguments entre guillemets, passe correctement par `cmdproxy` (le shell d'Emacs sous Windows).
+>
+> Non vérifié : l'ouverture effective d'un PDF dans SumatraPDF, et la configuration sous Linux (pas de machine Linux ici). Il faut redémarrer Emacs pour que la modification de `init.el` soit prise en compte. Attention : si tu enregistres des réglages avec Custom avant ce redémarrage, l'ancienne valeur de `TeX-view-program-selection` sera réécrite dans `init.el`.
+
+#### Commentaire n°10 — Description de la tâche `custom-file` (en attente)
+
+> Suite à ta demande (réponse à la question n°08), voici la description complète de la tâche. Je la garde en mémoire comme « en attente » ; tu pourras la recopier en tête du fichier sous un titre `## À FAIRE • …` quand tu voudras la lancer.
+>
+> **Objectif.** Que `init.el` ne soit plus modifié automatiquement par Emacs, pour que `git status` reste propre, et que les réglages partagés entre machines soient tous écrits explicitement dans `sb-init.el`.
+>
+> **Constat.** Le bloc `custom-set-variables` de `init.el` est réécrit par Emacs dans trois cas :
+>
+> - quand on enregistre un réglage avec `M-x customize` ;
+> - quand on répond « toujours » à la question sur les variables locales de fichier (exemple : `(TeX-master . \../livre_plaques.tex)` dans `safe-local-variable-values`) ;
+> - quand on installe un paquet avec `package.el` (variable `package-selected-packages`).
+>
+> Ce bloc est évalué après `sb-init.el` et écrase donc les réglages qui y sont faits : c'est ce qui s'était passé avec `TeX-view-program-selection`.
+>
+> **Étapes proposées.**
+>
+> 1. Ajouter au début de `init.el` :
+>    `(setq custom-file (locate-user-emacs-file "custom.el"))` et `(load custom-file 'noerror)`, et ajouter `custom.el` à `.gitignore`.
+> 2. Trier les réglages actuels de `custom-set-variables` et de `custom-set-faces` :
+>    - réglages à partager, à déplacer dans `sb-init.el` : `completion-auto-help`, `completion-styles`, `fido-mode`, `fido-vertical-mode`, `math-preview-*`, `org-startup-folded`, `org-startup-truncated`, et la face `whitespace-line` (déjà réglée dans `sb-init-whitespace`, à vérifier) ;
+>    - doublons à supprimer : `package-archives`, déjà défini dans `sb-init-package` ;
+>    - réglages propres à une machine, à laisser à Custom donc dans `custom.el` : `package-selected-packages` et les entrées de `safe-local-variable-values` propres à un projet. Les valeurs génériques de `safe-local-variable-values` (`buffer-auto-save-file-name`, `org-confirm-babel-evaluate`) sont déjà fixées dans `sb-init-vanilla-emacs`.
+> 3. Choisir où placer `load custom-file` : avant `sb-init.el` (`sb-init.el` a le dernier mot) ou après (Custom a le dernier mot). Avant me semble préférable, pour que les réglages suivis par git l'emportent. Dans ce cas, le `setq` de `safe-local-variable-values` dans `sb-init-vanilla-emacs` effacerait les entrées enregistrées par Custom : il faudrait l'adapter pour ajouter ses valeurs (avec `add-to-list`) au lieu de les remplacer.
+> 4. Vérifier qu'après redémarrage, un `M-x customize` suivi d'un enregistrement ne modifie que `custom.el`.
+>
+> **Points à décider** au moment de la tâche : le classement de chaque réglage (partagé ou propre à une machine), et l'ordre de chargement (étape 3).
+
+### Compte-rendu de Claude
+
+Le visualiseur PDF d'AUCTeX est maintenant choisi dans `sb-init-auctex` selon le système : `qpdfview` sous Linux ; SumatraPDF sous Windows, trouvé automatiquement (dans le `PATH`, puis dans `C:/opt/SumatraPDF-*/`, version la plus récente), avec repli sur `"start"`. L'entrée `TeX-view-program-selection` a été retirée de `custom-set-variables` dans `init.el` : il n'y a plus de modification locale à ne pas commiter. L'entrée SumatraPDF cassée et la faute de frappe `Tex-source-correlate-method` ont été supprimées. Vérifié en mode non interactif sous Windows ; ni l'ouverture effective d'un PDF ni la configuration Linux n'ont été testées. La tâche `custom-file` est décrite dans le commentaire n°10 et reste en attente.
+
+
 ## FAIT LE 18/10/2026 • Warning au démarrage
 
 Au démarrage, j'obtiens les messages suivants

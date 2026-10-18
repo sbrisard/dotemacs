@@ -362,7 +362,8 @@ windows platforms, it is something like:
     :ensure t
     :mode "\\.q?md\\'"
     :config
-    (setq markdown-command "pandoc"))
+    (setq markdown-command "pandoc"
+	  markdown-yank-dnd-method 'open))
   (use-package yaml-mode     :ensure t :mode "\\.yml\\'"))
 
 

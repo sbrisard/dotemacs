@@ -13,6 +13,29 @@
   (insert (format-time-string "%Y%m%d%H%M%S")))
 
 
+(defun sb-monospace-face-p (face)
+  "Return non-nil if FACE is rendered with a monospace font.
+Only meaningful in a graphical frame."
+  (= (string-pixel-width (propertize (make-string 10 ?i) 'face face))
+     (string-pixel-width (propertize (make-string 10 ?M) 'face face))))
+
+
+(defun sb-set-fixed-pitch-family ()
+  "Set the family of `fixed-pitch' to that of `default' if it is monospace.
+Otherwise, use the first installed font in a list of fallbacks. This
+matters for modes such as `markdown-mode', whose code and table faces
+inherit from `fixed-pitch'."
+  (when (display-graphic-p)
+    (let ((family
+	   (if (sb-monospace-face-p 'default)
+	       (face-attribute 'default :family)
+	     (seq-find (lambda (f) (find-font (font-spec :family f)))
+		       '("JuliaMono" "Cascadia Mono" "Consolas" "DejaVu Sans Mono")))))
+      (if family
+	  (set-face-attribute 'fixed-pitch nil :family family)
+	(message "sb-set-fixed-pitch-family: no monospace font found")))))
+
+
 ;;; Initialization functions
 
 (defun sb-init-vanilla-emacs ()
@@ -143,6 +166,7 @@ The following variables must be custom-set
 
   ;; Use w32-select-font
   (set-face-font 'default "JuliaMono-11")
+  (sb-set-fixed-pitch-family)
   )
 
 (defun sb-init-ibuffer ()

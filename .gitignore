@@ -29,3 +29,5 @@ url
 var/prescient-save.el
 eln-cache/
 tree-sitter/
+_INSTRUCTIONS.html
+_ARCHIVES.html

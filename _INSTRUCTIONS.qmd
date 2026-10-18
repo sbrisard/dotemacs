@@ -1,0 +1,79 @@
+---
+title: "Configuration Emacs"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    embed-resources: true
+    theme: cosmo
+    tbl-cap-location: top
+---
+
+## Contexte
+
+Ce projet contient mes fichiers de configuration pour Emacs.
+
+Toutes mes configurations personnelles sont normalement dans le fichier `sb-init.el`, mais la séparation avec `init.el` n'est pas toujours satisfaisante.
+
+Je vais te emander d'améliorer ma configuration.
+
+
+## À FAIRE • Police à chasse fixe en mode Markdown
+
+En mode Markdown (`markdown-mode`), la police à chasse fixe (*monospace*) est horrible sous windows. J'aimerais la personnaliser. En fait ma police courante est déjà de type monospace, et j'aimerais l'utiliser systématiquement (y compris dans les tableaux et les morceaux de code).
+
+### Échanges
+
+#### Commentaire n°01 — Origine du problème
+
+> Dans `markdown-mode`, la face `markdown-code-face` est définie avec `:inherit fixed-pitch`, et les faces `markdown-inline-code-face` (code en ligne), `markdown-pre-face` (blocs de code) et `markdown-table-face` (tableaux) héritent toutes de `markdown-code-face`. Le texte de code et les tableaux s'affichent donc avec la face `fixed-pitch`, et non avec la face `default`.
+>
+> Or votre configuration ne règle que la face `default` (`(set-face-font 'default "JuliaMono-11")` dans `sb-init-appearance`) et ne touche pas à `fixed-pitch`. Celle-ci garde la famille par défaut `Monospace`, que Windows traduit en général par Courier New, d'où le rendu disgracieux. Sous Linux, `Monospace` désigne souvent une police correcte (DejaVu Sans Mono), ce qui explique que le problème soit propre à Windows.
+
+#### Question n°02 — Portée de la correction
+
+> Il y a deux façons de corriger le problème :
+>
+> 1. **Globale** : dans `sb-init-appearance`, donner à `fixed-pitch` la même famille que `default`, avec `(set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))`, juste après le réglage de `default`. Toutes les faces qui héritent de `fixed-pitch` en profiteraient : Markdown, mais aussi Org (blocs de code et tableaux), Info, EWW, etc. C'est cohérent puisque votre police habituelle est déjà à chasse fixe. Il suffira de changer le nom de la police une seule fois si vous en changez.
+> 2. **Limitée à Markdown** : dans le bloc `use-package markdown-mode`, faire hériter `markdown-code-face` de `default` au lieu de `fixed-pitch`, avec `(set-face-attribute 'markdown-code-face nil :inherit 'default)`. Les autres modes ne changent pas.
+>
+> Je recommande la solution 1. Laquelle préférez-vous ?
+
+Je préfère la solution 1. Avant de l'implémenter, je voudrais ce choix robuste. Que peut-on mettre en place dans le cas où `default` ne serait aps à chasse fixe ?
+
+#### Commentaire n°03 — Rendre le choix robuste
+
+> **Détecter si `default` est à chasse fixe.** Je vois deux tests possibles, essayés avec Emacs 31.1 sous Linux (dans un serveur X virtuel) pour JuliaMono, DejaVu Sans Mono et DejaVu Sans :
+>
+> 1. lire la propriété `:spacing` de la police, `(font-get (face-attribute 'default :font) :spacing)`, qui vaut `100` pour une police à chasse fixe : on obtient `100` pour les deux polices à chasse fixe et `nil` pour DejaVu Sans ;
+> 2. comparer la largeur en pixels de deux chaînes de même longueur, l'une de `i`, l'autre de `M`, avec `string-pixel-width` (Emacs ≥ 29) : 90 et 90 pixels pour les polices à chasse fixe, 40 et 130 pixels pour DejaVu Sans.
+>
+> Je recommande le test 2. Il mesure le rendu réel et ne dépend pas de la façon dont le *backend* de polices renseigne `:spacing`. Je n'ai pas pu vérifier que ce *backend* le fait sous Windows.
+>
+> **Que faire si `default` n'est pas à chasse fixe ?** Je propose de prendre pour `fixed-pitch` la première police installée d'une liste de préférence, testée avec `find-font`. Par exemple : `("JuliaMono" "Cascadia Mono" "Consolas" "DejaVu Sans Mono")`, où Cascadia Mono et Consolas sont livrées avec Windows. Si aucune n'est installée, on laisse `fixed-pitch` tel quel et on affiche un avertissement avec `message`.
+>
+> **Point d'attention : à quel moment faire le test.** Il n'a de sens que dans un cadre graphique (*frame*), où les polices sont réellement chargées. En terminal, tout est à chasse fixe. Lancé par `emacs --daemon`, le fichier d'initialisation s'exécute sans cadre graphique, et le test serait faux. Je propose donc de mettre la logique dans une fonction, appelée directement si `(display-graphic-p)` est vrai et accrochée sinon à `server-after-make-frame-hook`, qui s'exécute dès qu'un cadre est créé.
+
+#### Question n°04 — Validation
+
+> Ce schéma vous convient-il : test par largeur en pixels, liste de repli `("JuliaMono" "Cascadia Mono" "Consolas" "DejaVu Sans Mono")`, prise en charge du mode *daemon* ? Si oui, je l'écris dans `sb-init-appearance`. Utilisez-vous `emacs --daemon` ? Si non, je peux me passer du crochet et garder le code plus simple.
+
+Je suis d'accord avec tes propositions. Je n'utilise pas `emacs --daemon`, ne complique donc pas trop le code.
+
+#### Commentaire n°05 — Mise en œuvre
+
+> J'ai modifié `sb-init.el` :
+>
+> - ajout, dans la partie *Utility functions*, de `sb-monospace-face-p`, qui compare la largeur en pixels de dix `i` et de dix `M` dans une face donnée ;
+> - ajout de `sb-set-fixed-pitch-family`, qui donne à `fixed-pitch` la famille de `default` si celle-ci est à chasse fixe, et sinon la première police installée parmi `("JuliaMono" "Cascadia Mono" "Consolas" "DejaVu Sans Mono")`. Si aucune n'est installée, la fonction affiche un message et ne touche pas à `fixed-pitch`. Elle ne fait rien hors d'un cadre graphique ;
+> - appel de `sb-set-fixed-pitch-family` dans `sb-init-appearance`, juste après `(set-face-font 'default "JuliaMono-11")`.
+>
+> Il n'y a pas de crochet pour le mode *daemon*, conformément à votre réponse.
+>
+> **Tests**, sous Linux avec Emacs 31.1, dans un serveur X virtuel, avec les deux fonctions appelées depuis un `init.el` de test, donc au même moment que dans votre configuration :
+>
+> - `default` en JuliaMono : la police est détectée comme à chasse fixe et `fixed-pitch` passe en JuliaMono ;
+> - `default` en DejaVu Sans : la police est détectée comme proportionnelle et `fixed-pitch` passe en JuliaMono, la première police de la liste de repli.
+>
+> La compilation de `sb-init.el` ne produit aucun avertissement sur ces fonctions. Je n'ai pas pu tester sous Windows : à vous de vérifier le rendu d'un fichier Markdown, code en ligne, blocs et tableaux compris. Les modifications ne sont pas commitées.

@@ -208,7 +208,6 @@ versions are installed there, return the most recent one."
 	      (seq-remove (lambda (entry) (eq (car entry) 'output-pdf))
 			  TeX-view-program-selection))))
 
-
 (defun sb-init-auctex ()
   "Initialize the AUCTeX package.
 
@@ -308,6 +307,35 @@ Edit → Settings → Behavior to:
   (add-hook 'LaTeX-mode-hook #'bratex-config))
 
 
+(defun sb-init-prettify-symbols-mode ()
+  "Enable `prettify-symbols-mode' in LaTeX buffers, with per-file extra symbols.
+Extra symbols are read from the file-local variable `sb-tex-prettify-extra'."
+  (defvar-local sb-tex-prettify-extra nil
+    "Extra (STRING . SYMBOL) pairs for `prettify-symbols-mode' in this buffer.
+Meant to be set as a file-local variable in .tex files, for example:
+
+  %%% sb-tex-prettify-extra: ((\"\\\\tsigma\" . ?𝛔) (\"\\\\grad\" . ?∇))")
+
+  (setq prettify-symbols-unprettify-at-point 'right-edge)
+
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (prettify-symbols-mode 1)
+              ;; File-local variables are applied *after* the mode hooks,
+              ;; hence the buffer-local hook.
+              (add-hook 'hack-local-variables-hook
+                        (lambda ()
+                          (when sb-tex-prettify-extra
+                            (setq-local prettify-symbols-alist
+                                        (append sb-tex-prettify-extra
+                                                prettify-symbols-alist))
+                            ;; Toggle to rebuild the font-lock keywords.
+                            (when prettify-symbols-mode
+                              (prettify-symbols-mode -1)
+                              (prettify-symbols-mode 1))))
+                        nil t))))
+
+
 (defun sb-init-c ()
   (setq-default c-basic-offset 2))
 
@@ -401,6 +429,7 @@ windows platforms, it is something like:
   (sb-init-auctex)
   (sb-init-reftex)
   (sb-init-bratex)
+  (sb-init-prettify-symbols-mode)
   (sb-init-c)
   (sb-init-python)
   (sb-init-maxima)

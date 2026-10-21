@@ -316,7 +316,7 @@ Meant to be set as a file-local variable in .tex files, for example:
 
   %%% sb-tex-prettify-extra: ((\"\\\\tsigma\" . ?𝛔) (\"\\\\grad\" . ?∇))")
 
-  (setq prettify-symbols-unprettify-at-point 'right-edge)
+  ;(setq prettify-symbols-unprettify-at-point 'right-edge)
 
   (add-hook 'LaTeX-mode-hook
             (lambda ()
